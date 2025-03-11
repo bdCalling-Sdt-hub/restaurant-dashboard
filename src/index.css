@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+input::placeholder {
+  color: #5C5C5C !important;
+}
+
+label.ant-form-item-required::before{
+  display: none !important;
+}
+
+.custom-input {
+  border: none !important; /* Remove all borders */
+  border-bottom-width: 2px !important; /* Set bottom border width */
+  border-bottom-style: solid !important; /* Set bottom border style */
+  border-bottom-color: red !important; /* Set bottom border color */
+  outline: none !important; /* Remove focus outline */
+  border-radius: 0 !important; /* Ensure no rounded corners */
+}
+
+.custom-input:focus {
+  border-bottom-width: 2px !important; /* Keep bottom border width */
+  border-bottom-style: solid !important; /* Keep bottom border style */
+  border-bottom-color: red !important; /* Keep bottom border color */
+  outline: none !important; /* Remove focus outline */
+  box-shadow: none !important; /* Remove default focus box-shadow */
+}
+
+.ant-card-body {
+  padding: 0 !important;
+  border-radius: 0 0 8px 8px;
+  width: 300px;
+}
+
+
+
+
+
+
+/* .ant-menu-light .ant-menu-item-selected {
+  background-color: red !important;
+  color: white !important;
+}
+
+.ant-menu-submenu .ant-menu-submenu-inline {
+  background-color: red !important;
+  color: white !important;
+}
+ */
