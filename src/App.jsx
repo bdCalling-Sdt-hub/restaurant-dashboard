@@ -3,11 +3,6 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import Dashboard from "./pages/dashboard";
 import RootLayOut from "./RootLayOut";
 import LoginPage from "./pages/auth/login";
-import AboutUs from "./pages/about";
-import TermsConditions from "./pages/terms";
-import FaqPage from "./pages/faqs";
-import PrivacyPolicy from "./pages/privacyPolicy";
-import SettingPage from "./pages/settings";
 import ForgotPassword from "./pages/auth/forgotPassword";
 import VerificationPage from "./components/verificationComponents/VerificationPage";
 import ResetPassword from "./pages/auth/resetPassword";

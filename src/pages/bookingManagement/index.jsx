@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Input, Pagination } from 'antd';
-import UserDetailsModal from '../../components/dashboardComponents/UserDetailsModal';
+import { Input, Modal, Pagination } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
+import { MdOutlineCancelPresentation } from 'react-icons/md';
 
 const { Search } = Input;
 
@@ -176,6 +176,8 @@ const BookingManagement = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10); // Set page size to 10
   const [searchTerm, setSearchTerm] = useState('');
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [userToDelete, setUserToDelete] = useState(null);
 
   const filteredUsers = users.filter((user) =>
     user.fullName.toLowerCase().includes(searchTerm.toLowerCase())
@@ -189,6 +191,24 @@ const BookingManagement = () => {
   const handlePageChange = (page, pageSize) => {
     setCurrentPage(page);
     setPageSize(pageSize);
+  };
+
+  const showDeleteConfirm = (user) => {
+    setUserToDelete(user);
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+    setUserToDelete(null);
+  };
+
+  const handleDelete = () => {
+    // Implement your delete logic here
+    console.log('Deleting user:', userToDelete);
+    // After successful deletion, update your users array and close the modal
+    setIsModalVisible(false);
+    setUserToDelete(null);
   };
 
 
@@ -236,17 +256,11 @@ const BookingManagement = () => {
                   <td className="py-2 px-4">{user.time}</td>
                   <td className="py-2 px-4">{user.status}</td>
                   <td className="py-4 flex gap-x-2 px-4">
-                    {/* <button
-                      className="bg-red-500 hover:bg-red-700 !text-white font-bold py-2 px-4 rounded mr-2"
-                      onClick={() => handleEdit(restaurant)}
-                    >
-                      <EditOutlined />
-                    </button> */}
                     <button
                       className="bg-red-500  hover:bg-red-700 !text-white font-bold py-2 px-4 rounded"
-                    //   onClick={() => handleDelete(restaurant.id)}
+                      onClick={() => showDeleteConfirm(user)}
                     >
-                      <DeleteOutlined/>
+                      <MdOutlineCancelPresentation/>
                     </button>
                   </td>
                 </tr>
@@ -271,6 +285,23 @@ const BookingManagement = () => {
           />
         </div>
       </div>
+
+
+      <Modal
+        title="Are you sure you want to Cancel?"
+        visible={isModalVisible}
+        onOk={handleDelete}
+        okButtonProps={{
+          className: '!bg-red-500 !text-white', 
+        }}
+        onCancel={handleCancel}
+        cancelButtonProps={{
+          style: { display: 'none' }, 
+        }}
+        okText="Cancel"
+       
+      >
+      </Modal>
 
     
     </div>

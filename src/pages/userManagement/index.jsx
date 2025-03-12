@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Input, Pagination } from "antd";
+import { Input, Modal, Pagination } from "antd";
 import { FaEye } from "react-icons/fa";
 import UserDetailsModal from "../../components/dashboardComponents/UserDetailsModal";
+import { MdBlock } from "react-icons/md";
 
 const { Search } = Input;
 
@@ -161,6 +162,8 @@ const UserManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedUser, setSelectedUser] = useState(null); // Track the selected user
   const [isModalVisible, setIsModalVisible] = useState(false); // Track modal visibility
+  const [isBlockModalVisible, setIsBlockModalVisible] = useState(false); // New state for block modal
+  const [userToBlock, setUserToBlock] = useState(null);
 
   const filteredUsers = users.filter((user) =>
     user.fullName.toLowerCase().includes(searchTerm.toLowerCase())
@@ -184,6 +187,30 @@ const UserManagement = () => {
   const handleModalClose = () => {
     setIsModalVisible(false);
     setSelectedUser(null);
+  };
+
+  const showBlockModal = (user) => {
+    setUserToBlock(user);
+    setIsBlockModalVisible(true);
+  };
+
+  const handleBlock = () => {
+    // Implement your block logic here
+    console.log("Blocking user:", userToBlock);
+    setIsBlockModalVisible(false);
+    setUserToBlock(null);
+  };
+
+  const handleUnblock = () => {
+    // Implement your unblock logic here
+    console.log("Unblocking user:", userToBlock);
+    setIsBlockModalVisible(false);
+    setUserToBlock(null);
+  };
+
+  const handleBlockModalCancel = () => {
+    setIsBlockModalVisible(false);
+    setUserToBlock(null);
   };
 
   return (
@@ -234,7 +261,9 @@ const UserManagement = () => {
                     </button>
                   </td>
                   <td className="py-4 px-4">
-                    <button className="bg-red-500 hover:bg-red-700 !text-white font-bold py-2 px-4 rounded">
+                    <button className="bg-red-500 hover:bg-red-700 !text-white font-bold py-2 px-4 rounded" 
+                     onClick={() => showBlockModal(user)}
+                     >
                       Action
                     </button>
                   </td>
@@ -264,6 +293,52 @@ const UserManagement = () => {
         onClose={handleModalClose}
         user={selectedUser}
       />
+
+
+<Modal
+        title="Are you sure you want to block?"
+        visible={isBlockModalVisible}
+        onCancel={handleBlockModalCancel}
+        footer={null} // Remove default footer
+        closable={true}
+        closeIcon={<span className="text-xl">X</span>} // Customize close icon
+        bodyStyle={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          padding: "20px",
+        }}
+        style={{
+          textAlign: "center",
+        }}
+      >
+        <button
+          className="bg-red-500 flex items-center  hover:bg-red-700 !text-white font-bold py-2 px-4 rounded !mb-4"
+          onClick={handleBlock}
+        >
+          <MdBlock/>
+          <p className="mr-2">  </p> Block
+        </button>
+        <button
+          className="bg-gray-800 hover:bg-gray-700 flex items-center !text-white font-bold py-2 px-4 rounded"
+          onClick={handleUnblock}
+        >
+          <MdBlock/> 
+          <p className="mr-2">
+            </p> Unblock
+        </button>
+      </Modal>
+
+
+
+
+
+
+
+
+
+
+
     </div>
   );
 };

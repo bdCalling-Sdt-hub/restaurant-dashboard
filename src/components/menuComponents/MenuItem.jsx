@@ -1,7 +1,7 @@
 import { Button, Card, Input, Modal, Typography } from 'antd';
 import respic from  '../../../public/respic.png'
 import { FaBellConcierge } from 'react-icons/fa6';
-import { IoIosStar, IoMdStats } from 'react-icons/io';
+import { IoIosStar } from 'react-icons/io';
 
 const { Text } = Typography;
 

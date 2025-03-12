@@ -16,14 +16,15 @@ const UserDetailsModal = ({ visible, onClose, user }) => {
       bodyStyle={{ padding: '24px' }}
     >
       <div className="relative">
+        <p className='font-bold'>Details</p>
         <button
-          className="absolute top-0 right-0 p-2 text-gray-500 hover:text-gray-700"
+          className="absolute top-[-30px]  right-[-40px] p-2 text-gray-500 hover:text-gray-700"
           onClick={onClose}
         >
           <CloseOutlined />
         </button>
         <div className="flex justify-center mb-4">
-          <Avatar src={user.avatar} size={100} />
+          <Avatar src={user.avatar} size={100} className='!rounded-md' />
         </div>
         <div className="mb-2 flex justify-between">
           <Text strong>ID No:</Text>

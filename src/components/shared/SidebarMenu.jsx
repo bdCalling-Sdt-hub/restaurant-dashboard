@@ -6,7 +6,10 @@ import {
   RiRestaurant2Fill,
   RiLogoutBoxRLine,
 } from "react-icons/ri";
-import { FaRegCircleUser } from "react-icons/fa6";
+import { FaChalkboardUser, FaRegCircleUser } from "react-icons/fa6";
+import { GiStabbedNote } from "react-icons/gi";
+import { BsMenuButtonWideFill } from "react-icons/bs";
+import { MdOutlineCategory, MdSchedule } from "react-icons/md";
 
 const SidebarMenu = () => {
   const [activeKey, setActiveKey] = useState("1");
@@ -39,12 +42,12 @@ const SidebarMenu = () => {
         selectedKeys={[activeKey]}
         onSelect={({ key }) => setActiveKey(key)}
       >
-       <div>
-       <div>
+       <div className="flex flex-col">
+       <div  className="px-4">
           <Menu.Item
             key="1"
-            icon={<RiPieChart2Fill />}
-            className={activeKey === "1" ? "!bg-red-500 !text-white" : ""}
+            icon={<RiPieChart2Fill size={25}  />}
+            className={activeKey === "1" ? "!bg-red-500 !p-4 !text-white" : "!p-4"}
           >
             <Link to="/" className="text-[18px]">
               Dashboard
@@ -52,8 +55,8 @@ const SidebarMenu = () => {
           </Menu.Item>
           <Menu.Item
             key="2"
-            icon={<FaRegCircleUser />}
-            className={activeKey === "2" ? "!bg-red-500 !text-white" : ""} // Tailwind active style
+            icon={<GiStabbedNote size={25}  />}
+            className={activeKey === "2" ? "!bg-red-500 !p-4 !text-white" : "!p-4"} // Tailwind active style
           >
             <Link to="/booking-management" className="text-[18px]">
               Booking Management
@@ -61,8 +64,8 @@ const SidebarMenu = () => {
           </Menu.Item>
           <Menu.Item
             key="3"
-            icon={<RiRestaurant2Fill />}
-            className={activeKey === "3" ? "!bg-red-500 !text-white" : ""} // Tailwind active style
+            icon={<BsMenuButtonWideFill size={25}  />}
+            className={activeKey === "3" ? "!bg-red-500 !p-4 !text-white" : "!p-4"} // Tailwind active style
           >
             <Link to="/menu" className="text-[18px]">
               Menu
@@ -70,8 +73,8 @@ const SidebarMenu = () => {
           </Menu.Item>
           <Menu.Item
             key="3"
-            icon={<RiRestaurant2Fill />}
-            className={activeKey === "4" ? "!bg-red-500 !text-white" : ""} // Tailwind active style
+            icon={<MdOutlineCategory size={25}  />}
+            className={activeKey === "4" ? "!bg-red-500 !p-4 !text-white" : "!p-4"} // Tailwind active style
           >
             <Link to="/add-category" className="text-[18px]">
               Add Category
@@ -79,8 +82,8 @@ const SidebarMenu = () => {
           </Menu.Item>
           <Menu.Item
             key="3"
-            icon={<RiRestaurant2Fill />}
-            className={activeKey === "5" ? "!bg-red-500 !text-white" : ""} // Tailwind active style
+            icon={<MdSchedule size={25} />}
+            className={activeKey === "5" ? "!bg-red-500 !p-4 !text-white" : "!p-4"} // Tailwind active style
           >
             <Link to="/table-booking" className="text-[18px]">
               Table Booking Schedule
@@ -89,20 +92,20 @@ const SidebarMenu = () => {
 
           <Menu.Item
             key="3"
-            icon={<RiRestaurant2Fill />}
-            className={activeKey === "6" ? "!bg-red-500 !text-white" : ""} // Tailwind active style
+            icon={<FaChalkboardUser size={25} />}
+            className={activeKey === "6" ? "!bg-red-500 !p-4 !text-white" : "!p-4"} // Tailwind active style
           >
             <Link to="/user-management" className="text-[18px]">
-              User Management
+              Users Management
             </Link>
           </Menu.Item>
         </div>
 
-        <div>
+        <div className="p-4  ">
           <Menu.Item
             key="signout"
-            icon={<RiLogoutBoxRLine />}
-            className={activeKey === "signout" ? "bg-red-500 text-white" : ""} // Tailwind active style
+            icon={<RiLogoutBoxRLine size={25} />}
+            className={activeKey === "signout" ? "bg-red-500 !p-4 text-white" : "!p-4"} // Tailwind active style
           >
             <Link to="/login" className="text-[18px]">
               Sign Out
