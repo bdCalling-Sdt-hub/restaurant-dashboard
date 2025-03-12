@@ -1,5 +1,9 @@
-
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
 import Dashboard from "./pages/dashboard";
 import RootLayOut from "./RootLayOut";
 import LoginPage from "./pages/auth/login";
@@ -11,30 +15,46 @@ import Menu from "./pages/menu";
 import AddCategory from "./pages/addCategory";
 import UserManagement from "./pages/userManagement";
 import TableBooking from "./pages/tableBooking";
+import MyDetails from "./pages/myDetails";
+import RestaurantDetails from "./pages/restaurantDetails";
+import Reviews from "./components/restaurantComponents/Reviews";
+import SocialMedia from "./components/restaurantComponents/SocialMedia";
+import BusinessHours from "./components/restaurantComponents/BusinessHours";
+import Party from "./components/restaurantComponents/Party";
+import ReservationsAgreement from "./components/restaurantComponents/ReservationsAgreement";
+import MenuItems from "./components/restaurantComponents/MenuItems";
+import RestaurantFeatures from "./components/restaurantComponents/RestaurantFeatures";
 
 function App() {
-
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
-        
-          <Route element={<RootLayOut/>}>
-            <Route path="/" element={<Dashboard/>}></Route>
-            <Route path="/booking-management" element={<BookingManagement/>}></Route>
-            <Route path="/menu" element={<Menu/>}></Route>
-            <Route path="/add-category" element={<AddCategory/>}></Route>
-            <Route path="/table-booking" element={<TableBooking/>}></Route>
-            <Route path="/user-management" element={<UserManagement/>}></Route>
-         
+        <Route element={<RootLayOut />}>
+          <Route path="/" element={<Dashboard />}></Route>
+          <Route
+            path="/booking-management"
+            element={<BookingManagement />}
+          ></Route>
+          <Route path="/menu" element={<Menu />}></Route>
+          <Route path="/add-category" element={<AddCategory />}></Route>
+          <Route path="/table-booking" element={<TableBooking />}></Route>
+          <Route path="/user-management" element={<UserManagement />}></Route>
+          <Route path="/my-details" element={<MyDetails/>}></Route>
+          <Route path="/restaurant-details" element={<RestaurantDetails/>}></Route>
+          <Route path="/reviews" element={<Reviews/>}></Route>
+          <Route path="/social-media" element={<SocialMedia/>}></Route>
+          <Route path="/business-hours" element={<BusinessHours/>}></Route>
+          <Route path="/party" element={<Party/>}></Route>
+          <Route path="/restaurant-agreement" element={<ReservationsAgreement/>}></Route>
+          {/* <Route path="/menu-items" element={<MenuItems/>}></Route> */}
+          <Route path="/restaurant-features" element={<RestaurantFeatures/>}></Route>
 
-            
-          </Route>
+        </Route>
+        <Route path="/login" element={<LoginPage />}></Route>
+        <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+        <Route path="/verification" element={<VerificationPage />}></Route>
+        <Route path="/reset-password" element={<ResetPassword />}></Route>
 
-
-          <Route path="/login" element={<LoginPage/>}></Route>
-          <Route path="/forgot-password" element={<ForgotPassword/>}></Route>
-          <Route path="/verification" element={<VerificationPage/>}></Route>
-          <Route path="/reset-password" element={<ResetPassword/>}></Route>
       </Route>
     )
   );
@@ -43,7 +63,7 @@ function App() {
     <>
       <RouterProvider router={router} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

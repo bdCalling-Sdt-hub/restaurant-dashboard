@@ -31,6 +31,17 @@ label.ant-form-item-required::before{
   width: 300px;
 }
 
+.ant-input-search-button{
+  display: none;
+}
+
+.ant-collapse{
+  border: none !important;
+  font-size: bold !important;
+  border-bottom: 1px solid #98999e !important;
+  border-radius: 0;
+}
+
 
 
 
