@@ -8,7 +8,7 @@ const { Text } = Typography;
 
 const MenuItem = ({ item, onEdit }) => {
   return (
-    <Card className="shadow-md">
+    <di className="shadow-md">
       <div >
         <img
           src={respic}
@@ -45,7 +45,7 @@ const MenuItem = ({ item, onEdit }) => {
 
 
    </div>
-    </Card>
+    </di>
   );
 };
 

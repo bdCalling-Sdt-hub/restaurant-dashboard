@@ -1,6 +1,7 @@
 import React from 'react';
 import { Input, Typography, Button, Card } from 'antd';
 import { EditOutlined, CloseOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 const { Text } = Typography;
 
@@ -11,7 +12,8 @@ const BusinessHours = () => {
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
         <Text strong style={{ fontSize: 20 }}>Business Hours</Text>
-        <Button icon={<CloseOutlined />} shape="circle" size="small" />
+       
+        <Link to={'/restaurant-details'}>  <Button icon={<CloseOutlined />} shape="circle" size="small" />   </Link>
       </div>
 
       <div style={{ marginBottom: 16 }}>

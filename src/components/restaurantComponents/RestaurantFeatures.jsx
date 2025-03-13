@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Typography, Checkbox, Button } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 const { Text } = Typography;
 
@@ -23,7 +24,8 @@ const RestaurantFeatures = () => {
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
         <Text strong style={{ fontSize: 20 }}>Restaurant Features</Text>
-        <Button icon={<CloseOutlined />} shape="circle" size="small" />
+        
+        <Link to={'/restaurant-details'} > <Button icon={<CloseOutlined />} shape="circle" size="small" /> </Link>
       </div>
 
       {features.map((feature, index) => (

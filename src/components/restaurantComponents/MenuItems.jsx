@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Typography, Rate, Button } from 'antd';
 import { CloseOutlined, EditOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 const { Text } = Typography;
 
@@ -13,7 +14,7 @@ const MenuItems = () => {
       description: '100 gr meat + onion + tomato + Lettuce cheese',
       price: 20.00,
       rating: 4.5,
-      image: 'https://via.placeholder.com/150', // Replace with your image URL
+      image: '../../../public/respic.png',
     },
     {
       id: 2,
@@ -22,7 +23,7 @@ const MenuItems = () => {
       description: '100 gr meat + onion + tomato + Lettuce cheese',
       price: 15.00,
       rating: 4.5,
-      image: 'https://via.placeholder.com/150', // Replace with your image URL
+      image: '../../../public/respic.png',
     },
     {
       id: 3,
@@ -31,7 +32,7 @@ const MenuItems = () => {
       description: '100 gr meat + onion + tomato + Lettuce cheese',
       price: 20.00,
       rating: 4.5,
-      image: 'https://via.placeholder.com/150', // Replace with your image URL
+      image: '../../../public/respic.png',
     },
     {
       id: 4,
@@ -40,22 +41,17 @@ const MenuItems = () => {
       description: '100 gr meat + onion + tomato + Lettuce cheese',
       price: 15.00,
       rating: 4.5,
-      image: 'https://via.placeholder.com/150', // Replace with your image URL
+      image: '../../../public/respic.png',
     },
   ];
 
   return (
-    <Card
-      style={{
-        width: 400, // Adjust width as needed
-        borderRadius: 10,
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-      }}
-      bodyStyle={{ padding: 24 }}
+    <div  className='w-[800px] mx-auto shadow-xl p-4'
+      
     >
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+      <div className='flex justify-between ' >
         <Text strong style={{ fontSize: 20 }}>Menu</Text>
-        <Button icon={<CloseOutlined />} shape="circle" size="small" />
+        <Link to={'/restaurant-details'}> <Button icon={<CloseOutlined />} shape="circle" size="small" /> </Link>
       </div>
 
       {['ITALIAN', 'MEXICAN'].map((category) => (
@@ -65,32 +61,31 @@ const MenuItems = () => {
             {menuItems
               .filter((item) => item.category === category)
               .map((item) => (
-                <Card
+                <div
                   key={item.id}
-                  style={{ borderRadius: 8, border: '1px solid #f0f0f0' }}
-                  bodyStyle={{ padding: 16 }}
+                  className='w-80 '
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
+                  <div >
                     <Rate disabled defaultValue={item.rating} count={1} style={{ fontSize: 14 }} />
                     <Text style={{ marginLeft: 4, fontSize: 14 }}>{item.rating}</Text>
                   </div>
                   <img
                     src={item.image}
                     alt={item.name}
-                    style={{ width: '100%', height: 100, objectFit: 'cover', borderRadius: 4, marginBottom: 8 }}
+                    className='w-full h-64'
                   />
                   <Text strong style={{ display: 'block', marginBottom: 4 }}>{item.name}</Text>
                   <Text style={{ fontSize: 12, marginBottom: 8 }}>{item.description}</Text>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Text strong style={{ color: 'red' }}>${item.price.toFixed(2)}</Text>
-                    <Button icon={<EditOutlined />} type="text" />
+                    <Button icon={<EditOutlined style={{color:"red"}} />} type="text" />
                   </div>
-                </Card>
+                </div>
               ))}
           </div>
         </div>
       ))}
-    </Card>
+    </div>
   );
 };
 

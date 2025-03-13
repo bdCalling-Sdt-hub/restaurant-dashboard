@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Table, Modal, Button, Avatar, Rate } from 'antd';
 import { EyeOutlined, StopOutlined, CloseOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([
@@ -149,7 +150,8 @@ const Reviews = () => {
       <div className="bg-white rounded-lg shadow-md p-6">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-semibold">Reviews</h2>
-          <Button shape="circle" icon={<CloseOutlined />} />
+          
+          <Link to={'/restaurant-details'}> <Button shape="circle" icon={<CloseOutlined />} /> </Link>
         </div>
         <p className="mb-4">All</p>
         <Table columns={columns} dataSource={reviews} pagination={false} />

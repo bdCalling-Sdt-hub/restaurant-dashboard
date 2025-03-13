@@ -24,6 +24,7 @@ import Party from "./components/restaurantComponents/Party";
 import ReservationsAgreement from "./components/restaurantComponents/ReservationsAgreement";
 import MenuItems from "./components/restaurantComponents/MenuItems";
 import RestaurantFeatures from "./components/restaurantComponents/RestaurantFeatures";
+import Cuisine from "./components/restaurantComponents/Cuisine";
 
 function App() {
   const router = createBrowserRouter(
@@ -45,8 +46,9 @@ function App() {
           <Route path="/social-media" element={<SocialMedia/>}></Route>
           <Route path="/business-hours" element={<BusinessHours/>}></Route>
           <Route path="/party" element={<Party/>}></Route>
+          <Route path="/cuisine" element={<Cuisine/>}></Route>
           <Route path="/restaurant-agreement" element={<ReservationsAgreement/>}></Route>
-          {/* <Route path="/menu-items" element={<MenuItems/>}></Route> */}
+          <Route path="/menu-items" element={<MenuItems/>}></Route>
           <Route path="/restaurant-features" element={<RestaurantFeatures/>}></Route>
 
         </Route>

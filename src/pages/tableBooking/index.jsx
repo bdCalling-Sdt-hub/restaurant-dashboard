@@ -127,9 +127,7 @@ const TableBooking = () => {
               onSearch={handleSearch}
               onChange={(e) => handleSearch(e.target.value)}
               suffix={<SearchOutlined style={{ color: "red" }} />}
-              className="
-          border-dashed border-2 border-gray-400
-          rounded-md p-2"
+              className=" border-dashed border-2 border-gray-400 rounded-md p-2"
             />
           </div>
 
@@ -138,21 +136,21 @@ const TableBooking = () => {
               <Collapse
                 key={index}
                 ghost
-                expandIconPosition="start" // Set icon position to start (left)
+                expandIconPosition="end" // Set icon position to start (left)
                 expandIcon={({ isActive }) => (
-                  <DownOutlined rotate={isActive ? 180 : 0} /> // Rotate icon when active
+                  <DownOutlined rotate={isActive ? 180 : 0} /> 
                 )}
               >
                 <Panel header={reservation.time} key="reservation">
                   <div className="flex border-1 border-black px-4 justify-between items-center">
                     <div>
-                      <p>{reservation.time.slice(0, 8)}</p>
+                      <p className="w-2">{reservation.time.slice(0, 8)}</p>
                     </div>
-                    <div className="border-l-1">
+                    <div className="border-l-1 pl-4">
                       <p className="font-bold">{reservation.name}</p>
                       <div className="flex items-center gap-x-2">
-                        <FaUserFriends />
-                        <p className="font-bold !mb-2">{reservation.table}</p>
+                        <FaUserFriends className="mb-3" />
+                        <p className="font-bold">{reservation.table}</p>
                       </div>
                     </div>
                     <Button className="!bg-gray-700 !text-white rounded-md !p-5 py-1 text-sm">
@@ -167,9 +165,9 @@ const TableBooking = () => {
 
         {/* Right Side: Table Layout */}
         <div className="w-3/4 p-4">
-          <div className="items-center flex ">
-            <p className="font-semibold">Apply Filters:</p>
-            <div className="flex space-x-2">
+          <div className="items-center flex gap-x-5 ">
+            <p className="font-semibold !mt-2">Apply Filters:</p>
+            <div className="flex  gap-x-4">
               <DatePicker
                 onChange={handleDateChange}
                 placeholder="Date"
@@ -184,7 +182,7 @@ const TableBooking = () => {
           </div>
 
           <div>
-            <div className="grid !bg-[#ebebeb] rounded-2xl p-16  grid-cols-3 gap-20">
+            <div className="grid !bg-[#ebebeb] rounded-2xl p-16  mt-5 grid-cols-3 gap-20">
               {["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9"].map(
                 (tableId) => (
                   <div
