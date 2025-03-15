@@ -11,7 +11,7 @@ const Cuisine= () => {
   const cuisineOptions = [
     'AMERICAN',
     'ITALIAN',
-    'FRNACE', // Typo in the original image, should be 'FRANCE'
+    'FRNACE', 
     'EUROPEAN',
     'MEXICAN',
     'CHINESE',
