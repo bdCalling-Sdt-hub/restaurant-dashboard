@@ -85,7 +85,6 @@ const TableBooking = () => {
       table: " 4",
       tableId: "T9",
     },
-    // Add more reservations as needed
   ];
 
   const filteredReservations = reservations.filter((reservation) =>
@@ -233,13 +232,13 @@ const TableBooking = () => {
               <label className="block text-sm font-medium text-gray-700">
                 Name
               </label>
-              <Input value="James Wann" disabled />
+              <Input value=""  /> 
             </div>
             <div className="mb-2">
               <label className="block text-sm font-medium text-gray-700">
                 Email
               </label>
-              <Input value="jameswann837@gmail.com" disabled />
+              <Input value=""  /> 
             </div>
             <div className="mb-2">
               <label className="block text-sm font-medium text-gray-700">
@@ -270,19 +269,19 @@ const TableBooking = () => {
                 <span className="mr-1">
                   <MdDateRange className="!text-red-500" />
                 </span>
-                Date <IoIosArrowDown />
+                Date <IoIosArrowDown /> 
               </Button>
               <Button>
                 <span className="mr-1">
                   <MdAccessTime className="!text-red-500" />
                 </span>
-                Time <IoIosArrowDown />
+                Time <IoIosArrowDown /> 
               </Button>
               <Button>
                 <span className="mr-1">
                   <FaUserFriends className="!text-red-500" />
                 </span>
-                People <IoIosArrowDown />
+                People <IoIosArrowDown />  
               </Button>
             </div>
             <Button className="w-full !mt-4 !text-white !bg-red-500">
