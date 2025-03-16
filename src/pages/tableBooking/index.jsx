@@ -24,11 +24,17 @@ const { RangePicker } = TimePicker;
 
 const TableBooking = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [name, setName] = useState('');
+const [email, setEmail] = useState('');
   const [date, setDate] = useState(null);
   const [timeRange, setTimeRange] = useState(null);
   const [location, setLocation] = useState("indoor");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedTableId, setSelectedTableId] = useState(null);
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showTimePicker, setShowTimePicker] = useState(false);
+  const [showPeopleSelector, setShowPeopleSelector] = useState(false);
+  const [selectedPeople, setSelectedPeople] = useState(1);
 
   const reservations = [
     {
@@ -85,11 +91,15 @@ const TableBooking = () => {
       table: " 4",
       tableId: "T9",
     },
+    // Add more reservations as needed
   ];
 
   const filteredReservations = reservations.filter((reservation) =>
     reservation.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handleNameChange = (e) => setName(e.target.value);
+   const handleEmailChange = (e) => setEmail(e.target.value);
 
   const handleSearch = (value) => {
     setSearchTerm(value);
@@ -114,7 +124,11 @@ const TableBooking = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
     setSelectedTableId(null);
+    setShowDatePicker(false);
+    setShowTimePicker(false);
+    setShowPeopleSelector(false);
   };
+
   return (
     <>
       <div className="flex  min-h-screen">
@@ -222,7 +236,7 @@ const TableBooking = () => {
         <div className="flex flex-col items-center">
           <div className="w-24 h-24 rounded-full overflow-hidden mb-4">
             <img
-              src="https://randomuser.me/api/portraits/men/75.jpg" // Replace with user's image
+              src="https://randomuser.me/api/portraits/men/75.jpg"
               alt="User Avatar"
               className="w-full h-full object-cover"
             />
@@ -232,13 +246,20 @@ const TableBooking = () => {
               <label className="block text-sm font-medium text-gray-700">
                 Name
               </label>
-              <Input value=""  /> 
+              <Input 
+              value={name} 
+              onChange={handleNameChange} 
+              />
             </div>
             <div className="mb-2">
               <label className="block text-sm font-medium text-gray-700">
                 Email
               </label>
-              <Input value=""  /> 
+              <Input 
+              value={email} 
+              onChange={handleEmailChange} 
+              
+              />
             </div>
             <div className="mb-2">
               <label className="block text-sm font-medium text-gray-700">
@@ -265,25 +286,51 @@ const TableBooking = () => {
               </div>
             </div>
             <div className="flex justify-between mt-4">
-              <Button>
+              <Button onClick={() => setShowDatePicker(true)}>
                 <span className="mr-1">
                   <MdDateRange className="!text-red-500" />
                 </span>
-                Date <IoIosArrowDown /> 
+                Date <IoIosArrowDown />
               </Button>
-              <Button>
+              <Button onClick={() => setShowTimePicker(true)}>
                 <span className="mr-1">
                   <MdAccessTime className="!text-red-500" />
                 </span>
-                Time <IoIosArrowDown /> 
+                Time <IoIosArrowDown />
               </Button>
-              <Button>
+              <Button onClick={() => setShowPeopleSelector(true)}>
                 <span className="mr-1">
                   <FaUserFriends className="!text-red-500" />
                 </span>
-                People <IoIosArrowDown />  
+                People <IoIosArrowDown />
               </Button>
             </div>
+            {showDatePicker && (
+              <DatePicker
+                onChange={(date) => setDate(date)}
+                className="w-full mt-4"
+              />
+            )}
+            {showTimePicker && (
+              <TimePicker
+                onChange={(time) => setTimeRange(time)}
+                format="HH:mm A"
+                className="w-full mt-4"
+              />
+            )}
+            {showPeopleSelector && (
+              <Select
+                value={selectedPeople}
+                onChange={(value) => setSelectedPeople(value)}
+                className="w-full mt-4"
+              >
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((people) => (
+                  <Option key={people} value={people}>
+                    {people} People
+                  </Option>
+                ))}
+              </Select>
+            )}
             <Button className="w-full !mt-4 !text-white !bg-red-500">
               Booked
             </Button>
