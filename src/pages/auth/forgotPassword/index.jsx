@@ -65,12 +65,14 @@ const ForgotPassword = () => {
 
               <div>
                 <Form.Item>
+                  <Link to={'/verification'}>
                   <Button
                     htmlType="submit"
                     className="w-full !bg-red-500 hover:bg-red-600 border-0 rounded-md !p-5 !text-white"
                   >
                     Proceed
-                  </Button>
+                  </Button></Link>
+                 
                 </Form.Item>
               </div>
             </div>

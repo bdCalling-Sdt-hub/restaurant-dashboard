@@ -188,7 +188,7 @@ const SidebarMenu = () => {
                 }
               >
                 <Link to="/social-media" className="text-[18px]">
-                  Social-Media
+                  Social Media
                 </Link>
               </Menu.Item>
               <Menu.Item

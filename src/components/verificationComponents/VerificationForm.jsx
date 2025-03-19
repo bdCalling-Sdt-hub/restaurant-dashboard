@@ -47,9 +47,11 @@ const VerificationForm = () => {
       </p>
 
       {/* Verify Button */}
+      <Link to={'/login'}>
       <Button className="w-full !bg-red-500 hover:bg-red-600 border-0 rounded-md p-2 !text-white" danger size="large" block>
         Verify
       </Button>
+      </Link>
     </div>
   );
 };
