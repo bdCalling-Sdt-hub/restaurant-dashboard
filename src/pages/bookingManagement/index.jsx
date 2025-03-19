@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Input, Modal, Pagination } from 'antd';
-import { DeleteOutlined } from '@ant-design/icons';
 import { MdOutlineCancelPresentation } from 'react-icons/md';
 
 const { Search } = Input;
@@ -168,50 +167,38 @@ const users = [
     status:'VIP',
     avatar: 'https://randomuser.me/api/portraits/women/68.jpg',
   },
-
- 
 ];
 
 const BookingManagement = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10); // Set page size to 10
+  const [pageSize, setPageSize] = useState(10); 
   const [searchTerm, setSearchTerm] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
-
   const filteredUsers = users.filter((user) =>
     user.fullName.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
   const handleSearch = (value) => {
     setSearchTerm(value);
     setCurrentPage(1); 
   };
-
   const handlePageChange = (page, pageSize) => {
     setCurrentPage(page);
     setPageSize(pageSize);
   };
-
   const showDeleteConfirm = (user) => {
     setUserToDelete(user);
     setIsModalVisible(true);
   };
-
   const handleCancel = () => {
     setIsModalVisible(false);
     setUserToDelete(null);
   };
-
   const handleDelete = () => {
-    // Implement your delete logic here
     console.log('Deleting user:', userToDelete);
-    // After successful deletion, update your users array and close the modal
     setIsModalVisible(false);
     setUserToDelete(null);
   };
-
-
   return (
     <div className="p-4 bg-[#f6f6f6]">
       <div className="flex justify-between items-center mb-4">

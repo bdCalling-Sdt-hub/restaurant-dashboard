@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Typography, Space, Modal, Input } from "antd";
 import MenuItem from "../../components/menuComponents/MenuItem";
 import respic from "/respic.png";
-import { IoIosStar, IoMdStats } from "react-icons/io";
+import { IoIosStar } from "react-icons/io";
 import { Link } from "react-router";
 
 const { Text } = Typography;

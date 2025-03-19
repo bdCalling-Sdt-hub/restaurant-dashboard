@@ -37,7 +37,7 @@ const RestaurantDetail = () => {
       title: 'Reviews',
       icon: <StarOutlined />,
       key: 'reviews',
-      path: '/reviews', // Add the path for the link
+      path: '/reviews', 
     },
     {
       title: 'Business Hours',
