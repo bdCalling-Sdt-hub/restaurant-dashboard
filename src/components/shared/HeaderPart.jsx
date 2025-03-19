@@ -14,13 +14,13 @@ const HeaderPart = () => {
       </Link>
       {/* User Section */}
       <div className="flex items-center">
-        <Link to={'/my-details'}>
+       
         <img src="admin.png" alt="User" className="mr-2 w-16 h-16" /> 
-        </Link>
+       
         <div>
-          <Text  className='text-black' >Eyasin</Text>
+          <Text  className='text-black' >Osman</Text>
           <br/>
-          <Text className="font-semibold" >Admin</Text>
+          <Text className="font-semibold" >Restaurant Owner</Text>
         </div>
       </div>
     </div>

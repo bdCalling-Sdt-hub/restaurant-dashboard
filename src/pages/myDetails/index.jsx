@@ -19,7 +19,7 @@ const MyDetails = () => {
 
   return (
     <div className="p-6">
-          <div className="flex gap-x-2">
+          {/* <div className="flex gap-x-2">
         <Link
           className={`py-2 px-4 rounded-full ${currentTab === 'profile' ? '!bg-red-500' : '!bg-gray-700'} !text-white`}
           to={'/my-details'}
@@ -34,7 +34,7 @@ const MyDetails = () => {
         >
           Restaurant Details
         </Link>
-      </div>
+      </div> */}
         <Tabs activeKey={currentTab} onChange={setCurrentTab}>
         <Tabs.TabPane tab="Profile" key="profile">
           <ProfilePage onEdit={setCurrentTab} />

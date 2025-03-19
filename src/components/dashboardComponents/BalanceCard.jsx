@@ -1,13 +1,8 @@
-import React from 'react';
-import { WalletOutlined, BarsOutlined } from '@ant-design/icons'; // Assuming you want these icons
+import React from "react";
+import { WalletOutlined, BarsOutlined } from "@ant-design/icons"; 
 const BalanceCard = () => {
   return (
     <div className="bg-gray-100 rounded-lg p-6 shadow-md font-sans">
-     
-
-
-
-
       <h2 className="text-xl font-semibold mb-4">Total Balance</h2>
       <div className="text-4xl text-green-500 font-bold mb-6">$1,20,000</div>
 
@@ -36,7 +31,6 @@ const BalanceCard = () => {
           <div className="text-lg font-medium">$65,500</div>
         </div>
       </div>
-
     </div>
   );
 };

@@ -42,7 +42,7 @@ const LoginPage = () => {
               <Input 
                 placeholder="Enter Email" 
                 prefix={<MdEmail className='text-[#5C5C5C]'  />} 
-                className="!border-black border-2 rounded-md p-2"
+                className="!border-black border-2 rounded-md !p-2"
               />
             </Form.Item>
 
@@ -54,7 +54,7 @@ const LoginPage = () => {
               <Input.Password 
                 placeholder="Enter Password" 
                 prefix={<RiLockPasswordFill className='text-[#5C5C5C]' />} 
-                className="!border-black border-2 rounded-md p-2 "
+                className="!border-black border-2 rounded-md !p-2 "
                
               />
             </Form.Item>
@@ -68,7 +68,7 @@ const LoginPage = () => {
             </Form.Item>
 
             <Form.Item>
-              <Button htmlType="submit" className="w-full !bg-red-500 hover:bg-red-600 border-0 rounded-md p-2 !text-white">
+              <Button htmlType="submit" className="w-full !bg-red-500 hover:bg-red-600 border-0 rounded-md !p-5 !text-white">
                 Sign In
               </Button>
             </Form.Item>
