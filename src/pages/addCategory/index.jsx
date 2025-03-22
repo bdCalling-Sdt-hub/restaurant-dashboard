@@ -1,75 +1,118 @@
-import React, { useState } from 'react';
-import { Button,  Typography, Space, Modal, Input } from 'antd';
-import MenuItem from '../../components/menuComponents/MenuItem';
-import respic from  '../../../public/respic.png'
-import btnbg from  '../../../public/buttonbg.png'
-import btn1 from  '../../../public/ite.png'
-import btn2 from  '../../../public/che.png'
-import btn3 from  '../../../public/mex.png'
+import React, { useState } from "react";
+import { Button, Typography, Space, Modal, Input } from "antd";
+import MenuItem from "../../components/menuComponents/MenuItem";
+import respic from "../../../public/respic.png";
+import btnbg from "../../../public/buttonbg.png";
+import btn1 from "../../../public/ite.png";
+import btn2 from "../../../public/che.png";
+import btn3 from "../../../public/mex.png";
 
-
-
-import { IoIosStar, IoMdStats } from 'react-icons/io';
+import { IoIosStar, IoMdStats } from "react-icons/io";
 import { Link } from "react-router";
-
 
 const { Text } = Typography;
 
-
-
 const AddCategory = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
-
-    const [editingItem, setEditingItem] = useState(null);
-     const [items, setItems] = useState([
-      {
-        id: 1,
-        name: 'Bison Burgers',
-        price: 50.00,
-        description: 'Beetroot, Potato, Bell Pepper, Sandwich Masala',
-      },
-      {
-        id: 2,
-        name: 'Bison Burgers',
-        price: 50.00,
-        description: 'Beetroot, Potato, Bell Pepper, Sandwich Masala',
-      },
-      {
-        id: 3,
-        name: 'Bison Burgers',
-        price: 50.00,
-        description: 'Beetroot, Potato, Bell Pepper, Sandwich Masala',
-      },
-      {
-        id: 4,
-        name: 'Bison Burgers',
-        price: 50.00,
-        description: 'Beetroot, Potato, Bell Pepper, Sandwich Masala',
-      },
-      {
-        id: 5,
-        name: 'Bison Burgers',
-        price: 50.00,
-        description: 'Beetroot, Potato, Bell Pepper, Sandwich Masala',
-      },
-      {
-        id: 6,
-        name: 'Bison Burgers',
-        price: 50.00,
-        description: 'Beetroot, Potato, Bell Pepper, Sandwich Masala',
-      },
-    ])
-   
-
-
-  
+  const [editingItem, setEditingItem] = useState(null);
+  const [items, setItems] = useState([
+    {
+      id: 1,
+      name: "Bison Burgers",
+      price: 50.0,
+      description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
+      category: "Mexican",
+    },
+    {
+      id: 2,
+      name: "Bison Burgers",
+      price: 50.0,
+      description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
+      category: "Italian",
+    },
+    {
+      id: 3,
+      name: "Bison Burgers",
+      price: 50.0,
+      description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
+      category: "Italian",
+    },
+    {
+      id: 4,
+      name: "Bison Burgers",
+      price: 50.0,
+      description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
+      category: "Italian",
+    },
+    {
+      id: 5,
+      name: "Bison Burgers",
+      price: 50.0,
+      description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
+      category: "Italian",
+    },
+    {
+      id: 6,
+      name: "Bison Burgers",
+      price: 50.0,
+      description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
+      category: "Italian",
+    },
+    {
+      id: 7,
+      name: "Bison Burgers",
+      price: 50.0,
+      description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
+      category: "Mexican",
+    },
+    {
+      id: 8,
+      name: "Bison Burgers",
+      price: 50.0,
+      description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
+      category: "Mexican",
+    },
+    {
+      id: 9,
+      name: "Bison Burgers",
+      price: 50.0,
+      description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
+      category: "Mexican",
+    },
+    {
+      id: 10,
+      name: "Bison Burgers",
+      price: 50.0,
+      description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
+      category: "Mexican",
+    },
+    {
+      id: 11,
+      name: "Bison Burgers",
+      price: 50.0,
+      description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
+      category: "Mexican",
+    },
+    {
+      id: 12,
+      name: "Bison Burgers",
+      price: 50.0,
+      description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
+      category: "Mexican",
+    },
+  ]);
 
   const showEditModal = (item) => {
     setEditingItem(item);
     setIsModalVisible(true);
   };
+  const filteredItems =
+    selectedCategory === "All"
+      ? items
+      : items.filter((item) => item.category === selectedCategory);
 
   const handleOk = () => {
     if (editingItem) {
@@ -79,8 +122,8 @@ const AddCategory = () => {
       setItems(updatedMenuItems);
     }
     setEditingItem(null);
-    setIsSuccessModalVisible(true)
-    setIsModalVisible(false)
+    setIsSuccessModalVisible(true);
+    setIsModalVisible(false);
   };
 
   const handleCancel = () => {
@@ -92,65 +135,122 @@ const AddCategory = () => {
     setEditingItem({ ...editingItem, [e.target.name]: e.target.value });
   };
 
-  const handleSuccessModal =()=>{
-    setIsSuccessModalVisible(false)
-  }
+  const handleSuccessModal = () => {
+    setIsSuccessModalVisible(false);
+  };
 
   return (
     <div className="p-4">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-semibold">Category</h2>
-        <Space >
-          <Button className="bg-gray-200 rounded-full px-4 py-2 text-sm" style={{ backgroundImage: `url(${btn1})`, backgroundSize: 'cover', color: 'white' }}>Italian</Button>
-          <Button className="bg-gray-200 rounded-full px-4 py-2 text-sm" style={{ backgroundImage: `url(${btn2})`, backgroundSize: 'cover', color: 'white' }}>Chinese</Button>
-          <Button className="bg-gray-200 rounded-full px-4 py-2 text-sm" style={{ backgroundImage: `url(${btn3})`, backgroundSize: 'cover', color: 'white' }}>Mexican</Button>
-          <Button className="bg-gray-200 rounded-full px-4 py-2 text-sm" style={{ backgroundImage: `url(${btnbg})`, backgroundSize: 'cover', color: 'white' }}>Russian</Button>
+        <Space>
+          <Button
+            onClick={() => setSelectedCategory("Italian")}
+            className="bg-gray-200 rounded-full px-4 py-2 text-sm"
+            style={{
+              backgroundImage: `url(${btn1})`,
+              backgroundSize: "cover",
+              color: "white",
+            }}
+          >
+            Italian
+          </Button>
+          <Button
+            onClick={() => setSelectedCategory("Chinese")}
+            className="bg-gray-200 rounded-full px-4 py-2 text-sm"
+            style={{
+              backgroundImage: `url(${btn2})`,
+              backgroundSize: "cover",
+              color: "white",
+            }}
+          >
+            Chinese
+          </Button>
+          <Button
+            onClick={() => setSelectedCategory("Mexican")}
+            className="bg-gray-200 rounded-full px-4 py-2 text-sm"
+            style={{
+              backgroundImage: `url(${btn3})`,
+              backgroundSize: "cover",
+              color: "white",
+            }}
+          >
+            Mexican
+          </Button>
+          <Button
+            onClick={() => setSelectedCategory("Russian")}
+            className="bg-gray-200 rounded-full px-4 py-2 text-sm"
+            style={{
+              backgroundImage: `url(${btnbg})`,
+              backgroundSize: "cover",
+              color: "white",
+            }}
+          >
+            Russian
+          </Button>
           <div>
-
-          <p className=" rounded-full  text-sm font-bold ">All Cuisine</p>
+            <p className=" rounded-full  text-sm font-bold ">All Cuisine</p>
           </div>
         </Space>
         <div>
-        <Button  onClick={() => showEditModal({ name: "", description: "", price: 0 })} className="!bg-red-500 !text-white rounded-full px-4 py-2 text-sm">+ Add New</Button>
+          <Button
+            onClick={() =>
+              showEditModal({ name: "", description: "", price: 0 })
+            }
+            className="!bg-red-500 !text-white rounded-full px-4 py-2 text-sm"
+          >
+            + Add New
+          </Button>
         </div>
       </div>
 
-      <Text strong className="block mb-2">Italian</Text>
+      {/* Display filtered items */}
+      <Text strong className="block mb-2">
+        {selectedCategory}
+      </Text>
+      <div className="flex flex-wrap gap-3">
+        {filteredItems.map((item) => (
+          <MenuItem key={item.id} item={item} />
+        ))}
+      </div>
+
+      {/* <Text strong className="block mb-2">
+        Italian
+      </Text>
       <div className="flex flex-wrap gap-3">
         {items.slice(0, 4).map((item) => (
           <MenuItem key={item.id} item={item} onEdit={showEditModal} />
         ))}
-      </div>
-
-      <Text strong className="block mb-2">Mexican</Text>
+      </div> */}
+      {/* =================================== */}
+      {/* <Text strong className="block mb-2">
+        Mexican
+      </Text>
       <div className="flex flex-wrap gap-3">
-        {items.slice(0,4).map((item, index) => (
+        {items.slice(0, 4).map((item, index) => (
           <MenuItem key={index} item={item} onEdit={showEditModal} />
         ))}
-      </div>
-
-
-
+      </div> */}
 
       <Modal
         title={editingItem ? "Edit Menu Item" : "Add New Menu Item"}
         visible={isModalVisible}
         onOk={handleOk}
         okText="Save"
-        cancelButtonProps={{ style: { display: 'block' } }} 
+        cancelButtonProps={{ style: { display: "block" } }}
         onCancel={handleCancel}
-        width={500} 
-        footer={[ 
+        width={500}
+        footer={[
           <div key="save-button" className="flex justify-center w-full">
             <Button
               key="submit"
               type="primary"
               onClick={handleOk}
               style={{
-                backgroundColor: 'red',
-                color: 'white',
-                borderColor: 'red',
-                width:"100%"
+                backgroundColor: "red",
+                color: "white",
+                borderColor: "red",
+                width: "100%",
               }}
             >
               Save
@@ -158,12 +258,9 @@ const AddCategory = () => {
           </div>,
         ]}
       >
-
-        <div className="flex items-center justify-center" >
-            <img src={respic} alt="img" className="w-64" />
+        <div className="flex items-center justify-center">
+          <img src={respic} alt="img" className="w-64" />
         </div>
-
-
 
         <div className="flex">
           <div>
@@ -204,47 +301,51 @@ const AddCategory = () => {
       {/* Success Popup model  */}
 
       <Modal
-        
         visible={isSuccessModalVisible}
         onOk={() => setIsSuccessModalVisible(false)}
         onCancel={handleSuccessModal}
         footer={null}
       >
-        <div  >
+        <div>
           <img src={respic} alt="Saved Item" className="w-40 mx-auto" />
-          
           <div>
-          <div className="flex gap-x-2">
-          <div>
-            <label htmlFor="">Food Name</label>
-            <Input
-              placeholder="Name"
-              name="name"
-              value={editingItem ? editingItem.name : ""}
-              onChange={handleInputChange}
-              className="mb-2"
-            />
-          </div>
+            <div className="flex gap-x-2">
+              <div>
+                <label htmlFor="">Food Name</label>
+                <Input
+                  placeholder="Name"
+                  name="name"
+                  value={editingItem ? editingItem.name : ""}
+                  onChange={handleInputChange}
+                  className="mb-2"
+                />
+              </div>
 
-          <div>
-            <label htmlFor="">Food Price</label>
-            <Input
-              placeholder="Price"
-              name="price"
-              type="number"
-              value={editingItem ? editingItem.price : ""}
-              onChange={handleInputChange}
-            />
+              <div>
+                <label htmlFor="">Food Price</label>
+                <Input
+                  placeholder="Price"
+                  name="price"
+                  type="number"
+                  value={editingItem ? editingItem.price : ""}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
           </div>
         </div>
+
+        <div className="flex py-2 gap-x-2 items-center">
+          <div className="flex">
+            {" "}
+            <IoIosStar color="#FF9500" /> <IoIosStar color="#FF9500" />{" "}
+            <IoIosStar color="#FF9500" /> <IoIosStar color="#FF9500" />{" "}
+            <IoIosStar color="#FF9500" />{" "}
           </div>
+          <Link to={"/menu"} className="text-[#949494]">
+            (63) See more{" "}
+          </Link>
         </div>
-
-        <div className='flex py-2 gap-x-2 items-center'>
-      <div className='flex'> <IoIosStar color='#FF9500'/>  <IoIosStar color='#FF9500'/> <IoIosStar color='#FF9500'/> <IoIosStar color='#FF9500'/> <IoIosStar color='#FF9500'/> </div>
-      <Link to={'/menu'} className='text-[#949494]'  >(63) See more  </Link>
-      </div>
-
       </Modal>
     </div>
   );

@@ -79,63 +79,63 @@ const users = [
   },
   {
     id: "#1233",
-    fullName: "Hari Danang",
+    fullName: "Kari Danang",
     email: "xtqrris@gmail.com",
     phoneNumber: "(270) 555-0117",
     avatar: "https://randomuser.me/api/portraits/men/44.jpg",
   },
   {
     id: "#1233",
-    fullName: "Devon Lane",
+    fullName: "Mevon Lane",
     email: "xteiris@gmail.com",
     phoneNumber: "(219) 555-0114",
     avatar: "https://randomuser.me/api/portraits/men/75.jpg",
   },
   {
     id: "#1233",
-    fullName: "Hari Danang",
+    fullName: "Alex Danang",
     email: "xtqrris@gmail.com",
     phoneNumber: "(270) 555-0117",
     avatar: "https://randomuser.me/api/portraits/men/44.jpg",
   },
   {
     id: "#1233",
-    fullName: "Devon Lane",
+    fullName: "David Mallan",
     email: "xtevris@gmail.com",
     phoneNumber: "(207) 555-0119",
     avatar: "https://randomuser.me/api/portraits/men/75.jpg",
   },
   {
     id: "#1233",
-    fullName: "Hari Danang",
+    fullName: " Emran Khan",
     email: "xterriq@gmail.com",
     phoneNumber: "(225) 555-0118",
     avatar: "https://randomuser.me/api/portraits/men/44.jpg",
   },
   {
     id: "#1233",
-    fullName: "Hari Danang",
+    fullName: "Raju Team",
     email: "xtqrris@gmail.com",
     phoneNumber: "(270) 555-0117",
     avatar: "https://randomuser.me/api/portraits/men/44.jpg",
   },
   {
     id: "#1233",
-    fullName: "Devon Lane",
+    fullName: "ALex Hales",
     email: "xteiris@gmail.com",
     phoneNumber: "(219) 555-0114",
     avatar: "https://randomuser.me/api/portraits/men/75.jpg",
   },
   {
     id: "#1233",
-    fullName: "Hari Danang",
+    fullName: "Rolex Danang",
     email: "xtqrris@gmail.com",
     phoneNumber: "(270) 555-0117",
     avatar: "https://randomuser.me/api/portraits/men/44.jpg",
   },
   {
     id: "#1233",
-    fullName: "Devon Lane",
+    fullName: "Vikrum Khan",
     email: "xtevris@gmail.com",
     phoneNumber: "(207) 555-0119",
     avatar: "https://randomuser.me/api/portraits/men/75.jpg",
@@ -158,12 +158,12 @@ const users = [
 
 const UserManagement = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10); // Set page size to 10
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedUser, setSelectedUser] = useState(null); // Track the selected user
-  const [isModalVisible, setIsModalVisible] = useState(false); // Track modal visibility
-  const [isBlockModalVisible, setIsBlockModalVisible] = useState(false); // New state for block modal
+  const [pageSize, setPageSize] = useState(10); 
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [isModalVisible, setIsModalVisible] = useState(false); 
+  const [isBlockModalVisible, setIsBlockModalVisible] = useState(false); 
   const [userToBlock, setUserToBlock] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const filteredUsers = users.filter((user) =>
     user.fullName.toLowerCase().includes(searchTerm.toLowerCase())
@@ -220,7 +220,8 @@ const UserManagement = () => {
         <div className="w-[348px]">
           <Search
             placeholder="Search here..."
-            onSearch={handleSearch}
+            // onSearch={handleSearch}
+            onChange={(e)=>handleSearch(e.target.value)}
             className="p-2 rounded"
           />
         </div>

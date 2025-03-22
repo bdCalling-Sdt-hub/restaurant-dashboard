@@ -27,7 +27,7 @@ const MenuItem = ({ item, onEdit }) => {
 
       <div className='flex items-center gap-x-3'>
       <FaBellConcierge color='red' />
-       <span>Italian</span>
+       <span>{item.category}</span>
       </div>
         
       <div className='flex gap-x-2 items-center'>

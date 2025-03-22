@@ -7,7 +7,7 @@ const { Search } = Input;
 const users = [
   {
     id: '#1233',
-    fullName: 'Kathryn Murp',
+    fullName: 'Nurulla Murp',
     guest: '4',
     date: '22/02/2025',
     time:'10:12 AM',
@@ -16,7 +16,7 @@ const users = [
   },
   {
     id: '#1233',
-    fullName: 'Kathryn Murp',
+    fullName: 'Sujon Khan',
     guest: '4',
     date: '22/02/2025',
     time:'10:12 AM',
@@ -25,7 +25,7 @@ const users = [
   },
   {
     id: '#1233',
-    fullName: 'Kathryn Murp',
+    fullName: 'Babar khan',
     guest: '4',
     date: '22/02/2025',
     time:'10:12 AM',
@@ -34,7 +34,7 @@ const users = [
   },
   {
     id: '#1233',
-    fullName: 'Kathryn Murp',
+    fullName: 'Murp',
     guest: '4',
     date: '22/02/2025',
     time:'10:12 AM',
@@ -43,7 +43,7 @@ const users = [
   },
   {
     id: '#1233',
-    fullName: 'Kathryn Murp',
+    fullName: 'Jack Murp',
     guest: '4',
     date: '22/02/2025',
     time:'10:12 AM',
@@ -52,7 +52,7 @@ const users = [
   },
   {
     id: '#1233',
-    fullName: 'Kathryn Murp',
+    fullName: 'Lyes ',
     guest: '4',
     date: '22/02/2025',
     time:'10:12 AM',
@@ -61,7 +61,7 @@ const users = [
   },
   {
     id: '#1233',
-    fullName: 'Kathryn Murp',
+    fullName: 'Alex Hales',
     guest: '4',
     date: '22/02/2025',
     time:'10:12 AM',
@@ -70,7 +70,7 @@ const users = [
   },
   {
     id: '#1233',
-    fullName: 'Kathryn Murp',
+    fullName: 'Robin khan',
     guest: '4',
     date: '22/02/2025',
     time:'10:12 AM',
@@ -79,7 +79,7 @@ const users = [
   },
   {
     id: '#1233',
-    fullName: 'Kathryn Murp',
+    fullName: 'Hasain Hayder',
     guest: '4',
     date: '22/02/2025',
     time:'10:12 AM',
@@ -88,7 +88,7 @@ const users = [
   },
   {
     id: '#1233',
-    fullName: 'Kathryn Murp',
+    fullName: 'Mohid Mia',
     guest: '4',
     date: '22/02/2025',
     time:'10:12 AM',
@@ -97,7 +97,7 @@ const users = [
   },
   {
     id: '#1233',
-    fullName: 'Kathryn Murp',
+    fullName: 'Emran Mahamud',
     guest: '4',
     date: '22/02/2025',
     time:'10:12 AM',
@@ -106,7 +106,7 @@ const users = [
   },
   {
     id: '#1233',
-    fullName: 'Kathryn Murp',
+    fullName: 'Kumar Murp',
     guest: '4',
     date: '22/02/2025',
     time:'10:12 AM',
@@ -115,7 +115,7 @@ const users = [
   },
   {
     id: '#1233',
-    fullName: 'Kathryn Murp',
+    fullName: 'Symon Murp',
     guest: '4',
     date: '22/02/2025',
     time:'10:12 AM',
@@ -124,7 +124,7 @@ const users = [
   },
   {
     id: '#1233',
-    fullName: 'Kathryn Murp',
+    fullName: 'Jack Murp',
     guest: '4',
     date: '22/02/2025',
     time:'10:12 AM',
@@ -133,7 +133,7 @@ const users = [
   },
   {
     id: '#1233',
-    fullName: 'Kathryn Murp',
+    fullName: 'Nick Less',
     guest: '4',
     date: '22/02/2025',
     time:'10:12 AM',
@@ -142,7 +142,7 @@ const users = [
   },
   {
     id: '#1233',
-    fullName: 'Kathryn Murp',
+    fullName: 'Yashraj Murp',
     guest: '4',
     date: '22/02/2025',
     time:'10:12 AM',
@@ -172,9 +172,10 @@ const users = [
 const BookingManagement = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10); 
-  const [searchTerm, setSearchTerm] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  // filter for search 
   const filteredUsers = users.filter((user) =>
     user.fullName.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -182,6 +183,8 @@ const BookingManagement = () => {
     setSearchTerm(value);
     setCurrentPage(1); 
   };
+
+  
   const handlePageChange = (page, pageSize) => {
     setCurrentPage(page);
     setPageSize(pageSize);
@@ -199,12 +202,14 @@ const BookingManagement = () => {
     setIsModalVisible(false);
     setUserToDelete(null);
   };
+
   return (
     <div className="p-4 bg-[#f6f6f6]">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-semibold">Booking Management</h2>
         <div className="w-[348px]">
           <Search
+            onChange={(e) => handleSearch(e.target.value)}
             placeholder="Search here..."
             onSearch={handleSearch}
             className="p-2 rounded"
