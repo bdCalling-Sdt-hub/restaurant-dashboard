@@ -19,22 +19,7 @@ const MyDetails = () => {
 
   return (
     <div className="p-6">
-          {/* <div className="flex gap-x-2">
-        <Link
-          className={`py-2 px-4 rounded-full ${currentTab === 'profile' ? '!bg-red-500' : '!bg-gray-700'} !text-white`}
-          to={'/my-details'}
-          onClick={() => setCurrentTab('profile')} // Update currentTab when clicked
-        >
-          My Details
-        </Link>
-        <Link
-          className={`py-2 px-4 rounded-full ${currentTab === 'restaurant' ? '!bg-red-500' : '!bg-gray-700'} !text-white`}
-          to={'/restaurant-details'}
-          onClick={() => setCurrentTab('restaurant')} // Update currentTab when clicked
-        >
-          Restaurant Details
-        </Link>
-      </div> */}
+      
         <Tabs activeKey={currentTab} onChange={setCurrentTab}>
         <Tabs.TabPane tab="Profile" key="profile">
           <ProfilePage onEdit={setCurrentTab} />
