@@ -13,6 +13,7 @@ import { BsMenuButtonWideFill } from "react-icons/bs";
 import { MdOutlineCategory, MdSchedule } from "react-icons/md";
 import { FaUserCog } from "react-icons/fa";
 import { IoRestaurantSharp } from "react-icons/io5";
+import { logout } from "../../helper/SessionHelper";
 
 const SidebarMenu = () => {
   const [activeKey, setActiveKey] = useState("1");
@@ -248,9 +249,9 @@ const SidebarMenu = () => {
                 activeKey === "signout" ? "bg-red-500 !p-4 text-white" : "!p-4"
               } // Tailwind active style
             >
-              <Link to="/login" className="text-[18px]">
+              <button onClick={()=> logout()} className="text-[18px]">
                 Sign Out
-              </Link>
+              </button>
             </Menu.Item>
           </div>
         </div>

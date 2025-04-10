@@ -1,17 +1,16 @@
-import React from "react";
-import { Form, Input, Button, Typography } from "antd";
+import { Typography } from "antd";
 import "antd/dist/reset.css";
 import logo from "/elhagz.png";
 import forgot from "/forgot.png";
 import { Link } from "react-router-dom";
-import { MdEmail, MdKeyboardArrowLeft } from "react-icons/md";
+import { MdKeyboardArrowLeft } from "react-icons/md";
+import ForgotPassForm from '../../../components/auth/ForgotPassForm';
+
 
 const { Title } = Typography;
 
 const ForgotPassword = () => {
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-  };
+ 
   return (
     <div className="bg-[#f6f6f6]">
       <div className="max-w-7xl block md:flex h-screen items-center mx-auto">
@@ -37,45 +36,7 @@ const ForgotPassword = () => {
               code to reset your password!
             </p>
           </div>
-          <Form
-            name="forgot password"
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
-            layout="vertical"
-            className="w-full max-w-sm"
-          >
-            <div className="flex flex-col space-y-36">
-              <div>
-                <Form.Item
-                  label={
-                    <span className="text-black font-semibold text-lg">
-                      Email
-                    </span>
-                  }
-                  name="email"
-                  rules={[{ required: true, message: "Enter Email Address" }]}
-                >
-                  <Input
-                    placeholder="Enter Email Address"
-                    prefix={<MdEmail className="text-[#5C5C5C]" />}
-                    className="!border-black border-2 rounded-md !p-2"
-                  />
-                </Form.Item>
-              </div>
-
-              <div>
-                <Form.Item>
-                  <Link to={'/verification'}>
-                  <Button
-                    htmlType="submit"
-                    className="w-full !bg-red-500 hover:bg-red-600 border-0 rounded-md !p-5 !text-white"
-                  >
-                    Proceed
-                  </Button></Link>
-                </Form.Item>
-              </div>
-            </div>
-          </Form>
+          <ForgotPassForm/>
         </div>
 
         {/* Right side: Image */}

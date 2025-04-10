@@ -25,12 +25,14 @@ import ReservationsAgreement from "./components/restaurantComponents/Reservation
 import MenuItems from "./components/restaurantComponents/MenuItems";
 import RestaurantFeatures from "./components/restaurantComponents/RestaurantFeatures";
 import Cuisine from "./components/restaurantComponents/Cuisine";
+import PrivateRoute from "./routes/PrivateRoute";
+import PublicRoute from "./routes/PublicRoute";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
-        <Route element={<RootLayOut />}>
+        <Route element={<PrivateRoute> <RootLayOut /> </PrivateRoute>}>
           <Route path="/" element={<Dashboard />}></Route>
           <Route
             path="/booking-management"
@@ -52,10 +54,10 @@ function App() {
           <Route path="/restaurant/restaurant-features" element={<RestaurantFeatures/>}></Route>
 
         </Route>
-        <Route path="/login" element={<LoginPage />}></Route>
-        <Route path="/forgot-password" element={<ForgotPassword />}></Route>
-        <Route path="/verification" element={<VerificationPage />}></Route>
-        <Route path="/reset-password" element={<ResetPassword />}></Route>
+        <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>}></Route>
+        <Route path="/forgot-password" element={<PublicRoute><ForgotPassword /></PublicRoute>}></Route>
+        <Route path="/verify-otp" element={<PublicRoute><VerificationPage /></PublicRoute>}></Route>
+        <Route path="/reset-password" element={<PublicRoute><ResetPassword /></PublicRoute>}></Route>
 
       </Route>
     )

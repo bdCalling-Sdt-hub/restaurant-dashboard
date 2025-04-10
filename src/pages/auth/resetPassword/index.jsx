@@ -1,10 +1,8 @@
-import React from "react";
-import { Form, Input, Button, Typography } from "antd";
+import { Typography } from "antd";
 import "antd/dist/reset.css";
 import logo from "/elhagz.png";
 import ResetPass from "/ResetPassword.png";
-
-import { RiLockPasswordFill } from "react-icons/ri";
+import ResetPasswordForm from '../../../components/auth/ResetPasswordForm';
 import { Link } from "react-router-dom";
 
 const { Title } = Typography;
@@ -30,67 +28,7 @@ const ResetPassword = () => {
             </Title>
             <p className="text-gray-600 mb-6">Please enter your new password</p>
           </div>
-          <Form
-            name="login"
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
-            layout="vertical"
-            className="w-full max-w-sm"
-          >
-            <Form.Item
-              label={
-                <span className="text-black font-semibold text-lg">
-                  Password
-                </span>
-              }
-              name="password"
-              rules={[
-                { required: true, message: "Please enter your password!" },
-              ]}
-            >
-              <Input.Password
-                placeholder="Enter Password"
-                prefix={<RiLockPasswordFill className="text-[#5C5C5C]" />}
-                className="!border-black border-2 rounded-md !p-2 "
-              />
-            </Form.Item>
-
-            <Form.Item
-              label={
-                <span className="text-black font-semibold text-lg">
-                  Password
-                </span>
-              }
-              name="password"
-              rules={[
-                { required: true, message: "Please enter your password!" },
-              ]}
-            >
-              <Input.Password
-                placeholder="Enter Password"
-                prefix={<RiLockPasswordFill className="text-[#5C5C5C]" />}
-                className="!border-black border-2 rounded-md !p-2 "
-              />
-            </Form.Item>
-
-            <Form.Item>
-              <div p>
-                <p className="!text-black font-semibold">
-                  *NOTE: Choose a password that is distinctive & you can easily
-                  remember.
-                </p>
-              </div>
-            </Form.Item>
-
-            <Form.Item>
-              <Button
-                htmlType="submit"
-                className="w-full !bg-red-500 hover:bg-red-600 border-0 rounded-md !p-5 !text-white"
-              >
-                Set Password
-              </Button>
-            </Form.Item>
-          </Form>
+          <ResetPasswordForm/>
         </div>
 
         {/* Right side: Image */}
