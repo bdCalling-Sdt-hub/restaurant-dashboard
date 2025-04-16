@@ -15,7 +15,7 @@ const RootLayOut = () => {
           <Sider width={300} className="!bg-[#F6F6F6] ">
             <SidebarMenu />
           </Sider>
-          <Content className="!bg-white p-5 flex-1">
+          <Content className="p-5 flex-1 bg-white h-[88vh] overflow-y-scroll">
             <Outlet />
           </Content>
         </Layout>

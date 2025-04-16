@@ -41,8 +41,8 @@ function App() {
           <Route path="/menu" element={<Menu />}></Route>
           <Route path="/add-category" element={<AddCategory />}></Route>
           <Route path="/table-booking" element={<TableBooking />}></Route>
-          <Route path="/user-management" element={<UserManagement />}></Route>
-          <Route path="/my-details" element={<MyDetails/>}></Route>
+          <Route path="/users" element={<UserManagement />}></Route>
+          <Route path="/profile" element={<MyDetails/>}></Route>
           <Route path="/restaurant-details" element={<RestaurantDetails/>}></Route>
           <Route path="/restaurant/reviews" element={<Reviews/>}></Route>
           <Route path="/restaurant/social-media" element={<SocialMedia/>}></Route>

@@ -4,53 +4,58 @@ import MenuItem from "../../components/menuComponents/MenuItem";
 import respic from "/respic.png";
 import { IoIosStar } from "react-icons/io";
 import { Link } from "react-router";
+import { useGetMenusQuery } from "../../redux/features/menu/menuApi";
+import MenuLoading from "../../components/Loader/MenuLoading";
+import CreateMenuModal from "../../components/modal/CreateMenuModal";
 
 const { Text } = Typography;
 
-const AddCategory = () => {
+const Menu = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
+   const {data, isLoading } = useGetMenusQuery(undefined);
+   const menus = data?.data;
 
   const [editingItem, setEditingItem] = useState(null);
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      name: "Bison Burgers",
-      price: 50.0,
-      description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
-    },
-    {
-      id: 2,
-      name: "Bison Burgers",
-      price: 50.0,
-      description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
-    },
-    {
-      id: 3,
-      name: "Bison Burgers",
-      price: 50.0,
-      description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
-    },
-    {
-      id: 4,
-      name: "Bison Burgers",
-      price: 50.0,
-      description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
-    },
-    {
-      id: 5,
-      name: "Bison Burgers",
-      price: 50.0,
-      description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
-    },
-    {
-      id: 6,
-      name: "Bison Burgers",
-      price: 50.0,
-      description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
-    },
-  ]);
-
+  // const [items, setItems] = useState([
+  //   {
+  //     id: 1,
+  //     name: "Bison Burgers",
+  //     price: 50.0,
+  //     description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Bison Burgers",
+  //     price: 50.0,
+  //     description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Bison Burgers",
+  //     price: 50.0,
+  //     description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Bison Burgers",
+  //     price: 50.0,
+  //     description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "Bison Burgers",
+  //     price: 50.0,
+  //     description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
+  //   },
+  //   {
+  //     id: 6,
+  //     name: "Bison Burgers",
+  //     price: 50.0,
+  //     description: "Beetroot, Potato, Bell Pepper, Sandwich Masala",
+  //   },
+  // ]);
+const items = [];
   const showEditModal = (item) => {
     setEditingItem(item);
     setIsModalVisible(true);
@@ -83,21 +88,31 @@ const AddCategory = () => {
 
   return (
     <div className="p-4">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-semibold">Menu</h2>
-        <Button
-          onClick={() => showEditModal({ name: "", description: "", price: 0 })}
-          className="!bg-red-500 !text-white rounded-full px-4 py-2 text-sm"
-        >
-          + Add New
-        </Button>
-      </div>
+      <CreateMenuModal />
 
-      <div className="flex flex-wrap gap-3">
-        {items.map((item) => (
-          <MenuItem key={item.id} item={item} onEdit={showEditModal} />
-        ))}
-      </div>
+      {isLoading ? (
+        <MenuLoading />
+      ) : (
+        <>
+          {menus?.length > 0 ? (
+            <>
+              <div className="flex flex-wrap gap-3">
+                {menus.map((menu, index) => (
+                  <MenuItem key={index} menu={menu} />
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="w-full flex flex-col items-center justify-center py-20 text-center text-gray-500">
+              <h2 className="text-lg font-semibold mb-2">No items found</h2>
+              <p className="text-sm text-gray-400 max-w-xs">
+                Looks like there's nothing here yet. Try adding a new item to
+                get started.
+              </p>
+            </div>
+          )}
+        </>
+      )}
 
       <Modal
         title={editingItem ? "Edit Menu Item" : "Add New Menu Item"}
@@ -167,7 +182,7 @@ const AddCategory = () => {
 
       {/* Success Popup model  */}
 
-      <Modal
+      {/* <Modal
         visible={isSuccessModalVisible}
         onOk={() => setIsSuccessModalVisible(false)}
         onCancel={handleSuccessModal}
@@ -214,9 +229,9 @@ const AddCategory = () => {
             (63) See more{" "}
           </Link>
         </div>
-      </Modal>
+      </Modal> */}
     </div>
   );
 };
 
-export default AddCategory;
+export default Menu;

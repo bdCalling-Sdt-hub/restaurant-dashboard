@@ -1,7 +1,9 @@
-import { Button, Form, Input } from "antd";
+import { Form, Input } from "antd";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { useForgotPassCreateNewPassMutation } from "../../redux/features/auth/authApi";
 import { getEmail, getOtp } from "../../helper/SessionHelper";
+import { CgSpinnerTwo } from "react-icons/cg";
+
 
 const ResetPasswordForm = () => {
     const [forgotPassCreateNewPass, { isLoading }] = useForgotPassCreateNewPassMutation();
@@ -75,13 +77,20 @@ const ResetPasswordForm = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button
-            htmlType="submit"
+        <button
+            type="submit"
             disabled={isLoading}
-            className="w-full !bg-red-500 hover:bg-red-600 border-0 rounded-md p-2 !text-white disabled:cursor-not-allowed"
+            className="w-full bg-red-500 hover:bg-red-600 duration-200 p-2 border-0 rounded-md text-white flex justify-center items-center gap-x-2 disabled:cursor-not-allowed"
           >
-           {isLoading ? "Processing..." : "Set Password"}
-          </Button>
+            {isLoading ? (
+              <>
+                <CgSpinnerTwo className="animate-spin" fontSize={16} />
+                Processing...
+              </>
+            ) : (
+              "Set Password"
+            )}
+          </button>
         </Form.Item>
       </Form>
     </>

@@ -1,11 +1,13 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {getToken} from "../../../helper/SessionHelper.js";
+import { getToken } from "../../../helper/SessionHelper.js";
+import { ErrorToast } from "../../../helper/ValidationHelper.js";
+
 
 const baseQuery = fetchBaseQuery({
     baseUrl: "http://localhost:9090/api/v1",
     prepareHeaders: async (headers, {getState, endpoint}) =>{
         if(getToken()){
-            headers.set("token", getToken());
+            headers.set("Authorization", getToken());
         }
         return headers;
     }

@@ -1,8 +1,10 @@
-import { Button, Form, Input } from "antd";
+import { Form, Input } from "antd";
 import { Link } from 'react-router-dom';
 import { MdEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { useLoginMutation } from "../../redux/features/auth/authApi";
+import { CgSpinnerTwo } from "react-icons/cg";
+
 
 const LoginForm = () => {
   const [login, { isLoading }] = useLoginMutation()
@@ -63,13 +65,20 @@ const LoginForm = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button
-            htmlType="submit"
+        <button
+            type="submit"
             disabled={isLoading}
-            className="w-full !bg-red-500 hover:bg-red-600 border-0 rounded-md p-2 !text-white"
+            className="w-full bg-red-500 hover:bg-red-600 duration-200 p-2 border-0 rounded-md text-white flex justify-center items-center gap-x-2 disabled:cursor-not-allowed"
           >
-            {isLoading ? "Processing..." : "Sign In"}
-          </Button>
+            {isLoading ? (
+              <>
+                <CgSpinnerTwo className="animate-spin" fontSize={16} />
+                Processing...
+              </>
+            ) : (
+              "Sign In"
+            )}
+          </button>
         </Form.Item>
       </Form>
     </>

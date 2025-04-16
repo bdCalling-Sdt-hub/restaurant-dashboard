@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Button} from "antd";
+import { useEffect, useState } from "react";
 import logo from "../../../public/elhagz.png";
 import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { ErrorToast } from "../../helper/ValidationHelper";
 import { useForgotPassVerifyOtpMutation } from "../../redux/features/auth/authApi";
 import { getEmail } from "../../helper/SessionHelper";
+import { CgSpinnerTwo } from "react-icons/cg";
+
 
 const VerificationForm = () => {
   const [code, setCode] = useState(new Array(4).fill(""));
@@ -105,16 +106,21 @@ const VerificationForm = () => {
       </p>
 
       {/* Verify Button */}
-      <Button
+      <button
+        type="submit"
         onClick={handleVerifyCode}
         disabled={isLoading}
-        className="w-full !bg-red-500 hover:bg-red-600 border-0 rounded-md p-2 !text-white disabled:cursor-not-allowed"
-        danger
-        size="large"
-        block
+        className="w-full bg-red-500 hover:bg-red-600 duration-200 p-2 border-0 rounded-md text-white flex justify-center items-center gap-x-2 disabled:cursor-not-allowed"
       >
-        {isLoading ? "Verifying..." : "Verify"}
-      </Button>
+        {isLoading ? (
+          <>
+            <CgSpinnerTwo className="animate-spin" fontSize={16} />
+            Verifying...
+          </>
+        ) : (
+          "Verify"
+        )}
+      </button>
     </div>
   );
 };

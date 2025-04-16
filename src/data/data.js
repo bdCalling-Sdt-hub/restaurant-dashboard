@@ -1,0 +1,59 @@
+import { BsMenuButtonWideFill } from "react-icons/bs";
+import { FaRegCircleUser } from "react-icons/fa6";
+import { GiStabbedNote } from "react-icons/gi";
+import { MdOutlineCategory, MdSchedule } from "react-icons/md";
+import { RiPieChart2Fill } from "react-icons/ri";
+
+
+export const menuItems = [
+    {
+        title: "Dashboard",
+        path: '/',
+        icon: RiPieChart2Fill
+    },
+    {
+        title: "Booking Management",
+        path: '/booking-management',
+        icon: GiStabbedNote
+    },
+    {
+        title: "Menu", 
+        path: '/menu',
+        icon: BsMenuButtonWideFill
+    },
+    {
+        title: "Add Category",
+        path: '/add-category',
+        icon: MdOutlineCategory
+    },
+    {
+        title: "Table Booking Schedule",
+        path: '/table-booking',
+        icon: MdSchedule
+    },
+    {
+        title: "User Management",
+        path: '/users',
+        icon: FaRegCircleUser
+    }
+]
+
+
+export const subMenuItems = [
+  {
+    title: "Terms & Conditions",
+    path: "/terms-conditions",
+  },
+  {
+    title: "About Us",
+    path: "/about",
+  },
+  {
+    title: "FAQS",
+    path: "/faqs",
+  },
+  {
+    title: "Privacy Policy",
+    path: "/privacy-policy",
+  },
+];
