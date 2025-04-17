@@ -1,16 +1,23 @@
-import { Input, Modal, Form, Button, Select} from "antd";
+import { Input, Modal, Form, Select} from "antd";
 import { useEffect, useRef, useState } from "react";
 import { CgSpinnerTwo } from "react-icons/cg";
-import { AiOutlineClose } from "react-icons/ai";
-import { useCreateMenuMutation } from "../../redux/features/menu/menuApi";
-import { useGetCusineDropDownQuery } from "../../redux/features/cuisine/cuisineApi";
+import { useUpdateMenuMutation } from "../../../redux/features/menu/menuApi";
+import { useGetCusineDropDownQuery } from "../../../redux/features/cuisine/cuisineApi";
+import { FiEdit } from "react-icons/fi";
+import placeholder_img from "../../../assets/images/placeholder.jpeg";
+import { IoCameraOutline } from "react-icons/io5";
+import { MdPhotoCamera } from "react-icons/md";
 
-const CreateMenuModal = () => {
+
+const EditMenuModal = ({ menu }) => {
+  const {_id:menuId, name, cuisineId, image, price, ingredient} = menu || {}
   const [modalOpen, setModalOpen] = useState(false);
   const [file, setFile] = useState(null);
-  const [createMenu, { isLoading, isSuccess }] = useCreateMenuMutation();
+  const [updateMenu, { isLoading, isSuccess }] = useUpdateMenuMutation();
   const {data} = useGetCusineDropDownQuery(undefined);
   const fileInputRef = useRef(null);
+  const [imageSrc, setImageSrc] = useState(image || placeholder_img); // Default image
+  
   const [form] = Form.useForm();
   const cuisines = data?.data;
   const cuisineOptions = cuisines?.map((item)=>({
@@ -29,48 +36,100 @@ const CreateMenuModal = () => {
     }
   }, [isSuccess, form]);
 
-  const onFinish = (values) => {
-    const data = {
-      cuisineId: values.cuisineId,
-      name: values.name,
-      price: Number(values.price),
-      ingredient: values.ingredient
-    };
-    const jsonStringData = JSON.stringify(data);
-    let formData = new FormData();
-    formData.append("file", values.file);
-    formData.append("data", jsonStringData)
-    // const formObject = Object.fromEntries(formData.entries());
-    // console.log(formObject);
-    createMenu(formData);
+  const handleIconClick = () => {
+    fileInputRef.current?.click();
   };
 
-  const handleClear = () => {
-    setFile(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = null;
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => setImageSrc(reader.result);
+      reader.readAsDataURL(file);
+      setFile(file);
     }
+  };
+
+
+  const onFinish = (values) => {
+    let formData = new FormData();
+    formData.append("name", values.name);
+    formData.append("cuisineId", values.cuisineId);
+    formData.append("price", Number(values.price));
+    formData.append("ingredient", values.ingredient);
+
+    if(file){
+        formData.append("file", file);
+    }
+    // const formObject = Object.fromEntries(formData.entries());
+    // console.log(formObject);
+     updateMenu({
+       id: menuId,
+       data: formData,
+     });
   };
 
   return (
     <>
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-semibold">Menu</h2>
-        <Button
-          onClick={() => setModalOpen(true)}
-          className="!bg-red-500 !text-white rounded-full px-4 py-2 text-sm"
-        >
-          + Add New
-        </Button>
-      </div>
+      <button
+        onClick={() => setModalOpen(true)}
+        className="bg-white p-1.5 rounded-full shadow hover:bg-gray-100 transition"
+      >
+        <FiEdit className="text-blue-600" size={20} />
+      </button>
       <Modal
-        title={<span className="font-bold">Add New Menu</span>}
+        title={<span className="font-bold text-xl">Update Menu</span>}
         open={modalOpen}
-        onCancel={() => setModalOpen(false)}
+        onCancel={() => {
+          setImageSrc(image);
+          setFile(null)
+          form.setFieldsValue({
+            name,
+            cuisineId,
+            price,
+            ingredient,
+          });
+          setModalOpen(false);
+        }}
         maskClosable={false}
         footer={false}
       >
-        <Form form={form} name="add" layout="vertical" onFinish={onFinish}>
+        <Form
+          form={form}
+          name="add"
+          layout="vertical"
+          onFinish={onFinish}
+          initialValues={{
+            name,
+            cuisineId,
+            price,
+            ingredient,
+          }}
+        >
+          <div className="relative w-24 h-24 mx-auto">
+            <img
+              src={imageSrc}
+              alt="Preview"
+              onError={()=>setImageSrc(placeholder_img)}
+              className="rounded-full w-24 h-24 border object-cover shadow-sm"
+            />
+            <input
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              ref={fileInputRef}
+              onChange={handleFileChange}
+            />
+            <div
+              onClick={handleIconClick}
+              className="absolute bottom-0 right-0 cursor-pointer"
+            >
+              <div className="bg-red-600 hover:bg-red-700 transition border-2 border-white flex items-center justify-center w-8 h-8 rounded-full shadow-md">
+                <MdPhotoCamera size={18} color="#fff" />
+              </div>
+            </div>
+          </div>
+
           <Form.Item
             name="name"
             label={
@@ -84,68 +143,12 @@ const CreateMenuModal = () => {
             <Input placeholder="Type here" />
           </Form.Item>
           <Form.Item
-            name="file"
-            label={
-              <span className="font-semibold">
-                <span className="text-red-500 mr-1">*</span>
-                Image
-              </span>
-            }
-            valuePropName="file"
-            getValueFromEvent={(e) => {
-              if (Array.isArray(e)) {
-                return e;
-              }
-              return e?.target?.files?.[0]; // <-- this gives you the File object
-            }}
-            rules={[
-              {
-                validator: (_, value) => {
-                  if (!file) {
-                    return Promise.reject("Image is required");
-                  }
-                  return Promise.resolve();
-                },
-              },
-            ]}
-          >
-            <div className="relative w-full">
-              <input
-                type="file"
-                ref={fileInputRef}
-                id="image"
-                onChange={(e) => {
-                  const selectedFile = e.target.files[0];
-                  console.log(selectedFile);
-                  setFile(selectedFile);
-                  form.setFieldsValue({ file: selectedFile }); // sync with form
-                }}
-                accept="image/*"
-                className="w-full px-4 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              {file && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    handleClear();
-                    form.setFieldsValue({ file: null });
-                    form.validateFields(['file']); //// This triggers the "Image is required" message // force revalidation of the image field
-                  }}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-red-500"
-                >
-                  <AiOutlineClose size={18} />
-                </button>
-              )}
-            </div>
-          </Form.Item>
-
-          <Form.Item
             name="cuisineId"
             rules={[{ required: true, message: "Select a cuisine" }]}
             label={
               <span className="font-semibold">
                 <span className="text-red-500 mr-1">*</span>
-                Cuisne 
+                Cuisine
               </span>
             }
           >
@@ -211,10 +214,10 @@ const CreateMenuModal = () => {
             {isLoading ? (
               <>
                 <CgSpinnerTwo className="animate-spin" fontSize={16} />
-                Creating...
+                Processing...
               </>
             ) : (
-              "Create"
+              "Save Changes"
             )}
           </button>
         </Form>
@@ -223,4 +226,4 @@ const CreateMenuModal = () => {
   );
 };
 
-export default CreateMenuModal;
+export default EditMenuModal;

@@ -1,20 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Form, Input } from "antd";
 import { IoCameraOutline } from "react-icons/io5";
 import EditProfileLoading from "../Loader/EditProfileLoading";
 import { CgSpinnerTwo } from "react-icons/cg";
-import placeholder_img from "../../assets/images/placeholder.jpeg";
+import profile_placeholder_img from "../../assets/images/profile_placeholder.png";
 import { useUpdateProfileMutation } from "../../redux/features/user/userApi";
 
 // eslint-disable-next-line no-unused-vars
 const EditProfile = ({ isLoading, user }) => {
   const [file, setFile] = useState(null);
-
+  const fileInputRef = useRef(null);
   const [updateProfile, { isLoading: updateLoading, isSuccess }] =
     useUpdateProfileMutation();
   const [form] = Form.useForm();
-  const [imageSrc, setImageSrc] = useState(placeholder_img); // Default image
-  const fallback = placeholder_img;
+  const [imageSrc, setImageSrc] = useState(profile_placeholder_img); // Default image
+  const fallback = profile_placeholder_img;
 
   useEffect(() => {
     if (isSuccess) {
@@ -57,33 +57,34 @@ const EditProfile = ({ isLoading, user }) => {
             type="file"
             accept="image/*"
             onChange={handleFileChange}
+            ref={fileInputRef}
             style={{ display: "none" }}
             id="upload-button"
-          />
-          <label htmlFor="upload-button" className="cursor-pointer">
-            <div className="relative">
-              <img
-                src={imageSrc}
-                alt="Preview"
-                onError={() => setImageSrc(fallback)}
-                className="rounded-full mx-auto w-24 h-24 border"
-              />
-              <div className="absolute right-36 bottom-0">
-                <div className="bg-red-500 border-2 border-white flex items-center justify-center  w-8 h-8 rounded-full ">
-                  <IoCameraOutline size={20} color="#fff" />
-                </div>
+          />{" "}
+          <div className="relative">
+            <img
+              src={imageSrc}
+              alt="Preview"
+              onError={() => setImageSrc(fallback)}
+              className="rounded-full mx-auto w-24 h-24 border"
+            />
+            <div onClick={()=> fileInputRef.current.click()} className="absolute right-36 bottom-0 cursor-pointer">
+              <div className="bg-red-500 border-2 border-white flex items-center justify-center  w-8 h-8 rounded-full ">
+                <IoCameraOutline size={20} color="#fff" />
               </div>
             </div>
-          </label>
+          </div>
           <h2 className="text-xl font-bold mt-2">Edit Profile</h2>
-
           <Form
-           form={form} name="edit" layout="vertical" onFinish={onFinish}
+            form={form}
+            name="edit"
+            layout="vertical"
+            onFinish={onFinish}
             initialValues={{
               fullName: user?.fullName,
               email: user?.email,
               phone: user?.phone,
-              address: user?.address
+              address: user?.address,
             }}
             className="text-left"
           >
@@ -126,13 +127,9 @@ const EditProfile = ({ isLoading, user }) => {
               />
             </Form.Item>
             <Form.Item
-              label={
-                <span className="text-black font-semibold">Address</span>
-              }
+              label={<span className="text-black font-semibold">Address</span>}
               name="address"
-              rules={[
-                { required: true, message: "Please enter your address" },
-              ]}
+              rules={[{ required: true, message: "Please enter your address" }]}
             >
               <Input
                 placeholder="Enter contact number"

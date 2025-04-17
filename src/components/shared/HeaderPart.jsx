@@ -2,13 +2,11 @@ import {Typography } from 'antd';
 import 'antd/dist/reset.css'; // Import Ant Design styles
 import { Link, useNavigate } from 'react-router-dom';
 import { useGetMeQuery } from '../../redux/features/user/userApi';
-import placeholder_img from "../../assets/images/placeholder.jpeg";
-import placeholder_profile from "../../assets/images/profile_placeholder.jpg";
+import profile_placeholder from "../../assets/images/profile_placeholder.png";
 
 const { Text } = Typography;
 
 const HeaderPart = () => {
-  const fallback = placeholder_img;
   const {data, isLoading } = useGetMeQuery(undefined);
   const myData = data?.data || {};
   const navigate = useNavigate()
@@ -36,12 +34,12 @@ const HeaderPart = () => {
         ) : (
           <>
             <img
-              src={myData?.profileImg || placeholder_profile}
+              src={myData?.profileImg || profile_placeholder}
               alt="User"
               onClick={()=> navigate('/profile')}
               onError={(e) => {
                 e.target.onerror = null; // Prevent infinite loop if fallback also fails
-                e.target.src = fallback;
+                e.target.src = profile_placeholder;
               }}
               className="mr-2 w-16 h-16 rounded-full shadow-md cursor-pointer"
             />

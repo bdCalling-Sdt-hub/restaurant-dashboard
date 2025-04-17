@@ -13,7 +13,6 @@ import ResetPassword from "./pages/auth/resetPassword";
 import BookingManagement from "./pages/bookingManagement";
 import Menu from "./pages/menu";
 import AddCategory from "./pages/addCategory";
-import UserManagement from "./pages/userManagement";
 import TableBooking from "./pages/tableBooking";
 import MyDetails from "./pages/myDetails";
 import RestaurantDetails from "./pages/restaurantDetails";
@@ -41,7 +40,6 @@ function App() {
           <Route path="/menu" element={<Menu />}></Route>
           <Route path="/add-category" element={<AddCategory />}></Route>
           <Route path="/table-booking" element={<TableBooking />}></Route>
-          <Route path="/users" element={<UserManagement />}></Route>
           <Route path="/profile" element={<MyDetails/>}></Route>
           <Route path="/restaurant-details" element={<RestaurantDetails/>}></Route>
           <Route path="/restaurant/reviews" element={<Reviews/>}></Route>

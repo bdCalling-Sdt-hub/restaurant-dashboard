@@ -1,6 +1,7 @@
 import { Button } from "antd";
-import profile from "../../../public/profile.png";
 import ProfileLoading from "../Loader/ProfileLoading";
+import profile_placeholder_img from "../../assets/images/profile_placeholder.png";
+
 
 const Profile = ({ onEdit, isLoading, user }) => {
   if (isLoading) {
@@ -9,7 +10,15 @@ const Profile = ({ onEdit, isLoading, user }) => {
     return (
       <div className="p-3 bg-[#f6f6f6]  rounded-lg  text-center">
         <div className="max-w-[400px] mx-auto">
-          <img src={profile} className="rounded-full mx-auto" alt="Profile" />
+          <img
+            src={user?.profileImg || profile_placeholder_img}
+            className="rounded-full mx-auto w-24 h-24"
+            alt="Profile"
+            onError={(e) => {
+              e.currentTarget.onerror = null; // Prevent infinite loop
+              e.currentTarget.src = profile_placeholder_img;
+            }}
+          />
           <h2 className="text-xl font-bold mt-2">Profile</h2>
           <div className="text-left  mx-auto mt-2">
             <div className="border-b-1">

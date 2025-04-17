@@ -30,11 +30,6 @@ export const menuItems = [
         title: "Table Booking Schedule",
         path: '/table-booking',
         icon: MdSchedule
-    },
-    {
-        title: "User Management",
-        path: '/users',
-        icon: FaRegCircleUser
     }
 ]
 

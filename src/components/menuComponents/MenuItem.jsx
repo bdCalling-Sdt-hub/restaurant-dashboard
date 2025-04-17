@@ -1,15 +1,16 @@
 import { Typography } from "antd";
-import respic from "../../../public/respic.png";
 import { FaBellConcierge } from "react-icons/fa6";
 import { IoIosStar } from "react-icons/io";
-import { FiEdit, FiTrash2 } from "react-icons/fi";
+import { FiEdit } from "react-icons/fi";
 import placeholder_img from "../../assets/images/placeholder.jpeg";
+import DeleteMenuModal from "../modal/menu/DeleteMenuModal";
+import EditMenuModal from "../modal/menu/EditMenuModal";
 
 
 const { Text } = Typography;
 
 const MenuItem = ({ menu }) => {
-  const { name, cuisineName, image, price, ratings, totalReview, ingredient} = menu || {}
+  const {_id:menuId, name, cuisineName, image, price, ratings, totalReview, ingredient} = menu || {}
   return (
     // <div className="shadow-md">
     //   <div>
@@ -70,12 +71,8 @@ const MenuItem = ({ menu }) => {
 
         {/* Action buttons - Top right */}
         <div className="absolute top-2 right-2 flex gap-2">
-          <button className="bg-white p-1.5 rounded-full shadow hover:bg-gray-100 transition">
-            <FiEdit className="text-blue-600" size={20} />
-          </button>
-          <button className="bg-white p-1.5 rounded-full shadow hover:bg-gray-100 transition">
-            <FiTrash2 className="text-red-500" size={20} />
-          </button>
+          <EditMenuModal menu={menu}/>
+          <DeleteMenuModal menuId={menuId}/>
         </div>
       </div>
 
@@ -87,7 +84,7 @@ const MenuItem = ({ menu }) => {
             {name}
           </Text>
           <Text className="!text-red-500 !font-semibold text-sm">
-            ${price.toFixed(2)}
+            ${price.toFixed(2)} 
           </Text>
         </div>
 

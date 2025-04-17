@@ -6,7 +6,8 @@ const TagTypes = {
     users: "Users",
     me: "me",
     restaurants: "Restaurants",
-    menus: "Menus"
+    menus: "Menus",
+    bookings: "Bookings"
 }
 
 export default TagTypes;

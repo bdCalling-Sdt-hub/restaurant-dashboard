@@ -2,9 +2,9 @@ import {apiSlice} from "../api/apiSlice.js";
 import { ErrorToast, SuccessToast } from "../../../helper/ValidationHelper.js";
 import TagTypes from "../../../constant/tagType.constant.js";
 
-export const menuApi = apiSlice.injectEndpoints({
+export const bookingApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getMenus: builder.query({
+    getBookings: builder.query({
       query: (args) => {
         const params = new URLSearchParams();
         if (args !== undefined && args.length > 0) {
@@ -15,13 +15,13 @@ export const menuApi = apiSlice.injectEndpoints({
           });
         }
         return {
-          url: "/menu/get-menus",
+          url: "/booking/get-bookings",
           method: "GET",
           params: params
         };
       },
       keepUnusedDataFor: 600,
-      providesTags: [TagTypes.menus],
+      providesTags: [TagTypes.bookings],
       async onQueryStarted(arg, { queryFulfilled}) {
         try {
           await queryFulfilled;
@@ -29,33 +29,6 @@ export const menuApi = apiSlice.injectEndpoints({
           //ErrorToast("Something Went Wrong!");
           //do nothing
           //console.log(err);
-        }
-      },
-    }),
-    createMenu: builder.mutation({
-      query: (data) => ({
-        url: `/menu/create-menu`,
-        method: "POST",
-        body: data,
-      }),
-      //invalidatesTags: [TagTypes.cuisine],
-      invalidatesTags: (result, error, arg) =>{
-        if(result?.success){
-          return [TagTypes.menus]
-        }
-        return []
-      },
-      async onQueryStarted(arg, { queryFulfilled }) {
-        try {
-          await queryFulfilled;
-          SuccessToast("Menu is created successfully");
-        } catch (err) {
-          const status = err?.error?.status;
-          if (status === 409) {
-            ErrorToast(err?.error?.data?.message);
-          } else {
-            ErrorToast("Something Went Wrong!");
-          }
         }
       },
     }),
@@ -117,4 +90,4 @@ export const menuApi = apiSlice.injectEndpoints({
 });
 
 
-export const { useGetMenusQuery, useCreateMenuMutation, useDeleteMenuMutation, useUpdateMenuMutation } = menuApi;
+export const { useGetBookingsQuery, useDeleteMenuMutation, useUpdateMenuMutation } = bookingApi;

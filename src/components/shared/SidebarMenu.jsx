@@ -41,11 +41,6 @@ const SidebarMenu = () => {
 
             {/* Restaurant Details Submenu Items  */}
             <Menu.SubMenu
-              // className={
-              //   activeKey === "restaurant-details"
-              //     ? "!bg-red-500 !text-white"
-              //     : "ml-5"
-              // }
               icon={<IoRestaurantSharp size={25} />}
               title={
                 <span className="text-[18px] text-black">
