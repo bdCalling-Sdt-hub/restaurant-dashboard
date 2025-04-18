@@ -26,6 +26,7 @@ import RestaurantFeatures from "./components/restaurantComponents/RestaurantFeat
 import Cuisine from "./components/restaurantComponents/Cuisine";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
+import SlotPage from "./pages/slot/SlotPage";
 
 function App() {
   const router = createBrowserRouter(
@@ -50,6 +51,8 @@ function App() {
           <Route path="/restaurant/restaurant-agreement" element={<ReservationsAgreement/>}></Route>
           <Route path="/restaurant/menu-items" element={<MenuItems/>}></Route>
           <Route path="/restaurant/restaurant-features" element={<RestaurantFeatures/>}></Route>
+
+          <Route path="/slots" element={<SlotPage/>}></Route>
 
         </Route>
         <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>}></Route>

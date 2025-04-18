@@ -1,5 +1,5 @@
 import { BsMenuButtonWideFill } from "react-icons/bs";
-import { FaRegCircleUser } from "react-icons/fa6";
+import { FaCheckToSlot, FaRegCircleUser } from "react-icons/fa6";
 import { GiStabbedNote } from "react-icons/gi";
 import { MdOutlineCategory, MdSchedule } from "react-icons/md";
 import { RiPieChart2Fill } from "react-icons/ri";
@@ -15,6 +15,11 @@ export const menuItems = [
         title: "Booking Management",
         path: '/booking-management',
         icon: GiStabbedNote
+    },
+    {
+      title: "Slots",
+      path: '/slots',
+      icon: FaCheckToSlot
     },
     {
         title: "Menu", 
