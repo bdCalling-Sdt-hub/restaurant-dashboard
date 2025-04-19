@@ -6,7 +6,7 @@ import { useGetSlotsQuery } from "../../redux/features/slot/slotApi";
 import CreateSlotModal from "../modal/slot/CreateSlotModal";
 
 
-const SlotList = () => {
+const ScheduleList = () => {
   const [ currentPage, setCurrentPage ] = useState(1);
   const [ pageSize, setPageSize ] = useState(10);
 
@@ -36,4 +36,4 @@ const SlotList = () => {
   );
 }
 
-export default SlotList;
+export default ScheduleList;

@@ -2,7 +2,7 @@ import { Pagination , Table } from 'antd';
 import convertUTCtimeString from '../../utils/convertUTCtimeString';
 import DeleteSlotModal from '../modal/slot/DeleteSlotModal';
 
-const SlotTable = ({slots, meta, currentPage, setCurrentPage, pageSize, setPageSize}) => {
+const ScheduleTable = ({slots, meta, currentPage, setCurrentPage, pageSize, setPageSize}) => {
 
     const dataSource = slots?.map((slot, index)=> ({
         key: index,
@@ -78,4 +78,4 @@ const SlotTable = ({slots, meta, currentPage, setCurrentPage, pageSize, setPageS
   )
 }
 
-export default SlotTable;
+export default ScheduleTable;
