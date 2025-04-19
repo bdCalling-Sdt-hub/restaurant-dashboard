@@ -8,7 +8,8 @@ const TagTypes = {
     restaurants: "Restaurants",
     menus: "Menus",
     bookings: "Bookings",
-    slots: "Slots"
+    slots: "Slots",
+    schedules: "Schedules"
 }
 
 export default TagTypes;

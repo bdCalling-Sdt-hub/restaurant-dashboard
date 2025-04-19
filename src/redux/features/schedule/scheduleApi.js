@@ -2,9 +2,9 @@ import {apiSlice} from "../api/apiSlice.js";
 import { ErrorToast, SuccessToast } from "../../../helper/ValidationHelper.js";
 import TagTypes from "../../../constant/tagType.constant.js";
 
-export const slotApi = apiSlice.injectEndpoints({
+export const scheduleApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getSlots: builder.query({
+    getSchedules: builder.query({
       query: (args) => {
         const params = new URLSearchParams();
         if (args !== undefined && args.length > 0) {
@@ -15,39 +15,30 @@ export const slotApi = apiSlice.injectEndpoints({
           });
         }
         return {
-          url: "/slot/get-slots",
+          url: "/schedule/get-schedules",
           method: "GET",
           params: params
         };
       },
       keepUnusedDataFor: 600,
-      providesTags: [TagTypes.slots],
-      async onQueryStarted(arg, { queryFulfilled}) {
-        try {
-          await queryFulfilled;
-        } catch (err) {
-          //ErrorToast("Something Went Wrong!");
-          //do nothing
-          //console.log(err);
-        }
-      },
+      providesTags: [TagTypes.schedules],
     }),
-    createSlot: builder.mutation({
+    createSchedule: builder.mutation({
       query: (data) => ({
-        url: `/slot/create-slot`,
+        url: `/schedule/create-schedule`,
         method: "POST",
         body: data,
       }),
       invalidatesTags: (result, error, arg) =>{
         if(result?.success){
-          return [TagTypes.slots]
+          return [TagTypes.schedules]
         }
         return []
       },
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          SuccessToast("Slot is created successfully");
+          SuccessToast("Schedule is created successfully");
         } catch (err) {
           const status = err?.error?.status;
           if (status === 409) {
@@ -58,9 +49,9 @@ export const slotApi = apiSlice.injectEndpoints({
         }
       },
     }),
-    deleteSlot: builder.mutation({
+    deleteSchedule: builder.mutation({
       query: (id) => ({
-        url: `/slot/delete-slot/${id}`,
+        url: `/schedule/delete-schedule/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: (result, error, arg) =>{
@@ -72,7 +63,7 @@ export const slotApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          SuccessToast("Slot is deleted successfully");
+          SuccessToast("Schedule is deleted successfully");
         } catch (err) {
           const status = err?.error?.status;
           if (status === 404) {
@@ -87,4 +78,4 @@ export const slotApi = apiSlice.injectEndpoints({
 });
 
 
-export const { useGetSlotsQuery, useCreateSlotMutation, useDeleteSlotMutation } = slotApi;
+export const { useGetSchedulesQuery, useCreateScheduleMutation, useDeleteScheduleMutation } = scheduleApi;

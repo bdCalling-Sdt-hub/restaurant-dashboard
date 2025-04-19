@@ -1,9 +1,9 @@
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ListLoading from "../Loader/ListLoading";
-import SlotTable from "./SlotTable";
 import { useGetSlotsQuery } from "../../redux/features/slot/slotApi";
-import CreateSlotModal from "../modal/slot/CreateSlotModal";
+import ScheduleTable from "./ScheduleTable";
+import CreateScheduleModal from "../modal/schedule/CreateScheduleModal";
 
 
 const ScheduleList = () => {
@@ -23,13 +23,13 @@ const ScheduleList = () => {
   return (
     <>
       <div className="flex justify-between items-center mb-4">
-        <CreateSlotModal/>
+        <CreateScheduleModal/>
       </div>
       {
         isLoading ? (
           <ListLoading/>
         ): (
-          <SlotTable slots={slots} meta={meta} currentPage={currentPage} setCurrentPage={setCurrentPage} pageSize={pageSize} setPageSize={setPageSize}/>
+          <ScheduleTable slots={slots} meta={meta} currentPage={currentPage} setCurrentPage={setCurrentPage} pageSize={pageSize} setPageSize={setPageSize}/>
         )
       }
     </>

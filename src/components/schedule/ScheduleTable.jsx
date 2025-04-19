@@ -1,6 +1,6 @@
 import { Pagination , Table } from 'antd';
 import convertUTCtimeString from '../../utils/convertUTCtimeString';
-import DeleteSlotModal from '../modal/slot/DeleteSlotModal';
+import DeleteScheduleModal from '../modal/schedule/DeleteScheduleModal';
 
 const ScheduleTable = ({slots, meta, currentPage, setCurrentPage, pageSize, setPageSize}) => {
 
@@ -19,26 +19,6 @@ const ScheduleTable = ({slots, meta, currentPage, setCurrentPage, pageSize, setP
           dataIndex: "serial",
           key: "serial",
         },
-        // {
-        //   title: "Start Time",
-        //   dataIndex: "startDateTime",
-        //   key: "startDateTime",
-        //   render: (val) => (
-        //     <>
-        //      {convertUTCtimeString(val)}
-        //     </>
-        //   )
-        // },
-        // {
-        //   title: "End Time",
-        //   dataIndex: "endDateTime",
-        //   key: "endDateTime",
-        //   render: (val) => (
-        //     <>
-        //      {convertUTCtimeString(val)}
-        //     </>
-        //   )
-        // },
         {
             title: "Time",
             dataIndex: "startDateTime",
@@ -54,7 +34,7 @@ const ScheduleTable = ({slots, meta, currentPage, setCurrentPage, pageSize, setP
           key: "action",
           render: (_, record) => (
             <div className="flex items-center gap-x-2">
-              <DeleteSlotModal slotId={record._id} />
+              <DeleteScheduleModal slotId={record._id} />
             </div>
           ),
         },

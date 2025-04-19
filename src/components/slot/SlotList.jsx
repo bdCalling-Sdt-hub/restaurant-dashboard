@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ListLoading from "../Loader/ListLoading";
 import SlotTable from "./SlotTable";
 import { useGetSlotsQuery } from "../../redux/features/slot/slotApi";
