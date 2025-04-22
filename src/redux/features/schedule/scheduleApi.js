@@ -38,7 +38,7 @@ export const scheduleApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          SuccessToast("Schedule is created successfully");
+          SuccessToast("Schedule created successfully");
         } catch (err) {
           const status = err?.error?.status;
           if (status === 409) {
@@ -56,7 +56,7 @@ export const scheduleApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result, error, arg) =>{
         if(result?.success){
-          return [TagTypes.slots]
+          return [TagTypes.schedules]
         }
         return []
       },
@@ -65,6 +65,7 @@ export const scheduleApi = apiSlice.injectEndpoints({
           await queryFulfilled;
           SuccessToast("Schedule is deleted successfully");
         } catch (err) {
+          console.log(err);
           const status = err?.error?.status;
           if (status === 404) {
             ErrorToast(err?.error?.data?.message);

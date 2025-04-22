@@ -120,7 +120,7 @@ const BookingTable = ({users, meta, currentPage, setCurrentPage, pageSize, setPa
   return (
     <>
       <div className="rounded-lg shadow p-4">
-        <Table columns={columns} dataSource={dataSource} scroll={{ x: true, y:"60vh" }} pagination={false} />
+        <Table size="small" columns={columns} dataSource={dataSource} scroll={{ x: true, y:"60vh" }} pagination={false} />
         <br />
         <Pagination onChange={handlePagination} align="end" current={currentPage} pageSize={pageSize} total={meta?.total} />
       </div>

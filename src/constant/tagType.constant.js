@@ -9,6 +9,7 @@ const TagTypes = {
     menus: "Menus",
     bookings: "Bookings",
     slots: "Slots",
+    slotDropDown: "SlotDropDown",
     schedules: "Schedules"
 }
 

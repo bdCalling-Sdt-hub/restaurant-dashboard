@@ -27,6 +27,11 @@ export const menuItems = [
       icon: MdScheduleSend
     },
     {
+      title: "Table Booking Schedule",
+      path: '/table-booking',
+      icon: MdSchedule
+    },
+    {
         title: "Menu", 
         path: '/menu',
         icon: BsMenuButtonWideFill
@@ -36,11 +41,7 @@ export const menuItems = [
     //     path: '/add-category',
     //     icon: MdOutlineCategory
     // },
-    {
-        title: "Table Booking Schedule",
-        path: '/table-booking',
-        icon: MdSchedule
-    }
+  
 ]
 
 

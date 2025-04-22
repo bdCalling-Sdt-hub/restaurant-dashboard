@@ -32,6 +32,34 @@ export const slotApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    getSlotDropDown: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args !== undefined && args.length > 0) {
+          args.forEach((item) => {
+            if(item.value){
+              params.append(item.name, item.value);
+            }
+          });
+        }
+        return {
+          url: "/slot/get-slot-drop-down",
+          method: "GET",
+          params: params
+        };
+      },
+      keepUnusedDataFor: 600,
+      providesTags: [TagTypes.slots],
+      async onQueryStarted(arg, { queryFulfilled}) {
+        try {
+          await queryFulfilled;
+        } catch (err) {
+          //ErrorToast("Something Went Wrong!");
+          //do nothing
+          //console.log(err);
+        }
+      },
+    }),
     createSlot: builder.mutation({
       query: (data) => ({
         url: `/slot/create-slot`,
@@ -87,4 +115,4 @@ export const slotApi = apiSlice.injectEndpoints({
 });
 
 
-export const { useGetSlotsQuery, useCreateSlotMutation, useDeleteSlotMutation } = slotApi;
+export const { useGetSlotsQuery, useGetSlotDropDownQuery, useCreateSlotMutation, useDeleteSlotMutation } = slotApi;

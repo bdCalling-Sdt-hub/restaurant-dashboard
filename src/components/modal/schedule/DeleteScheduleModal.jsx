@@ -2,24 +2,22 @@ import { Modal } from "antd";
 import { useEffect, useState } from "react";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { DeleteOutlined } from "@ant-design/icons";
-import { useDeleteSlotMutation } from "../../../redux/features/slot/slotApi";
+import { useDeleteScheduleMutation } from "../../../redux/features/schedule/scheduleApi";
 
+const DeleteScheduleModal = ({ scheduleId }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [deleteSchedule, { isLoading, isSuccess, isError }] =
+    useDeleteScheduleMutation();
 
-
-
-const DeleteScheduleModal = ({ slotId }) => {
-    const [ modalOpen, setModalOpen ] = useState(false);
-   const [ deleteSlot, { isLoading, isSuccess, isError }] = useDeleteSlotMutation();
-
-    useEffect(()=> {
-        if(isSuccess || isError){
-          setModalOpen(false)
-        }
-    },[isSuccess, isError])
-   
-    const handleDelete = () => {
-      deleteSlot(slotId);
+  useEffect(() => {
+    if (isSuccess || isError) {
+      setModalOpen(false);
     }
+  }, [isSuccess, isError]);
+
+  const handleDelete = () => {
+    deleteSchedule(scheduleId);
+  };
 
   return (
     <>
@@ -60,6 +58,6 @@ const DeleteScheduleModal = ({ slotId }) => {
       </Modal>
     </>
   );
-}
+};
 
 export default DeleteScheduleModal;

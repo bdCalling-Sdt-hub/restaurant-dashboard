@@ -145,7 +145,7 @@ const CreateMenuModal = () => {
             label={
               <span className="font-semibold">
                 <span className="text-red-500 mr-1">*</span>
-                Cuisne 
+                Cuisine 
               </span>
             }
           >
