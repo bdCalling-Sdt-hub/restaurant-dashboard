@@ -10,7 +10,8 @@ const TagTypes = {
     bookings: "Bookings",
     slots: "Slots",
     slotDropDown: "SlotDropDown",
-    schedules: "Schedules"
+    schedules: "Schedules",
+    myDining: "MyDining"
 }
 
 export default TagTypes;

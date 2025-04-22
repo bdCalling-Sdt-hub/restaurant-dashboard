@@ -27,6 +27,11 @@ export const menuItems = [
       icon: MdScheduleSend
     },
     {
+      title: "Table List",
+      path: '/tables',
+      icon: MdScheduleSend
+    },
+    {
       title: "Table Booking Schedule",
       path: '/table-booking',
       icon: MdSchedule

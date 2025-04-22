@@ -4,7 +4,7 @@ import DeleteScheduleModal from '../modal/schedule/DeleteScheduleModal';
 import getColorClassForDate from '../../utils/getColorClassForDate';
 
 
-const ScheduleTable = ({schedules, meta, currentPage, setCurrentPage, pageSize, setPageSize}) => {
+const TableBoxTable = ({schedules, meta, currentPage, setCurrentPage, pageSize, setPageSize}) => {
 
     const dataSource = schedules?.map((schedule, index)=> ({
         key: index,
@@ -80,4 +80,4 @@ const ScheduleTable = ({schedules, meta, currentPage, setCurrentPage, pageSize, 
   )
 }
 
-export default ScheduleTable;
+export default TableBoxTable;

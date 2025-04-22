@@ -1,13 +1,13 @@
 
 import { useState } from "react";
 import ListLoading from "../Loader/ListLoading";
-import ScheduleTable from "./ScheduleTable";
-import CreateScheduleModal from "../modal/schedule/CreateScheduleModal";
+import TableBoxTable from "./TableBoxTable";
+import CreateTableModal from "../modal/table/CreateTableModal";
 import { useGetSchedulesQuery } from "../../redux/features/schedule/scheduleApi";
 import { DatePicker } from "antd";
 
 
-const ScheduleList = () => {
+const TableList = () => {
   const [ currentPage, setCurrentPage ] = useState(1);
   const [ pageSize, setPageSize ] = useState(10);
   const [date, setDate] = useState("");
@@ -27,7 +27,7 @@ const ScheduleList = () => {
   return (
     <>
       <div className="flex justify-between items-center mb-4">
-        <CreateScheduleModal />
+        <CreateTableModal />
         {/* Filter By Date */}
         <div className="mr-20 px-6 flex gap-x-2">
           <span className="text-xl font-semibold">Filter:</span>
@@ -43,7 +43,7 @@ const ScheduleList = () => {
       {isLoading ? (
         <ListLoading />
       ) : (
-        <ScheduleTable
+        <TableBoxTable
           schedules={schedules}
           meta={meta}
           currentPage={currentPage}
@@ -56,4 +56,4 @@ const ScheduleList = () => {
   );
 }
 
-export default ScheduleList;
+export default TableList;
