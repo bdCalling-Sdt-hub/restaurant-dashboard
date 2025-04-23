@@ -29,6 +29,7 @@ import PublicRoute from "./routes/PublicRoute";
 import SlotPage from "./pages/slot/SlotPage";
 import SchedulePage from "./pages/schedule/SchedulePage";
 import TablePage from "./pages/table/TablePage";
+import TableDetailsPage from "./pages/TableDetails/TableDetailsPage";
 
 function App() {
   const router = createBrowserRouter(
@@ -57,6 +58,8 @@ function App() {
           <Route path="/slots" element={<SlotPage/>}></Route>
           <Route path="/schedules" element={<SchedulePage/>}></Route>
           <Route path="/tables" element={<TablePage/>}></Route>
+
+          <Route path="/table-details/:scheduleId/:diningId" element={<TableDetailsPage/>}></Route>
 
 
         </Route>

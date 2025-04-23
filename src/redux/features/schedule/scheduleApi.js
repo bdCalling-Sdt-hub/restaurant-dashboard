@@ -9,7 +9,7 @@ export const scheduleApi = apiSlice.injectEndpoints({
         const params = new URLSearchParams();
         if (args !== undefined && args.length > 0) {
           args.forEach((item) => {
-            if(item.value){
+            if (item.value) {
               params.append(item.name, item.value);
             }
           });
@@ -17,7 +17,7 @@ export const scheduleApi = apiSlice.injectEndpoints({
         return {
           url: "/schedule/get-schedules",
           method: "GET",
-          params: params
+          params: params,
         };
       },
       keepUnusedDataFor: 600,
@@ -28,7 +28,7 @@ export const scheduleApi = apiSlice.injectEndpoints({
         const params = new URLSearchParams();
         if (args !== undefined && args.length > 0) {
           args.forEach((item) => {
-            if(item.value){
+            if (item.value) {
               params.append(item.name, item.value);
             }
           });
@@ -36,7 +36,7 @@ export const scheduleApi = apiSlice.injectEndpoints({
         return {
           url: "/schedule/get-schedule-drop-down",
           method: "GET",
-          params: params
+          params: params,
         };
       },
       keepUnusedDataFor: 600,
@@ -44,9 +44,9 @@ export const scheduleApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          const schedules =res?.data?.data;
-          if(schedules.length ===0){
-            ErrorToast("No schedules found for the selected date.")
+          const schedules = res?.data?.data;
+          if (schedules.length === 0) {
+            ErrorToast("No schedules found for the selected date.");
           }
         } catch (err) {
           const status = err?.error?.status;
@@ -62,11 +62,11 @@ export const scheduleApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: (result, error, arg) =>{
-        if(result?.success){
-          return [TagTypes.schedules, TagTypes.scheduleDropDown]
+      invalidatesTags: (result, error, arg) => {
+        if (result?.success) {
+          return [TagTypes.schedules, TagTypes.scheduleDropDown];
         }
-        return []
+        return [];
       },
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
@@ -87,22 +87,23 @@ export const scheduleApi = apiSlice.injectEndpoints({
         url: `/schedule/delete-schedule/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error, arg) =>{
-        if(result?.success){
-          return [TagTypes.schedules, TagTypes.scheduleDropDown]
+      invalidatesTags: (result, error, arg) => {
+        if (result?.success) {
+          return [TagTypes.schedules, TagTypes.scheduleDropDown];
         }
-        return []
+        return [];
       },
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
           SuccessToast("Schedule is deleted successfully");
         } catch (err) {
-          console.log(err);
           const status = err?.error?.status;
           if (status === 404) {
             ErrorToast(err?.error?.data?.message);
-          }else {
+          } else if (status === 409) {
+            ErrorToast(err?.error?.data?.message);
+          } else {
             ErrorToast("Something Went Wrong!");
           }
         }

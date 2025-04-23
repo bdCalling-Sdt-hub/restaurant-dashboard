@@ -28,14 +28,14 @@ const ScheduleTable = ({schedules, meta, currentPage, setCurrentPage, pageSize, 
           key: "date",
           render: (val) => {
             const date = val?.split("T")[0];
-            const bgColor = getColorClassForDate(date);
+            const { bg, text } = getColorClassForDate(date);
             return (
-              <button className={`text-sm px-2 py-1 rounded ${bgColor} cursor-default`}>
+              <button className={`text-sm px-2 py-1 rounded ${bg} ${text} cursor-default`}>
                 {date}
               </button>
             );
           }
-       },
+        },        
         {
             title: "Time",
             dataIndex: "startDateTime",

@@ -3,8 +3,8 @@ import { useState } from "react";
 import ListLoading from "../Loader/ListLoading";
 import TableBoxTable from "./TableBoxTable";
 import CreateTableModal from "../modal/table/CreateTableModal";
-import { useGetSchedulesQuery } from "../../redux/features/schedule/scheduleApi";
 import { DatePicker } from "antd";
+import { useGetTablesQuery } from "../../redux/features/table/tableApi";
 
 
 const TableList = () => {
@@ -13,12 +13,12 @@ const TableList = () => {
   const [date, setDate] = useState("");
 
 
-  const { data, isLoading } = useGetSchedulesQuery([
+  const { data, isLoading } = useGetTablesQuery([
     { name: "page", value: currentPage },
     { name: "limit", value: pageSize },
     { name: "date", value: date}
   ]);
-  const schedules = data?.data || []
+  const tables = data?.data || []
   const meta = data?.meta;
 
  
@@ -44,7 +44,7 @@ const TableList = () => {
         <ListLoading />
       ) : (
         <TableBoxTable
-          schedules={schedules}
+          tables={tables}
           meta={meta}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}

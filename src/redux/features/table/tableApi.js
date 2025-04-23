@@ -15,9 +15,19 @@ export const tableApi = apiSlice.injectEndpoints({
           });
         }
         return {
-          url: "/schedule/get-schedules",
+          url: "/table/get-tables",
           method: "GET",
           params: params
+        };
+      },
+      keepUnusedDataFor: 600,
+      providesTags: [TagTypes.tables],
+    }),
+    getTablesByScheduleAndDining: builder.query({
+      query: ({scheduleId, diningId}) => {
+        return {
+          url: `/table/get-tables-by-schedule-and-dining/${scheduleId}/${diningId}`,
+          method: "GET",
         };
       },
       keepUnusedDataFor: 600,
