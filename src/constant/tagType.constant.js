@@ -11,7 +11,9 @@ const TagTypes = {
     slots: "Slots",
     slotDropDown: "SlotDropDown",
     schedules: "Schedules",
-    myDining: "MyDining"
+    scheduleDropDown: "ScheduleDropDown",
+    myDining: "MyDining",
+    tables: "Tables"
 }
 
 export default TagTypes;

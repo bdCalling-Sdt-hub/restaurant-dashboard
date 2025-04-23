@@ -6,6 +6,7 @@ import TagTypes from "../../../constant/tagType.constant.js";
 
 const baseQuery = fetchBaseQuery({
     baseUrl: "http://localhost:9090/api/v1",
+    // eslint-disable-next-line no-unused-vars
     prepareHeaders: async (headers, {getState, endpoint}) =>{
         if(getToken()){
             headers.set("Authorization", getToken());
@@ -37,7 +38,9 @@ export const apiSlice = createApi({
     TagTypes.slots,
     TagTypes.slotDropDown,
     TagTypes.schedules,
-    TagTypes.myDining
+    TagTypes.scheduleDropDown,
+    TagTypes.myDining,
+    TagTypes.tables
 ], //TagS WhiteLists
   endpoints: (builder) => ({}),
 });

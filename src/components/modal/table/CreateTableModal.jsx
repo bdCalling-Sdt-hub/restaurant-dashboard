@@ -2,29 +2,48 @@ import { Modal, Form, Button, DatePicker, Select, Input } from "antd";
 import { useEffect, useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { CgSpinnerTwo } from "react-icons/cg";
-import { useCreateScheduleMutation } from "../../../redux/features/schedule/scheduleApi";
-import { useGetSlotDropDownQuery } from "../../../redux/features/slot/slotApi";
+import { useGetScheduleDropDownQuery } from "../../../redux/features/schedule/scheduleApi";
 import convertUTCtimeString from "../../../utils/convertUTCtimeString";
+import { useGetMyDiningsQuery } from "../../../redux/features/dining/diningApi";
+import { useCreateTableMutation } from "../../../redux/features/table/tableApi";
 
 const CreateTableModal = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [createSchedule, { isLoading, isSuccess }] =
-    useCreateScheduleMutation();
+  const [createTable, { isLoading, isSuccess }] = useCreateTableMutation();
+  const [date, setDate] = useState("");
+  const { data } = useGetScheduleDropDownQuery(
+    [{ name: "date", value: date }],
+    {
+      skip: !date,
+    }
+  );
+ 
+  const [scheduleOptions, setScheduleOptions] = useState([]);
+  useEffect(() => {
+    if (date) {
+      const schedules = data?.data || [];
+      const Options = schedules?.map((schedule) => ({
+        value: schedule?._id,
+        label: (
+          convertUTCtimeString(schedule?.startDateTime) +
+          "-" +
+          convertUTCtimeString(schedule.endDateTime)
+        ).toString(),
+      }));
+      setScheduleOptions(Options);
+    } else {
+      setScheduleOptions([]);
+    }
+  }, [data, date]);
 
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+
   const [form] = Form.useForm();
-  const { data, isLoading: dropDownLoading } =
-    useGetSlotDropDownQuery(undefined);
-  const slots = data?.data;
-  const slotOptions = slots?.map((slot) => ({
-    value: slot?.startTime + "-" + slot?.endTime,
-    label: (
-      convertUTCtimeString(slot?.startDateTime) +
-      "-" +
-      convertUTCtimeString(slot.endDateTime)
-    ).toString(),
-  }));
+  const { data:diningData } = useGetMyDiningsQuery();
+  const dinings = diningData?.data || [];
+  const diningOptions = dinings?.map((dining)=>({
+    value: dining?._id,
+    label: dining?.name
+  }))
 
   useEffect(() => {
     if (isSuccess) {
@@ -34,19 +53,13 @@ const CreateTableModal = () => {
   }, [isSuccess, form]);
 
   const onFinish = (values) => {
-    const selectedSlots = values?.slot?.map((val) => {
-      const [startTime, endTime] = val.split("-");
-      return { startTime, endTime };
+    console.log(values);
+    createTable({
+      scheduleId: values.scheduleId,
+      diningId: values.diningId,
+      totalTable: Number(values.totalTable),
+      seats: Number(values.seats)
     });
-
-    const data = {
-      startDate,
-      endDate,
-      slot: selectedSlots,
-      availableSeats: Number(values.availableSeats),
-    };
-
-    createSchedule(data);
   };
 
   return (
@@ -67,46 +80,29 @@ const CreateTableModal = () => {
       >
         <Form form={form} name="add" layout="vertical" onFinish={onFinish}>
           <Form.Item
-            name="startDate"
+            name="date"
             label={
               <span className="font-semibold">
                 <span className="text-red-500 mr-1">*</span>
                 Select Date
               </span>
             }
-            dependencies={["endDate"]}
-            rules={[
-              { required: true, message: "Start Date is required" },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  const endDateValue = getFieldValue("endDate");
-                  if (!value || !endDateValue) {
-                    return Promise.resolve();
-                  }
-                  if (value.isAfter(endDateValue, "day")) {
-                    return Promise.reject(
-                      new Error(
-                        "Start Date must be the same or before End Date"
-                      )
-                    );
-                  }
-                  return Promise.resolve();
-                },
-              }),
-            ]}
+            rules={[{ required: true, message: "Please select a date" }]}
           >
             <DatePicker
               disabledDate={(current) =>
                 current && current < new Date().setHours(0, 0, 0, 0)
               }
               onChange={(_, dateString) => {
-                setStartDate(dateString);
+                setDate(dateString);
               }}
               style={{ width: "100%" }}
             />
           </Form.Item>
           <Form.Item
-            name="status"
+            name="scheduleId"
+            dependencies={["date"]}
+            rules={[{ required: true, message: "Please select a schedule" }]}
             label={
               <span className="font-semibold">
                 <span className="text-red-500 mr-1">*</span>
@@ -115,15 +111,15 @@ const CreateTableModal = () => {
             }
           >
             <Select
+              placeholder="Select a schedule"
+              disabled={scheduleOptions.length === 0}
               style={{ width: "100%" }}
-              options={[
-                { value: "blocked", label: "Blocked" },
-                { value: "unblocked", label: "Unblocked" },
-              ]}
+              options={scheduleOptions}
             />
           </Form.Item>
           <Form.Item
-            name="status"
+            name="diningId"
+            rules={[{ required: true, message: "Please select a dining" }]}
             label={
               <span className="font-semibold">
                 <span className="text-red-500 mr-1">*</span>
@@ -132,15 +128,48 @@ const CreateTableModal = () => {
             }
           >
             <Select
+              placeholder="Select a dining"
+              disabled={diningOptions.length === 0}
               style={{ width: "100%" }}
-              options={[
-                { value: "blocked", label: "Blocked" },
-                { value: "unblocked", label: "Unblocked" },
-              ]}
+              options={diningOptions}
             />
           </Form.Item>
           <Form.Item
-            name="availableSeats"
+            name="totalTable"
+            label={
+              <span className="font-semibold">
+                <span className="text-red-500 mr-1">*</span>
+                Total Table
+              </span>
+            }
+            rules={[
+              { required: true, message: "Please enter the Total Table" },
+              {
+                pattern: /^\d+$/,
+                message: "Only numeric values are allowed",
+              },
+              {
+                validator: (_, value) => {
+                  if (value && Number(value) <= 0) {
+                    return Promise.reject("Total Table must be greater than 0");
+                  }
+                  return Promise.resolve();
+                },
+              },
+            ]}
+          >
+            <Input
+              type="number"
+              placeholder="Type here"
+              onKeyUp={(e) => {
+                if (!/[0-9]/.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
+            />
+          </Form.Item>
+          <Form.Item
+            name="seats"
             label={
               <span className="font-semibold">
                 <span className="text-red-500 mr-1">*</span>

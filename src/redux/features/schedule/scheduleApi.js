@@ -23,6 +23,39 @@ export const scheduleApi = apiSlice.injectEndpoints({
       keepUnusedDataFor: 600,
       providesTags: [TagTypes.schedules],
     }),
+    getScheduleDropDown: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args !== undefined && args.length > 0) {
+          args.forEach((item) => {
+            if(item.value){
+              params.append(item.name, item.value);
+            }
+          });
+        }
+        return {
+          url: "/schedule/get-schedule-drop-down",
+          method: "GET",
+          params: params
+        };
+      },
+      keepUnusedDataFor: 600,
+      providesTags: [TagTypes.scheduleDropDown],
+      async onQueryStarted(arg, { queryFulfilled }) {
+        try {
+          const res = await queryFulfilled;
+          const schedules =res?.data?.data;
+          if(schedules.length ===0){
+            ErrorToast("No schedules found for the selected date.")
+          }
+        } catch (err) {
+          const status = err?.error?.status;
+          if (status === 500) {
+            ErrorToast("Something Went Wrong!");
+          }
+        }
+      },
+    }),
     createSchedule: builder.mutation({
       query: (data) => ({
         url: `/schedule/create-schedule`,
@@ -31,7 +64,7 @@ export const scheduleApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result, error, arg) =>{
         if(result?.success){
-          return [TagTypes.schedules]
+          return [TagTypes.schedules, TagTypes.scheduleDropDown]
         }
         return []
       },
@@ -56,7 +89,7 @@ export const scheduleApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result, error, arg) =>{
         if(result?.success){
-          return [TagTypes.schedules]
+          return [TagTypes.schedules, TagTypes.scheduleDropDown]
         }
         return []
       },
@@ -79,4 +112,4 @@ export const scheduleApi = apiSlice.injectEndpoints({
 });
 
 
-export const { useGetSchedulesQuery, useCreateScheduleMutation, useDeleteScheduleMutation } = scheduleApi;
+export const { useGetSchedulesQuery, useGetScheduleDropDownQuery, useCreateScheduleMutation, useDeleteScheduleMutation } = scheduleApi;

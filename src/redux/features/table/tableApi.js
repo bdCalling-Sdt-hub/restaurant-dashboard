@@ -21,49 +21,44 @@ export const tableApi = apiSlice.injectEndpoints({
         };
       },
       keepUnusedDataFor: 600,
-      providesTags: [TagTypes.schedules],
+      providesTags: [TagTypes.tables],
     }),
-    createSchedule: builder.mutation({
+    createTable: builder.mutation({
       query: (data) => ({
-        url: `/schedule/create-schedule`,
+        url: `/table/create-table`,
         method: "POST",
         body: data,
       }),
-      invalidatesTags: (result, error, arg) =>{
+      invalidatesTags: (result) =>{
         if(result?.success){
-          return [TagTypes.schedules]
+          return [TagTypes.tables]
         }
         return []
       },
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          SuccessToast("Schedule created successfully");
-        } catch (err) {
-          const status = err?.error?.status;
-          if (status === 409) {
-            ErrorToast(err?.error?.data?.message);
-          } else {
-            ErrorToast("Something Went Wrong!");
-          }
+          SuccessToast("Table created successfully");
+        } catch (err) {      
+          ErrorToast("Something Went Wrong!");  
         }
       },
     }),
-    deleteSchedule: builder.mutation({
+    deleteTable: builder.mutation({
       query: (id) => ({
-        url: `/schedule/delete-schedule/${id}`,
+        url: `/table/delete-table/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error, arg) =>{
+      invalidatesTags: (result) =>{
         if(result?.success){
-          return [TagTypes.schedules]
+          return [TagTypes.tables]
         }
         return []
       },
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          SuccessToast("Schedule is deleted successfully");
+          SuccessToast("Table is deleted successfully");
         } catch (err) {
           console.log(err);
           const status = err?.error?.status;
@@ -79,4 +74,4 @@ export const tableApi = apiSlice.injectEndpoints({
 });
 
 
-export const { useGetSchedulesQuery, useCreateScheduleMutation, useDeleteScheduleMutation } = tableApi;
+export const { useGetTablesQuery, useCreateTableMutation, useDeleteTableMutation } = tableApi;
