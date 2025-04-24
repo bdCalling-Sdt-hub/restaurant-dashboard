@@ -30,6 +30,7 @@ import SlotPage from "./pages/slot/SlotPage";
 import SchedulePage from "./pages/schedule/SchedulePage";
 import TablePage from "./pages/table/TablePage";
 import TableDetailsPage from "./pages/TableDetails/TableDetailsPage";
+import TableBookingSchedulePage from "./pages/tableBookingSchedule/TableBookingSchedulePage";
 
 function App() {
   const router = createBrowserRouter(
@@ -43,7 +44,10 @@ function App() {
           ></Route>
           <Route path="/menu" element={<Menu />}></Route>
           <Route path="/add-category" element={<AddCategory />}></Route>
+
           <Route path="/table-booking" element={<TableBooking />}></Route>
+          <Route path="/table-booking-schedule" element={<TableBookingSchedulePage />}></Route>
+
           <Route path="/profile" element={<MyDetails/>}></Route>
           <Route path="/restaurant-details" element={<RestaurantDetails/>}></Route>
           <Route path="/restaurant/reviews" element={<Reviews/>}></Route>
@@ -58,7 +62,6 @@ function App() {
           <Route path="/slots" element={<SlotPage/>}></Route>
           <Route path="/schedules" element={<SchedulePage/>}></Route>
           <Route path="/tables" element={<TablePage/>}></Route>
-
           <Route path="/table-details/:scheduleId/:diningId" element={<TableDetailsPage/>}></Route>
 
 

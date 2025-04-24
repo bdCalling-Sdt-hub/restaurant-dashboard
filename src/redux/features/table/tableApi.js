@@ -84,4 +84,4 @@ export const tableApi = apiSlice.injectEndpoints({
 });
 
 
-export const { useGetTablesQuery, useCreateTableMutation, useDeleteTableMutation } = tableApi;
+export const { useGetTablesQuery, useGetTablesByScheduleAndDiningQuery, useCreateTableMutation, useDeleteTableMutation } = tableApi;
