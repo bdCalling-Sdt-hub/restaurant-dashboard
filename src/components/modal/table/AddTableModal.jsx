@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { useCreateTableMutation } from "../../../redux/features/table/tableApi";
 import { PlusOutlined } from "@ant-design/icons";
+import { useParams } from "react-router-dom";
 
 const AddTableModal = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [createTable, { isLoading, isSuccess }] = useCreateTableMutation();
-  
+  const { scheduleId, diningId } = useParams();
   const [form] = Form.useForm();
  
   useEffect(() => {
@@ -18,10 +19,9 @@ const AddTableModal = () => {
   }, [isSuccess, form]);
 
   const onFinish = (values) => {
-    console.log(values);
     createTable({
-      scheduleId: values.scheduleId,
-      diningId: values.diningId,
+      scheduleId,
+      diningId,
       totalTable: Number(values.totalTable),
       seats: Number(values.seats)
     });
@@ -123,7 +123,7 @@ const AddTableModal = () => {
                 Processing...
               </>
             ) : (
-              "Save Changes"
+              "Add"
             )}
           </button>
         </Form>

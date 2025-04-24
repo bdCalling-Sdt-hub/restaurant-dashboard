@@ -1,13 +1,13 @@
 import { Input, Modal, Form, } from "antd";
 import { useEffect, useState } from "react";
 import { CgSpinnerTwo } from "react-icons/cg";
-import { useCreateMenuMutation } from "../../../redux/features/menu/menuApi";
 import { useGetCusineDropDownQuery } from "../../../redux/features/cuisine/cuisineApi";
+import { useCreateTableBookingMutation } from "../../../redux/features/tableBooking/tableBookingApi";
 
-const TableBookingModal = () => {
+const TableBookingModal = ({ tableId }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [createMenu, { isLoading, isSuccess }] = useCreateMenuMutation();
-  const { data } = useGetCusineDropDownQuery(undefined);
+  const [createTableBooking, { isLoading, isSuccess }] = useCreateTableBookingMutation();
+  useGetCusineDropDownQuery(undefined);
   const [form] = Form.useForm();
  
 
@@ -19,7 +19,12 @@ const TableBookingModal = () => {
   }, [isSuccess, form]);
 
   const onFinish = (values) => {
-     console.log(values);
+    createTableBooking({
+      tableId,
+      name: values.name,
+      token: values.token,
+      guest: Number(values.guest)
+    })
   };
 
   

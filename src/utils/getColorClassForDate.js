@@ -38,7 +38,6 @@ const getColorClassForDate = (date) => {
     hash += date.charCodeAt(i);
   }
   const index = hash % bgColorMap.length;
-  console.log(bgColorMap[index]);
   return bgColorMap[index];
 };
 

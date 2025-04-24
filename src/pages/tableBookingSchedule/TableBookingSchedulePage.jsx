@@ -13,18 +13,14 @@ const TableBookingSchedulePage = () => {
   const dispatch = useDispatch();
   const { selectedDate, scheduleId, diningId } = useSelector((state)=> state.table);
   const { scheduleOptions } = useSelector((state)=>state.schedule)
-  const { data } = useGetScheduleDropDownQuery(
+  useGetScheduleDropDownQuery(
     [{ name: "date", value: selectedDate }],
     {
       skip: !selectedDate,
     }
   );
 
-  console.log({
-    selectedDate,
-    scheduleId,
-    diningId
-  });
+
 
   //const [scheduleOptions, setScheduleOptions] = useState([]);
 

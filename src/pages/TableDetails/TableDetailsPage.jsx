@@ -17,6 +17,7 @@ const TableDetailsPage = () => {
 
   const tables = data?.data?.tables;
 
+
   return (
     <>
       {isLoading ? (
@@ -24,7 +25,7 @@ const TableDetailsPage = () => {
       ) : (
         <>
           {tables?.length > 0 ? (
-            <TableDetails tables={tables} />
+            <TableDetails tables={tables} data={data?.data}/>
           ) : (
             <div className="h-[580px]">
               <div className="w-full p-6 bg-red-50 border border-red-200 rounded-2xl shadow-sm text-center">

@@ -2,7 +2,7 @@ import {apiSlice} from "../api/apiSlice.js";
 import { ErrorToast, SuccessToast } from "../../../helper/ValidationHelper.js";
 import TagTypes from "../../../constant/tagType.constant.js";
 
-export const tableApi = apiSlice.injectEndpoints({
+export const tableBookingApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getTables: builder.query({
       query: (args) => {
@@ -33,9 +33,9 @@ export const tableApi = apiSlice.injectEndpoints({
       keepUnusedDataFor: 600,
       providesTags: [TagTypes.tablesByScheduleAndDining],
     }),
-    createTable: builder.mutation({
+    createTableBooking: builder.mutation({
       query: (data) => ({
-        url: `/table/create-table`,
+        url: `/table-booking/create-table-booking`,
         method: "POST",
         body: data,
       }),
@@ -111,4 +111,4 @@ export const tableApi = apiSlice.injectEndpoints({
 });
 
 
-export const { useGetTablesQuery, useGetTablesByScheduleAndDiningQuery, useCreateTableMutation, useUpdateTableMutation, useDeleteTableMutation } = tableApi;
+export const { useGetTablesQuery, useGetTablesByScheduleAndDiningQuery, useCreateTableBookingMutation, useUpdateTableMutation, useDeleteTableMutation } = tableBookingApi;
