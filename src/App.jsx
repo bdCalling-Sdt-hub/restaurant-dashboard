@@ -12,7 +12,6 @@ import VerificationPage from "./components/verificationComponents/VerificationPa
 import ResetPassword from "./pages/auth/resetPassword";
 import BookingManagement from "./pages/bookingManagement";
 import Menu from "./pages/menu";
-import AddCategory from "./pages/addCategory";
 import TableBooking from "./pages/tableBooking";
 import MyDetails from "./pages/myDetails";
 import RestaurantDetails from "./pages/restaurantDetails";
@@ -43,7 +42,7 @@ function App() {
             element={<BookingManagement />}
           ></Route>
           <Route path="/menu" element={<Menu />}></Route>
-          <Route path="/add-category" element={<AddCategory />}></Route>
+          {/* <Route path="/add-category" element={<AddCategory />}></Route> */}
 
           <Route path="/table-booking" element={<TableBooking />}></Route>
           <Route path="/table-booking-schedule" element={<TableBookingSchedulePage />}></Route>
@@ -62,7 +61,7 @@ function App() {
           <Route path="/slots" element={<SlotPage/>}></Route>
           <Route path="/schedules" element={<SchedulePage/>}></Route>
           <Route path="/tables" element={<TablePage/>}></Route>
-          <Route path="/table-details/:scheduleId/:diningId" element={<TableDetailsPage/>}></Route>
+          <Route path="/tables/details/:scheduleId/:diningId" element={<TableDetailsPage/>}></Route>
 
 
         </Route>

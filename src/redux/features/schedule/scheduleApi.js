@@ -1,6 +1,8 @@
 import {apiSlice} from "../api/apiSlice.js";
 import { ErrorToast, SuccessToast } from "../../../helper/ValidationHelper.js";
 import TagTypes from "../../../constant/tagType.constant.js";
+import convertUTCtimeString from "../../../utils/convertUTCtimeString.js";
+import { SetScheduleOptions } from "./scheduleSlice.js";
 
 export const scheduleApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -41,13 +43,24 @@ export const scheduleApi = apiSlice.injectEndpoints({
       },
       keepUnusedDataFor: 600,
       providesTags: [TagTypes.scheduleDropDown],
-      async onQueryStarted(arg, { queryFulfilled }) {
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const res = await queryFulfilled;
           const schedules = res?.data?.data;
           if (schedules.length === 0) {
             ErrorToast("No schedules found for the selected date.");
+            return
           }
+          const Options = schedules?.map((schedule) => ({
+            value: schedule?._id,
+            label: (
+              convertUTCtimeString(schedule?.startDateTime) +
+              "-" +
+              convertUTCtimeString(schedule.endDateTime)
+            ).toString(),
+          }));
+          dispatch(SetScheduleOptions(Options))
+          
         } catch (err) {
           const status = err?.error?.status;
           if (status === 500) {

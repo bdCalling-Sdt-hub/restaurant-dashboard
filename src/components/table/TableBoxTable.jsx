@@ -75,7 +75,7 @@ const TableBoxTable = ({tables, meta, currentPage, setCurrentPage, pageSize, set
           dataIndex: "view",
           key: "view",
           render: (_, {scheduleId, diningId}) => (
-            <button onClick={()=> navigate(`/table-details/${scheduleId}/${diningId}`)} className="bg-black hover:bg-primary p-1.5 text-white rounded-md">
+            <button onClick={()=> navigate(`/tables/details/${scheduleId}/${diningId}`)} className="bg-black hover:bg-primary p-1.5 text-white rounded-md">
               <IoEyeSharp size={18} />
             </button>
           ),

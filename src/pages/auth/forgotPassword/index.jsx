@@ -1,7 +1,7 @@
 import { Typography } from "antd";
 import "antd/dist/reset.css";
-import logo from "/elhagz.png";
-import forgot from "/forgot.png";
+import logo from "../../../assets/images/elhagz.png";
+import forgot from "../../../assets/images/forgot.png"
 import { Link } from "react-router-dom";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import ForgotPassForm from '../../../components/auth/ForgotPassForm';

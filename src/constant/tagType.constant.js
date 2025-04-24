@@ -14,6 +14,7 @@ const TagTypes = {
     scheduleDropDown: "ScheduleDropDown",
     myDining: "MyDining",
     tables: "Tables",
+    tablesByScheduleAndDining: "TablesByScheduleAndDining"
 }
 
 export default TagTypes;

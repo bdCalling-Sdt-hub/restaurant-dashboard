@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
 import { useGetScheduleDropDownQuery } from "../../redux/features/schedule/scheduleApi";
-import convertUTCtimeString from "../../utils/convertUTCtimeString";
 import { useGetMyDiningsQuery } from "../../redux/features/dining/diningApi";
-import { useGetTablesByScheduleAndDiningQuery } from "../../redux/features/table/tableApi";
 import TableBookingSchedule from "../../components/tableBookingSchedule/TableBookingSchedule";
 import { DatePicker } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { SetDiningId, SetScheduleId, SetSelectedDate } from "../../redux/features/table/tableSlice";
+import dayjs from "dayjs";
 
 const TableBookingSchedulePage = () => {
-  const [selectedDate, setSelectedDate] = useState("");
-  const [diningId, setDiningId] = useState("");
-  const [scheduleId, setScheduleId] = useState("");
+  // const [selectedDate, setSelectedDate] = useState("");
+  // const [diningId, setDiningId] = useState("");
+  // const [scheduleId, setScheduleId] = useState("");
+  const dispatch = useDispatch();
+  const { selectedDate, scheduleId, diningId } = useSelector((state)=> state.table);
+  const { scheduleOptions } = useSelector((state)=>state.schedule)
   const { data } = useGetScheduleDropDownQuery(
     [{ name: "date", value: selectedDate }],
     {
@@ -17,26 +20,32 @@ const TableBookingSchedulePage = () => {
     }
   );
 
-  const [scheduleOptions, setScheduleOptions] = useState([]);
-  useEffect(() => {
-    if (selectedDate) {
-      const schedules = data?.data || [];
-      const Options = schedules?.map((schedule) => ({
-        value: schedule?._id,
-        label: (
-          convertUTCtimeString(schedule?.startDateTime) +
-          "-" +
-          convertUTCtimeString(schedule.endDateTime)
-        ).toString(),
-      }));
-      setScheduleOptions(Options);
-      setDiningId("");
-      setScheduleId("")
+  console.log({
+    selectedDate,
+    scheduleId,
+    diningId
+  });
 
-    } else {
-      setScheduleOptions([]);
-    }
-  }, [data, selectedDate]);
+  //const [scheduleOptions, setScheduleOptions] = useState([]);
+
+  // useEffect(() => {
+  //   if (selectedDate) {
+  //     const schedules = data?.data || [];
+  //     const Options = schedules?.map((schedule) => ({
+  //       value: schedule?._id,
+  //       label: (
+  //         convertUTCtimeString(schedule?.startDateTime) +
+  //         "-" +
+  //         convertUTCtimeString(schedule.endDateTime)
+  //       ).toString(),
+  //     }));
+  //     setScheduleOptions(Options);
+  //     dispatch(SetScheduleId(""))
+  //     dispatch(SetDiningId(""))
+  //   } else {
+  //     setScheduleOptions([]);
+  //   }
+  // }, [data, selectedDate, dispatch]);
 
   const { data: diningData } = useGetMyDiningsQuery();
   const dinings = diningData?.data || [];
@@ -58,11 +67,14 @@ const TableBookingSchedulePage = () => {
                 * Select Date
               </label>
               <DatePicker
+              value={selectedDate ? dayjs(selectedDate) : null}
                 disabledDate={(current) =>
                   current && current < new Date().setHours(0, 0, 0, 0)
                 }
                 onChange={(_, dateString) => {
-                  setSelectedDate(dateString);
+                  dispatch(SetSelectedDate(dateString));
+                  dispatch(SetScheduleId(""));
+                  dispatch(SetDiningId(""));
                 }}
                 style={{ width: "100%" }}
               />
@@ -75,7 +87,10 @@ const TableBookingSchedulePage = () => {
               <select
                 className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white disabled:text-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed"
                 value={scheduleId}
-                onChange={(e) => setScheduleId(e.target.value)}
+                onChange={(e) => {
+                  dispatch(SetScheduleId(e.target.value))
+                  dispatch(SetDiningId(""))
+                }}
                 disabled={scheduleOptions.length === 0}
               >
                 <option value="" disabled>
@@ -96,7 +111,7 @@ const TableBookingSchedulePage = () => {
               <select
                 className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white disabled:text-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed"
                 value={diningId}
-                onChange={(e) => setDiningId(e.target.value)}
+                onChange={(e) => dispatch(SetDiningId(e.target.value))}
                 disabled={diningOptions.length === 0 || !scheduleId}
               >
                 <option value="" disabled>Select a dining</option>

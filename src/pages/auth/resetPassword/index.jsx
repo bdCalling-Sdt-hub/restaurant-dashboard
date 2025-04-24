@@ -1,16 +1,14 @@
 import { Typography } from "antd";
 import "antd/dist/reset.css";
-import logo from "/elhagz.png";
-import ResetPass from "/ResetPassword.png";
+import logo from "../../../assets/images/elhagz.png";
+import ResetPass from "../../../assets/images/ResetPassword.png";
 import ResetPasswordForm from '../../../components/auth/ResetPasswordForm';
 import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
 const ResetPassword = () => {
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-  };
+
 
   return (
     <div className="bg-[#f6f6f6]">
