@@ -3,15 +3,12 @@ import { useGetMyDiningsQuery } from "../../redux/features/dining/diningApi";
 import TableBookingSchedule from "../../components/tableBookingSchedule/TableBookingSchedule";
 import { DatePicker } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { SetDiningId, SetScheduleId, SetSelectedDate } from "../../redux/features/table/tableSlice";
+import { SetDiningId, SetDiningName, SetScheduleId, SetSelectedDate, SetTime } from "../../redux/features/table/tableSlice";
 import dayjs from "dayjs";
 
 const TableBookingSchedulePage = () => {
-  // const [selectedDate, setSelectedDate] = useState("");
-  // const [diningId, setDiningId] = useState("");
-  // const [scheduleId, setScheduleId] = useState("");
   const dispatch = useDispatch();
-  const { selectedDate, scheduleId, diningId } = useSelector((state)=> state.table);
+  const { selectedDate, scheduleId, diningId, time, diningName } = useSelector((state)=> state.table);
   const { scheduleOptions } = useSelector((state)=>state.schedule)
   useGetScheduleDropDownQuery(
     [{ name: "date", value: selectedDate }],
@@ -19,29 +16,6 @@ const TableBookingSchedulePage = () => {
       skip: !selectedDate,
     }
   );
-
-
-
-  //const [scheduleOptions, setScheduleOptions] = useState([]);
-
-  // useEffect(() => {
-  //   if (selectedDate) {
-  //     const schedules = data?.data || [];
-  //     const Options = schedules?.map((schedule) => ({
-  //       value: schedule?._id,
-  //       label: (
-  //         convertUTCtimeString(schedule?.startDateTime) +
-  //         "-" +
-  //         convertUTCtimeString(schedule.endDateTime)
-  //       ).toString(),
-  //     }));
-  //     setScheduleOptions(Options);
-  //     dispatch(SetScheduleId(""))
-  //     dispatch(SetDiningId(""))
-  //   } else {
-  //     setScheduleOptions([]);
-  //   }
-  // }, [data, selectedDate, dispatch]);
 
   const { data: diningData } = useGetMyDiningsQuery();
   const dinings = diningData?.data || [];
@@ -58,12 +32,13 @@ const TableBookingSchedulePage = () => {
         <div className="flex gap-x-4 p-4 gap-4">
           {/* Left */}
           <div className=" bg-white w-[260px] p-4 rounded shadow-sm space-y-4">
+            {/* Form Part */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 * Select Date
               </label>
               <DatePicker
-              value={selectedDate ? dayjs(selectedDate) : null}
+                value={selectedDate ? dayjs(selectedDate) : null}
                 disabledDate={(current) =>
                   current && current < new Date().setHours(0, 0, 0, 0)
                 }
@@ -84,8 +59,10 @@ const TableBookingSchedulePage = () => {
                 className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white disabled:text-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed"
                 value={scheduleId}
                 onChange={(e) => {
-                  dispatch(SetScheduleId(e.target.value))
-                  dispatch(SetDiningId(""))
+                  dispatch(SetScheduleId(e.target.value));
+                  const selectedLabel = e.target.options[e.target.selectedIndex].text;
+                  dispatch(SetTime(selectedLabel));
+                  dispatch(SetDiningId(""));
                 }}
                 disabled={scheduleOptions.length === 0}
               >
@@ -107,10 +84,16 @@ const TableBookingSchedulePage = () => {
               <select
                 className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white disabled:text-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed"
                 value={diningId}
-                onChange={(e) => dispatch(SetDiningId(e.target.value))}
+                onChange={(e) =>{
+                   dispatch(SetDiningId(e.target.value));
+                   const selectedLabel = e.target.options[e.target.selectedIndex].text;
+                   dispatch(SetDiningName(selectedLabel));
+                }}
                 disabled={diningOptions.length === 0 || !scheduleId}
               >
-                <option value="" disabled>Select a dining</option>
+                <option value="" disabled>
+                  Select a dining
+                </option>
                 {diningOptions?.map((dining, index) => (
                   <option key={index} value={dining.value}>
                     {dining.label}
@@ -118,6 +101,37 @@ const TableBookingSchedulePage = () => {
                 ))}
               </select>
             </div>
+            {/* Summary Part */}
+            {
+              selectedDate && scheduleId && diningId &&(
+                <div className="border-t pt-4">
+                <h3 className="text-sm font-semibold text-gray-700 mb-3">
+                  Selected Summary
+                </h3>
+                <div className="space-y-2 text-sm text-gray-700">
+                  <div className="flex items-center gap-2">
+                    <span className="w-20 font-medium">Date:</span>
+                    <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold">
+                      {selectedDate}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-20 font-medium">Schedule:</span>
+                    <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">
+                      {/* 10:00 AM–11:00 AM */} {time}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-20 font-medium">Dining:</span>
+                    <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs font-semibold">
+                      {/* In door */} {diningName}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              )
+            }
+           
           </div>
           {/* Right */}
           <div className="flex-1">

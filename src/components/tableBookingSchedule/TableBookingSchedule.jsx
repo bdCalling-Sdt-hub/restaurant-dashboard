@@ -4,12 +4,13 @@ const TableBookingSchedule = ({selectedDate, scheduleId, diningId}) => {
     
     return (
       <>
-      
-    {
-        selectedDate && scheduleId && diningId ? (
-            <TableBookingScheduleList scheduleId={scheduleId} diningId={diningId}/>
+        {selectedDate && scheduleId && diningId ? (
+          <TableBookingScheduleList
+            scheduleId={scheduleId}
+            diningId={diningId}
+          />
         ) : (
-            <div className="flex h-[580px]">
+          <div className="flex h-[580px]">
             <div className="w-full p-6 bg-blue-50 border border-blue-200 rounded-2xl shadow-sm text-center">
               <h2 className="text-xl font-semibold text-blue-800 mb-2">
                 Please Complete Selection
@@ -23,9 +24,7 @@ const TableBookingSchedule = ({selectedDate, scheduleId, diningId}) => {
               </p>
             </div>
           </div>
-        )
-    }
-       
+        )}
       </>
     );
 };

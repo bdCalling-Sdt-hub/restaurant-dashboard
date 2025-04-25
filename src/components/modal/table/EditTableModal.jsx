@@ -20,6 +20,7 @@ const EditTableModal = ({ table }) => {
     updateTable({
       id: table?._id,
       data: {
+        name: values?.name,
         seats: Number(values.seats)
       }
     })
@@ -28,7 +29,7 @@ const EditTableModal = ({ table }) => {
   return (
     <>
       <button
-        onClick={()=>setModalOpen(true)}
+        onClick={() => setModalOpen(true)}
         className="bg-blue-50 text-blue-600 hover:bg-blue-100 border border-blue-200 hover:border-blue-300 p-2 rounded-md transition-colors"
         title="Edit"
       >
@@ -37,16 +38,47 @@ const EditTableModal = ({ table }) => {
       <Modal
         title={<span className="font-bold text-xl">Update Table</span>}
         open={modalOpen}
-        onCancel={() =>{
+        onCancel={() => {
           form.setFieldsValue({
-            seats: table?.seats 
-          })
-          setModalOpen(false)
+            name: table?.name,
+            seats: table?.seats,
+          });
+          setModalOpen(false);
         }}
         maskClosable={false}
         footer={false}
       >
-        <Form form={form} name="add" layout="vertical" initialValues={{ seats: table?.seats }} onFinish={onFinish}>
+        <Form
+          form={form}
+          name="edit"
+          layout="vertical"
+          initialValues={{ name: table?.name, seats: table?.seats }}
+          onFinish={onFinish}
+        >
+          <Form.Item
+            name="name"
+            label={
+              <span className="font-semibold">
+                <span className="text-red-500 mr-1">*</span>
+                Table Name
+              </span>
+            }
+            rules={[
+              { required: true, message: "Table Name is required" },
+              {
+                validator: (_, value) => {
+                  if (!value || /^T-[1-9]\d*$/.test(value)) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(
+                    new Error("Table Name must be in format 'T-1', 'T-2', ... (no T-0 or T-01)")
+                  );
+                },
+              },
+            ]}
+          >
+            <Input placeholder="Type here" />
+          </Form.Item>
           <Form.Item
             name="seats"
             label={

@@ -1,10 +1,10 @@
-import { Input, Modal, Form, } from "antd";
+import { Input, Modal, Form, Select, } from "antd";
 import { useEffect, useState } from "react";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { useGetCusineDropDownQuery } from "../../../redux/features/cuisine/cuisineApi";
 import { useCreateTableBookingMutation } from "../../../redux/features/tableBooking/tableBookingApi";
 
-const TableBookingModal = ({ tableId }) => {
+const TableBookingModal = ({ table, disabled }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [createTableBooking, { isLoading, isSuccess }] = useCreateTableBookingMutation();
   useGetCusineDropDownQuery(undefined);
@@ -20,18 +20,21 @@ const TableBookingModal = ({ tableId }) => {
 
   const onFinish = (values) => {
     createTableBooking({
-      tableId,
+      tableId:table?._id,
       name: values.name,
       token: values.token,
-      guest: Number(values.guest)
+      guest: Number(values.guest),
+      availability: values.availability
     })
   };
 
+
+  console.log(disabled);
   
 
   return (
     <>
-      <button onClick={()=>setModalOpen(true)} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm">
+      <button disabled={disabled} onClick={()=>setModalOpen(true)} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm disabled:cursor-not-allowed disabled:opacity-50">
         Book
       </button>
 
@@ -42,7 +45,7 @@ const TableBookingModal = ({ tableId }) => {
         maskClosable={false}
         footer={false}
       >
-        <Form form={form} name="add" layout="vertical" onFinish={onFinish}>
+        <Form form={form} name="add" layout="vertical" onFinish={onFinish} initialValues={{availability: "Waitlist"}}>
         <Form.Item
             name="name"
             label={
@@ -92,8 +95,12 @@ const TableBookingModal = ({ tableId }) => {
               },
               {
                 validator: (_, value) => {
-                  if (value && Number(value) <= 0) {
+                  const number = Number(value);
+                  if (value && (isNaN(number) || number <= 0)) {
                     return Promise.reject("Guest must be greater than 0");
+                  }
+                  if (number > table?.seats) {
+                    return Promise.reject(`There is only ${table?.seats} seats available`);
                   }
                   return Promise.resolve();
                 },
@@ -108,6 +115,29 @@ const TableBookingModal = ({ tableId }) => {
                   e.preventDefault();
                 }
               }}
+            />
+          </Form.Item>
+          <Form.Item
+            name="availability"
+            label={
+              <span className="font-semibold">
+                Availability (Optional)
+              </span>
+            }
+          >
+            <Select
+              style={{ width: "100%" }}
+              options={[
+                {
+                  "value": "Immediate Seating",
+                  "label": "Immediate Seating"
+                },
+                {
+                  "value": "Waitlist",
+                  "label": "Waitlist"
+                }
+              ]
+              }
             />
           </Form.Item>
           <button

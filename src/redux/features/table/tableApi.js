@@ -74,6 +74,8 @@ export const tableApi = apiSlice.injectEndpoints({
           const status = err?.error?.status;
           if (status === 404) {
             ErrorToast(err?.error?.data?.message);
+          } else if (status === 409) {
+            ErrorToast(err?.error?.data?.message);
           } else {
             ErrorToast("Something Went Wrong!");
           }

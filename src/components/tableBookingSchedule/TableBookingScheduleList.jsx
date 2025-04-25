@@ -27,7 +27,7 @@ const TableBookingScheduleList = ({scheduleId, diningId}) => {
                   {tables.map((table, index) => (
                     <div
                       key={index}
-                      className="border p-4 rounded-lg shadow-sm flex justify-between items-center bg-white"
+                      className={`border p-4 rounded-lg shadow-sm flex justify-between items-center ${table?.seats === 0 ? "bg-red-100 border-red-300" : "bg-white"}`}
                     >
                       <div>
                         <h2 className="text-lg font-semibold">{table.name}</h2>
@@ -36,16 +36,20 @@ const TableBookingScheduleList = ({scheduleId, diningId}) => {
                         </p>
                       </div>
                       {/* TableBooking Model */}
-                      <TableBookingModal tableId={table?._id}/>
-                      {/* <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm">
-                        Book
-                      </button> */}
+                      {
+                        table?.seats === 0 ?(
+                          <h1 className="text-red-600">No Seats Available</h1>
+                        ): (
+                          <TableBookingModal table={table} disabled={table?.seats === 0}/>
+                        )
+                      }
+                     
                     </div>
                   ))}
                 </div>
               </div>
             ) : (
-              <div className="h-[580px]">
+              <div className="flex full h-[580px]">
                 <div className="w-full p-6 bg-red-50 border border-red-200 rounded-2xl shadow-sm text-center">
                   <h2 className="text-xl font-semibold text-red-800 mb-2">
                     No Tables Available

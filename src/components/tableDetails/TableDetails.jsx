@@ -2,21 +2,35 @@ import EditTableModal from "../modal/table/EditTableModal";
 import DeleteTableModal from "../modal/table/DeleteTableModal";
 import convertUTCtimeString from "../../utils/convertUTCtimeString";
 import AddTableModal from "../modal/table/AddTableModal";
+import { FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 
 const TableDetails = ({ tables, data }) => {
   const diningName = data?.diningName;
   const startDateTime = data?.startDateTime;
   const endDateTime = data?.endDateTime;
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1)
+  }
 
   return (
     <>
       <div className="bg-white shadow-md rounded-xl p-4 mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div className="mb-2 sm:mb-0 flex">
-          <div className="text-lg flex flex-col gap-y-2">
-            <span className="font-semibold">Schedule:</span>
-            <span className="font-semibold">Dining:</span>
+          <div className="flex items-center gap-12">
+            <button onClick={handleGoBack} className="self-start flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-800 transition">
+              <FaArrowLeft className="text-lg" />
+              <span>Go Back</span>
+            </button>
+            <div className="text-lg flex flex-col gap-y-2">
+              <span className="font-semibold">Schedule:</span>
+              <span className="font-semibold">Dining:</span>
+            </div>
           </div>
+
           <div className="text-lg flex flex-col gap-y-2">
             <button className="cursor-default bg-purple-100 px-2 ml-1 text-purple-600 border border-purple-300 rounded-md">
               {convertUTCtimeString(startDateTime)} -{" "}
@@ -28,7 +42,8 @@ const TableDetails = ({ tables, data }) => {
           </div>
         </div>
 
-        <AddTableModal/>
+
+        <AddTableModal />
       </div>
 
       <div className="mx-auto bg-white shadow-lg rounded-md p-4 h-[600px] overflow-y-scroll">
