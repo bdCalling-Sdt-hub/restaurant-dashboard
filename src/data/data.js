@@ -36,11 +36,11 @@ export const menuItems = [
       path: '/table-booking-schedule',
       icon: MdSchedule
     },
-    {
-      title: "Table Booking",
-      path: '/table-booking',
-      icon: MdSchedule
-    },
+    // {
+    //   title: "Table Booking",
+    //   path: '/table-booking',
+    //   icon: MdSchedule
+    // },
     {
         title: "Menu", 
         path: '/menu',

@@ -22,31 +22,51 @@ const TableBookingScheduleList = ({scheduleId, diningId}) => {
         ) : (
           <>
             {tables?.length > 0 ? (
-              <div className="mx-auto bg-white shadow-md rounded-lg p-4 h-[600px] overflow-y-scroll">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {tables.map((table, index) => (
-                    <div
-                      key={index}
-                      className={`border p-4 rounded-lg shadow-sm flex justify-between items-center ${table?.seats === 0 ? "bg-red-100 border-red-300" : "bg-white"}`}
-                    >
-                      <div>
-                        <h2 className="text-lg font-semibold">{table.name}</h2>
-                        <p className="text-sm text-gray-600">
-                          Seats: {table.seats}
-                        </p>
-                      </div>
-                      {/* TableBooking Model */}
-                      {
-                        table?.seats === 0 ?(
-                          <h1 className="text-red-600">No Seats Available</h1>
-                        ): (
-                          <TableBookingModal table={table} disabled={table?.seats === 0}/>
-                        )
-                      }
-                     
+              // <div className="mx-auto bg-white shadow-md rounded-lg p-4 h-[600px] overflow-y-scroll">
+              //   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              //     {tables.map((table, index) => (
+              //       <div
+              //         key={index}
+              //         className={`border p-4 rounded-lg shadow-sm flex justify-between items-center ${table?.seats === 0 ? "bg-red-100 border-red-300" : "bg-white"}`}
+              //       >
+              //         <div>
+              //           <h2 className="text-lg font-semibold">{table.name}</h2>
+              //           <p className="text-sm text-gray-600">
+              //             Seats: {table.seats}
+              //           </p>
+              //         </div>
+              //         TableBooking Model
+              //         {
+              //           table?.seats === 0 ?(
+              //             <h1 className="text-red-600">No Seats Available</h1>
+              //           ): (
+              //             <TableBookingModal table={table}/>
+              //           )
+              //         }
+
+              //       </div>
+              //     ))}
+              //   </div>
+              //  </div>
+
+              <div className="grid !bg-[#ebebeb] rounded-2xl p-16  mt-5 grid-cols-3 gap-20 h-[700px] overflow-y-scroll">
+                {tables?.map((table, index) => (
+                  <TableBookingModal table={table}>
+                        <div
+                    key={index}
+                    className={`relative rotate-45 w-32 h-32 ${table.seats === 0 ? "cursor-not-allowed" : "cursor-pointer"}`}
+                  >
+                    <div className="absolute top-0 left-0 w-full h-full rounded-4xl border-[15px] border-red-500"></div>
+
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -rotate-45 rounded-2xl w-24 h-24 flex flex-col items-center justify-center">
+                      <span className="text-4xl font-semibold">
+                        {table.name}
+                      </span>
+                      <span  className="text-sm font-semibold">Seats: {table?.seats}</span>
                     </div>
-                  ))}
-                </div>
+                  </div>  
+                  </TableBookingModal>
+                ))}
               </div>
             ) : (
               <div className="flex full h-[580px]">

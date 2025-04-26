@@ -15,6 +15,7 @@ const bgColorMap = [
   { bg: "bg-sky-100", text: "text-sky-700" },
   { bg: "bg-violet-100", text: "text-violet-700" },
   { bg: "bg-fuchsia-100", text: "text-fuchsia-700" },
+  { bg: "bg-rose-200", text: "text-rose-800" },
   { bg: "bg-amber-100", text: "text-amber-700" },
   { bg: "bg-stone-100", text: "text-stone-700" },
   { bg: "bg-gray-100", text: "text-gray-700" },
@@ -29,7 +30,7 @@ const bgColorMap = [
   { bg: "bg-purple-200", text: "text-purple-800" },
   { bg: "bg-pink-200", text: "text-pink-800" },
   { bg: "bg-indigo-200", text: "text-indigo-800" },
-  { bg: "bg-rose-200", text: "text-rose-800" }
+ 
 ];
 
 const getColorClassForDate = (date) => {

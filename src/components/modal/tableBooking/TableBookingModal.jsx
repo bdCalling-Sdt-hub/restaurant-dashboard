@@ -4,7 +4,7 @@ import { CgSpinnerTwo } from "react-icons/cg";
 import { useGetCusineDropDownQuery } from "../../../redux/features/cuisine/cuisineApi";
 import { useCreateTableBookingMutation } from "../../../redux/features/tableBooking/tableBookingApi";
 
-const TableBookingModal = ({ table, disabled }) => {
+const TableBookingModal = ({ table, children }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [createTableBooking, { isLoading, isSuccess }] = useCreateTableBookingMutation();
   useGetCusineDropDownQuery(undefined);
@@ -29,14 +29,16 @@ const TableBookingModal = ({ table, disabled }) => {
   };
 
 
-  console.log(disabled);
   
 
   return (
     <>
-      <button disabled={disabled} onClick={()=>setModalOpen(true)} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm disabled:cursor-not-allowed disabled:opacity-50">
-        Book
-      </button>
+      {/* <button onClick={()=>setModalOpen(true)} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm disabled:cursor-not-allowed disabled:opacity-50">
+       Book
+      </button> */}
+      <div onClick={()=>table.seats !==0 &&setModalOpen(true)} >
+        {children}
+      </div>
 
       <Modal
         title={<span className="font-bold">Book Table</span>}
@@ -45,8 +47,14 @@ const TableBookingModal = ({ table, disabled }) => {
         maskClosable={false}
         footer={false}
       >
-        <Form form={form} name="add" layout="vertical" onFinish={onFinish} initialValues={{availability: "Waitlist"}}>
-        <Form.Item
+        <Form
+          form={form}
+          name="add"
+          layout="vertical"
+          onFinish={onFinish}
+          initialValues={{ availability: "Waitlist" }}
+        >
+          <Form.Item
             name="name"
             label={
               <span className="font-semibold">
@@ -67,14 +75,13 @@ const TableBookingModal = ({ table, disabled }) => {
               </span>
             }
             rules={[
-                { required: true, message: "Token is required" },
-                { min: 6, message: "Token must be 6 characters long!" },
-                { max: 6, message: "Token must be 6 characters long!" },
-                {
-                    pattern: /^\d+$/,
-                    message: "Only numeric values are allowed",
-                },
-                
+              { required: true, message: "Token is required" },
+              { min: 6, message: "Token must be 6 characters long!" },
+              { max: 6, message: "Token must be 6 characters long!" },
+              {
+                pattern: /^\d+$/,
+                message: "Only numeric values are allowed",
+              },
             ]}
           >
             <Input placeholder="Enter token" />
@@ -100,7 +107,9 @@ const TableBookingModal = ({ table, disabled }) => {
                     return Promise.reject("Guest must be greater than 0");
                   }
                   if (number > table?.seats) {
-                    return Promise.reject(`There is only ${table?.seats} seats available`);
+                    return Promise.reject(
+                      `There is only ${table?.seats} seats available`
+                    );
                   }
                   return Promise.resolve();
                 },
@@ -120,24 +129,21 @@ const TableBookingModal = ({ table, disabled }) => {
           <Form.Item
             name="availability"
             label={
-              <span className="font-semibold">
-                Availability (Optional)
-              </span>
+              <span className="font-semibold">Availability (Optional)</span>
             }
           >
             <Select
               style={{ width: "100%" }}
               options={[
                 {
-                  "value": "Immediate Seating",
-                  "label": "Immediate Seating"
+                  value: "Immediate Seating",
+                  label: "Immediate Seating",
                 },
                 {
-                  "value": "Waitlist",
-                  "label": "Waitlist"
-                }
-              ]
-              }
+                  value: "Waitlist",
+                  label: "Waitlist",
+                },
+              ]}
             />
           </Form.Item>
           <button

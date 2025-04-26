@@ -15,11 +15,11 @@ const BookingList = () => {
 
   //debounced handle
   useEffect(() => {
-        let timeoutId;
-        clearTimeout(timeoutId); //clear timeout after onChange
-        timeoutId = setTimeout(() => {
-        setSearchTerm(searchQuery); 
-        }, 600);    
+    let timeoutId;
+    clearTimeout(timeoutId); //clear timeout after onChange
+    timeoutId = setTimeout(() => {
+      setSearchTerm(searchQuery);
+    }, 600);
   }, [searchQuery]);
 
   const { data, isLoading } = useGetBookingsQuery([
@@ -27,7 +27,7 @@ const BookingList = () => {
     { name: "page", value: currentPage },
     { name: "limit", value: pageSize }
   ]);
-  const users = data?.data || []
+  const bookings = data?.data || []
   const meta = data?.meta;
     
    
@@ -53,7 +53,7 @@ const BookingList = () => {
         isLoading ? (
           <ListLoading/>
         ): (
-          <BookingTable users={users} meta={meta} currentPage={currentPage} setCurrentPage={setCurrentPage} pageSize={pageSize} setPageSize={setPageSize}/>
+          <BookingTable bookings={bookings} meta={meta} currentPage={currentPage} setCurrentPage={setCurrentPage} pageSize={pageSize} setPageSize={setPageSize}/>
         )
       }
     </>

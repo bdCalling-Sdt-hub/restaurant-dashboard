@@ -44,7 +44,7 @@ function App() {
           <Route path="/menu" element={<Menu />}></Route>
           {/* <Route path="/add-category" element={<AddCategory />}></Route> */}
 
-          <Route path="/table-booking" element={<TableBooking />}></Route>
+          {/* <Route path="/table-booking" element={<TableBooking />}></Route> */}
           <Route path="/table-booking-schedule" element={<TableBookingSchedulePage />}></Route>
 
           <Route path="/profile" element={<MyDetails/>}></Route>

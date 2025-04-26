@@ -5,7 +5,6 @@ import AddTableModal from "../modal/table/AddTableModal";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-
 const TableDetails = ({ tables, data }) => {
   const diningName = data?.diningName;
   const startDateTime = data?.startDateTime;
@@ -13,15 +12,18 @@ const TableDetails = ({ tables, data }) => {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    navigate(-1)
-  }
+    navigate(-1);
+  };
 
   return (
     <>
       <div className="bg-white shadow-md rounded-xl p-4 mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div className="mb-2 sm:mb-0 flex">
           <div className="flex items-center gap-12">
-            <button onClick={handleGoBack} className="self-start flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-800 transition">
+            <button
+              onClick={handleGoBack}
+              className="self-start flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-800 transition"
+            >
               <FaArrowLeft className="text-lg" />
               <span>Go Back</span>
             </button>
@@ -42,7 +44,6 @@ const TableDetails = ({ tables, data }) => {
           </div>
         </div>
 
-
         <AddTableModal />
       </div>
 
@@ -51,16 +52,22 @@ const TableDetails = ({ tables, data }) => {
           {tables?.map((table, index) => (
             <div
               key={index}
-              className="border p-4 rounded-lg shadow-sm flex justify-between items-center bg-white"
+              className={`border p-4 rounded-lg shadow-sm flex justify-between items-center ${
+                table?.seats === 0 ? "bg-red-100 border-red-300" : "bg-white"
+              }`}
             >
               <div>
                 <h2 className="text-lg font-semibold">{table.name}</h2>
                 <p className="text-sm text-gray-600">Seats: {table.seats}</p>
               </div>
-              <div className="flex space-x-2">
-                <EditTableModal table={table} />
-                <DeleteTableModal tableId={table?._id} />
-              </div>
+              {table?.seats === 0 ? (
+                <h1 className="text-red-600">No Seats Available</h1>
+              ) : (
+                <div className="flex space-x-2">
+                  <EditTableModal table={table} />
+                  <DeleteTableModal tableId={table?._id} />
+                </div>
+              )}
             </div>
           ))}
         </div>
