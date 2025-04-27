@@ -66,4 +66,4 @@ jobs:
             [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  
             cd ${{ env.DEPLOY_PATH }} 
 
-            pm2 reload dist/server.js --name restaurant-backend || pm2 start dist/server.js --name restaurant-backend
+            pm2 reload dist/index.html --name restaurant-backend || pm2 start dist/index.html --name restaurant-backend
