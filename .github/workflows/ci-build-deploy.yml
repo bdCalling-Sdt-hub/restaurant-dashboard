@@ -54,16 +54,11 @@ jobs:
           strip_components: 1
           overwrite: true
 
-      - name: Setup and run application
+      - name: Restart Nginx
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            export NVM_DIR="/home/${{ secrets.EC2_USER }}/.nvm"  
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
-            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  
-            cd ${{ env.DEPLOY_PATH }} 
-
-            pm2 reload dist/index.html --name restaurant-backend || pm2 start dist/index.html --name restaurant-backend
+            sudo systemctl restart nginx
