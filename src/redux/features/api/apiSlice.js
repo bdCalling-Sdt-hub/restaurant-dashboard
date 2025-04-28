@@ -41,7 +41,8 @@ export const apiSlice = createApi({
     TagTypes.scheduleDropDown,
     TagTypes.myDining,
     TagTypes.tables,
-    TagTypes.tablesByScheduleAndDining
+    TagTypes.tablesByScheduleAndDining,
+    TagTypes.tableBookings
 ], //TagS WhiteLists
   endpoints: (builder) => ({}),
 });

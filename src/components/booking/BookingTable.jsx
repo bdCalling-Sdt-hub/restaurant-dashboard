@@ -27,7 +27,6 @@ const BookingTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, se
         paymentStatus: booking?.paymentStatus
       }))
 
-    console.log(dataSource);
  
       const columns = [
         {

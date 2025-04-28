@@ -82,16 +82,6 @@ const SidebarMenu = () => {
                 </Link>
               </Menu.Item>
               <Menu.Item
-                key="party"
-                className={
-                  activeKey === "party" ? "!bg-red-500 !text-white" : ""
-                }
-              >
-                <Link to="/restaurant/party" className="text-[18px]">
-                  Party
-                </Link>
-              </Menu.Item>
-              <Menu.Item
                 key="social-media"
                 className={
                   activeKey === "social-media" ? "!bg-red-500 !text-white" : ""
@@ -129,16 +119,6 @@ const SidebarMenu = () => {
                   className="text-[18px]"
                 >
                   Restaurant Agreement
-                </Link>
-              </Menu.Item>
-              <Menu.Item
-                key="menu-items"
-                className={
-                  activeKey === "menu-items" ? "!bg-red-500 !text-white" : ""
-                }
-              >
-                <Link to="/restaurant/menu-items" className="text-[18px]">
-                  Menu Items
                 </Link>
               </Menu.Item>
             </Menu.SubMenu>

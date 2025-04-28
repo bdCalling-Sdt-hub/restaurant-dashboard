@@ -12,7 +12,6 @@ import VerificationPage from "./components/verificationComponents/VerificationPa
 import ResetPassword from "./pages/auth/resetPassword";
 import BookingManagement from "./pages/bookingManagement";
 import Menu from "./pages/menu";
-import TableBooking from "./pages/tableBooking";
 import MyDetails from "./pages/myDetails";
 import RestaurantDetails from "./pages/restaurantDetails";
 import Reviews from "./components/restaurantComponents/Reviews";
@@ -20,7 +19,6 @@ import SocialMedia from "./components/restaurantComponents/SocialMedia";
 import BusinessHours from "./components/restaurantComponents/BusinessHours";
 import Party from "./components/restaurantComponents/Party";
 import ReservationsAgreement from "./components/restaurantComponents/ReservationsAgreement";
-import MenuItems from "./components/restaurantComponents/MenuItems";
 import RestaurantFeatures from "./components/restaurantComponents/RestaurantFeatures";
 import Cuisine from "./components/restaurantComponents/Cuisine";
 import PrivateRoute from "./routes/PrivateRoute";
@@ -30,6 +28,7 @@ import SchedulePage from "./pages/schedule/SchedulePage";
 import TablePage from "./pages/table/TablePage";
 import TableDetailsPage from "./pages/TableDetails/TableDetailsPage";
 import TableBookingSchedulePage from "./pages/tableBookingSchedule/TableBookingSchedulePage";
+import TableBookingListPage from "./pages/tableBookingList/TableBookingListPage";
 
 function App() {
   const router = createBrowserRouter(
@@ -46,16 +45,15 @@ function App() {
 
           {/* <Route path="/table-booking" element={<TableBooking />}></Route> */}
           <Route path="/table-booking-schedule" element={<TableBookingSchedulePage />}></Route>
+          <Route path="/table-booking-list" element={<TableBookingListPage />}></Route>
 
           <Route path="/profile" element={<MyDetails/>}></Route>
           <Route path="/restaurant-details" element={<RestaurantDetails/>}></Route>
           <Route path="/restaurant/reviews" element={<Reviews/>}></Route>
           <Route path="/restaurant/social-media" element={<SocialMedia/>}></Route>
           <Route path="/restaurant/business-hours" element={<BusinessHours/>}></Route>
-          <Route path="/restaurant/party" element={<Party/>}></Route>
           <Route path="/restaurant/cuisine" element={<Cuisine/>}></Route>
           <Route path="/restaurant/restaurant-agreement" element={<ReservationsAgreement/>}></Route>
-          <Route path="/restaurant/menu-items" element={<MenuItems/>}></Route>
           <Route path="/restaurant/restaurant-features" element={<RestaurantFeatures/>}></Route>
 
           <Route path="/slots" element={<SlotPage/>}></Route>

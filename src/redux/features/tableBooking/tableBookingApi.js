@@ -4,7 +4,7 @@ import TagTypes from "../../../constant/tagType.constant.js";
 
 export const tableBookingApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getTables: builder.query({
+    getTableBookings: builder.query({
       query: (args) => {
         const params = new URLSearchParams();
         if (args !== undefined && args.length > 0) {
@@ -15,23 +15,13 @@ export const tableBookingApi = apiSlice.injectEndpoints({
           });
         }
         return {
-          url: "/table/get-tables",
+          url: "/table-booking/get-table-bookings",
           method: "GET",
           params: params
         };
       },
       keepUnusedDataFor: 600,
-      providesTags: [TagTypes.tables],
-    }),
-    getTablesByScheduleAndDining: builder.query({
-      query: ({scheduleId, diningId}) => {
-        return {
-          url: `/table/get-tables-by-schedule-and-dining/${scheduleId}/${diningId}`,
-          method: "GET",
-        };
-      },
-      keepUnusedDataFor: 600,
-      providesTags: [TagTypes.tablesByScheduleAndDining],
+      providesTags: [TagTypes.tableBookings],
     }),
     createTableBooking: builder.mutation({
       query: (data) => ({
@@ -41,35 +31,43 @@ export const tableBookingApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result) =>{
         if(result?.success){
-          return [TagTypes.tables, TagTypes.tablesByScheduleAndDining]
+          return [TagTypes.tableBookings]
         }
         return []
       },
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          SuccessToast("Table created successfully");
-        } catch (err) {      
-          ErrorToast("Something Went Wrong!");  
+          SuccessToast("Table Booked successfully");
+        } catch (err) {  
+          const status = err?.error?.status;
+          if (status === 404) {
+            ErrorToast(err?.error?.data?.message);
+          }
+          else if (status === 400) {
+            ErrorToast(err?.error?.data?.message);
+          } else {
+            ErrorToast("Something Went Wrong!");
+          }
         }
       },
     }),
-    updateTable: builder.mutation({
+    changeAvailibility: builder.mutation({
       query: ({ id, data }) => ({
-        url: `/table/update-table/${id}`,
+        url: `/table-booking/change-availability/${id}`,
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: (result) =>{
-        if(result?.success){
-          return [TagTypes.tables, TagTypes.tablesByScheduleAndDining]
+      invalidatesTags: (result) => {
+        if (result?.success) {
+          return [TagTypes.tableBookings];
         }
-        return []
+        return [];
       },
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
-            SuccessToast("Table is updated successfully");
+          SuccessToast("Availibility is updated successfully");
         } catch (err) {
           const status = err?.error?.status;
           if (status === 404) {
@@ -80,28 +78,26 @@ export const tableBookingApi = apiSlice.injectEndpoints({
         }
       },
     }),
-    deleteTable: builder.mutation({
+    deleteTableBooking: builder.mutation({
       query: (id) => ({
-        url: `/table/delete-table/${id}`,
+        url: `/table-booking/delete-table-booking/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: (result) =>{
         if(result?.success){
-          return [TagTypes.tables, TagTypes.tablesByScheduleAndDining]
+          return [TagTypes.tableBookings]
         }
         return []
       },
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          SuccessToast("Table is deleted successfully");
+          SuccessToast("Table Booking is deleted successfully");
         } catch (err) {
           const status = err?.error?.status;
           if (status === 404) {
             ErrorToast(err?.error?.data?.message);
-          } else if (status === 409) {
-            ErrorToast(err?.error?.data?.message);
-          } else {
+          }else {
             ErrorToast("Something Went Wrong!");
           }
         }
@@ -111,4 +107,4 @@ export const tableBookingApi = apiSlice.injectEndpoints({
 });
 
 
-export const { useGetTablesQuery, useGetTablesByScheduleAndDiningQuery, useCreateTableBookingMutation, useUpdateTableMutation, useDeleteTableMutation } = tableBookingApi;
+export const { useGetTableBookingsQuery, useCreateTableBookingMutation, useChangeAvailibilityMutation, useDeleteTableBookingMutation } = tableBookingApi;

@@ -1,7 +1,7 @@
 import { BsMenuButtonWideFill } from "react-icons/bs";
-import { FaCheckToSlot, FaRegCircleUser, FaTable } from "react-icons/fa6";
+import { FaCheckToSlot, FaTable, FaTableList } from "react-icons/fa6";
 import { GiStabbedNote } from "react-icons/gi";
-import { MdOutlineCategory, MdSchedule, MdScheduleSend } from "react-icons/md";
+import { MdSchedule, MdScheduleSend } from "react-icons/md";
 import { RiPieChart2Fill } from "react-icons/ri";
 
 
@@ -35,6 +35,11 @@ export const menuItems = [
       title: "Table Booking Schedule",
       path: '/table-booking-schedule',
       icon: MdSchedule
+    },
+    {
+      title: "Table Booking List",
+      path: '/table-booking-list',
+      icon: FaTableList
     },
     // {
     //   title: "Table Booking",
