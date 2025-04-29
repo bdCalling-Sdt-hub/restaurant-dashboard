@@ -1,5 +1,4 @@
-import TableBookingList from '../../components/tableBooking/tableBookingList';
-
+import TableBookingList from "../../components/tableBooking/TableBookingList";
 
 const TableBookingListPage = () => {
   
