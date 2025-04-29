@@ -13,6 +13,7 @@ const TagTypes = {
     schedules: "Schedules",
     scheduleDropDown: "ScheduleDropDown",
     myDining: "MyDining",
+    diningDropDown: "diningDropDown",
     tables: "Tables",
     tablesByScheduleAndDining: "TablesByScheduleAndDining",
     tableBookings: "tableBookings",

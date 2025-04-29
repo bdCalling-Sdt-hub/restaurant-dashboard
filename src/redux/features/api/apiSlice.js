@@ -40,6 +40,7 @@ export const apiSlice = createApi({
     TagTypes.schedules,
     TagTypes.scheduleDropDown,
     TagTypes.myDining,
+    TagTypes.diningDropDown,
     TagTypes.tables,
     TagTypes.tablesByScheduleAndDining,
     TagTypes.tableBookings

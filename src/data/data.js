@@ -22,6 +22,11 @@ export const menuItems = [
       icon: FaCheckToSlot
     },
     {
+      title: "Create Restaurant",
+      path: '/create-restaurant',
+      icon: FaCheckToSlot
+    },
+    {
       title: "Schedules",
       path: '/schedules',
       icon: MdScheduleSend

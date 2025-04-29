@@ -32,6 +32,34 @@ export const diningApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    getDiningDropDown: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args !== undefined && args.length > 0) {
+          args.forEach((item) => {
+            if(item.value){
+              params.append(item.name, item.value);
+            }
+          });
+        }
+        return {
+          url: "/dining/get-dining-drop-down",
+          method: "GET",
+          params: params
+        };
+      },
+      keepUnusedDataFor: 600,
+      providesTags: [TagTypes.diningDropDown],
+      async onQueryStarted(arg, { queryFulfilled}) {
+        try {
+          await queryFulfilled;
+        } catch (err) {
+          //ErrorToast("Something Went Wrong!");
+          //do nothing
+          //console.log(err);
+        }
+      },
+    }),
     createMenu: builder.mutation({
       query: (data) => ({
         url: `/menu/create-menu`,
@@ -117,4 +145,4 @@ export const diningApi = apiSlice.injectEndpoints({
 });
 
 
-export const { useGetMyDiningsQuery, useCreateMenuMutation, useDeleteMenuMutation, useUpdateMenuMutation } = diningApi;
+export const { useGetMyDiningsQuery, useGetDiningDropDownQuery, useCreateMenuMutation, useDeleteMenuMutation, useUpdateMenuMutation } = diningApi;

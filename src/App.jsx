@@ -28,6 +28,7 @@ import TablePage from "./pages/table/TablePage";
 import TableDetailsPage from "./pages/TableDetails/TableDetailsPage";
 import TableBookingSchedulePage from "./pages/tableBookingSchedule/TableBookingSchedulePage";
 import TableBookingListPage from "./pages/tableBookingList/TableBookingListPage";
+import CreateRestaurantPage from "./pages/restaurant/CreateRestaurantPage";
 
 function App() {
   const router = createBrowserRouter(
@@ -55,6 +56,7 @@ function App() {
           <Route path="/restaurant/restaurant-agreement" element={<ReservationsAgreement/>}></Route>
           <Route path="/restaurant/restaurant-features" element={<RestaurantFeatures/>}></Route>
 
+          <Route path="/create-restaurant" element={<CreateRestaurantPage/>}></Route>
           <Route path="/slots" element={<SlotPage/>}></Route>
           <Route path="/schedules" element={<SchedulePage/>}></Route>
           <Route path="/tables" element={<TablePage/>}></Route>
