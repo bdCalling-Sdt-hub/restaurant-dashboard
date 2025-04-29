@@ -1,31 +1,32 @@
 import React from 'react';
 import { List, Avatar } from 'antd';
-// import img from '../../../public/img.png'
+import img1 from "../../assets/images/img.png";
+import img2 from "../../assets/images/img2.png";
 
 const orderData = [
   {
     title: 'Grill Sandwich',
     price: '$30.00',
     orders: '500',
-    image: '../../../public/img.png',
+    image: img1,
   },
   {
     title: 'Chicken Popeyes',
     price: '$20.00',
     orders: '800',
-    image: '../../../public/img2.png',
+    image: img2,
   },
   {
     title: 'Bison Burgers',
     price: '$50.00',
     orders: '950',
-    image: '../../../public/img.png',
+    image: img1,
   },
   {
     title: 'Grill Sandwich',
     price: '$30.00',
     orders: '700',
-    image: '../../../public/img.png',
+    image: img2,
   },
 ];
 

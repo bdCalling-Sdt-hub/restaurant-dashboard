@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import { Button, Typography, Space, Modal, Input } from "antd";
 import MenuItem from "../../components/menuComponents/MenuItem";
-import respic from "../../../public/respic.png";
-import btnbg from "../../../public/buttonbg.png";
-import btn1 from "../../../public/ite.png";
-import btn2 from "../../../public/che.png";
-import btn3 from "../../../public/mex.png";
+import respic from "../../assets/images/respic.png";
+import btnbg from "../../assets/images/respic.png";
+import btn1 from "../../assets/images/respic.png";
+import btn2 from "../../assets/images/respic.png";
+import btn3 from "../../assets/images/respic.png";
+
+// import respic from "../../assets/images/respic.png";
+// import btnbg from "../../../public/buttonbg.png";
+// import btn1 from "../../../public/ite.png";
+// import btn2 from "../../../public/che.png";
+// import btn3 from "../../../public/mex.png";
 
 import { IoIosStar, IoMdStats } from "react-icons/io";
 import { Link } from "react-router";

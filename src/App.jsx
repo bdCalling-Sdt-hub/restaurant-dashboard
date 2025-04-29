@@ -17,7 +17,6 @@ import RestaurantDetails from "./pages/restaurantDetails";
 import Reviews from "./components/restaurantComponents/Reviews";
 import SocialMedia from "./components/restaurantComponents/SocialMedia";
 import BusinessHours from "./components/restaurantComponents/BusinessHours";
-import Party from "./components/restaurantComponents/Party";
 import ReservationsAgreement from "./components/restaurantComponents/ReservationsAgreement";
 import RestaurantFeatures from "./components/restaurantComponents/RestaurantFeatures";
 import Cuisine from "./components/restaurantComponents/Cuisine";

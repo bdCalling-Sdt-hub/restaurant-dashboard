@@ -59,7 +59,7 @@ const AdministratorModal = () => {
           </Upload>
         </div>
 
-        <Form   form={form} layout="vertical">
+        <Form form={form} layout="vertical">
           <Form.Item name="name" label="Name" rules={[{ required: true }]}> <Input /> </Form.Item>
           <Form.Item name="email" label="Email" rules={[{ required: true }]}> <Input /> </Form.Item>
           <Form.Item name="contact" label="Contact Number" rules={[{ required: true }]}> <Input /> </Form.Item>

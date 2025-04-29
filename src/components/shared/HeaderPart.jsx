@@ -1,6 +1,6 @@
 import {Typography } from 'antd';
 import 'antd/dist/reset.css'; // Import Ant Design styles
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useGetMeQuery } from '../../redux/features/user/userApi';
 import profile_placeholder from "../../assets/images/profile_placeholder.png";
 import Logo from "../../assets/images/elhagz.png";
