@@ -53,7 +53,6 @@ const CreateTableModal = () => {
   }, [isSuccess, form]);
 
   const onFinish = (values) => {
-    console.log(values);
     createTable({
       scheduleId: values.scheduleId,
       diningId: values.diningId,

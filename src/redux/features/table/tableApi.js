@@ -49,7 +49,7 @@ export const tableApi = apiSlice.injectEndpoints({
         try {
           await queryFulfilled;
           SuccessToast("Table created successfully");
-        } catch (err) {      
+        } catch (err) {   
           ErrorToast("Something Went Wrong!");  
         }
       },

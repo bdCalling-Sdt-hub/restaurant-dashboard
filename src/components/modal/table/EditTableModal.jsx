@@ -12,7 +12,6 @@ const EditTableModal = ({ table }) => {
   useEffect(() => {
     if (isSuccess) {
       setModalOpen(false);
-      form.resetFields();
     }
   }, [isSuccess, form]);
 
