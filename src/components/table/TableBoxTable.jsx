@@ -3,6 +3,7 @@ import convertUTCtimeString from '../../utils/convertUTCtimeString';
 import getColorClassForDate from '../../utils/getColorClassForDate';
 import { IoEyeSharp } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router-dom';
+import { getDiningColorClass } from '../../utils/getDiningColorClass';
 
 
 const TableBoxTable = ({tables, meta, currentPage, setCurrentPage, pageSize, setPageSize}) => {
@@ -34,16 +35,14 @@ const TableBoxTable = ({tables, meta, currentPage, setCurrentPage, pageSize, set
           key: "date",
           render: (val) => {
             const date = val?.split("T")[0];
-            const bgColor = getColorClassForDate(date);
+            const { bg, text, border } = getColorClassForDate(date);
             return (
-              <button
-                className={`text-sm px-2 py-1 rounded ${bgColor} cursor-default`}
-              >
+              <button className={`text-sm px-2 py-1 rounded ${bg} ${text} ${border} border cursor-default`}>
                 {date}
               </button>
             );
-          },
-        },
+          }
+        }, 
         {
           title: "Time",
           dataIndex: "startDateTime",
@@ -59,16 +58,26 @@ const TableBoxTable = ({tables, meta, currentPage, setCurrentPage, pageSize, set
           title: "Dining",
           dataIndex: "diningName",
           key: "diningName",
+          render: (val) => {
+            const colorClass = getDiningColorClass(val);
+            return (
+              <span className={`inline-block min-w-24 text-center px-3 py-1 rounded-full text-sm font-medium ${colorClass}`}>
+                {val}
+              </span>
+            );
+          },
         },
         {
           title: "Total Tables",
           dataIndex: "totalTables",
           key: "totalTables",
+          align: "center"
         },
         {
           title: "Total Seats",
           dataIndex: "totalSeats",
           key: "totalSeats",
+          align: "center"
         },
         {
           title: "View",

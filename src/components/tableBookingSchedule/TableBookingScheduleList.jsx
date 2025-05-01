@@ -14,6 +14,7 @@ const TableBookingScheduleList = ({scheduleId, diningId}) => {
       );
 
       const tables = data?.data?.tables;
+      
 
     return (
       <>
@@ -35,7 +36,7 @@ const TableBookingScheduleList = ({scheduleId, diningId}) => {
               //             Seats: {table.seats}
               //           </p>
               //         </div>
-              //         TableBooking Model
+              //         {/* TableBooking Model */}
               //         {
               //           table?.seats === 0 ?(
               //             <h1 className="text-red-600">No Seats Available</h1>

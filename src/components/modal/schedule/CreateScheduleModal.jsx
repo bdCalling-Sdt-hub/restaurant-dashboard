@@ -5,6 +5,7 @@ import { CgSpinnerTwo } from "react-icons/cg";
 import { useCreateScheduleMutation } from "../../../redux/features/schedule/scheduleApi";
 import { useGetSlotDropDownQuery } from "../../../redux/features/slot/slotApi";
 import convertUTCtimeString from "../../../utils/convertUTCtimeString";
+import disabledDate from "../../../utils/disabledDate";
 
 
 const CreateScheduleModal = () => {
@@ -94,9 +95,7 @@ const CreateScheduleModal = () => {
               ]}
             >
               <DatePicker
-                disabledDate={(current) =>
-                  current && current < new Date().setHours(0, 0, 0, 0)
-                }
+                disabledDate={disabledDate}
                 onChange={(_, dateString) => {
                   setStartDate(dateString);
                 }}
@@ -133,9 +132,7 @@ const CreateScheduleModal = () => {
               ]}
             >
               <DatePicker
-                disabledDate={(current) =>
-                  current && current < new Date().setHours(0, 0, 0, 0)
-                }
+                disabledDate={disabledDate}
                 onChange={(_, dateString) => {
                   setEndDate(dateString);
                 }}

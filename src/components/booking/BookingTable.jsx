@@ -1,6 +1,7 @@
 import { Pagination , Table } from 'antd';
 import convertUTCtimeString from '../../utils/convertUTCtimeString';
 import getColorClassForDate from '../../utils/getColorClassForDate';
+import { getDiningColorClass } from '../../utils/getDiningColorClass';
 
 const colorMap = {
   pending: "bg-yellow-100 text-yellow-800",
@@ -24,7 +25,9 @@ const BookingTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, se
         startDateTime: booking?.startDateTime, //checkIn
         endDateTime: booking?.endDateTime, //checkOut
         status: booking?.status,
-        paymentStatus: booking?.paymentStatus
+        paymentStatus: booking?.paymentStatus,
+        guest: booking?.guest,
+        diningName: booking?.diningName
       }))
 
  
@@ -53,9 +56,9 @@ const BookingTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, se
           key: "date",
           render: (val) => {
             const date = val?.split("T")[0];
-            const { bg, text } = getColorClassForDate(date);
+            const { bg, text, border } = getColorClassForDate(date);
             return (
-              <button className={`text-sm px-2 py-1 rounded ${bg} ${text} cursor-default`}>
+              <button className={`text-sm px-2 py-1 rounded ${bg} ${text} ${border} border cursor-default`}>
                 {date}
               </button>
             );
@@ -107,29 +110,23 @@ const BookingTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, se
           dataIndex: "phone",
           key: "phone",
         },
-        {
-          title: "Status",
-          dataIndex: "status",
-          key: "status",
-          render: (val, record) => {
-            const bgColor = colorMap[val]; 
-        
-            return (
-              <div className="flex items-center gap-2">
-                <button
-                  className={`${bgColor} w-20 px-2 py-0.5 rounded-md shadow cursor-default capitalize`}
-                >
-                  {val}
-                </button>
-                {/* <EditApprovalStatusModal approved={val==="pending" ? "" : val} restaurantId={record._id}/> */}
-              </div>
-            );
+      {
+            title: "Dining",
+            dataIndex: "diningName",
+            key: "diningName"
           },
-        },
+          {
+            title: "Guest",
+            dataIndex: "guest",
+            key: "guest",
+            align: "center",
+            width: 80,
+          },
         {
           title: "Payment Status",
           dataIndex: "paymentStatus",
           key: "paymentStatus",
+          align: "center",
           render: (val) => {
             const statusStyles = {
               unpaid: "bg-red-100 text-red-700 border border-red-300",
@@ -139,7 +136,7 @@ const BookingTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, se
             val === "paid" ? statusStyles.paid : statusStyles.unpaid;
         
             return (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center gap-2">
                 <span
                   className={`${bgColor} capitalize px-3 py-0.5 text-sm font-medium rounded-full`}
                 >

@@ -1,7 +1,7 @@
 import { BsMenuButtonWideFill } from "react-icons/bs";
 import { FaCheckToSlot, FaTable, FaTableList } from "react-icons/fa6";
 import { GiStabbedNote } from "react-icons/gi";
-import { MdSchedule, MdScheduleSend } from "react-icons/md";
+import { MdDining, MdSchedule, MdScheduleSend } from "react-icons/md";
 import { RiPieChart2Fill } from "react-icons/ri";
 
 
@@ -25,6 +25,11 @@ export const menuItems = [
       title: "Create Restaurant",
       path: '/create-restaurant',
       icon: FaCheckToSlot
+    },
+    {
+      title: "Dining",
+      path: '/dining',
+      icon: MdDining
     },
     {
       title: "Schedules",

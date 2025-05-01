@@ -28,9 +28,9 @@ const ScheduleTable = ({schedules, meta, currentPage, setCurrentPage, pageSize, 
           key: "date",
           render: (val) => {
             const date = val?.split("T")[0];
-            const { bg, text } = getColorClassForDate(date);
+            const { bg, text, border } = getColorClassForDate(date);
             return (
-              <button className={`text-sm px-2 py-1 rounded ${bg} ${text} cursor-default`}>
+              <button className={`text-sm px-2 py-1 rounded ${bg} ${text} ${border} border cursor-default`}>
                 {date}
               </button>
             );

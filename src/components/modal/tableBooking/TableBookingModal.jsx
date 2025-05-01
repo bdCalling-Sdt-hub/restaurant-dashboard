@@ -21,7 +21,6 @@ const TableBookingModal = ({ table, children }) => {
   const onFinish = (values) => {
     createTableBooking({
       tableId:table?._id,
-      name: values.name,
       token: values.token,
       guest: Number(values.guest),
       availability: values.availability
@@ -54,18 +53,6 @@ const TableBookingModal = ({ table, children }) => {
           onFinish={onFinish}
           initialValues={{ availability: "Waitlist" }}
         >
-          <Form.Item
-            name="name"
-            label={
-              <span className="font-semibold">
-                <span className="text-red-500 mr-1">*</span>
-                Name
-              </span>
-            }
-            rules={[{ required: true, message: "Name is required" }]}
-          >
-            <Input placeholder="Type here" />
-          </Form.Item>
           <Form.Item
             name="token"
             label={

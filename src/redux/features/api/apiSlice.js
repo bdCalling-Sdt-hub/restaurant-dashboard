@@ -26,25 +26,7 @@ export const apiSlice = createApi({
     }
     return result;
   },
-  tagTypes: [
-    TagTypes.cuisine,
-    TagTypes.dining,
-    TagTypes.administrator,
-    TagTypes.users,
-    TagTypes.me,
-    TagTypes.restaurants,
-    TagTypes.menus,
-    TagTypes.bookings,
-    TagTypes.slots,
-    TagTypes.slotDropDown,
-    TagTypes.schedules,
-    TagTypes.scheduleDropDown,
-    TagTypes.myDining,
-    TagTypes.diningDropDown,
-    TagTypes.tables,
-    TagTypes.tablesByScheduleAndDining,
-    TagTypes.tableBookings
-], //TagS WhiteLists
+  tagTypes: Object.values(TagTypes), //TagS WhiteLists
   endpoints: (builder) => ({}),
 });
 

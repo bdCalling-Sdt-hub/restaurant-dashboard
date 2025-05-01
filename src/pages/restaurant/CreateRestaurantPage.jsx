@@ -38,7 +38,8 @@ const CreateRestaurantPage = () => {
   };
 
   return (
-    <Form
+    <div className="bg-gray-50">
+      <Form
       form={form}
       layout="vertical"
       initialValues={{ cancellationCharge: 0 }}
@@ -319,6 +320,7 @@ const CreateRestaurantPage = () => {
         </button>
       </div>
     </Form>
+    </div>
   );
 };
 

@@ -29,6 +29,8 @@ import TableDetailsPage from "./pages/TableDetails/TableDetailsPage";
 import TableBookingSchedulePage from "./pages/tableBookingSchedule/TableBookingSchedulePage";
 import TableBookingListPage from "./pages/tableBookingList/TableBookingListPage";
 import CreateRestaurantPage from "./pages/restaurant/CreateRestaurantPage";
+import DiningPage from "./pages/dining/DiningPage";
+import NotFoundPage from "./pages/NotFound/NotFoundPage";
 
 function App() {
   const router = createBrowserRouter(
@@ -57,6 +59,7 @@ function App() {
           <Route path="/restaurant/restaurant-features" element={<RestaurantFeatures/>}></Route>
 
           <Route path="/create-restaurant" element={<CreateRestaurantPage/>}></Route>
+          <Route path="/dining" element={<DiningPage/>}></Route>
           <Route path="/slots" element={<SlotPage/>}></Route>
           <Route path="/schedules" element={<SchedulePage/>}></Route>
           <Route path="/tables" element={<TablePage/>}></Route>
@@ -68,6 +71,7 @@ function App() {
         <Route path="/forgot-password" element={<PublicRoute><ForgotPassword /></PublicRoute>}></Route>
         <Route path="/verify-otp" element={<PublicRoute><VerificationPage /></PublicRoute>}></Route>
         <Route path="/reset-password" element={<PublicRoute><ResetPassword /></PublicRoute>}></Route>
+        <Route path="*" element={<NotFoundPage/>}/>
 
       </Route>
     )

@@ -1,10 +1,11 @@
 import { useGetScheduleDropDownQuery } from "../../redux/features/schedule/scheduleApi";
-import { useGetMyDiningsQuery } from "../../redux/features/dining/diningApi";
+import { useGetDiningDropDownQuery } from "../../redux/features/dining/diningApi";
 import TableBookingSchedule from "../../components/tableBookingSchedule/TableBookingSchedule";
 import { DatePicker } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { SetDiningId, SetDiningName, SetScheduleId, SetSelectedDate, SetTime } from "../../redux/features/table/tableSlice";
 import dayjs from "dayjs";
+import disabledDate from "../../utils/disabledDate";
 
 const TableBookingSchedulePage = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const TableBookingSchedulePage = () => {
     }
   );
 
-  const { data: diningData } = useGetMyDiningsQuery();
+  const { data: diningData } = useGetDiningDropDownQuery();
   const dinings = diningData?.data || [];
   const diningOptions = dinings?.map((dining) => ({
     value: dining?._id,
@@ -39,9 +40,7 @@ const TableBookingSchedulePage = () => {
               </label>
               <DatePicker
                 value={selectedDate ? dayjs(selectedDate) : null}
-                disabledDate={(current) =>
-                  current && current < new Date().setHours(0, 0, 0, 0)
-                }
+                disabledDate={disabledDate}
                 onChange={(_, dateString) => {
                   dispatch(SetSelectedDate(dateString));
                   dispatch(SetScheduleId(""));

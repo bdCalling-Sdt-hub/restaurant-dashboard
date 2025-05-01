@@ -31,7 +31,7 @@ export const tableBookingApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result) =>{
         if(result?.success){
-          return [TagTypes.tableBookings]
+          return [TagTypes.tableBookings, TagTypes.tables, TagTypes.tablesByScheduleAndDining]
         }
         return []
       },
@@ -46,6 +46,8 @@ export const tableBookingApi = apiSlice.injectEndpoints({
           }
           else if (status === 400) {
             ErrorToast(err?.error?.data?.message);
+          }else if (status === 403) {
+              ErrorToast(err?.error?.data?.message);   
           } else {
             ErrorToast("Something Went Wrong!");
           }
@@ -85,7 +87,7 @@ export const tableBookingApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result) =>{
         if(result?.success){
-          return [TagTypes.tableBookings]
+          return [TagTypes.tableBookings, TagTypes.tables, TagTypes.tablesByScheduleAndDining]
         }
         return []
       },
