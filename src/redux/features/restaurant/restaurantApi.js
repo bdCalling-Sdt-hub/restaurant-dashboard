@@ -12,7 +12,7 @@ export const restaurantApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result) =>{
         if(result?.success){
-          return [TagTypes.cuisine]
+          return [TagTypes.restaurant]
         }
         return []
       },
@@ -31,8 +31,15 @@ export const restaurantApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    getMyRestaurant: builder.query({
+      query: () => ({
+        url: `/restaurant/get-owner-restaurant`,
+        method: "GET",
+      }),
+      providesTags: [TagTypes.restaurant]
+    }),
   }),
 });
 
 
-export const { useCreateRestaurantMutation } = restaurantApi;
+export const { useCreateRestaurantMutation, useGetMyRestaurantQuery } = restaurantApi;

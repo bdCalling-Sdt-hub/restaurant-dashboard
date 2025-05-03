@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
-import { Form, Input, Select } from "antd";
+import { Form, Input } from "antd";
 import { AiOutlineClose } from "react-icons/ai";
 import { useCreateRestaurantMutation } from "../../redux/features/restaurant/restaurantApi";
 import { CgSpinnerTwo } from "react-icons/cg";
 
-const CreateRestaurantPage = () => {
+const CreateRestaurantForm = () => {
   const [enabled, setEnabled] = useState(false);
   const [discountEnabled, setDisacountEnabled] = useState(false);
   const fileInputRef = useRef(null);
@@ -418,7 +418,7 @@ const CreateRestaurantPage = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-blue-600 text-white py-2 rounded flex items-center  justify-center gap-3 hover:bg-blue-700 transition"
+            className="w-full bg-red-500 text-white py-2 rounded flex items-center  justify-center gap-3 hover:bg-red-600 transition"
           >
             {isLoading ? (
               <>
@@ -435,4 +435,4 @@ const CreateRestaurantPage = () => {
   );
 };
 
-export default CreateRestaurantPage;
+export default CreateRestaurantForm;

@@ -1,6 +1,7 @@
 import {apiSlice} from "../api/apiSlice.js";
 import { ErrorToast, SuccessToast } from "../../../helper/ValidationHelper.js";
 import TagTypes from "../../../constant/tagType.constant.js";
+import { SetDiningOptions } from "./diningSlice.js";
 
 export const diningApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -152,9 +153,17 @@ export const diningApi = apiSlice.injectEndpoints({
       },
       keepUnusedDataFor: 600,
       providesTags: [TagTypes.diningDropDown],
-      async onQueryStarted(arg, { queryFulfilled}) {
+      async onQueryStarted(arg, { queryFulfilled, dispatch}) {
         try {
           await queryFulfilled;
+          const res = await queryFulfilled;
+          const dinings = res?.data?.data;
+          const Options = dinings?.map((dining) => ({
+            value: dining?._id,
+            label: dining?.name
+          }));
+
+          dispatch(SetDiningOptions(Options))
         } catch (err) {
           //ErrorToast("Something Went Wrong!");
           //do nothing
@@ -166,4 +175,4 @@ export const diningApi = apiSlice.injectEndpoints({
 });
 
 
-export const {useGetDiningListQuery, useCreateDiningMutation, useUpdateDiningMutation, useDeleteDiningMutation, useGetMyDiningsQuery, useGetDiningDropDownQuery } = diningApi;
+export const { useGetDiningListQuery, useCreateDiningMutation, useUpdateDiningMutation, useDeleteDiningMutation, useGetMyDiningsQuery, useGetDiningDropDownQuery } = diningApi;

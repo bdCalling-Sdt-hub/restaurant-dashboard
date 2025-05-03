@@ -1,8 +1,8 @@
 import { Pagination , Table } from 'antd';
 import convertUTCtimeString from '../../utils/convertUTCtimeString';
 import getColorClassForDate from '../../utils/getColorClassForDate';
-import { getDiningColorClass } from '../../utils/getDiningColorClass';
 import UpdateBookingStatusModal from '../modal/booking/UpdateBookingStatusModal';
+import { useNavigate } from 'react-router-dom';
 
 const colorMap = {
   pending: "bg-yellow-100 text-yellow-800",
@@ -10,7 +10,8 @@ const colorMap = {
   cancelled: "bg-red-100 text-red-800",
 };
 
-const BookingTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, setPageSize}) => {
+const WaitlistTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, setPageSize}) => {
+    const navigate = useNavigate();
 
     const dataSource = bookings?.map((booking, index)=> ({
         key: index,
@@ -116,35 +117,12 @@ const BookingTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, se
           width: 80,
         },
         {
-          title: "Payment Status",
-          dataIndex: "paymentStatus",
-          key: "paymentStatus",
-          align: "center",
-          render: (val) => {
-            const statusStyles = {
-              unpaid: "bg-red-100 text-red-700 border border-red-300",
-              paid: "bg-green-100 text-green-700 border border-green-300",
-            };
-            const bgColor =
-              val === "paid" ? statusStyles.paid : statusStyles.unpaid;
-
-            return (
-              <div className="flex items-center justify-center gap-2">
-                <span
-                  className={`${bgColor} capitalize px-3 py-0.5 text-sm font-medium rounded-full`}
-                >
-                  {val}
-                </span>
-                {/* <ChangeStatusModal userId={record._id} status={val}/> */}
-              </div>
-            );
-          },
-        },
-        {
-          title: "Action",
+          title: "Action2",
           key: "action",
           render: (_, record) => (
-            <UpdateBookingStatusModal bookingId={record?._id}/>
+            <button onClick={()=>navigate(`/assign-table/${record?._id}`)} class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded shadow">
+            Assign to Table
+          </button>
           ),
         },
       ];
@@ -167,4 +145,4 @@ const BookingTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, se
   )
 }
 
-export default BookingTable;
+export default WaitlistTable;

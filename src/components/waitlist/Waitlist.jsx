@@ -3,11 +3,11 @@ import { Input } from "antd";
 import { useEffect, useState } from "react";
 import ListLoading from "../Loader/ListLoading";
 import { useGetBookingsQuery } from "../../redux/features/booking/bookingApi";
-import BookingTable from "./BookingTable";
+import WaitlistTable from "./WaitlistTable";
 
 const { Search } = Input;
 
-const BookingList = () => {
+const Waitlist = () => {
   const [searchQuery, setSearchQuery ] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [ currentPage, setCurrentPage ] = useState(1);
@@ -26,7 +26,7 @@ const BookingList = () => {
     { name: "searchTerm", value: searchTerm },
     { name: "page", value: currentPage },
     { name: "limit", value: pageSize },
-    { name: "status", value: "pending"}
+    { name: "status", value: "waitlist"}
   ]);
   const bookings = data?.data || []
   const meta = data?.meta;
@@ -54,11 +54,11 @@ const BookingList = () => {
         isLoading ? (
           <ListLoading/>
         ): (
-          <BookingTable bookings={bookings} meta={meta} currentPage={currentPage} setCurrentPage={setCurrentPage} pageSize={pageSize} setPageSize={setPageSize}/>
+          <WaitlistTable bookings={bookings} meta={meta} currentPage={currentPage} setCurrentPage={setCurrentPage} pageSize={pageSize} setPageSize={setPageSize}/>
         )
       }
     </>
   );
 }
 
-export default BookingList;
+export default Waitlist;

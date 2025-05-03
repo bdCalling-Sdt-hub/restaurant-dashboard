@@ -77,7 +77,7 @@ const TableBookingScheduleList = ({scheduleId, diningId}) => {
                   </h2>
                   <p className="text-sm text-red-700">
                     Sorry, we couldn't find any available tables for the
-                    selected <span className="font-medium">date</span>,{" "}
+                    selected
                     <span className="font-medium">schedule</span>, and{" "}
                     <span className="font-medium">dining option</span>.
                   </p>

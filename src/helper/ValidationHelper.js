@@ -10,4 +10,4 @@ class ValidationHelper {
     }
 }
 
-export const {LoadingToast, SuccessToast, ErrorToast } = new ValidationHelper();
+export const { SuccessToast, ErrorToast } = new ValidationHelper();

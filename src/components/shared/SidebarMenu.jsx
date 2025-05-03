@@ -126,13 +126,14 @@ const SidebarMenu = () => {
 
           <div className="p-4  ">
             <Menu.Item
+            onClick={() => logout()}
               key="signout"
               icon={<RiLogoutBoxRLine size={25} />}
               className={
                 activeKey === "signout" ? "bg-red-500 !p-4 text-white" : "!p-4"
               } // Tailwind active style
             >
-              <button onClick={() => logout()} className="text-[18px]">
+              <button className="text-[18px]">
                 Sign Out
               </button>
             </Menu.Item>

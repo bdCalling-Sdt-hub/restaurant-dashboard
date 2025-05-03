@@ -1,6 +1,8 @@
 import {apiSlice} from "../api/apiSlice.js";
-import { ErrorToast, SuccessToast } from "../../../helper/ValidationHelper.js";
 import TagTypes from "../../../constant/tagType.constant.js";
+import { ErrorToast, SuccessToast } from "../../../helper/ValidationHelper.js";
+import { SetSelectedDate } from "../table/tableSlice.js";
+import { SetBooking } from "./bookingSlice.js";
 
 export const bookingApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -32,50 +34,25 @@ export const bookingApi = apiSlice.injectEndpoints({
         }
       },
     }),
-    deleteMenu: builder.mutation({
-      query: (id) => ({
-        url: `/menu/delete-menu/${id}`,
-        method: "DELETE",
-      }),
-      // invalidatesTags: [TagTypes.cuisine],
-      invalidatesTags: (result, error, arg) =>{
-        if(result?.success){
-          return [TagTypes.menus]
-        }
-        return []
-      },
-      async onQueryStarted(arg, { queryFulfilled }) {
-        try {
-          await queryFulfilled;
-          SuccessToast("Menu is deleted successfully");
-        } catch (err) {
-          const status = err?.error?.status;
-          if (status === 404) {
-            ErrorToast(err?.error?.data?.message);
-          }else {
-            ErrorToast("Something Went Wrong!");
-          }
-        }
-      },
-    }),
-    updateMenu: builder.mutation({
+    updateBookingStatus: builder.mutation({
       query: ({ id, data }) => ({
-        url: `/menu/update-menu/${id}`,
+        url: `/booking/update-booking-status/${id}`,
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: (result, error, arg) =>{
-        if(result?.success){
-          return [TagTypes.menus]
+      invalidatesTags: (result) => {
+        if (result?.success) {
+          return [TagTypes.bookings];
         }
-        return []
+        return [];
       },
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
-            SuccessToast("Menu is updated successfully");
+          SuccessToast("Customer is forwarded to waitlist");
         } catch (err) {
           const status = err?.error?.status;
+          console.log(err);
           if (status === 404) {
             ErrorToast(err?.error?.data?.message);
           } else if (status === 409) {
@@ -86,8 +63,28 @@ export const bookingApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    getSingleBooking: builder.query({
+      query: (id) => ({
+        url: `/booking/get-single-booking/${id}`,
+        method: "GET",
+      }),
+      providesTags: (result, error, arg) => [ {type: TagTypes.booking, id:arg}],
+      async onQueryStarted(arg, { queryFulfilled, dispatch}) {
+        try {
+          const res = await queryFulfilled;
+          const data = res?.data?.data;
+          dispatch(SetBooking(data));
+          const date = data?.date?.split("T")[0];
+          dispatch(SetSelectedDate(date))
+        } catch (err) {
+          //ErrorToast("Something Went Wrong!");
+          //do nothing
+          //console.log(err);
+        }
+      },
+    }),
   }),
 });
 
 
-export const { useGetBookingsQuery, useDeleteMenuMutation, useUpdateMenuMutation } = bookingApi;
+export const { useGetBookingsQuery, useUpdateBookingStatusMutation, useGetSingleBookingQuery} = bookingApi;
