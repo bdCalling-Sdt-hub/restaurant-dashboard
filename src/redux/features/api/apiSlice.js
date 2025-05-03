@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import { getToken } from "../../../helper/SessionHelper.js";
 import { ErrorToast } from "../../../helper/ValidationHelper.js";
@@ -5,8 +6,8 @@ import TagTypes from "../../../constant/tagType.constant.js";
 
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: "http://localhost:9090/api/v1",
-    // eslint-disable-next-line no-unused-vars
+  baseUrl: import.meta.env.VITE_API_BASE_URL,
+  // eslint-disable-next-line no-unused-vars
     prepareHeaders: async (headers, {getState, endpoint}) =>{
         if(getToken()){
             headers.set("Authorization", getToken());

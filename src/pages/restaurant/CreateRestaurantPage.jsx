@@ -10,7 +10,7 @@ const CreateRestaurantPage = () => {
   const fileInputRef = useRef(null);
   const [form] = Form.useForm();
   const [file, setFile] = useState(null);
-  const [createRestaurant, { data, isLoading }] = useCreateRestaurantMutation();
+  const [createRestaurant, { isLoading }] = useCreateRestaurantMutation();
  
 
 
@@ -47,8 +47,6 @@ const CreateRestaurantPage = () => {
     const {name, file, keywords, features, address, latitude, longitude, paymentRequired, cancellationCharge, bookingFeePerGuest, discount} = finalValues;
     formData.append("name", name);
     formData.append("file", file);
-    //formData.append("keywords", keywords)
-    // formData.append("features", features)
     formData.append("address", address)
     formData.append("latitude", latitude)
     formData.append("longitude", longitude)
@@ -57,11 +55,11 @@ const CreateRestaurantPage = () => {
     formData.append("bookingFeePerGuest", bookingFeePerGuest)
     formData.append("discount", discount);
 
-    formData.append('tags', 'react');
-    formData.append('tags', 'node');
-    formData.append('tags', 'zod');
+    // formData.append('tags', 'react');
+    // formData.append('tags', 'node');
+    // formData.append('tags', 'zod');
 
-
+    //for array valu
     keywords.forEach(keyword => formData.append('keywords', keyword));
     features.forEach(feature => formData.append('features', feature));
 
@@ -287,7 +285,7 @@ const CreateRestaurantPage = () => {
 
           {/* Cancellation Charge */}
           <div className="flex items-center gap-4">
-            <div>
+          <div>
               <label className="inline-flex items-center cursor-pointer">
                 <span className="mr-2 font-semibold text-gray-700">
                   Payment Required
@@ -314,6 +312,34 @@ const CreateRestaurantPage = () => {
                 </div>
               </label>
             </div>
+          <div className="flex-1">
+              <Form.Item
+                label={
+                  <span className="font-semibold">
+                    Booking Fee Per Guest (Optional)
+                  </span>
+                }
+                name="bookingFeePerGuest"
+                rules={[
+                  {
+                    type: "number",
+                    min: 0,
+                    message: "Booking Fee Per Guest cannot be negative.",
+                    transform: (value) => Number(value), // converts string input to number
+                  },
+                ]}
+              >
+                <Input
+                  disabled={!enabled}
+                  type="number"
+                  min={0}
+                  step="any"
+                  placeholder="e.g. 5"
+                  className="w-full p-2 border rounded"
+                />
+              </Form.Item>
+            </div>
+            
             <div className="flex-1">
               <Form.Item
                 label={
@@ -341,33 +367,7 @@ const CreateRestaurantPage = () => {
                 />
               </Form.Item>
             </div>
-            <div className="flex-1">
-              <Form.Item
-                label={
-                  <span className="font-semibold">
-                    Booking Fee Per Guest (Optional)
-                  </span>
-                }
-                name="bookingFeePerGuest"
-                rules={[
-                  {
-                    type: "number",
-                    min: 0,
-                    message: "Booking Fee Per Guest cannot be negative.",
-                    transform: (value) => Number(value), // converts string input to number
-                  },
-                ]}
-              >
-                <Input
-                  disabled={!enabled}
-                  type="number"
-                  min={0}
-                  step="any"
-                  placeholder="e.g. 5"
-                  className="w-full p-2 border rounded"
-                />
-              </Form.Item>
-            </div>
+            
           </div>
           {/* <div>
             <Form.Item
