@@ -40,7 +40,6 @@ const CreateScheduleModal = () => {
       startDate,
       endDate,
       slot: selectedSlots,
-      availableSeats: Number(values.availableSeats)
     }
     
     createSchedule(data);
@@ -156,40 +155,6 @@ const CreateScheduleModal = () => {
               placeholder="Please select"
               style={{ width: "100%" }}
               options={slotOptions}
-            />
-          </Form.Item>
-          <Form.Item
-            name="availableSeats"
-            label={
-              <span className="font-semibold">
-                <span className="text-red-500 mr-1">*</span>
-                Seats
-              </span>
-            }
-            rules={[
-              { required: true, message: "Please enter the Total Seats" },
-              {
-                pattern: /^\d+$/,
-                message: "Only numeric values are allowed",
-              },
-              {
-                validator: (_, value) => {
-                  if (value && Number(value) <= 0) {
-                    return Promise.reject("Price must be greater than 0");
-                  }
-                  return Promise.resolve();
-                },
-              },
-            ]}
-          >
-            <Input
-              type="number"
-              placeholder="Type here"
-              onKeyUp={(e) => {
-                if (!/[0-9]/.test(e.key)) {
-                  e.preventDefault();
-                }
-              }}
             />
           </Form.Item>
           <button

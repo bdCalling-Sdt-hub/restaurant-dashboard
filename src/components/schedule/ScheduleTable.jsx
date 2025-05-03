@@ -12,7 +12,6 @@ const ScheduleTable = ({schedules, meta, currentPage, setCurrentPage, pageSize, 
         _id: schedule?._id,
         startDateTime:  schedule?.startDateTime,
         endDateTime: schedule?.endDateTime,
-        availableSeats: schedule?.availableSeats
     }))
 
  
@@ -46,11 +45,6 @@ const ScheduleTable = ({schedules, meta, currentPage, setCurrentPage, pageSize, 
               </div>
             )
          },
-         {
-          title: "Seats",
-          dataIndex: "availableSeats",
-          key: "availableSeats"
-       },
         {
           title: "Action",
           key: "action",

@@ -6,6 +6,7 @@ import { useCreateTableBookingMutation } from "../../../redux/features/tableBook
 
 const TableBookingModal = ({ table, children }) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [disabled, setDisabled] = useState(true);
   const [createTableBooking, { isLoading, isSuccess }] = useCreateTableBookingMutation();
   useGetCusineDropDownQuery(undefined);
   const [form] = Form.useForm();
@@ -120,7 +121,7 @@ const TableBookingModal = ({ table, children }) => {
             }
           >
             <Select
-              style={{ width: "100%" }}
+              style={{ width: "100%", cursor: "pointer" }}
               options={[
                 {
                   value: "Immediate Seating",
