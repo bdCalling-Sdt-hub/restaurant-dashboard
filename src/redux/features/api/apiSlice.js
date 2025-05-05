@@ -7,6 +7,7 @@ import TagTypes from "../../../constant/tagType.constant.js";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_BASE_URL,
+  //keepUnusedDataFor: 300, // Cache unused data for 5 minutes globally
   // eslint-disable-next-line no-unused-vars
     prepareHeaders: async (headers, {getState, endpoint}) =>{
         if(getToken()){

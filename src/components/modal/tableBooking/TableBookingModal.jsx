@@ -1,154 +1,105 @@
-import { Input, Modal, Form, Select, } from "antd";
+import { Modal} from "antd";
 import { useEffect, useState } from "react";
 import { CgSpinnerTwo } from "react-icons/cg";
-import { useGetCusineDropDownQuery } from "../../../redux/features/cuisine/cuisineApi";
 import { useCreateTableBookingMutation } from "../../../redux/features/tableBooking/tableBookingApi";
+import { useSelector } from "react-redux";
+import { ErrorToast } from "../../../helper/ValidationHelper";
+import { useNavigate } from "react-router-dom";
 
 const TableBookingModal = ({ table, children }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [disabled, setDisabled] = useState(true);
-  const [createTableBooking, { isLoading, isSuccess }] = useCreateTableBookingMutation();
-  useGetCusineDropDownQuery(undefined);
-  const [form] = Form.useForm();
- 
+  const [createTableBooking, { isLoading, isSuccess }] =
+    useCreateTableBookingMutation();
+  const { booking } = useSelector((state) => state.booking);
+  const { time, diningName } = useSelector((state) => state.table);
+  const { token, customerName, guest } = booking || {};
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isSuccess) {
       setModalOpen(false);
-      form.resetFields();
+      navigate("/waitlist")
     }
-  }, [isSuccess, form]);
+  }, [isSuccess, navigate]);
 
-  const onFinish = (values) => {
+  const handleBooking = () => {
     createTableBooking({
-      tableId:table?._id,
-      token: values.token,
-      guest: Number(values.guest),
-      availability: values.availability
-    })
+      tableId: table?._id,
+      bookingId: booking?._id,
+    });
   };
 
 
-  
+
+  const handleClick = () => {
+    if (table.seats === 0) {
+      ErrorToast("There is no seats available");
+    }
+
+    if (table.seats < guest) {
+      ErrorToast(`Seat(s) are insuffiecient for this customer !`);
+    }
+    if (table.seats !== 0 && table.seats >= guest) {
+      setModalOpen(true);
+    }
+  };
 
   return (
     <>
       {/* <button onClick={()=>setModalOpen(true)} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm disabled:cursor-not-allowed disabled:opacity-50">
        Book
       </button> */}
-      <div onClick={()=>table.seats !==0 &&setModalOpen(true)} >
-        {children}
-      </div>
+      <div onClick={handleClick}>{children}</div>
 
       <Modal
-        title={<span className="font-bold">Book Table</span>}
         open={modalOpen}
         onCancel={() => setModalOpen(false)}
         maskClosable={false}
         footer={false}
       >
-        <Form
-          form={form}
-          name="add"
-          layout="vertical"
-          onFinish={onFinish}
-          initialValues={{ availability: "Waitlist" }}
-        >
-          <Form.Item
-            name="token"
-            label={
-              <span className="font-semibold">
-                <span className="text-red-500 mr-1">*</span>
-                Token
+        <div className="max-w-sm mx-auto mt-10 p-6 bg-white rounded-2xl shadow-lg border">
+          <div className="space-y-1 text-gray-700">
+            <p>
+              <span className="font-medium">Name:</span> {customerName}
+            </p>
+            <p>
+              <span className="font-medium">Token:</span>
+              <span className="font-semibold pl-2">{token}</span>
+            </p>
+            <p>
+              <span className="font-medium">Schedule: </span>
+              <span className="bg-purple-100 text-purple-700 border border-purple-300 p-0.5 rounded-sm">
+                {time}
               </span>
-            }
-            rules={[
-              { required: true, message: "Token is required" },
-              { min: 6, message: "Token must be 6 characters long!" },
-              { max: 6, message: "Token must be 6 characters long!" },
-              {
-                pattern: /^\d+$/,
-                message: "Only numeric values are allowed",
-              },
-            ]}
-          >
-            <Input placeholder="Enter token" />
-          </Form.Item>
-          <Form.Item
-            name="guest"
-            label={
-              <span className="font-semibold">
-                <span className="text-red-500 mr-1">*</span>
-                Guest
-              </span>
-            }
-            rules={[
-              { required: true, message: "Guest is required" },
-              {
-                pattern: /^\d+$/,
-                message: "Only numeric value is allowed",
-              },
-              {
-                validator: (_, value) => {
-                  const number = Number(value);
-                  if (value && (isNaN(number) || number <= 0)) {
-                    return Promise.reject("Guest must be greater than 0");
-                  }
-                  if (number > table?.seats) {
-                    return Promise.reject(
-                      `There is only ${table?.seats} seats available`
-                    );
-                  }
-                  return Promise.resolve();
-                },
-              },
-            ]}
-          >
-            <Input
-              type="number"
-              placeholder="Type here"
-              onKeyUp={(e) => {
-                if (!/[0-9]/.test(e.key)) {
-                  e.preventDefault();
-                }
-              }}
-            />
-          </Form.Item>
-          <Form.Item
-            name="availability"
-            label={
-              <span className="font-semibold">Availability (Optional)</span>
-            }
-          >
-            <Select
-              style={{ width: "100%", cursor: "pointer" }}
-              options={[
-                {
-                  value: "Immediate Seating",
-                  label: "Immediate Seating",
-                },
-                {
-                  value: "Waitlist",
-                  label: "Waitlist",
-                },
-              ]}
-            />
-          </Form.Item>
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="w-full bg-red-500 hover:bg-red-600 duration-200 p-2 border-0 rounded-md text-white flex justify-center items-center gap-x-2 disabled:cursor-not-allowed"
-          >
-            {isLoading ? (
-              <>
-                <CgSpinnerTwo className="animate-spin" fontSize={16} />
-                Processing...
-              </>
-            ) : (
-              "Book"
-            )}
-          </button>
-        </Form>
+            </p>
+            <p>
+              <span className="font-medium">Table Name:</span>
+              <span className="font-semibold pl-2">{table?.name}</span>
+            </p>
+            <p>
+              <span className="font-medium">Dining:</span> {diningName}
+            </p>
+            <p>
+              <span className="font-medium">Guest:</span> {guest}
+            </p>
+          </div>
+          <div className="mt-6">
+            <button
+              onClick={handleBooking}
+              disabled={isLoading}
+              className="w-full bg-blue-600 text-white py-2 px-4 rounded-xl flex justify-center items-center gap-x-2 hover:bg-blue-700 transition duration-200 disabled:cursor-not-allowed"
+            >
+              {isLoading ? (
+                <>
+                  <CgSpinnerTwo className="animate-spin" fontSize={16} />
+                  Processing...
+                </>
+              ) : (
+                "Proceed"
+              )}
+            </button>
+          </div>
+        </div>
       </Modal>
     </>
   );

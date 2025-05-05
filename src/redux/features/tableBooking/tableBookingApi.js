@@ -31,7 +31,7 @@ export const tableBookingApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result) =>{
         if(result?.success){
-          return [TagTypes.tableBookings, TagTypes.tables, TagTypes.tablesByScheduleAndDining]
+          return [TagTypes.tableBookings,TagTypes.bookings, TagTypes.tables, TagTypes.tablesByScheduleAndDining]
         }
         return []
       },

@@ -1,14 +1,8 @@
 import { Pagination , Table } from 'antd';
 import convertUTCtimeString from '../../utils/convertUTCtimeString';
 import getColorClassForDate from '../../utils/getColorClassForDate';
-import UpdateBookingStatusModal from '../modal/booking/UpdateBookingStatusModal';
 import { useNavigate } from 'react-router-dom';
 
-const colorMap = {
-  pending: "bg-yellow-100 text-yellow-800",
-  completed: "bg-green-100 text-green-800",
-  cancelled: "bg-red-100 text-red-800",
-};
 
 const WaitlistTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, setPageSize}) => {
     const navigate = useNavigate();
@@ -29,7 +23,6 @@ const WaitlistTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, s
         status: booking?.status,
         paymentStatus: booking?.paymentStatus,
         guest: booking?.guest,
-        diningName: booking?.diningName
       }))
 
  
@@ -78,22 +71,6 @@ const WaitlistTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, s
           key: "endDateTime",
           render: (val) => <>{convertUTCtimeString(val)}</>,
         },
-        // {
-        //   title: "Image",
-        //   dataIndex: "profileImg",
-        //   key: "profileImg",
-        //   render: (val) => (
-        //     <img
-        //       src={val || placeholder_img}
-        //       alt="administrator_img"
-        //       onError={(e) => {
-        //         e.currentTarget.onerror = null; // Prevent infinite loop
-        //         e.currentTarget.src = placeholder_img;
-        //       }}
-        //       className="h-[45px] w-[45px] rounded-md mr-2"
-        //     />
-        //   ),
-        // },
         {
           title: "Email",
           dataIndex: "email",
@@ -104,11 +81,6 @@ const WaitlistTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, s
           dataIndex: "phone",
           key: "phone",
         },
-        // {
-        //       title: "Dining",
-        //       dataIndex: "diningName",
-        //       key: "diningName"
-        //     },
         {
           title: "Guest",
           dataIndex: "guest",
@@ -117,10 +89,10 @@ const WaitlistTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, s
           width: 80,
         },
         {
-          title: "Action2",
+          title: "Action",
           key: "action",
           render: (_, record) => (
-            <button onClick={()=>navigate(`/assign-table/${record?._id}`)} class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded shadow">
+            <button onClick={()=>navigate(`/assign-table/${record?._id}`)} class="bg-green-600 hover:bg-green-700 text-white font-medium py-1 px-2 rounded shadow">
             Assign to Table
           </button>
           ),

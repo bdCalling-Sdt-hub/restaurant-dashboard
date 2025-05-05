@@ -41,6 +41,12 @@ const AssignTable = () => {
                       {/* In door */} {convertUTCtimeString(booking?.endDateTime)}
                     </span>
                   </div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-20 font-medium">Guest:</span>
+                    <span className="bg-pink-100 text-pink-800 border border-pink-300 px-3 py-1 rounded-full text-xs font-semibold">
+                      {/* In door */} {booking?.guest}
+                    </span>
+                  </div>
                 </div>
               </div>
 

@@ -27,16 +27,6 @@ export const menuItems = [
     //   icon: RiRestaurantLine
     // },
     {
-        title: "Booking Management",
-        path: '/booking-management',
-        icon: GiStabbedNote
-    },
-    {
-      title: "Waitlist",
-      path: '/waitlist',
-      icon: GiStabbedNote
-  },
-    {
       title: "Slots",
       path: '/slots',
       icon: FaCheckToSlot
@@ -57,10 +47,20 @@ export const menuItems = [
       icon: FaTable
     },
     {
-      title: "Table Booking Schedule",
-      path: '/table-booking-schedule',
-      icon: MdSchedule
-    },
+      title: "Booking Management",
+      path: '/booking-management',
+      icon: GiStabbedNote
+  },
+  {
+    title: "Waitlist",
+    path: '/waitlist',
+    icon: GiStabbedNote
+},
+    // {
+    //   title: "Table Booking Schedule",
+    //   path: '/table-booking-schedule',
+    //   icon: MdSchedule
+    // },
     {
       title: "Table Booking List",
       path: '/table-booking-list',

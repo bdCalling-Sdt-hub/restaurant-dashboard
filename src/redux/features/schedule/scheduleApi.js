@@ -43,7 +43,7 @@ export const scheduleApi = apiSlice.injectEndpoints({
       },
       keepUnusedDataFor: 600,
       providesTags: [TagTypes.scheduleDropDown],
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(arg, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
           const schedules = res?.data?.data;
@@ -51,15 +51,16 @@ export const scheduleApi = apiSlice.injectEndpoints({
             ErrorToast("No schedules found for the selected date.");
             return
           }
-          const Options = schedules?.map((schedule) => ({
-            value: schedule?._id,
-            label: (
-              convertUTCtimeString(schedule?.startDateTime) +
-              "-" +
-              convertUTCtimeString(schedule.endDateTime)
-            ).toString(),
-          }));
-          dispatch(SetScheduleOptions(Options))
+
+          // const Options = schedules?.map((schedule) => ({
+          //   value: schedule?._id,
+          //   label: (
+          //     convertUTCtimeString(schedule?.startDateTime) +
+          //     "-" +
+          //     convertUTCtimeString(schedule.endDateTime)
+          //   ).toString(),
+          // }));
+          // dispatch(SetScheduleOptions(Options))
           
         } catch (err) {
           const status = err?.error?.status;

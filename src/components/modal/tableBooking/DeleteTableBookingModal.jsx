@@ -18,7 +18,7 @@ const DeleteTableBookingModal = ({ tableBookingId }) => {
     },[isSuccess, isError])
    
     const handleDelete = () => {
-      deleteTableBooking(tableBookingId);
+      //deleteTableBooking(tableBookingId);
     }
 
   return (

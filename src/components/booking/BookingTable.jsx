@@ -93,11 +93,11 @@ const BookingTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, se
         //     />
         //   ),
         // },
-        {
-          title: "Email",
-          dataIndex: "email",
-          key: "email",
-        },
+        // {
+        //   title: "Email",
+        //   dataIndex: "email",
+        //   key: "email",
+        // },
         {
           title: "Contact Number",
           dataIndex: "phone",
