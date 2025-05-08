@@ -43,7 +43,7 @@ function App() {
       <Route>
         <Route element={<PrivateRoute> <RootLayOut /> </PrivateRoute>}>
           <Route path="/dashboard" element={<Dashboard />}></Route>
-          <Route path="/" element={<RestaurantDetailsPage />}></Route>
+          <Route path="/" element={<RestaurantPage />}></Route>
           <Route
             path="/booking-management"
             element={<BookingManagement />}

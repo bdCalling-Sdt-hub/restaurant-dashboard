@@ -10,7 +10,9 @@ import UpdateFeaturesModal from "../modal/restaurant/UpdateFeaturesModal";
 import UpdateKeywordsModal from "../modal/restaurant/UpdateKeywordsModal";
 // Remove the direct import of the image file
 
-const MyRestaurant = () => {
+const MyRestaurant = ({ data:Restaurant }) => {
+
+
   // Sample restaurant data
   const restaurant = {
     name: "Bella Italia",
@@ -31,15 +33,19 @@ const MyRestaurant = () => {
     <div className="max-w-4xl mx-auto p-4 md:p-6 bg-white">
       {/* Restaurant Name */}
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-3xl md:text-4xl font-bold">{restaurant.name}</h1>
+        <h1 className="text-3xl md:text-4xl font-bold">{Restaurant.name}</h1>
         <UpdateNameModal/>
       </div>
 
       {/* Restaurant Image */}
       <div className="mb-6 rounded-lg overflow-hidden shadow-md relative group">
         <img
-          src={restaurant.image || "/placeholder.svg"}
-          alt={restaurant.name}
+          src={Restaurant.restaurantImg || restaurant_img}
+          alt="restaurant_img"
+          onError={(e) => {
+            e.currentTarget.onerror = null; // Prevent infinite loop
+            e.currentTarget.src = restaurant_img // placeholder_img;
+          }}
           className="w-full h-auto object-cover"
         />
        <UpdateImageModal/>
@@ -55,7 +61,7 @@ const MyRestaurant = () => {
               <MapPin className="w-5 h-5 text-gray-600 mt-1 mr-2 flex-shrink-0" />
               <div>
                 <h3 className="font-semibold text-gray-800">Address</h3>
-                <p className="text-gray-600">{restaurant.address}</p>
+                <p className="text-gray-600">{Restaurant.address}</p>
               </div>
             </div>
            <UpdateAddressModal/>

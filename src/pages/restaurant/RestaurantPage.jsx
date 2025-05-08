@@ -1,13 +1,12 @@
 import { useGetMyRestaurantQuery } from "../../redux/features/restaurant/restaurantApi";
-import { restaurantData } from "../../data/data";
 import CreateRestaurantForm from "../../components/restaurant/CreateRestaurantForm";
-import RestaurantDetails from "../../components/restaurant/RestaurantDetails";
 import RestaurantLoading from "../../components/Loader/RestaurantLoading";
+import MyRestaurant from "../../components/restaurant/MyRestaurant";
 
 
 const RestaurantPage = () => {
   const { data, isLoading, isSuccess, error} = useGetMyRestaurantQuery(undefined);
-  const RestaurantData = data?.data;
+  const restaurantData = data?.data;
 
  if(isLoading){
   return <RestaurantLoading/>
@@ -16,8 +15,8 @@ const RestaurantPage = () => {
   return <CreateRestaurantForm/>
  }
  
- if(!isLoading && isSuccess && RestaurantData?._id){
-   return <RestaurantDetails data={RestaurantData}/>
+ if(!isLoading && isSuccess && restaurantData?._id){
+   return <MyRestaurant data={restaurantData}/>
  }
  
 };

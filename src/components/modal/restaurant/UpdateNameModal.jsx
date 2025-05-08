@@ -1,12 +1,13 @@
-import { Input, Modal, Form, Button} from "antd";
+import { Input, Modal, Form } from "antd";
 import { useEffect, useState } from "react";
 import { CgSpinnerTwo } from "react-icons/cg";
-import { useCreateDiningMutation } from "../../../redux/features/dining/diningApi";
+import { useUpdateRestaurantMutation } from "../../../redux/features/restaurant/restaurantApi";
+
 import { SquarePen } from "lucide-react";
 
-const UpdateNameModal = () => {
+const UpdateNameModal = ({ restaurant }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [createDining, { isLoading, isSuccess }] = useCreateDiningMutation();
+  const [createDining, { isLoading, isSuccess }] = useUpdateRestaurantMutation();
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -17,21 +18,18 @@ const UpdateNameModal = () => {
   }, [isSuccess, form]);
 
   const onFinish = (values) => {
-    createDining(values)    
+    createDining(values);
   };
-
-
 
   return (
     <>
-     
       <button
-      onClick={() => setModalOpen(true)}
-          className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
-          aria-label="Edit restaurant name"
-        >
-          <SquarePen className="w-5 h-5" />
-        </button>
+        onClick={() => setModalOpen(true)}
+        className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
+        aria-label="Edit restaurant name"
+      >
+        <SquarePen className="w-5 h-5" />
+      </button>
       <Modal
         title={<span className="font-bold">Update Restaurant Name</span>}
         open={modalOpen}
@@ -58,7 +56,7 @@ const UpdateNameModal = () => {
                 Creating...
               </>
             ) : (
-              "Create"
+              "Save Change"
             )}
           </button>
         </Form>

@@ -38,8 +38,36 @@ export const restaurantApi = apiSlice.injectEndpoints({
       }),
       providesTags: [TagTypes.restaurant]
     }),
+    updateRestaurant: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/restaurant/update-restaurant/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: (result) =>{
+        if(result?.success){
+          return [TagTypes.restaurant]
+        }
+        return []
+      },
+      async onQueryStarted(arg, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+            SuccessToast("Restaurant is updated successfully");
+        } catch (err) {
+          const status = err?.error?.status;
+          if (status === 404) {
+            ErrorToast(err?.error?.data?.message);
+          } else if (status === 409) {
+            ErrorToast(err?.error?.data?.message);
+          } else {
+            ErrorToast("Something Went Wrong!");
+          }
+        }
+      },
+    }),
   }),
 });
 
 
-export const { useCreateRestaurantMutation, useGetMyRestaurantQuery } = restaurantApi;
+export const { useCreateRestaurantMutation, useGetMyRestaurantQuery, useUpdateRestaurantMutation } = restaurantApi;
