@@ -13,7 +13,6 @@ import ResetPassword from "./pages/auth/resetPassword";
 import BookingManagement from "./pages/bookingManagement";
 import Menu from "./pages/menu";
 import MyDetails from "./pages/myDetails";
-import RestaurantDetails from "./pages/restaurantDetails";
 import Reviews from "./components/restaurantComponents/Reviews";
 import SocialMedia from "./components/restaurantComponents/SocialMedia";
 import BusinessHours from "./components/restaurantComponents/BusinessHours";
@@ -33,6 +32,7 @@ import NotFoundPage from "./pages/NotFound/NotFoundPage";
 import RestaurantPage from "./pages/restaurant/RestaurantPage";
 import WaitlistPage from "./pages/waitlist/WaitlistPage";
 import AssignTablePage from "./pages/assignTable/AssignTablePage";
+import RestaurantDetailsPage from "./pages/restaurantDetails/RestaurantDetailsPage";
 
 function App() {
   const router = createBrowserRouter(
@@ -40,7 +40,7 @@ function App() {
       <Route>
         <Route element={<PrivateRoute> <RootLayOut /> </PrivateRoute>}>
           <Route path="/dashboard" element={<Dashboard />}></Route>
-          <Route path="/" element={<RestaurantPage />}></Route>
+          <Route path="/" element={<RestaurantDetailsPage />}></Route>
           <Route
             path="/booking-management"
             element={<BookingManagement />}
@@ -59,7 +59,7 @@ function App() {
           <Route path="/table-booking-list" element={<TableBookingListPage />}></Route>
 
           <Route path="/profile" element={<MyDetails/>}></Route>
-          <Route path="/restaurant-details" element={<RestaurantDetails/>}></Route>
+          <Route path="/restaurant-details" element={<RestaurantDetailsPage/>}></Route>
           <Route path="/restaurant/reviews" element={<Reviews/>}></Route>
           <Route path="/restaurant/social-media" element={<SocialMedia/>}></Route>
           <Route path="/restaurant/business-hours" element={<BusinessHours/>}></Route>
