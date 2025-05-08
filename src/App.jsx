@@ -33,6 +33,9 @@ import RestaurantPage from "./pages/restaurant/RestaurantPage";
 import WaitlistPage from "./pages/waitlist/WaitlistPage";
 import AssignTablePage from "./pages/assignTable/AssignTablePage";
 import RestaurantDetailsPage from "./pages/restaurantDetails/RestaurantDetailsPage";
+import ReservedPage from "./pages/BookPage/ReservedPage";
+import ReservedSelect from "./pages/BookPage/ReservedSelect";
+import ReservedNotFound from "./pages/BookPage/ReservedNotFound";
 
 function App() {
   const router = createBrowserRouter(
@@ -73,6 +76,9 @@ function App() {
           <Route path="/schedules" element={<SchedulePage/>}></Route>
           <Route path="/tables" element={<TablePage/>}></Route>
           <Route path="/tables/details/:scheduleId/:diningId" element={<TableDetailsPage/>}></Route>
+          <Route path="/reserved" element={<ReservedPage />}></Route>
+          <Route path="/reserved-select" element={<ReservedSelect />}></Route>
+          <Route path="/reserved-not-found" element={<ReservedNotFound />}></Route>
 
 
         </Route>
