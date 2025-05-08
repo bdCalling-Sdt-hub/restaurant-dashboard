@@ -1,10 +1,10 @@
-import { Input, Modal, Form, Button} from "antd";
+import { Input, Modal, Form } from "antd";
 import { useEffect, useState } from "react";
-import { PlusOutlined } from "@ant-design/icons";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { useCreateDiningMutation } from "../../../redux/features/dining/diningApi";
+import { SquarePen } from "lucide-react";
 
-const AddDiningModal = () => {
+const UpdateDiscountModal = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [createDining, { isLoading, isSuccess }] = useCreateDiningMutation();
   const [form] = Form.useForm();
@@ -17,24 +17,20 @@ const AddDiningModal = () => {
   }, [isSuccess, form]);
 
   const onFinish = (values) => {
-    createDining(values)    
+    createDining(values);
   };
-
-
 
   return (
     <>
-      <Button
-        className="mb-4 !bg-red-500 !text-white  hover:bg-red-700"
-        icon={<PlusOutlined />}
+      <button
         onClick={() => setModalOpen(true)}
+        className="p-1.5 text-green-600/70 hover:text-green-700 hover:bg-green-100 rounded-full transition-colors"
+        aria-label="Edit special offer"
       >
-        Add Dining
-      </Button>
-
-      
+        <SquarePen className="w-4 h-4" />
+      </button>
       <Modal
-        title={<span className="font-bold">Add New Dining</span>}
+        title={<span className="font-bold">Update Discount</span>}
         open={modalOpen}
         onCancel={() => setModalOpen(false)}
         maskClosable={false}
@@ -68,4 +64,4 @@ const AddDiningModal = () => {
   );
 };
 
-export default AddDiningModal;
+export default UpdateDiscountModal;

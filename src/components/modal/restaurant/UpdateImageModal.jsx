@@ -1,10 +1,10 @@
 import { Input, Modal, Form, Button} from "antd";
 import { useEffect, useState } from "react";
-import { PlusOutlined } from "@ant-design/icons";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { useCreateDiningMutation } from "../../../redux/features/dining/diningApi";
+import { SquarePen } from "lucide-react";
 
-const AddDiningModal = () => {
+const UpdateImageModal = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [createDining, { isLoading, isSuccess }] = useCreateDiningMutation();
   const [form] = Form.useForm();
@@ -24,17 +24,15 @@ const AddDiningModal = () => {
 
   return (
     <>
-      <Button
-        className="mb-4 !bg-red-500 !text-white  hover:bg-red-700"
-        icon={<PlusOutlined />}
+      <button
         onClick={() => setModalOpen(true)}
+        className="absolute top-3 right-3 p-2 bg-white/80 text-gray-700 rounded-full group-hover:opacity-100 transition-opacity shadow-sm hover:bg-white"
+        aria-label="Edit restaurant image"
       >
-        Add Dining
-      </Button>
-
-      
+        <SquarePen className="w-5 h-5" />
+      </button>
       <Modal
-        title={<span className="font-bold">Add New Dining</span>}
+        title={<span className="font-bold">Update Restaurant Image</span>}
         open={modalOpen}
         onCancel={() => setModalOpen(false)}
         maskClosable={false}
@@ -68,4 +66,4 @@ const AddDiningModal = () => {
   );
 };
 
-export default AddDiningModal;
+export default UpdateImageModal;
