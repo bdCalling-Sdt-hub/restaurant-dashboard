@@ -1,8 +1,6 @@
 import {apiSlice} from "../api/apiSlice.js";
 import TagTypes from "../../../constant/tagType.constant.js";
 import { ErrorToast, SuccessToast } from "../../../helper/ValidationHelper.js";
-import { SetDiningId, SetScheduleId, SetSelectedDate } from "../table/tableSlice.js";
-import { SetBooking } from "./bookingSlice.js";
 
 export const bookingApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -34,6 +32,34 @@ export const bookingApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    getWaitlist: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args !== undefined && args.length > 0) {
+          args.forEach((item) => {
+            if(item.value){
+              params.append(item.name, item.value);
+            }
+          });
+        }
+        return {
+          url: "/booking/get-bookings",
+          method: "GET",
+          params: params
+        };
+      },
+      keepUnusedDataFor: 300,//seconds
+      providesTags: [TagTypes.waitlist],
+      async onQueryStarted(arg, { queryFulfilled}) {
+        try {
+          await queryFulfilled;
+        } catch (err) {
+          //ErrorToast("Something Went Wrong!");
+          //do nothing
+          //console.log(err);
+        }
+      },
+    }),
     updateBookingStatus: builder.mutation({
       query: ({ id, data }) => ({
         url: `/booking/update-booking-status/${id}`,
@@ -42,7 +68,7 @@ export const bookingApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result) => {
         if (result?.success) {
-          return [TagTypes.bookings];
+          return [TagTypes.bookings, TagTypes.waitlist];
         }
         return [];
       },
@@ -91,4 +117,4 @@ export const bookingApi = apiSlice.injectEndpoints({
 });
 
 
-export const { useGetBookingsQuery, useUpdateBookingStatusMutation, useGetSingleBookingQuery} = bookingApi;
+export const { useGetBookingsQuery, useGetWaitlistQuery, useUpdateBookingStatusMutation, useGetSingleBookingQuery} = bookingApi;

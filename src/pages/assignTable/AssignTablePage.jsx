@@ -7,7 +7,7 @@ import BookingLoading from "../../components/Loader/BookingLoading";
 import AssignTable from "../../components/assignTable/AssignTable";
 import { useEffect } from "react";
 import { SetBooking } from "../../redux/features/booking/bookingSlice";
-import { SetDiningId, SetScheduleId, SetSelectedDate } from "../../redux/features/table/tableSlice";
+import { SetDiningId, SetScheduleId, SetSelectedDate, SetSelectedTable, SetSelectedTableName } from "../../redux/features/table/tableSlice";
 import makeScheduleOptions from "../../utils/makeScheduleOptions";
 
 const AssignTablePage = () => {
@@ -21,10 +21,14 @@ const AssignTablePage = () => {
       dispatch(SetBooking(data.data));
       const date = data?.data?.date?.split("T")[0];
       dispatch(SetSelectedDate(date));
-      dispatch(SetScheduleId(""));
-      dispatch(SetDiningId(""));
+      if(selectedDate !== date){
+         dispatch(SetScheduleId(""));
+         dispatch(SetDiningId(""));
+         dispatch(SetSelectedTable(""));
+         dispatch(SetSelectedTableName(""));
+      } 
     }
-  }, [data, dispatch]);
+  }, [data, dispatch, selectedDate]);
 
 
   //set scheduleOptions part-- started

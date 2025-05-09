@@ -1,5 +1,5 @@
 import restaurant_img from "../../assets/images/restaurant.png";
-import { MapPin, Star, Tag, Check, DollarSign, X, Pencil, SquarePen } from "lucide-react"
+import { MapPin, Star, Tag, Check, DollarSign, X } from "lucide-react"
 import UpdateNameModal from "../modal/restaurant/UpdateNameModal";
 import UpdateImageModal from "../modal/restaurant/UpdateImageModal";
 import UpdateAddressModal from "../modal/restaurant/UpdateAddressModal";
@@ -30,7 +30,7 @@ const MyRestaurant = ({ data:Restaurant }) => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-4 md:p-6 bg-white">
+    <div className="max-w-7xl mx-auto p-4 md:p-6 bg-white">
       {/* Restaurant Name */}
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-3xl md:text-4xl font-bold">{Restaurant.name}</h1>

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { SetSelectedTable } from "../../redux/features/table/tableSlice";
+import { SetSelectedTable, SetSelectedTableName } from "../../redux/features/table/tableSlice";
 
 const TableListItem = ({ table }) => {
   const dispatch = useDispatch();
@@ -11,17 +11,16 @@ const TableListItem = ({ table }) => {
       dispatch(SetSelectedTable(""));
     } else {
       dispatch(SetSelectedTable(tableId));
+      dispatch(SetSelectedTableName(table?.name))
     }
   };
 
   const available = table?.seats > 0 && table?.seats >= booking.guest;
-  console.log(table?.seats < booking.guest);
-  // console.log("a", available);
+ 
 
   return (
     <>
       <div
-        //onClick={() => table.available && handleTableSelect(table._id)}
         onClick={() => available && handleTableSelect(table._id)}
         className={`
                     relative flex flex-col items-center justify-center p-4 rounded-lg border-2 transition-all transform hover:scale-105

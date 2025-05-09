@@ -4,101 +4,98 @@ import { GiStabbedNote } from "react-icons/gi";
 import { MdDining, MdSchedule, MdScheduleSend } from "react-icons/md";
 import { RiPieChart2Fill, RiRestaurantLine } from "react-icons/ri";
 
-
 export const menuItems = [
-    // {
-    //     title: "Dashboard",
-    //     path: '/',
-    //     icon: RiPieChart2Fill
-    // },
-    {
-      title: "Restaurant",
-      path: '/',
-      icon: RiRestaurantLine
-    },
-     {
-        title: "Dashboard",
-        path: '/dashboard',
-        icon: RiPieChart2Fill
-    },
-    // {
-    //   title: "Restaurant",
-    //   path: '/restaurant',
-    //   icon: RiRestaurantLine
-    // },
-    {
-      title: "Slots",
-      path: '/slots',
-      icon: FaCheckToSlot
-    },
-    {
-      title: "Dining",
-      path: '/dining',
-      icon: MdDining
-    },
-    {
-      title: "Schedules",
-      path: '/schedules',
-      icon: MdScheduleSend
-    },
-    {
-      title: "Table List",
-      path: '/tables',
-      icon: FaTable
-    },
-    {
-      title: "Booking Management",
-      path: '/booking-management',
-      icon: GiStabbedNote
+  // {
+  //     title: "Dashboard",
+  //     path: '/',
+  //     icon: RiPieChart2Fill
+  // },
+  {
+    title: "Restaurant",
+    path: "/",
+    icon: RiRestaurantLine,
+  },
+  {
+    title: "Dashboard",
+    path: "/dashboard",
+    icon: RiPieChart2Fill,
+  },
+  // {
+  //   title: "Restaurant",
+  //   path: '/restaurant',
+  //   icon: RiRestaurantLine
+  // },
+  {
+    title: "Slots",
+    path: "/slots",
+    icon: FaCheckToSlot,
+  },
+  {
+    title: "Schedules",
+    path: "/schedules",
+    icon: MdScheduleSend,
+  },
+  {
+    title: "Table List",
+    path: "/tables",
+    icon: FaTable,
+  },
+  {
+    title: "Booking Management",
+    path: "/booking-management",
+    icon: GiStabbedNote,
   },
   {
     title: "Waitlist",
-    path: '/waitlist',
-    icon: GiStabbedNote
-},
-    // {
-    //   title: "Table Booking Schedule",
-    //   path: '/table-booking-schedule',
-    //   icon: MdSchedule
-    // },
-    {
-      title: "Table Booking List",
-      path: '/table-booking-list',
-      icon: FaTableList
-    },
-    {
-      title: "Reserved",
-      path: '/reserved',
-      icon: GiStabbedNote
+    path: "/waitlist",
+    icon: GiStabbedNote,
+  },
+  // {
+  //   title: "Table Booking Schedule",
+  //   path: '/table-booking-schedule',
+  //   icon: MdSchedule
+  // },
+  {
+    title: "Table Booking List",
+    path: "/table-booking-list",
+    icon: FaTableList,
+  },
+  //     {
+  //       title: "Reserved",
+  //       path: '/reserved',
+  //       icon: GiStabbedNote
+  //   },
+  //   {
+  //     title: "Reserved Select",
+  //     path: '/reserved-select',
+  //     icon: GiStabbedNote
+  // },
+  // {
+  //   title: "Reserved Not Select",
+  //   path: '/reserved-not-found',
+  //   icon: GiStabbedNote
+  // },
+  // {
+  //   title: "Table Booking",
+  //   path: '/table-booking',
+  //   icon: MdSchedule
+  // },
+  {
+    title: "Menu",
+    path: "/menu",
+    icon: BsMenuButtonWideFill,
   },
   {
-    title: "Reserved Select",
-    path: '/reserved-select',
-    icon: GiStabbedNote
-},
-{
-  title: "Reserved Not Select",
-  path: '/reserved-not-found',
-  icon: GiStabbedNote
-},
-    // {
-    //   title: "Table Booking",
-    //   path: '/table-booking',
-    //   icon: MdSchedule
-    // },
-    {
-        title: "Menu", 
-        path: '/menu',
-        icon: BsMenuButtonWideFill
-    },
-    // {
-    //     title: "Add Category",
-    //     path: '/add-category',
-    //     icon: MdOutlineCategory
-    // },
-  
-]
-
+    title: "Dining",
+    path: "/dining",
+    icon: MdDining,
+  },
+  // {
+  //     title: "Add Category",
+  //     path: '/add-category',
+  //     icon: MdOutlineCategory
+  // },
+];
 
 export const subMenuItems = [
   {
@@ -130,5 +127,5 @@ export const restaurantData = {
   discount: "10% off on weekdays",
   keywords: "organic, vegan, gluten-free",
   features: "wifi, outdoor-seating",
-  image: "https://via.placeholder.com/400x200"
-}
+  image: "https://via.placeholder.com/400x200",
+};

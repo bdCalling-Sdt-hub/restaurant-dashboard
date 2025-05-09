@@ -2,7 +2,7 @@
 import { Input } from "antd";
 import { useEffect, useState } from "react";
 import ListLoading from "../Loader/ListLoading";
-import { useGetBookingsQuery } from "../../redux/features/booking/bookingApi";
+import { useGetWaitlistQuery } from "../../redux/features/booking/bookingApi";
 import WaitlistTable from "./WaitlistTable";
 
 const { Search } = Input;
@@ -22,7 +22,7 @@ const Waitlist = () => {
     }, 600);
   }, [searchQuery]);
 
-  const { data, isLoading } = useGetBookingsQuery([
+  const { data, isLoading } = useGetWaitlistQuery([
     { name: "searchTerm", value: searchTerm },
     { name: "page", value: currentPage },
     { name: "limit", value: pageSize },

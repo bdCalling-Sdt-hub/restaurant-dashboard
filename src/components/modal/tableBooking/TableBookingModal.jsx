@@ -3,53 +3,42 @@ import { useEffect, useState } from "react";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { useCreateTableBookingMutation } from "../../../redux/features/tableBooking/tableBookingApi";
 import { useSelector } from "react-redux";
-import { ErrorToast } from "../../../helper/ValidationHelper";
 import { useNavigate } from "react-router-dom";
 
-const TableBookingModal = ({ table, children }) => {
+const TableBookingModal = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [createTableBooking, { isLoading, isSuccess }] =
     useCreateTableBookingMutation();
   const { booking } = useSelector((state) => state.booking);
-  const { time, diningName } = useSelector((state) => state.table);
+  const { time, diningName, selectedTable, selectedTableName } = useSelector((state) => state.table);
   const { token, customerName, guest } = booking || {};
   const navigate = useNavigate();
 
   useEffect(() => {
     if (isSuccess) {
       setModalOpen(false);
-      navigate("/waitlist")
+      navigate("/table-booking-list")
     }
   }, [isSuccess, navigate]);
 
   const handleBooking = () => {
     createTableBooking({
-      tableId: table?._id,
+      tableId: selectedTable,
       bookingId: booking?._id,
     });
   };
 
 
 
-  const handleClick = () => {
-    if (table.seats === 0) {
-      ErrorToast("There is no seats available");
-    }
-
-    if (table.seats < guest) {
-      ErrorToast(`Seat(s) are insuffiecient for this customer !`);
-    }
-    if (table.seats !== 0 && table.seats >= guest) {
-      setModalOpen(true);
-    }
-  };
 
   return (
     <>
-      {/* <button onClick={()=>setModalOpen(true)} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm disabled:cursor-not-allowed disabled:opacity-50">
-       Book
-      </button> */}
-      <div onClick={handleClick}>{children}</div>
+      <button
+      onClick={()=>setModalOpen(true)}
+        className={`mt-6 w-full py-3 px-4 rounded-md font-medium text-white bg-rose-600 hover:bg-rose-700`}
+      >
+        Proceed to Reservation
+      </button>
 
       <Modal
         open={modalOpen}
@@ -67,14 +56,14 @@ const TableBookingModal = ({ table, children }) => {
               <span className="font-semibold pl-2">{token}</span>
             </p>
             <p>
-              <span className="font-medium">Schedule: </span>
+              <span className="font-medium">Time: </span>
               <span className="bg-purple-100 text-purple-700 border border-purple-300 p-0.5 rounded-sm">
                 {time}
               </span>
             </p>
             <p>
               <span className="font-medium">Table Name:</span>
-              <span className="font-semibold pl-2">{table?.name}</span>
+              <span className="font-semibold pl-2">{selectedTableName}</span>
             </p>
             <p>
               <span className="font-medium">Dining:</span> {diningName}
@@ -87,7 +76,7 @@ const TableBookingModal = ({ table, children }) => {
             <button
               onClick={handleBooking}
               disabled={isLoading}
-              className="w-full bg-blue-600 text-white py-2 px-4 rounded-xl flex justify-center items-center gap-x-2 hover:bg-blue-700 transition duration-200 disabled:cursor-not-allowed"
+              className="w-full bg-rose-600 text-white py-2 px-4 rounded-xl flex justify-center items-center gap-x-2 hover:bg-rose-700 transition duration-200 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <>
@@ -95,7 +84,7 @@ const TableBookingModal = ({ table, children }) => {
                   Processing...
                 </>
               ) : (
-                "Proceed"
+                "Confirm Reservation"
               )}
             </button>
           </div>
