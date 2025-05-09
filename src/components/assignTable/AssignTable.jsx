@@ -1,54 +1,58 @@
-import TableBookingSchedule from "../../components/tableBookingSchedule/TableBookingSchedule";
 import { useDispatch, useSelector } from "react-redux";
-import { SetDiningId, SetDiningName, SetScheduleId, SetTime } from "../../redux/features/table/tableSlice";
+import {
+  SetDiningId,
+  SetDiningName,
+  SetScheduleId,
+  SetTime,
+} from "../../redux/features/table/tableSlice";
 import convertUTCtimeString from "../../utils/convertUTCtimeString";
+import AssignTableSchedule from "./AssignTableSchedule";
 
 const AssignTable = () => {
   const dispatch = useDispatch();
-  const { selectedDate, scheduleId, diningId, time, diningName } = useSelector((state)=> state.table);
-  const { scheduleOptions } = useSelector((state)=>state.schedule);
-  const { diningOptions } = useSelector((state)=>state.dining);
-  const { booking } = useSelector((state)=>state.booking);
-
-
-
-  
+  const { selectedDate, scheduleId, diningId, time, diningName } = useSelector(
+    (state) => state.table
+  );
+  const { scheduleOptions } = useSelector((state) => state.schedule);
+  const { diningOptions } = useSelector((state) => state.dining);
+  const { booking } = useSelector((state) => state.booking);
 
   return (
     <>
-      <section className=" h-full bg-gray-50">
-        <div className="flex gap-x-4 p-4 gap-4">
+      <section className="h-full bg-gray-50">
+        <div className="h-full flex gap-x-4 p-4 gap-4">
           {/* Left */}
-          <div className=" bg-white w-[260px] p-4 rounded shadow-sm space-y-4">
-             <div className="border-t pt-4">
-                <div className="space-y-2 text-sm text-gray-700">
-                  <div className="flex items-center gap-2">
-                    <span className="w-20 font-medium">Date:</span>
-                    <span className="bg-blue-100 text-blue-800 border border-blue-300 px-3 py-1 rounded-full text-xs font-semibold">
-                      {selectedDate}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="w-20 font-medium">Check In:</span>
-                    <span className="bg-green-100 text-green-800 border border-green-300 px-3 py-1 rounded-full text-xs font-semibold">
-                      {/* 10:00 AM–11:00 AM */} {convertUTCtimeString(booking?.startDateTime)}
-                    </span>
-                  </div>
-              
-                  <div className="flex items-center gap-2">
-                    <span className="w-20 font-medium">Check Out:</span>
-                    <span className="bg-purple-100 text-purple-800 border border-purple-300 px-3 py-1 rounded-full text-xs font-semibold">
-                      {/* In door */} {convertUTCtimeString(booking?.endDateTime)}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="w-20 font-medium">Guest:</span>
-                    <span className="bg-pink-100 text-pink-800 border border-pink-300 px-3 py-1 rounded-full text-xs font-semibold">
-                      {/* In door */} {booking?.guest}
-                    </span>
-                  </div>
+          <div className=" bg-white w-[260px] p-4 rounded shadow-sm space-y-4 h-full">
+            <div className="border-t pt-4">
+              <div className="space-y-2 text-sm text-gray-700">
+                <div className="flex items-center gap-2">
+                  <span className="w-20 font-medium">Date:</span>
+                  <span className="bg-blue-100 text-blue-800 border border-blue-300 px-3 py-1 rounded-full text-xs font-semibold">
+                    {selectedDate}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="w-20 font-medium">Check In:</span>
+                  <span className="bg-green-100 text-green-800 border border-green-300 px-3 py-1 rounded-full text-xs font-semibold">
+                    {/* 10:00 AM–11:00 AM */}{" "}
+                    {convertUTCtimeString(booking?.startDateTime)}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="w-20 font-medium">Check Out:</span>
+                  <span className="bg-purple-100 text-purple-800 border border-purple-300 px-3 py-1 rounded-full text-xs font-semibold">
+                    {/* In door */} {convertUTCtimeString(booking?.endDateTime)}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="w-20 font-medium">Guest:</span>
+                  <span className="bg-pink-100 text-pink-800 border border-pink-300 px-3 py-1 rounded-full text-xs font-semibold">
+                    {/* In door */} {booking?.guest}
+                  </span>
                 </div>
               </div>
+            </div>
 
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1">
@@ -59,7 +63,8 @@ const AssignTable = () => {
                 value={scheduleId}
                 onChange={(e) => {
                   dispatch(SetScheduleId(e.target.value));
-                  const selectedLabel = e.target.options[e.target.selectedIndex].text;
+                  const selectedLabel =
+                    e.target.options[e.target.selectedIndex].text;
                   dispatch(SetTime(selectedLabel));
                   dispatch(SetDiningId(""));
                 }}
@@ -83,10 +88,11 @@ const AssignTable = () => {
               <select
                 className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white disabled:text-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed"
                 value={diningId}
-                onChange={(e) =>{
-                   dispatch(SetDiningId(e.target.value));
-                   const selectedLabel = e.target.options[e.target.selectedIndex].text;
-                   dispatch(SetDiningName(selectedLabel));
+                onChange={(e) => {
+                  dispatch(SetDiningId(e.target.value));
+                  const selectedLabel =
+                    e.target.options[e.target.selectedIndex].text;
+                  dispatch(SetDiningName(selectedLabel));
                 }}
                 disabled={diningOptions.length === 0 || !scheduleId}
               >
@@ -101,9 +107,8 @@ const AssignTable = () => {
               </select>
             </div>
             {/* Summary Part */}
-            {
-              selectedDate && scheduleId && diningId &&(
-                <div className="border-t pt-4">
+            {selectedDate && scheduleId && diningId && (
+              <div className="border-t pt-4">
                 <h3 className="text-sm font-semibold text-gray-700 mb-3">
                   Selected Summary
                 </h3>
@@ -122,17 +127,11 @@ const AssignTable = () => {
                   </div>
                 </div>
               </div>
-              )
-            }
-           
+            )}
           </div>
           {/* Right */}
-          <div className="flex-1">
-            <TableBookingSchedule
-              selectedDate={selectedDate}
-              scheduleId={scheduleId}
-              diningId={diningId}
-            />
+          <div className="flex-1 h-full">
+            <AssignTableSchedule />
           </div>
         </div>
       </section>
