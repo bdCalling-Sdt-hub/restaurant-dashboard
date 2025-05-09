@@ -92,7 +92,7 @@ const WaitlistTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, s
           title: "Action",
           key: "action",
           render: (_, record) => (
-            <button onClick={()=>navigate(`/assign-table/${record?._id}`)} class="bg-green-600 hover:bg-green-700 text-white font-medium py-1 px-2 rounded shadow">
+            <button onClick={()=>navigate(`/assign-table/${record?._id}`)} class="bg-rose-600 hover:bg-rose-700 text-white font-medium py-1 px-2 rounded shadow">
             Assign to Table
           </button>
           ),

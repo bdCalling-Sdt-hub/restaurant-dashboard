@@ -29,7 +29,7 @@ const UpdateBookingStatusModal = ({ bookingId }) => {
 
   return (
     <>
-      <button onClick={()=> setModalOpen(true)} class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-1 px-2 rounded shadow">
+      <button onClick={()=> setModalOpen(true)} class="bg-rose-600 hover:bg-rose-700 text-white font-medium py-1 px-2 rounded shadow">
         Forward to Waitlist
       </button>
       <Modal

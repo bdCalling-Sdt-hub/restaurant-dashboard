@@ -99,21 +99,25 @@ export const menuItems = [
 
 export const subMenuItems = [
   {
-    title: "Terms & Conditions",
-    path: "/terms-conditions",
+    title: "Business Hours",
+    path: "/restaurant/business-hours",
   },
   {
-    title: "About Us",
-    path: "/about",
+    title: "Reviews",
+    path: "/restaurant/reviews",
   },
   {
-    title: "FAQS",
-    path: "/faqs",
+    title: "Cuisine",
+    path: "/restaurant/cuisine",
   },
   {
-    title: "Privacy Policy",
-    path: "/privacy-policy",
+    title: "Social Media",
+    path: "/restaurant/social-media",
   },
+  // {
+  //   title: "Restaurant Features",
+  //   path: "/restaurant/features",
+  // },
 ];
 
 export const restaurantData = {

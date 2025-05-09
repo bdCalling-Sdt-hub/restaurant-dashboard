@@ -67,8 +67,7 @@ function App() {
           <Route path="/restaurant/social-media" element={<SocialMedia/>}></Route>
           <Route path="/restaurant/business-hours" element={<BusinessHours/>}></Route>
           <Route path="/restaurant/cuisine" element={<Cuisine/>}></Route>
-          <Route path="/restaurant/restaurant-agreement" element={<ReservationsAgreement/>}></Route>
-          <Route path="/restaurant/restaurant-features" element={<RestaurantFeatures/>}></Route>
+          <Route path="/restaurant/features" element={<RestaurantFeatures/>}></Route>
 
           <Route path="/restaurant" element={<RestaurantPage/>}></Route>
           <Route path="/dining" element={<DiningPage/>}></Route>
