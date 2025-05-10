@@ -1,14 +1,8 @@
 import { Pagination , Table } from 'antd';
 import convertUTCtimeString from '../../utils/convertUTCtimeString';
 import getColorClassForDate from '../../utils/getColorClassForDate';
-import { getDiningColorClass } from '../../utils/getDiningColorClass';
 import UpdateBookingStatusModal from '../modal/booking/UpdateBookingStatusModal';
 
-const colorMap = {
-  pending: "bg-yellow-100 text-yellow-800",
-  completed: "bg-green-100 text-green-800",
-  cancelled: "bg-red-100 text-red-800",
-};
 
 const BookingTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, setPageSize}) => {
 
@@ -22,7 +16,6 @@ const BookingTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, se
         email: booking?.customerEmail,
         phone: booking?.customerPhone,
         profileImg: booking?.profileImg,
-        date: booking?.date,
         startDateTime: booking?.startDateTime, //checkIn
         endDateTime: booking?.endDateTime, //checkOut
         status: booking?.status,
@@ -51,32 +44,28 @@ const BookingTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, se
         },
         {
           title: "Date",
-          dataIndex: "date",
-          key: "date",
+          dataIndex: "startDateTime",
+          key: "startDateTime",
           render: (val) => {
             const date = val?.split("T")[0];
             const { bg, text, border } = getColorClassForDate(date);
             return (
-              <button
-                className={`text-sm px-2 py-1 rounded ${bg} ${text} ${border} border cursor-default`}
-              >
+              <button className={`text-sm px-2 py-1 rounded ${bg} ${text} ${border} border cursor-default`}>
                 {date}
               </button>
             );
-          },
-        },
+          }
+        },        
         {
-          title: "Check In",
-          dataIndex: "startDateTime",
-          key: "startDateTime",
-          render: (val) => <>{convertUTCtimeString(val)}</>,
-        },
-        {
-          title: "Check Out",
-          dataIndex: "endDateTime",
-          key: "endDateTime",
-          render: (val) => <>{convertUTCtimeString(val)}</>,
-        },
+            title: "Time",
+            dataIndex: "startDateTime",
+            key: "time",
+            render: (_, record) => (
+              <div className="text-sm text-gray-700">
+                {convertUTCtimeString(record.startDateTime)} - {convertUTCtimeString(record.endDateTime)}
+              </div>
+            )
+         },
         // {
         //   title: "Image",
         //   dataIndex: "profileImg",

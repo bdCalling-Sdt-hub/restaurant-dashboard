@@ -32,6 +32,7 @@ import RestaurantPage from "./pages/restaurant/RestaurantPage";
 import WaitlistPage from "./pages/waitlist/WaitlistPage";
 import AssignTablePage from "./pages/assignTable/AssignTablePage";
 import RestaurantDetailsPage from "./pages/restaurantDetails/RestaurantDetailsPage";
+import ReservationCalendarPage from "./pages/ReservationCalendar/ReservationCalendarPage";
 
 function App() {
   const router = createBrowserRouter(
@@ -56,6 +57,7 @@ function App() {
           <Route path="/table-booking-schedule" element={<TableBookingSchedulePage />}></Route>
           <Route path="/assign-table/:bookingId" element={<AssignTablePage />}></Route>
           <Route path="/table-booking-list" element={<TableBookingListPage />}></Route>
+          <Route path="/reservation-calendar" element={<ReservationCalendarPage />}></Route>
 
           <Route path="/profile" element={<MyDetails/>}></Route>
           <Route path="/restaurant-details" element={<RestaurantDetailsPage/>}></Route>

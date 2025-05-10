@@ -2,8 +2,9 @@ import { Modal} from "antd";
 import { useEffect, useState } from "react";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { useCreateTableBookingMutation } from "../../../redux/features/tableBooking/tableBookingApi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { SetDiningId, SetScheduleId, SetSelectedDate, SetSelectedTable, SetSelectedTableName } from "../../../redux/features/table/tableSlice";
 
 const TableBookingModal = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -13,13 +14,19 @@ const TableBookingModal = () => {
   const { time, diningName, selectedTable, selectedTableName } = useSelector((state) => state.table);
   const { token, customerName, guest } = booking || {};
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (isSuccess) {
       setModalOpen(false);
+      dispatch(SetSelectedTable(""))
+      dispatch(SetSelectedTableName(""))
+      dispatch(SetSelectedDate(""))
+      dispatch(SetScheduleId(""))
+      dispatch(SetDiningId(""))
       navigate("/table-booking-list")
     }
-  }, [isSuccess, navigate]);
+  }, [isSuccess, navigate, dispatch]);
 
   const handleBooking = () => {
     createTableBooking({

@@ -27,6 +27,8 @@ const AssignTableList = () => {
     }
   }, [data, dispatch]);
 
+  
+
   return (
     <>
       {isLoading ? (

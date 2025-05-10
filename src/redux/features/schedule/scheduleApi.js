@@ -1,8 +1,7 @@
 import {apiSlice} from "../api/apiSlice.js";
 import { ErrorToast, SuccessToast } from "../../../helper/ValidationHelper.js";
 import TagTypes from "../../../constant/tagType.constant.js";
-import convertUTCtimeString from "../../../utils/convertUTCtimeString.js";
-import { SetScheduleOptions } from "./scheduleSlice.js";
+
 
 export const scheduleApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -101,7 +100,7 @@ export const scheduleApi = apiSlice.injectEndpoints({
         url: `/schedule/delete-schedule/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error, arg) => {
+      invalidatesTags: (result) => {
         if (result?.success) {
           return [TagTypes.schedules, TagTypes.scheduleDropDown];
         }

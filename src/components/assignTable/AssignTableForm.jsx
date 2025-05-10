@@ -1,10 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import convertUTCtimeString from "../../utils/convertUTCtimeString";
 import {
   SetDiningId,
   SetDiningName,
-  SetScheduleId,
-  SetTime,
 } from "../../redux/features/table/tableSlice";
 import { Check } from "lucide-react";
 import TableBookingModal from "../modal/tableBooking/TableBookingModal";
@@ -20,7 +17,6 @@ const AssignTableForm = () => {
     selectedTableName,
     time,
   } = useSelector((state) => state.table);
-  const { scheduleOptions } = useSelector((state) => state.schedule);
   const { diningOptions } = useSelector((state) => state.dining);
   const { booking } = useSelector((state) => state.booking);
 
@@ -36,18 +32,11 @@ const AssignTableForm = () => {
                 {selectedDate}
               </span>
             </div>
+            
             <div className="flex items-center gap-2">
-              <span className="w-20 font-medium">Check In:</span>
-              <span className="bg-green-100 text-green-800 border border-green-300 px-3 py-1 rounded-full text-xs font-semibold">
-                {/* 10:00 AM–11:00 AM */}{" "}
-                {convertUTCtimeString(booking?.startDateTime)}
-              </span>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <span className="w-20 font-medium">Check Out:</span>
+              <span className="w-20 font-medium">Time:</span>
               <span className="bg-purple-100 text-purple-800 border border-purple-300 px-3 py-1 rounded-full text-xs font-semibold">
-                {/* In door */} {convertUTCtimeString(booking?.endDateTime)}
+                {/* In door */} {time}
               </span>
             </div>
             <div className="flex items-center gap-2">
@@ -58,34 +47,6 @@ const AssignTableForm = () => {
             </div>
           </div>
         </div>
-
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">
-            * Schedule
-          </label>
-          <select
-            className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white disabled:text-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed"
-            value={scheduleId}
-            onChange={(e) => {
-              dispatch(SetScheduleId(e.target.value));
-              const selectedLabel =
-                e.target.options[e.target.selectedIndex].text;
-              dispatch(SetTime(selectedLabel));
-              dispatch(SetDiningId(""));
-            }}
-            disabled={scheduleOptions.length === 0}
-          >
-            <option value="" disabled>
-              Select a Schedule
-            </option>
-            {scheduleOptions?.map((schedule, index) => (
-              <option key={index} value={schedule.value}>
-                {schedule.label}
-              </option>
-            ))}
-          </select>
-        </div>
-
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-1">
             * Dining

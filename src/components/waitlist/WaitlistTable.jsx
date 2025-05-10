@@ -17,7 +17,6 @@ const WaitlistTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, s
         email: booking?.customerEmail,
         phone: booking?.customerPhone,
         profileImg: booking?.profileImg,
-        date: booking?.date,
         startDateTime: booking?.startDateTime, //checkIn
         endDateTime: booking?.endDateTime, //checkOut
         status: booking?.status,
@@ -45,32 +44,28 @@ const WaitlistTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, s
         },
         {
           title: "Date",
-          dataIndex: "date",
-          key: "date",
+          dataIndex: "startDateTime",
+          key: "startDateTime",
           render: (val) => {
             const date = val?.split("T")[0];
             const { bg, text, border } = getColorClassForDate(date);
             return (
-              <button
-                className={`text-sm px-2 py-1 rounded ${bg} ${text} ${border} border cursor-default`}
-              >
+              <button className={`text-sm px-2 py-1 rounded ${bg} ${text} ${border} border cursor-default`}>
                 {date}
               </button>
             );
-          },
-        },
+          }
+        },        
         {
-          title: "Check In",
-          dataIndex: "startDateTime",
-          key: "startDateTime",
-          render: (val) => <>{convertUTCtimeString(val)}</>,
-        },
-        {
-          title: "Check Out",
-          dataIndex: "endDateTime",
-          key: "endDateTime",
-          render: (val) => <>{convertUTCtimeString(val)}</>,
-        },
+            title: "Time",
+            dataIndex: "startDateTime",
+            key: "time",
+            render: (_, record) => (
+              <div className="text-sm text-gray-700">
+                {convertUTCtimeString(record.startDateTime)} - {convertUTCtimeString(record.endDateTime)}
+              </div>
+            )
+         },
         {
           title: "Email",
           dataIndex: "email",

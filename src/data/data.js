@@ -41,6 +41,11 @@ export const menuItems = [
     icon: FaTable,
   },
   {
+    title: "Reservation Calendar",
+    path: "/reservation-calendar",
+    icon: FaTable,
+  },
+  {
     title: "Booking Management",
     path: "/booking-management",
     icon: GiStabbedNote,
@@ -105,17 +110,5 @@ export const subMenuItems = [
   // },
 ];
 
-export const restaurantData = {
-  name: "Green Garden",
-  address: "123 Vegan Lane",
-  latitude: 40.7128,
-  longitude: -74.006,
-  paymentRequired: true,
-  bookingFeePerGuest: 5,
-  cancellationCharge: 10,
-  discount: "10% off on weekdays",
-  keywords: "organic, vegan, gluten-free",
-  features: "wifi, outdoor-seating",
-  image: "https://via.placeholder.com/400x200",
-};
+
 
