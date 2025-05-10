@@ -121,7 +121,7 @@ const MyRestaurant = ({ data: Restaurant }) => {
                 <h3 className="font-semibold text-gray-800 mr-2">Rating</h3>
                 <div className="flex items-center gap-x-1">
                   <Star className={`w-4 h-4 fill-amber-400 text-amber-400`} />
-                   <span className="text-xl font-bold text-amber-500">
+                  <span className="text-xl font-bold text-amber-500">
                     {Restaurant?.ratings}
                   </span>
                   <span>({Restaurant?.totalReview} reviews)</span>
@@ -136,16 +136,16 @@ const MyRestaurant = ({ data: Restaurant }) => {
               <h3 className="font-semibold text-gray-800">
                 Booking Information
               </h3>
-              <UpdateInformationModal />
+              <UpdateInformationModal restaurant={Restaurant} />
             </div>
 
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Payment Required</span>
               <span className="flex items-center">
-                {restaurant.paymentRequired ? (
-                  <Check className="w-5 h-5 text-green-500" />
+                {Restaurant.paymentRequired ? (
+                  <Check className="w-10 h-10 text-green-700 text-lg bg-green-100 border border-green-300 p-2 rounded-full" />
                 ) : (
-                  <X className="w-5 h-5 text-red-500" />
+                  <X className="w-10 h-10 text-red-700 text-lg bg-red-100 border border-red-300 p-2 rounded-full" />
                 )}
               </span>
             </div>
@@ -153,7 +153,7 @@ const MyRestaurant = ({ data: Restaurant }) => {
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Cancellation Fee</span>
               <span className="font-medium">
-                {restaurant.cancellationPercentage}%
+                {Restaurant.cancellationPercentage}%
               </span>
             </div>
 
@@ -161,7 +161,7 @@ const MyRestaurant = ({ data: Restaurant }) => {
               <span className="text-gray-600">Booking Fee</span>
               <span className="flex items-center font-medium">
                 <DollarSign className="w-4 h-4" />
-                {restaurant.bookingFeePerGuest} per guest
+                {Restaurant.bookingFeePerGuest} per guest
               </span>
             </div>
           </div>

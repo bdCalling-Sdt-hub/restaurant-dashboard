@@ -44,14 +44,14 @@ const CreateRestaurantForm = () => {
     //   formData.append(key, value instanceof File ? value : value.toString());
     // });
 
-    const {name, file, keywords, features, address, latitude, longitude, paymentRequired, cancellationCharge, bookingFeePerGuest, discount} = finalValues;
+    const {name, file, keywords, features, address, latitude, longitude, paymentRequired, cancellationPercentage, bookingFeePerGuest, discount} = finalValues;
     formData.append("name", name);
     formData.append("file", file);
     formData.append("address", address)
     formData.append("latitude", latitude)
     formData.append("longitude", longitude)
     formData.append("paymentRequired", paymentRequired)
-    formData.append("cancellationCharge", cancellationCharge)
+    formData.append("cancellationPercentage", cancellationPercentage)
     formData.append("bookingFeePerGuest", bookingFeePerGuest)
     formData.append("discount", discount);
 
@@ -323,9 +323,14 @@ const CreateRestaurantForm = () => {
                 rules={[
                   {
                     type: "number",
-                    min: 0,
+                    min: enabled ? 1 : 0,
                     message: "Booking Fee Per Guest cannot be negative.",
-                    transform: (value) => Number(value), // converts string input to number
+                    transform: (value) => {
+                      if (value === undefined) {
+                        return 0;
+                      }
+                      return Number(value);
+                    },
                   },
                 ]}
               >
@@ -347,7 +352,7 @@ const CreateRestaurantForm = () => {
                     Cancellation Charge (%, Optional)
                   </span>
                 }
-                name="cancellationCharge"
+                name="cancellationPercentage"
                 rules={[
                   {
                     type: "number",
