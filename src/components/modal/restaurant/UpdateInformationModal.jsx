@@ -19,7 +19,6 @@ const UpdateInformationModal = ({ restaurant }) => {
   }, [isSuccess, form]);
 
   const onFinish = (values) => {
-    console.log(values);
     updateRestaurant({
       paymentRequired: enabled,
       bookingFeePerGuest: Number(values.bookingFeePerGuest),
@@ -166,7 +165,7 @@ const UpdateInformationModal = ({ restaurant }) => {
                 Processing...
               </>
             ) : (
-              "Save Change"
+              "Save Changes"
             )}
           </button>
         </Form>

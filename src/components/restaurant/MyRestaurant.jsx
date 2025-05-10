@@ -8,43 +8,21 @@ import UpdateInformationModal from "../modal/restaurant/UpdateInformationModal";
 import UpdateDiscountModal from "../modal/restaurant/UpdateDiscountModal";
 import UpdateFeaturesModal from "../modal/restaurant/UpdateFeaturesModal";
 import UpdateKeywordsModal from "../modal/restaurant/UpdateKeywordsModal";
-// Remove the direct import of the image file
 
-const MyRestaurant = ({ data: Restaurant }) => {
-  // Sample restaurant data
-  const restaurant = {
-    name: "Bella Italia",
-    image: restaurant_img, // Using a placeholder image instead
-    address: "123 Culinary Street, Foodville, FC 12345",
-    longitude: 40.7128,
-    latitude: -74.006,
-    discount: "20% off on weekdays",
-    ratings: 4.7,
-    paymentRequired: true,
-    cancellationPercentage: 15,
-    bookingFeePerGuest: 5,
-    keywords: ["Italian", "Pasta", "Pizza", "Wine", "Romantic"],
-    features: [
-      "Outdoor Seating",
-      "Vegetarian Options",
-      "Wheelchair Accessible",
-      "Free WiFi",
-      "Takeaway Available",
-    ],
-  };
+const MyRestaurant = ({ data: restaurant }) => {
 
   return (
     <div className="max-w-7xl mx-auto p-4 md:p-6 bg-white">
       {/* Restaurant Name */}
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-3xl md:text-4xl font-bold">{Restaurant.name}</h1>
-        <UpdateNameModal restaurant={Restaurant} />
+        <h1 className="text-3xl md:text-4xl font-bold">{restaurant.name}</h1>
+        <UpdateNameModal restaurant={restaurant} />
       </div>
 
       {/* Restaurant Image */}
       <div className="mb-6 rounded-lg overflow-hidden shadow-md relative group">
         <img
-          src={Restaurant.restaurantImg || restaurant_img}
+          src={restaurant.restaurantImg || restaurant_img}
           alt="restaurant_img"
           onError={(e) => {
             e.currentTarget.onerror = null; // Prevent infinite loop
@@ -52,7 +30,7 @@ const MyRestaurant = ({ data: Restaurant }) => {
           }}
           className="w-full h-auto object-cover"
         />
-        <UpdateImageModal />
+        <UpdateImageModal restaurant={restaurant}/>
       </div>
 
       {/* Main Info Grid */}
@@ -65,21 +43,21 @@ const MyRestaurant = ({ data: Restaurant }) => {
               <MapPin className="w-5 h-5 text-gray-600 mt-1 mr-2 flex-shrink-0" />
               <div>
                 <h3 className="font-semibold text-gray-800">Address</h3>
-                <p className="text-gray-600">{Restaurant.address}</p>
+                <p className="text-gray-600">{restaurant.address}</p>
               </div>
             </div>
-            <UpdateAddressModal restaurant={Restaurant} />
+            <UpdateAddressModal restaurant={restaurant} />
           </div>
 
           {/* Coordinates */}
           <div className="bg-gray-50 p-3 rounded-md relative group">
             <div className="flex justify-between items-start">
               <h3 className="font-semibold text-gray-800 mb-1">Location</h3>
-              <UpdateLocationModal restaurant={Restaurant} />
+              <UpdateLocationModal restaurant={restaurant} />
             </div>
             <p className="text-sm text-gray-600">
-              Latitude: {Restaurant.latitude} | Longitude:{" "}
-              {Restaurant.longitude}
+              Latitude: {restaurant.latitude} | Longitude:{" "}
+              {restaurant.longitude}
             </p>
           </div>
 
@@ -87,16 +65,16 @@ const MyRestaurant = ({ data: Restaurant }) => {
           <div className="bg-green-50 p-3 rounded-md border-l-4 border-green-500 relative group">
             <div className="flex justify-between items-start">
               <h3 className="font-semibold text-green-700">Discount/Offer</h3>
-              <UpdateDiscountModal restaurant={Restaurant} />
+              <UpdateDiscountModal restaurant={restaurant} />
             </div>
-            <p className="text-green-600">{Restaurant.discount}</p>
+            <p className="text-green-600">{restaurant.discount}</p>
           </div>
 
           {/* Keywords */}
           <div className="relative group">
             <div className="flex justify-between items-start mb-2">
               <h3 className="font-semibold text-gray-800">Keywords</h3>
-              <UpdateKeywordsModal />
+              <UpdateKeywordsModal restaurant={restaurant}/>
             </div>
             <div className="flex flex-wrap gap-2">
               {restaurant.keywords.map((keyword, index) => (
@@ -122,9 +100,9 @@ const MyRestaurant = ({ data: Restaurant }) => {
                 <div className="flex items-center gap-x-1">
                   <Star className={`w-4 h-4 fill-amber-400 text-amber-400`} />
                   <span className="text-xl font-bold text-amber-500">
-                    {Restaurant?.ratings}
+                    {restaurant?.ratings}
                   </span>
-                  <span>({Restaurant?.totalReview} reviews)</span>
+                  <span>({restaurant?.totalReview} reviews)</span>
                 </div>
               </div>
             </div>
@@ -136,13 +114,13 @@ const MyRestaurant = ({ data: Restaurant }) => {
               <h3 className="font-semibold text-gray-800">
                 Booking Information
               </h3>
-              <UpdateInformationModal restaurant={Restaurant} />
+              <UpdateInformationModal restaurant={restaurant} />
             </div>
 
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Payment Required</span>
               <span className="flex items-center">
-                {Restaurant.paymentRequired ? (
+                {restaurant.paymentRequired ? (
                   <Check className="w-10 h-10 text-green-700 text-lg bg-green-100 border border-green-300 p-2 rounded-full" />
                 ) : (
                   <X className="w-10 h-10 text-red-700 text-lg bg-red-100 border border-red-300 p-2 rounded-full" />
@@ -153,7 +131,7 @@ const MyRestaurant = ({ data: Restaurant }) => {
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Cancellation Fee</span>
               <span className="font-medium">
-                {Restaurant.cancellationPercentage}%
+                {restaurant?.cancellationPercentage}%
               </span>
             </div>
 
@@ -161,7 +139,7 @@ const MyRestaurant = ({ data: Restaurant }) => {
               <span className="text-gray-600">Booking Fee</span>
               <span className="flex items-center font-medium">
                 <DollarSign className="w-4 h-4" />
-                {Restaurant.bookingFeePerGuest} per guest
+                {restaurant?.bookingFeePerGuest} per guest
               </span>
             </div>
           </div>
@@ -172,10 +150,10 @@ const MyRestaurant = ({ data: Restaurant }) => {
       <div className="border-t pt-6">
         <div className="flex justify-between items-center mb-4">
           <h3 className="font-semibold text-gray-800 text-lg">Features</h3>
-          <UpdateFeaturesModal />
+          <UpdateFeaturesModal restaurant={restaurant}/>
         </div>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {restaurant.features.map((feature, index) => (
+          {restaurant?.features?.map((feature, index) => (
             <li key={index} className="flex items-center">
               <Check className="w-5 h-5 text-green-500 mr-2" />
               <span>{feature}</span>

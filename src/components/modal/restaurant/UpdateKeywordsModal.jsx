@@ -1,48 +1,81 @@
 import { Input, Modal, Form } from "antd";
 import { useEffect, useState } from "react";
 import { CgSpinnerTwo } from "react-icons/cg";
-import { useCreateDiningMutation } from "../../../redux/features/dining/diningApi";
+const { TextArea } = Input;
+import { useUpdateRestaurantMutation } from "../../../redux/features/restaurant/restaurantApi";
+
 import { SquarePen } from "lucide-react";
 
-const UpdateKeywordsModal = () => {
+const UpdateKeywordsModal = ({ restaurant }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [createDining, { isLoading, isSuccess }] = useCreateDiningMutation();
+  const [updateRestaurant, { isLoading, isSuccess }] =
+    useUpdateRestaurantMutation();
   const [form] = Form.useForm();
 
   useEffect(() => {
     if (isSuccess) {
       setModalOpen(false);
-      form.resetFields();
     }
   }, [isSuccess, form]);
 
+
   const onFinish = (values) => {
-    createDining(values);
+    updateRestaurant({
+      keywords: values.keywords
+        ? values.keywords?.split(",").map((s) => s.trim())
+        : [],
+    });
   };
 
   return (
     <>
       <button
         onClick={() => setModalOpen(true)}
-        className="p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
-        aria-label="Edit keywords"
+        className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
+        aria-label="Edit restaurant name"
       >
-        <SquarePen className="w-4 h-4" />
+        <SquarePen className="w-5 h-5" />
       </button>
       <Modal
         title={<span className="font-bold">Update Keywords</span>}
         open={modalOpen}
-        onCancel={() => setModalOpen(false)}
+        onCancel={() => {
+          setModalOpen(false);
+          form.setFieldsValue({
+            keywords: restaurant?.keywords.join(",")
+          });
+        }}
         maskClosable={false}
         footer={false}
       >
-        <Form form={form} name="add" layout="vertical" onFinish={onFinish}>
+        <Form
+          form={form}
+          name="add"
+          layout="vertical"
+          onFinish={onFinish}
+          initialValues={{
+            keywords: restaurant?.keywords.join(","),
+          }}
+        >
           <Form.Item
-            name="name"
-            label={<span className="font-semibold">Name</span>}
-            rules={[{ required: true, message: "Name is required" }]}
+            label={
+              <span className="font-semibold">
+                Keywords (comma-separated, optional)
+              </span>
+            }
+            name="keywords"
+            rules={[
+              {
+                pattern: /^([\w\s-]+)(,\s*[\w\s-]+)*$/,
+                message: "Please enter valid comma-separated keywords.",
+              },
+            ]}
           >
-            <Input placeholder="Type here" />
+            <TextArea
+              placeholder="e.g. plant-based, organic"
+              className="w-full p-2 border rounded"
+              autoSize={{ minRows: 3, maxRows: 5 }}
+            />
           </Form.Item>
           <button
             type="submit"
@@ -52,10 +85,10 @@ const UpdateKeywordsModal = () => {
             {isLoading ? (
               <>
                 <CgSpinnerTwo className="animate-spin" fontSize={16} />
-                Creating...
+                Processing...
               </>
             ) : (
-              "Create"
+              "Save Change"
             )}
           </button>
         </Form>

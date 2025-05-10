@@ -66,8 +66,34 @@ export const restaurantApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    updateRestaurantImg: builder.mutation({
+      query: (data) => ({
+        url: `/restaurant/update-restaurant-img`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: (result) =>{
+        if(result?.success){
+          return [TagTypes.restaurant]
+        }
+        return []
+      },
+      async onQueryStarted(arg, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+            SuccessToast("Image is updated successfully");
+        } catch (err) {
+          const status = err?.error?.status;
+          if (status === 404) {
+            ErrorToast(err?.error?.data?.message);
+          }else {
+            ErrorToast("Something Went Wrong!");
+          }
+        }
+      },
+    }),
   }),
 });
 
 
-export const { useCreateRestaurantMutation, useGetMyRestaurantQuery, useUpdateRestaurantMutation } = restaurantApi;
+export const { useCreateRestaurantMutation, useGetMyRestaurantQuery, useUpdateRestaurantMutation, useUpdateRestaurantImgMutation } = restaurantApi;

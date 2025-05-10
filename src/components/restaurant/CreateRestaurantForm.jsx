@@ -11,8 +11,6 @@ const CreateRestaurantForm = () => {
   const [form] = Form.useForm();
   const [file, setFile] = useState(null);
   const [createRestaurant, { isLoading }] = useCreateRestaurantMutation();
- 
-
 
   const handleImageChange = (e) => {
     const file = e.target.files?.[0] || null;
@@ -44,15 +42,27 @@ const CreateRestaurantForm = () => {
     //   formData.append(key, value instanceof File ? value : value.toString());
     // });
 
-    const {name, file, keywords, features, address, latitude, longitude, paymentRequired, cancellationPercentage, bookingFeePerGuest, discount} = finalValues;
+    const {
+      name,
+      file,
+      keywords,
+      features,
+      address,
+      latitude,
+      longitude,
+      paymentRequired,
+      cancellationPercentage,
+      bookingFeePerGuest,
+      discount,
+    } = finalValues;
     formData.append("name", name);
     formData.append("file", file);
-    formData.append("address", address)
-    formData.append("latitude", latitude)
-    formData.append("longitude", longitude)
-    formData.append("paymentRequired", paymentRequired)
-    formData.append("cancellationPercentage", cancellationPercentage)
-    formData.append("bookingFeePerGuest", bookingFeePerGuest)
+    formData.append("address", address);
+    formData.append("latitude", latitude);
+    formData.append("longitude", longitude);
+    formData.append("paymentRequired", paymentRequired);
+    formData.append("cancellationPercentage", cancellationPercentage);
+    formData.append("bookingFeePerGuest", bookingFeePerGuest);
     formData.append("discount", discount);
 
     // formData.append('tags', 'react');
@@ -60,12 +70,12 @@ const CreateRestaurantForm = () => {
     // formData.append('tags', 'zod');
 
     //for array valu
-    keywords.forEach(keyword => formData.append('keywords', keyword));
-    features.forEach(feature => formData.append('features', feature));
+    keywords.forEach((keyword) => formData.append("keywords", keyword));
+    features.forEach((feature) => formData.append("features", feature));
 
     // const formObject = Object.fromEntries(formData.entries());
     // console.log(formObject);
-    
+
     createRestaurant(formData);
   };
 
@@ -74,7 +84,11 @@ const CreateRestaurantForm = () => {
       <Form
         form={form}
         layout="vertical"
-        initialValues={{ cancellationCharge: 0, bookingFeePerGuest: 0, discount: "" }}
+        initialValues={{
+          cancellationCharge: 0,
+          bookingFeePerGuest: 0,
+          discount: "",
+        }}
         onFinish={onFinish}
       >
         <div className="max-w-5xl mx-auto p-6 bg-white rounded-xl shadow space-y-6">
@@ -285,7 +299,7 @@ const CreateRestaurantForm = () => {
 
           {/* Cancellation Charge */}
           <div className="flex items-center gap-4">
-          <div>
+            <div>
               <label className="inline-flex items-center cursor-pointer">
                 <span className="mr-2 font-semibold text-gray-700">
                   Payment Required
@@ -312,7 +326,7 @@ const CreateRestaurantForm = () => {
                 </div>
               </label>
             </div>
-          <div className="flex-1">
+            <div className="flex-1">
               <Form.Item
                 label={
                   <span className="font-semibold">
@@ -324,7 +338,9 @@ const CreateRestaurantForm = () => {
                   {
                     type: "number",
                     min: enabled ? 1 : 0,
-                    message: "Booking Fee Per Guest cannot be negative.",
+                    message: enabled
+                      ? "Booking Fee must be atleast 1"
+                      : "Booking cannot be negative.",
                     transform: (value) => {
                       if (value === undefined) {
                         return 0;
@@ -344,7 +360,7 @@ const CreateRestaurantForm = () => {
                 />
               </Form.Item>
             </div>
-            
+
             <div className="flex-1">
               <Form.Item
                 label={
@@ -358,7 +374,12 @@ const CreateRestaurantForm = () => {
                     type: "number",
                     min: 0,
                     message: "Cancellation charge cannot be negative.",
-                    transform: (value) => Number(value), // converts string input to number
+                    transform: (value) => {
+                      if (value === undefined) {
+                        return 0;
+                      }
+                      return Number(value);
+                    },
                   },
                 ]}
               >
@@ -372,7 +393,6 @@ const CreateRestaurantForm = () => {
                 />
               </Form.Item>
             </div>
-            
           </div>
           {/* <div>
             <Form.Item
