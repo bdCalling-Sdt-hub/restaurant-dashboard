@@ -1,46 +1,58 @@
-import { Input, Modal, Form, Button } from "antd";
+import { Input, Modal, Form } from "antd";
 import { useEffect, useState } from "react";
 import { CgSpinnerTwo } from "react-icons/cg";
-import { useCreateDiningMutation } from "../../../redux/features/dining/diningApi";
+import { useUpdateRestaurantMutation } from "../../../redux/features/restaurant/restaurantApi";
+
 import { SquarePen } from "lucide-react";
 
-const UpdateAddressModal = () => {
+const UpdateAddressModal = ({ restaurant }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [createDining, { isLoading, isSuccess }] = useCreateDiningMutation();
+  const [updateRestaurant, { isLoading, isSuccess }] =
+    useUpdateRestaurantMutation();
   const [form] = Form.useForm();
 
   useEffect(() => {
     if (isSuccess) {
       setModalOpen(false);
-      form.resetFields();
     }
   }, [isSuccess, form]);
 
   const onFinish = (values) => {
-    createDining(values);
+    updateRestaurant(values);
   };
 
   return (
     <>
       <button
         onClick={() => setModalOpen(true)}
-        className="p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
-        aria-label="Edit address"
+        className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
+        aria-label="Edit restaurant name"
       >
-        <SquarePen className="w-4 h-4" />
+        <SquarePen className="w-5 h-5" />
       </button>
       <Modal
         title={<span className="font-bold">Update Address</span>}
         open={modalOpen}
-        onCancel={() => setModalOpen(false)}
+        onCancel={() => {
+          setModalOpen(false);
+          form.setFieldsValue({
+            address: restaurant?.address,
+          });
+        }}
         maskClosable={false}
         footer={false}
       >
-        <Form form={form} name="add" layout="vertical" onFinish={onFinish}>
+        <Form
+          form={form}
+          name="address"
+          layout="vertical"
+          onFinish={onFinish}
+          initialValues={{ address: restaurant?.address }}
+        >
           <Form.Item
-            name="name"
-            label={<span className="font-semibold">Name</span>}
-            rules={[{ required: true, message: "Name is required" }]}
+            name="address"
+            label={<span className="font-semibold">Address</span>}
+            rules={[{ required: true, message: "Address is required" }]}
           >
             <Input placeholder="Type here" />
           </Form.Item>
@@ -52,10 +64,10 @@ const UpdateAddressModal = () => {
             {isLoading ? (
               <>
                 <CgSpinnerTwo className="animate-spin" fontSize={16} />
-                Creating...
+                Processing...
               </>
             ) : (
-              "Create"
+              "Save Change"
             )}
           </button>
         </Form>

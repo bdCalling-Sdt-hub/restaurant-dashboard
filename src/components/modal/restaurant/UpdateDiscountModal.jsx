@@ -1,46 +1,57 @@
 import { Input, Modal, Form } from "antd";
 import { useEffect, useState } from "react";
 import { CgSpinnerTwo } from "react-icons/cg";
-import { useCreateDiningMutation } from "../../../redux/features/dining/diningApi";
+import { useUpdateRestaurantMutation } from "../../../redux/features/restaurant/restaurantApi";
+
 import { SquarePen } from "lucide-react";
 
-const UpdateDiscountModal = () => {
+const UpdateDiscountModal = ({ restaurant }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [createDining, { isLoading, isSuccess }] = useCreateDiningMutation();
+  const [updateRestaurant, { isLoading, isSuccess }] =
+    useUpdateRestaurantMutation();
   const [form] = Form.useForm();
 
   useEffect(() => {
     if (isSuccess) {
       setModalOpen(false);
-      form.resetFields();
     }
   }, [isSuccess, form]);
 
   const onFinish = (values) => {
-    createDining(values);
+    updateRestaurant(values);
   };
 
   return (
     <>
       <button
         onClick={() => setModalOpen(true)}
-        className="p-1.5 text-green-600/70 hover:text-green-700 hover:bg-green-100 rounded-full transition-colors"
-        aria-label="Edit special offer"
+        className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
+        aria-label="Edit restaurant name"
       >
-        <SquarePen className="w-4 h-4" />
+        <SquarePen className="w-5 h-5" />
       </button>
       <Modal
-        title={<span className="font-bold">Update Discount</span>}
+        title={<span className="font-bold">Update Discount/Offer</span>}
         open={modalOpen}
-        onCancel={() => setModalOpen(false)}
+        onCancel={() => {
+          setModalOpen(false);
+          form.setFieldsValue({
+            discount: restaurant?.discount,
+          });
+        }}
         maskClosable={false}
         footer={false}
       >
-        <Form form={form} name="add" layout="vertical" onFinish={onFinish}>
+        <Form
+          form={form}
+          name="address"
+          layout="vertical"
+          onFinish={onFinish}
+          initialValues={{ discount: restaurant?.discount }}
+        >
           <Form.Item
-            name="name"
-            label={<span className="font-semibold">Name</span>}
-            rules={[{ required: true, message: "Name is required" }]}
+            name="discount"
+            label={<span className="font-semibold">Discount</span>}
           >
             <Input placeholder="Type here" />
           </Form.Item>
@@ -52,10 +63,10 @@ const UpdateDiscountModal = () => {
             {isLoading ? (
               <>
                 <CgSpinnerTwo className="animate-spin" fontSize={16} />
-                Creating...
+                Processing...
               </>
             ) : (
-              "Create"
+              "Save Change"
             )}
           </button>
         </Form>

@@ -1,15 +1,13 @@
-import { Input, Modal, Form} from "antd";
+import { Input, Modal, Form } from "antd";
 import { useEffect, useState } from "react";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { EditOutlined } from "@ant-design/icons";
 import { useUpdateDiningMutation } from "../../../redux/features/dining/diningApi";
 
-
 const EditDiningModal = ({ dining }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [updateDining, { isLoading, isSuccess }] = useUpdateDiningMutation();
   const [form] = Form.useForm();
-
 
   useEffect(() => {
     if (isSuccess) {
@@ -17,13 +15,12 @@ const EditDiningModal = ({ dining }) => {
     }
   }, [isSuccess, form]);
 
- 
   //update the dining
   const onFinish = (values) => {
     updateDining({
       id: dining._id,
-      data: values
-    })
+      data: values,
+    });
   };
 
   return (
@@ -39,20 +36,26 @@ const EditDiningModal = ({ dining }) => {
         open={modalOpen}
         onCancel={() => {
           setModalOpen(false);
-          form.setFieldsValue({ 
-            name: dining?.name
+          form.setFieldsValue({
+            name: dining?.name,
           });
         }}
         maskClosable={false}
         footer={false}
       >
-        <Form form={form} name="edit" layout="vertical" onFinish={onFinish} initialValues={{ name: dining?.name }}>
+        <Form
+          form={form}
+          name="edit"
+          layout="vertical"
+          onFinish={onFinish}
+          initialValues={{ name: dining?.name }}
+        >
           <Form.Item
             name="name"
             label={<span className="font-semibold">Name</span>}
             rules={[{ required: true, message: "Name is required" }]}
           >
-            <Input key={Date.now()} placeholder="Type here"/>
+            <Input key={Date.now()} placeholder="Type here" />
           </Form.Item>
           <button
             type="submit"

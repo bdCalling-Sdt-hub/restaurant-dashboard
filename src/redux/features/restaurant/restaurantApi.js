@@ -39,8 +39,8 @@ export const restaurantApi = apiSlice.injectEndpoints({
       providesTags: [TagTypes.restaurant]
     }),
     updateRestaurant: builder.mutation({
-      query: ({ id, data }) => ({
-        url: `/restaurant/update-restaurant/${id}`,
+      query: (data) => ({
+        url: `/restaurant/update-restaurant`,
         method: "PATCH",
         body: data,
       }),

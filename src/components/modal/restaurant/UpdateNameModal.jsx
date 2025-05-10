@@ -7,18 +7,18 @@ import { SquarePen } from "lucide-react";
 
 const UpdateNameModal = ({ restaurant }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [createDining, { isLoading, isSuccess }] = useUpdateRestaurantMutation();
+  const [updateRestaurant, { isLoading, isSuccess }] =
+    useUpdateRestaurantMutation();
   const [form] = Form.useForm();
 
   useEffect(() => {
     if (isSuccess) {
       setModalOpen(false);
-      form.resetFields();
     }
   }, [isSuccess, form]);
 
   const onFinish = (values) => {
-    createDining(values);
+    updateRestaurant(values);
   };
 
   return (
@@ -33,11 +33,22 @@ const UpdateNameModal = ({ restaurant }) => {
       <Modal
         title={<span className="font-bold">Update Restaurant Name</span>}
         open={modalOpen}
-        onCancel={() => setModalOpen(false)}
+        onCancel={() => {
+          setModalOpen(false);
+          form.setFieldsValue({
+            name: restaurant?.name,
+          });
+        }}
         maskClosable={false}
         footer={false}
       >
-        <Form form={form} name="add" layout="vertical" onFinish={onFinish}>
+        <Form
+          form={form}
+          name="add"
+          layout="vertical"
+          onFinish={onFinish}
+          initialValues={{ name: restaurant?.name }}
+        >
           <Form.Item
             name="name"
             label={<span className="font-semibold">Name</span>}
@@ -53,7 +64,7 @@ const UpdateNameModal = ({ restaurant }) => {
             {isLoading ? (
               <>
                 <CgSpinnerTwo className="animate-spin" fontSize={16} />
-                Creating...
+                Processing...
               </>
             ) : (
               "Save Change"
