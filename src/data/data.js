@@ -15,11 +15,11 @@ export const menuItems = [
     path: "/",
     icon: RiRestaurantLine,
   },
-  {
-    title: "Dashboard",
-    path: "/dashboard",
-    icon: RiPieChart2Fill,
-  },
+  // {
+  //   title: "Dashboard",
+  //   path: "/dashboard",
+  //   icon: RiPieChart2Fill,
+  // },
   // {
   //   title: "Restaurant",
   //   path: '/restaurant',
@@ -60,21 +60,6 @@ export const menuItems = [
     path: "/table-booking-list",
     icon: FaTableList,
   },
-  //     {
-  //       title: "Reserved",
-  //       path: '/reserved',
-  //       icon: GiStabbedNote
-  //   },
-  //   {
-  //     title: "Reserved Select",
-  //     path: '/reserved-select',
-  //     icon: GiStabbedNote
-  // },
-  // {
-  //   title: "Reserved Not Select",
-  //   path: '/reserved-not-found',
-  //   icon: GiStabbedNote
-  // },
   // {
   //   title: "Table Booking",
   //   path: '/table-booking',
