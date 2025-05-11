@@ -1,18 +1,17 @@
 import { Pagination , Table } from 'antd';
-import convertUTCtimeString from '../../utils/convertUTCtimeString';
 import getColorClassForDate from '../../utils/getColorClassForDate';
+import { useNavigate } from 'react-router-dom';
+import { IoEyeSharp } from 'react-icons/io5';
 
 
 const ReservationTable = ({reservations, meta, currentPage, setCurrentPage, pageSize, setPageSize}) => {
+  const navigate = useNavigate();
 
     const dataSource = reservations?.map((reservation, index)=> ({
         key: index,
         serial: Number(index+1) + ((currentPage-1)*pageSize),
-        _id: reservation?._id,
-        startDateTime:  reservation?.startDateTime,
-        endDateTime: reservation?.endDateTime,
-        scheduleId: reservation?.scheduleId,
-        seats: reservation?.seats
+        date: reservation?.date,
+        totalSeats: reservation?.totalSeats
     }))
 
  
@@ -24,54 +23,33 @@ const ReservationTable = ({reservations, meta, currentPage, setCurrentPage, page
         },
         {
           title: "Date",
-          dataIndex: "startDateTime",
+          dataIndex: "date",
           key: "date",
           render: (val) => {
-            const date = val?.split("T")[0];
-            const { bg, text, border } = getColorClassForDate(date);
+            const { bg, text, border } = getColorClassForDate(val);
             return (
               <button className={`text-sm px-2 py-1 rounded ${bg} ${text} ${border} border cursor-default`}>
-                {date}
+                {val}
               </button>
             );
           }
         }, 
         {
-          title: "Time",
-          dataIndex: "startDateTime",
-          key: "time",
-          render: (_, record) => (
-            <div className="text-sm text-gray-700">
-              {convertUTCtimeString(record.startDateTime)} -{" "}
-              {convertUTCtimeString(record.endDateTime)}
-            </div>
-          ),
-        },
-        {
           title: "Total Seats",
-          dataIndex: "seats",
-          key: "seats",
+          dataIndex: "totalSeats",
+          key: "totalSeats",
           align: "center"
         },
-        // {
-        //   title: "View",
-        //   dataIndex: "view",
-        //   key: "view",
-        //   render: (_, {scheduleId, diningId}) => (
-        //     <button onClick={()=> navigate(`/tables/details/${scheduleId}/${diningId}`)} className="bg-black hover:bg-primary p-1.5 text-white rounded-md">
-        //       <IoEyeSharp size={18} />
-        //     </button>
-        //   ),
-        // },
-        // {
-        //   title: "Action",
-        //   key: "action",
-        //   render: (_, record) => (
-        //     <div className="flex items-center gap-x-2">
-        //       <DeleteScheduleModal scheduleId={record._id} />
-        //     </div>
-        //   ),
-        // },
+        {
+          title: "View",
+          dataIndex: "view",
+          key: "view",
+          render: (_, {date}) => (
+            <button onClick={()=> navigate(`/reservation-calendar/details/${date}`)} className="bg-black hover:bg-primary p-1.5 text-white rounded-md">
+              <IoEyeSharp size={18} />
+            </button>
+          ),
+        },
       ];
 
 

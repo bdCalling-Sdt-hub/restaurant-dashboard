@@ -33,6 +33,8 @@ import WaitlistPage from "./pages/waitlist/WaitlistPage";
 import AssignTablePage from "./pages/assignTable/AssignTablePage";
 import RestaurantDetailsPage from "./pages/restaurantDetails/RestaurantDetailsPage";
 import ReservationCalendarPage from "./pages/ReservationCalendar/ReservationCalendarPage";
+import ScheduleDetailsPage from "./pages/scheduleDetails/ScheduleDetailsPage";
+import CalendarDetailsPage from "./pages/ReservationCalendar/CalendarDetailsPage";
 
 function App() {
   const router = createBrowserRouter(
@@ -58,6 +60,7 @@ function App() {
           <Route path="/assign-table/:bookingId" element={<AssignTablePage />}></Route>
           <Route path="/table-booking-list" element={<TableBookingListPage />}></Route>
           <Route path="/reservation-calendar" element={<ReservationCalendarPage />}></Route>
+          <Route path="/reservation-calendar/details/:date" element={<CalendarDetailsPage/>}></Route>
 
           <Route path="/profile" element={<MyDetails/>}></Route>
           <Route path="/restaurant-details" element={<RestaurantDetailsPage/>}></Route>
@@ -71,6 +74,7 @@ function App() {
           <Route path="/dining" element={<DiningPage/>}></Route>
           <Route path="/slots" element={<SlotPage/>}></Route>
           <Route path="/schedules" element={<SchedulePage/>}></Route>
+          <Route path="/schedule-details" element={<ScheduleDetailsPage/>}></Route>
           <Route path="/tables" element={<TablePage/>}></Route>
           <Route path="/tables/details/:scheduleId/:diningId" element={<TableDetailsPage/>}></Route>
 

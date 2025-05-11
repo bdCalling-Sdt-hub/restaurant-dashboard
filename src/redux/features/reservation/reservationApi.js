@@ -21,7 +21,7 @@ export const reservationApi = apiSlice.injectEndpoints({
         };
       },
       keepUnusedDataFor: 600,
-      providesTags: [TagTypes.tables],
+      providesTags: [TagTypes.reservations],
     }),
     getTablesByScheduleAndDining: builder.query({
       query: ({scheduleId, diningId}) => {
@@ -33,25 +33,29 @@ export const reservationApi = apiSlice.injectEndpoints({
       keepUnusedDataFor: 600,
       providesTags: [TagTypes.tablesByScheduleAndDining],
     }),
-    createTable: builder.mutation({
+    createReservation: builder.mutation({
       query: (data) => ({
-        url: `/table/create-table`,
+        url: `/reservation/create-reservation`,
         method: "POST",
         body: data,
       }),
       invalidatesTags: (result) =>{
         if(result?.success){
-          return [TagTypes.tables, TagTypes.tablesByScheduleAndDining]
+          return [TagTypes.reservations]
         }
         return []
       },
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          SuccessToast("Table created successfully");
+          SuccessToast("Reservation created successfully");
         } catch (err) {   
-          ErrorToast("Something Went Wrong!");  
-        }
+          const status = err?.error?.status;
+          if (status === 404) {
+            ErrorToast(err?.error?.data?.message);
+          }else {
+            ErrorToast("Something Went Wrong!");
+          }        }
       },
     }),
     updateTable: builder.mutation({
@@ -113,4 +117,4 @@ export const reservationApi = apiSlice.injectEndpoints({
 });
 
 
-export const { useGetReservationsQuery  } = reservationApi;
+export const { useGetReservationsQuery, useCreateReservationMutation  } = reservationApi;

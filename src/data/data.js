@@ -45,6 +45,11 @@ export const menuItems = [
     path: "/reservation-calendar",
     icon: FaTable,
   },
+   {
+    title: "Schedule Details",
+    path: "/schedule-details",
+    icon: MdScheduleSend,
+  },
   {
     title: "Booking Management",
     path: "/booking-management",

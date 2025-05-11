@@ -3,14 +3,15 @@ import { useEffect, useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { useGetScheduleDropDownQuery } from "../../../redux/features/schedule/scheduleApi";
-import convertUTCtimeString from "../../../utils/convertUTCtimeString";
-import { useGetDiningDropDownQuery } from "../../../redux/features/dining/diningApi";
-import { useCreateTableMutation } from "../../../redux/features/table/tableApi";
 import disabledDate from "../../../utils/disabledDate";
+import makeScheduleOptions from "../../../utils/makeScheduleOptions";
+import { useSelector } from "react-redux";
+import { useCreateReservationMutation } from "../../../redux/features/reservation/reservationApi";
 
 const CreateReservationModal = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [createTable, { isLoading, isSuccess }] = useCreateTableMutation();
+  const { scheduleOptions } = useSelector((state)=>state.schedule)
+  const [createReservation, { isLoading, isSuccess }] = useCreateReservationMutation();
   const [date, setDate] = useState("");
   const { data } = useGetScheduleDropDownQuery(
     [{ name: "date", value: date }],
@@ -19,32 +20,17 @@ const CreateReservationModal = () => {
     }
   );
  
-  const [scheduleOptions, setScheduleOptions] = useState([]);
+
   useEffect(() => {
-    if (date) {
+    if (data?.data) {
       const schedules = data?.data || [];
-      const Options = schedules?.map((schedule) => ({
-        value: schedule?._id,
-        label: (
-          convertUTCtimeString(schedule?.startDateTime) +
-          "-" +
-          convertUTCtimeString(schedule.endDateTime)
-        ).toString(),
-      }));
-      setScheduleOptions(Options);
-    } else {
-      setScheduleOptions([]);
+      makeScheduleOptions(schedules)
     }
-  }, [data, date]);
+  }, [data]);
 
 
   const [form] = Form.useForm();
-  const { data:diningData } = useGetDiningDropDownQuery();
-  const dinings = diningData?.data || [];
-  const diningOptions = dinings?.map((dining)=>({
-    value: dining?._id,
-    label: dining?.name
-  }))
+
 
   useEffect(() => {
     if (isSuccess) {
@@ -54,10 +40,9 @@ const CreateReservationModal = () => {
   }, [isSuccess, form]);
 
   const onFinish = (values) => {
-    createTable({
-      scheduleId: values.scheduleId,
-      diningId: values.diningId,
-      totalTable: Number(values.totalTable),
+    console.log(values);
+    createReservation({
+      scheduleIds: values.scheduleIds,
       seats: Number(values.seats)
     });
   };
@@ -77,6 +62,7 @@ const CreateReservationModal = () => {
         onCancel={() => setModalOpen(false)}
         maskClosable={false}
         footer={false}
+        width={680}
       >
         <Form form={form} name="add" layout="vertical" onFinish={onFinish}>
           <Form.Item
@@ -98,73 +84,30 @@ const CreateReservationModal = () => {
             />
           </Form.Item>
           <Form.Item
-            name="scheduleId"
+            name="scheduleIds"
             dependencies={["date"]}
             rules={[{ required: true, message: "Please select a schedule" }]}
             label={
               <span className="font-semibold">
                 <span className="text-red-500 mr-1">*</span>
-                Schedule
+                Schedule (multiple)
               </span>
             }
           >
             <Select
-              placeholder="Select a schedule"
+            mode="multiple"
+              placeholder="Select schedule"
               disabled={scheduleOptions.length === 0}
               style={{ width: "100%" }}
               options={scheduleOptions}
             />
-          </Form.Item>
-          <Form.Item
-            name="diningId"
-            rules={[{ required: true, message: "Please select a dining" }]}
-            label={
-              <span className="font-semibold">
-                <span className="text-red-500 mr-1">*</span>
-                Dining
-              </span>
-            }
-          >
-            <Select
-              placeholder="Select a dining"
-              disabled={diningOptions.length === 0}
-              style={{ width: "100%" }}
-              options={diningOptions}
-            />
-          </Form.Item>
-          <Form.Item
-            name="totalTable"
-            label={
-              <span className="font-semibold">
-                <span className="text-red-500 mr-1">*</span>
-                Total Table
-              </span>
-            }
-            rules={[
-              { required: true, message: "Please enter the Total Table" },
-              {
-                pattern: /^\d+$/,
-                message: "Only numeric values are allowed",
-              },
-              {
-                validator: (_, value) => {
-                  if (value && Number(value) <= 0) {
-                    return Promise.reject("Total Table must be greater than 0");
-                  }
-                  return Promise.resolve();
-                },
-              },
-            ]}
-          >
-            <Input
-              type="number"
-              placeholder="Type here"
-              onKeyUp={(e) => {
-                if (!/[0-9]/.test(e.key)) {
-                  e.preventDefault();
-                }
-              }}
-            />
+            {/* <Select
+                          mode="multiple"
+                          disabled={dropDownLoading}
+                          placeholder="Please select"
+                          style={{ width: "100%" }}
+                          options={slotOptions}
+                        /> */}
           </Form.Item>
           <Form.Item
             name="seats"

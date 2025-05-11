@@ -144,7 +144,7 @@ const CreateScheduleModal = () => {
             label={
               <span className="font-semibold">
                 <span className="text-red-500 mr-1">*</span>
-                Slots
+                Slots(multiple)
               </span>
             }
             rules={[{ required: true, message: "Select at least one slot" }]}
