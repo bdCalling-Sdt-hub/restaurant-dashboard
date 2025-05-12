@@ -1,5 +1,4 @@
 import { Pagination , Table } from 'antd';
-import convertUTCtimeString from '../../utils/convertUTCtimeString';
 import getColorClassForDate from '../../utils/getColorClassForDate';
 import UpdateBookingStatusModal from '../modal/booking/UpdateBookingStatusModal';
 
@@ -15,13 +14,12 @@ const BookingTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, se
         customerName: booking?.customerName,
         email: booking?.customerEmail,
         phone: booking?.customerPhone,
-        profileImg: booking?.profileImg,
-        startDateTime: booking?.startDateTime, //checkIn
-        endDateTime: booking?.endDateTime, //checkOut
+        profileImg: booking?.customerImg,
         status: booking?.status,
         paymentStatus: booking?.paymentStatus,
         guest: booking?.guest,
-        diningName: booking?.diningName
+        date: booking?.date,
+        time: booking?.time
       }))
 
  
@@ -44,25 +42,24 @@ const BookingTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, se
         },
         {
           title: "Date",
-          dataIndex: "startDateTime",
-          key: "startDateTime",
+          dataIndex: "date",
+          key: "date",
           render: (val) => {
-            const date = val?.split("T")[0];
-            const { bg, text, border } = getColorClassForDate(date);
+            const { bg, text, border } = getColorClassForDate(val);
             return (
               <button className={`text-sm px-2 py-1 rounded ${bg} ${text} ${border} border cursor-default`}>
-                {date}
+                {val}
               </button>
             );
           }
         },        
         {
             title: "Time",
-            dataIndex: "startDateTime",
+            dataIndex: "time",
             key: "time",
-            render: (_, record) => (
+            render: (val) => (
               <div className="text-sm text-gray-700">
-                {convertUTCtimeString(record.startDateTime)} - {convertUTCtimeString(record.endDateTime)}
+                {val}
               </div>
             )
          },
@@ -83,20 +80,11 @@ const BookingTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, se
         //   ),
         // },
         // {
-        //   title: "Email",
-        //   dataIndex: "email",
-        //   key: "email",
-        // },
         {
           title: "Contact Number",
           dataIndex: "phone",
           key: "phone",
         },
-        // {
-        //       title: "Dining",
-        //       dataIndex: "diningName",
-        //       key: "diningName"
-        //     },
         {
           title: "Guest",
           dataIndex: "guest",

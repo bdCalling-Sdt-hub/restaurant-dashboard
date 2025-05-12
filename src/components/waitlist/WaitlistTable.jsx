@@ -1,5 +1,4 @@
 import { Pagination , Table } from 'antd';
-import convertUTCtimeString from '../../utils/convertUTCtimeString';
 import getColorClassForDate from '../../utils/getColorClassForDate';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,12 +15,12 @@ const WaitlistTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, s
         customerName: booking?.customerName,
         email: booking?.customerEmail,
         phone: booking?.customerPhone,
-        profileImg: booking?.profileImg,
-        startDateTime: booking?.startDateTime, //checkIn
-        endDateTime: booking?.endDateTime, //checkOut
+        profileImg: booking?.customerImg,
         status: booking?.status,
         paymentStatus: booking?.paymentStatus,
         guest: booking?.guest,
+        date: booking?.date,
+        time: booking?.time
       }))
 
  
@@ -44,33 +43,32 @@ const WaitlistTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, s
         },
         {
           title: "Date",
-          dataIndex: "startDateTime",
-          key: "startDateTime",
+          dataIndex: "date",
+          key: "date",
           render: (val) => {
-            const date = val?.split("T")[0];
-            const { bg, text, border } = getColorClassForDate(date);
+            const { bg, text, border } = getColorClassForDate(val);
             return (
               <button className={`text-sm px-2 py-1 rounded ${bg} ${text} ${border} border cursor-default`}>
-                {date}
+                {val}
               </button>
             );
           }
         },        
         {
             title: "Time",
-            dataIndex: "startDateTime",
+            dataIndex: "time",
             key: "time",
-            render: (_, record) => (
+            render: (val) => (
               <div className="text-sm text-gray-700">
-                {convertUTCtimeString(record.startDateTime)} - {convertUTCtimeString(record.endDateTime)}
+                {val}
               </div>
             )
          },
-        {
-          title: "Email",
-          dataIndex: "email",
-          key: "email",
-        },
+        // {
+        //   title: "Email",
+        //   dataIndex: "email",
+        //   key: "email",
+        // },
         {
           title: "Contact Number",
           dataIndex: "phone",
