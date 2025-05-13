@@ -13,7 +13,7 @@ const EditProfile = ({ isLoading, user }) => {
   const [updateProfile, { isLoading: updateLoading, isSuccess }] =
     useUpdateProfileMutation();
   const [form] = Form.useForm();
-  const [imageSrc, setImageSrc] = useState(profile_placeholder_img); // Default image
+  const [imageSrc, setImageSrc] = useState(user?.profileImg); // Default image
   const fallback = profile_placeholder_img;
 
   useEffect(() => {
