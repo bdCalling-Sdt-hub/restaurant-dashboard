@@ -8,6 +8,7 @@ const TagTypes = {
     restaurant: "Restaurant",
     menus: "Menus",
     reservations: "Reservations",
+    reservationByDate: "ReservationByDate",
     bookings: "Bookings",
     waitlist: "Waitlist",
     booking: "Booking",

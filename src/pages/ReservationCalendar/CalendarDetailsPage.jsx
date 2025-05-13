@@ -37,6 +37,7 @@ const CalendarDetailsPage = () => {
           </div>
         </div>
 
+                 <h1 className="font-semibold text-2xl">Available Time Slots</h1>
 
         <button
           onClick={handleAddNew}

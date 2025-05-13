@@ -23,15 +23,15 @@ export const reservationApi = apiSlice.injectEndpoints({
       keepUnusedDataFor: 600,
       providesTags: [TagTypes.reservations],
     }),
-    getTablesByScheduleAndDining: builder.query({
-      query: ({scheduleId, diningId}) => {
+    getReservationsByDate: builder.query({
+      query: (date) => {
         return {
-          url: `/table/get-tables-by-schedule-and-dining/${scheduleId}/${diningId}`,
+          url: `/reservation/get-reservations-by-date/${date}`,
           method: "GET",
         };
       },
       keepUnusedDataFor: 600,
-      providesTags: [TagTypes.tablesByScheduleAndDining],
+      providesTags: [TagTypes.reservationByDate],
     }),
     createReservation: builder.mutation({
       query: (data) => ({
@@ -117,4 +117,4 @@ export const reservationApi = apiSlice.injectEndpoints({
 });
 
 
-export const { useGetReservationsQuery, useCreateReservationMutation  } = reservationApi;
+export const { useGetReservationsQuery, useGetReservationsByDateQuery, useCreateReservationMutation  } = reservationApi;
