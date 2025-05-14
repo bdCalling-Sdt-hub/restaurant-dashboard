@@ -1,20 +1,12 @@
-"use client"
 
 import { Clock, User, Pencil, Trash2 } from "lucide-react"
 import { useState, useEffect } from "react"
-import TimeSlotSkeleton from "./time-slot-skeleton"
 
-// Sample data structure
-interface TimeSlot {
-  id: number
-  startTime: string
-  endTime: string
-  seats: number
-}
 
-export default function TimeSlotGrid() {
+
+const TimeSlot = () => {
   const [loading, setLoading] = useState(true)
-  const [timeSlots, setTimeSlots] = useState<TimeSlot[]>([])
+  const [timeSlots, setTimeSlots] = useState([])
 
   // Simulate loading data
   useEffect(() => {
@@ -24,7 +16,7 @@ export default function TimeSlotGrid() {
       await new Promise((resolve) => setTimeout(resolve, 2000))
 
       // Sample data matching the design
-      const data: TimeSlot[] = [
+      const data = [
         { id: 1, startTime: "10:00 AM", endTime: "11:00 AM", seats: 10 },
         { id: 2, startTime: "12:00 PM", endTime: "01:00 PM", seats: 15 },
         { id: 3, startTime: "02:00 PM", endTime: "03:00 PM", seats: 8 },
@@ -82,3 +74,5 @@ export default function TimeSlotGrid() {
     </div>
   )
 }
+
+export default TimeSlot;

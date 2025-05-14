@@ -1,10 +1,9 @@
-"use client"
 
 import { CalendarX, Plus } from "lucide-react"
 
-export default function ScheduleNotFoundCard({ date, onAddSchedule }) {
+const SlotNotFoundCard = ({date}) => {
   return (
-    <div className="max-w-md mx-auto bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
       <div className="p-6">
         <div className="flex justify-center mb-5">
           <div className="relative">
@@ -21,8 +20,7 @@ export default function ScheduleNotFoundCard({ date, onAddSchedule }) {
 
         <div className="flex justify-center">
           <button
-            onClick={onAddSchedule}
-            className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors focus:outline-none"
           >
             <Plus className="h-4 w-4 mr-2" />
             Add New Schedule
@@ -32,3 +30,6 @@ export default function ScheduleNotFoundCard({ date, onAddSchedule }) {
     </div>
   )
 }
+
+
+export default SlotNotFoundCard;

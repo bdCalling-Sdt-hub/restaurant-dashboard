@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-export default function TimeSlotSkeleton() {
+const TimeSlotLoading = () =>{
   const [itemCount, setItemCount] = useState(9)
 
   // Adjust number of skeleton items based on screen width
@@ -48,3 +48,5 @@ export default function TimeSlotSkeleton() {
     </div>
   )
 }
+
+export default TimeSlotLoading;

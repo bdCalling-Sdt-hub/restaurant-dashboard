@@ -41,7 +41,7 @@ export const reservationApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result) =>{
         if(result?.success){
-          return [TagTypes.reservations]
+          return [TagTypes.reservations, TagTypes.reservationByDate]
         }
         return []
       },

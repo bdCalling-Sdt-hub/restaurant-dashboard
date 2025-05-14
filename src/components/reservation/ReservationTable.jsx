@@ -11,7 +11,8 @@ const ReservationTable = ({reservations, meta, currentPage, setCurrentPage, page
         key: index,
         serial: Number(index+1) + ((currentPage-1)*pageSize),
         date: reservation?.date,
-        totalSeats: reservation?.totalSeats
+        totalSeats: reservation?.totalSeats,
+        totalSchedules: reservation?.totalSchedules
     }))
 
  
@@ -38,6 +39,12 @@ const ReservationTable = ({reservations, meta, currentPage, setCurrentPage, page
           title: "Total Seats",
           dataIndex: "totalSeats",
           key: "totalSeats",
+          align: "center"
+        },
+         {
+          title: "Total Schedules",
+          dataIndex: "totalSchedules",
+          key: "totalSchedules",
           align: "center"
         },
         {
