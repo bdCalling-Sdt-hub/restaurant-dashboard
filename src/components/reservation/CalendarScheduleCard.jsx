@@ -1,4 +1,6 @@
-import { Clock, Edit, Trash2, Users } from "lucide-react";
+import { Clock, Users } from "lucide-react";
+import DeleteResrvationModal from "../modal/reservation/DeleteResrvationModal";
+import EditReservationModal from "../modal/reservation/EditReservationModal";
 
 const CalendarScheduleCard = ( {schedule}) => {
 
@@ -20,20 +22,9 @@ const CalendarScheduleCard = ( {schedule}) => {
                 <Users className="h-5 w-5 mr-2 text-gray-500" />
                 <span className="text-gray-700">Seats: {schedule?.seats}</span>
               </div>
-
               <div className="flex justify-end space-x-2">
-                <button
-                  className="p-2 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-500 transition-colors"
-                  aria-label="Edit schedule"
-                >
-                  <Edit className="h-4 w-4" />
-                </button>
-                <button
-                  className="p-2 rounded-full bg-red-50 hover:bg-red-100 text-red-500 transition-colors"
-                  aria-label="Delete schedule"
-                >
-                  <Trash2 className="h-4 w-4" />
-                </button>
+               <EditReservationModal reservation={schedule}/>
+               <DeleteResrvationModal reservationId={schedule?._id}/>
               </div>
             </div>
           </div>

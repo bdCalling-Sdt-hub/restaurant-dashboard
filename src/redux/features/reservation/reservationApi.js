@@ -58,15 +58,15 @@ export const reservationApi = apiSlice.injectEndpoints({
           }        }
       },
     }),
-    updateTable: builder.mutation({
+   updateReservation: builder.mutation({
       query: ({ id, data }) => ({
-        url: `/table/update-table/${id}`,
+        url: `/reservation/update-reservation/${id}`,
         method: "PATCH",
         body: data,
       }),
       invalidatesTags: (result) =>{
         if(result?.success){
-          return [TagTypes.tables, TagTypes.tablesByScheduleAndDining]
+          return [TagTypes.reservations, TagTypes.reservationByDate]
         }
         return []
       },
@@ -86,14 +86,14 @@ export const reservationApi = apiSlice.injectEndpoints({
         }
       },
     }),
-    deleteTable: builder.mutation({
+    deleteReservation: builder.mutation({
       query: (id) => ({
-        url: `/table/delete-table/${id}`,
+        url: `/reservation/delete-reservation/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: (result) =>{
         if(result?.success){
-          return [TagTypes.tables, TagTypes.tablesByScheduleAndDining]
+          return [TagTypes.reservations, TagTypes.reservationByDate]
         }
         return []
       },
@@ -117,4 +117,4 @@ export const reservationApi = apiSlice.injectEndpoints({
 });
 
 
-export const { useGetReservationsQuery, useGetReservationsByDateQuery, useCreateReservationMutation  } = reservationApi;
+export const { useGetReservationsQuery, useGetReservationsByDateQuery, useCreateReservationMutation, useUpdateReservationMutation, useDeleteReservationMutation  } = reservationApi;
