@@ -5,7 +5,11 @@ import EditReservationModal from "../modal/reservation/EditReservationModal";
 const CalendarScheduleCard = ({ schedule }) => {
   return (
     <>
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+      <div
+        className={`rounded-lg shadow-sm border border-gray-200 overflow-hidden ${
+          schedule?.seats === 0 ? "bg-red-100 border-red-300" : "bg-white"
+        }`}
+      >
         <div className="p-5">
           <div className="flex items-center mb-3">
             <Clock className="h-5 w-5 mr-2 text-blue-500" />
@@ -17,8 +21,14 @@ const CalendarScheduleCard = ({ schedule }) => {
             <span className="text-gray-700">Seats: {schedule?.seats}</span>
           </div>
           <div className="flex justify-end space-x-2">
-            <EditReservationModal reservation={schedule} />
-            <DeleteResrvationModal reservationId={schedule?._id} />
+          {schedule?.seats === 0 ? (
+            <h1 className="text-red-600">No Seats Available</h1>
+          ) : (
+            <>
+              <EditReservationModal reservation={schedule} />
+              <DeleteResrvationModal reservationId={schedule?._id} />
+            </>
+            )}
           </div>
         </div>
       </div>

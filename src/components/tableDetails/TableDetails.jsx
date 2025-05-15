@@ -1,9 +1,8 @@
-import EditTableModal from "../modal/table/EditTableModal";
-import DeleteTableModal from "../modal/table/DeleteTableModal";
 import convertUTCtimeString from "../../utils/convertUTCtimeString";
 import AddTableModal from "../modal/table/AddTableModal";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import TableCard from "./TableCard";
 
 const TableDetails = ({ tables, data }) => {
   const diningName = data?.diningName;
@@ -50,25 +49,7 @@ const TableDetails = ({ tables, data }) => {
       <div className="mx-auto bg-white shadow-lg rounded-md p-4 h-[600px] overflow-y-scroll">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {tables?.map((table, index) => (
-            <div
-              key={index}
-              className={`border p-4 rounded-lg shadow-sm flex justify-between items-center ${
-                table?.seats === 0 ? "bg-red-100 border-red-300" : "bg-white"
-              }`}
-            >
-              <div>
-                <h2 className="text-lg font-semibold">{table.name}</h2>
-                <p className="text-sm text-gray-600">Seats: {table.seats}</p>
-              </div>
-              {table?.seats === 0 ? (
-                <h1 className="text-red-600">No Seats Available</h1>
-              ) : (
-                <div className="flex space-x-2">
-                  <EditTableModal table={table} />
-                  <DeleteTableModal tableId={table?._id} />
-                </div>
-              )}
-            </div>
+           <TableCard table={table} key={index}/>
           ))}
         </div>
       </div>

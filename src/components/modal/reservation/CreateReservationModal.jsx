@@ -7,11 +7,15 @@ import disabledDate from "../../../utils/disabledDate";
 import makeScheduleOptions from "../../../utils/makeScheduleOptions";
 import { useSelector } from "react-redux";
 import { useCreateReservationMutation } from "../../../redux/features/reservation/reservationApi";
+import { useGetDiningDropDownQuery } from "../../../redux/features/dining/diningApi";
 
 const CreateReservationModal = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const { scheduleOptions } = useSelector((state)=>state.schedule)
+  const { scheduleOptions } = useSelector((state)=>state.schedule);
+  const { diningOptions } = useSelector((state)=>state.dining);
   const [createReservation, { isLoading, isSuccess }] = useCreateReservationMutation();
+  //diningDropdown
+  useGetDiningDropDownQuery();
   const [date, setDate] = useState("");
   const { data } = useGetScheduleDropDownQuery(
     [{ name: "date", value: date }],
@@ -43,6 +47,7 @@ const CreateReservationModal = () => {
     console.log(values);
     createReservation({
       scheduleIds: values.scheduleIds,
+      dinings: values.dinings,
       seats: Number(values.seats)
     });
   };
@@ -57,7 +62,11 @@ const CreateReservationModal = () => {
         Add New
       </Button>
       <Modal
-        title={<span className="font-bold text-xl">Add New Reservation Calendar</span>}
+        title={
+          <span className="font-bold text-xl">
+            Add New Reservation Calendar
+          </span>
+        }
         open={modalOpen}
         onCancel={() => setModalOpen(false)}
         maskClosable={false}
@@ -95,19 +104,30 @@ const CreateReservationModal = () => {
             }
           >
             <Select
-            mode="multiple"
+              mode="multiple"
               placeholder="Select schedule"
               disabled={scheduleOptions.length === 0}
               style={{ width: "100%" }}
               options={scheduleOptions}
             />
-            {/* <Select
-                          mode="multiple"
-                          disabled={dropDownLoading}
-                          placeholder="Please select"
-                          style={{ width: "100%" }}
-                          options={slotOptions}
-                        /> */}
+          </Form.Item>
+           <Form.Item
+            name="dinings"
+            rules={[{ required: true, message: "Please select atleast one dining" }]}
+            label={
+              <span className="font-semibold">
+                <span className="text-red-500 mr-1">*</span>
+                Dining (multiple)
+              </span>
+            }
+          >
+            <Select
+              mode="multiple"
+              placeholder="Select dining"
+              disabled={diningOptions.length === 0}
+              style={{ width: "100%" }}
+              options={diningOptions}
+            />
           </Form.Item>
           <Form.Item
             name="seats"
