@@ -15,6 +15,7 @@ const TagTypes = {
     slots: "Slots",
     slotDropDown: "SlotDropDown",
     schedules: "Schedules",
+    schedulesByDate: "SchedulesByDate",
     scheduleDropDown: "ScheduleDropDown",
     myDining: "MyDining",
     diningDropDown: "diningDropDown",

@@ -1,28 +1,26 @@
-
 import { useState } from "react";
 import ListLoading from "../Loader/ListLoading";
 import TableBoxTable from "./TableBoxTable";
 import CreateTableModal from "../modal/table/CreateTableModal";
 import { DatePicker } from "antd";
 import { useGetTablesQuery } from "../../redux/features/table/tableApi";
-
+import { useDispatch, useSelector } from "react-redux";
+import dayjs from "dayjs";
+import { SetTableSelectedDate } from "../../redux/features/table/tableSlice";
 
 const TableList = () => {
-  const [ currentPage, setCurrentPage ] = useState(1);
-  const [ pageSize, setPageSize ] = useState(10);
-  const [date, setDate] = useState("");
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const { tableSelectedDate } = useSelector((state) => state.table);
+  const dispatch = useDispatch();
 
   const { data, isLoading } = useGetTablesQuery([
     { name: "page", value: currentPage },
     { name: "limit", value: pageSize },
-    { name: "date", value: date}
+    { name: "date", value: tableSelectedDate },
   ]);
-  const tables = data?.data || []
+  const tables = data?.data || [];
   const meta = data?.meta;
-
- 
-    
 
   return (
     <>
@@ -32,9 +30,9 @@ const TableList = () => {
         <div className="mr-20 px-6 flex gap-x-2">
           <span className="text-xl font-semibold">Filter:</span>
           <DatePicker
+            value={tableSelectedDate ? dayjs(tableSelectedDate) : null}
             onChange={(_, dateString) => {
-              console.log(dateString);
-              setDate(dateString);
+              dispatch(SetTableSelectedDate(dateString));
             }}
             style={{ width: "100%" }}
           />
@@ -54,6 +52,6 @@ const TableList = () => {
       )}
     </>
   );
-}
+};
 
 export default TableList;

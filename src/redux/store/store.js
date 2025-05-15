@@ -5,6 +5,7 @@ import userSliceReducer from '../features/user/userSlice'
 import scheduleSliceReducer from '../features/schedule/scheduleSlice'
 import bookingSliceReducer from '../features/booking/bookingSlice'
 import diningSliceReducer from '../features/dining/diningSlice'
+import reservationSliceReducer from '../features/reservation/reservationSlice'
 
 const store = configureStore({
    reducer: {
@@ -13,7 +14,8 @@ const store = configureStore({
      schedule: scheduleSliceReducer,
      table: tableSliceReducer,
      booking: bookingSliceReducer,
-     dining: diningSliceReducer
+     dining: diningSliceReducer,
+     reservation: reservationSliceReducer
    },
    middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),

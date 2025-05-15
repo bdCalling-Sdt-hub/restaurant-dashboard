@@ -22,9 +22,9 @@ import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
 import SlotPage from "./pages/slot/SlotPage";
 import SchedulePage from "./pages/schedule/SchedulePage";
+import ScheduleDetailsPage from "./pages/schedule/ScheduleDetailsPage";
 import TablePage from "./pages/table/TablePage";
 import TableDetailsPage from "./pages/TableDetails/TableDetailsPage";
-import TableBookingSchedulePage from "./pages/tableBookingSchedule/TableBookingSchedulePage";
 import TableBookingListPage from "./pages/tableBookingList/TableBookingListPage";
 import DiningPage from "./pages/dining/DiningPage";
 import NotFoundPage from "./pages/NotFound/NotFoundPage";
@@ -33,7 +33,6 @@ import WaitlistPage from "./pages/waitlist/WaitlistPage";
 import AssignTablePage from "./pages/assignTable/AssignTablePage";
 import RestaurantDetailsPage from "./pages/restaurantDetails/RestaurantDetailsPage";
 import ReservationCalendarPage from "./pages/ReservationCalendar/ReservationCalendarPage";
-import ScheduleDetailsPage from "./pages/scheduleDetails/ScheduleDetailsPage";
 import CalendarDetailsPage from "./pages/ReservationCalendar/CalendarDetailsPage";
 
 function App() {
@@ -53,10 +52,8 @@ function App() {
           ></Route>
 
           <Route path="/menu" element={<Menu />}></Route>
-          {/* <Route path="/add-category" element={<AddCategory />}></Route> */}
 
           {/* <Route path="/table-booking" element={<TableBooking />}></Route> */}
-          <Route path="/table-booking-schedule" element={<TableBookingSchedulePage />}></Route>
           <Route path="/assign-table/:bookingId" element={<AssignTablePage />}></Route>
           <Route path="/table-booking-list" element={<TableBookingListPage />}></Route>
           <Route path="/reservation-calendar" element={<ReservationCalendarPage />}></Route>
@@ -74,7 +71,7 @@ function App() {
           <Route path="/dining" element={<DiningPage/>}></Route>
           <Route path="/slots" element={<SlotPage/>}></Route>
           <Route path="/schedules" element={<SchedulePage/>}></Route>
-          <Route path="/schedule-details" element={<ScheduleDetailsPage/>}></Route>
+          <Route path="/schedule-details/:date" element={<ScheduleDetailsPage/>}></Route>
           <Route path="/tables" element={<TablePage/>}></Route>
           <Route path="/tables/details/:scheduleId/:diningId" element={<TableDetailsPage/>}></Route>
 

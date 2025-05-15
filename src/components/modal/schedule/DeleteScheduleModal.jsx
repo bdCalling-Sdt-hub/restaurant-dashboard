@@ -1,8 +1,8 @@
 import { Modal } from "antd";
 import { useEffect, useState } from "react";
 import { CgSpinnerTwo } from "react-icons/cg";
-import { DeleteOutlined } from "@ant-design/icons";
 import { useDeleteScheduleMutation } from "../../../redux/features/schedule/scheduleApi";
+import { Trash2 } from "lucide-react";
 
 const DeleteScheduleModal = ({ scheduleId }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -23,9 +23,10 @@ const DeleteScheduleModal = ({ scheduleId }) => {
     <>
       <button
         onClick={() => setModalOpen(true)}
-        className="bg-red-500 hover:bg-red-700 !text-white font-bold py-2 px-4 rounded"
+        className="p-2 rounded-full bg-red-50 hover:bg-red-100 text-red-500 transition-colors"
+        aria-label="Delete schedule"
       >
-        <DeleteOutlined />
+        <Trash2 className="h-4 w-4" />
       </button>
       <Modal
         title="Are you sure, you want to delete?"

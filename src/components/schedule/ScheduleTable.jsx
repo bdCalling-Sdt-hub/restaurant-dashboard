@@ -1,6 +1,7 @@
 import { Pagination, Table } from "antd";
 import getColorClassForDate from "../../utils/getColorClassForDate";
 import { IoEyeSharp } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 const ScheduleTable = ({
   schedules,
@@ -10,12 +11,15 @@ const ScheduleTable = ({
   pageSize,
   setPageSize,
 }) => {
+  const navigate = useNavigate();
   const dataSource = schedules?.map((schedule, index) => ({
     key: index,
     serial: Number(index + 1) + (currentPage - 1) * pageSize,
     date: schedule?.date,
     count: schedule?.count,
   }));
+
+  
 
   const columns = [
     {
@@ -47,8 +51,8 @@ const ScheduleTable = ({
       title: "View",
       dataIndex: "view",
       key: "view",
-      render: () => (
-        <button className="bg-black hover:bg-primary p-1.5 text-white rounded-md">
+      render: (_, {date}) => (
+        <button onClick={()=> navigate(`/schedule-details/${date}`)} className="bg-black hover:bg-primary p-1.5 text-white rounded-md">
           <IoEyeSharp size={18} />
         </button>
       ),

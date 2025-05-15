@@ -28,7 +28,7 @@ const MyRestaurant = ({ data: restaurant }) => {
             e.currentTarget.onerror = null; // Prevent infinite loop
             e.currentTarget.src = restaurant_img; // placeholder_img;
           }}
-          className="w-full h-auto object-cover"
+          className="w-full h-[300px] object-cover"
         />
         <UpdateImageModal restaurant={restaurant}/>
       </div>

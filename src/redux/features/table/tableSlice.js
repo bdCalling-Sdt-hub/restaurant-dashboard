@@ -7,8 +7,9 @@ const initialState = {
   time: "",
   diningName: "",
   tables: [],
-  selectedTable:"",
-  selectedTableName:""
+  selectedTable: "",
+  selectedTableName: "",
+  tableSelectedDate: null,
 };
 
 const tableSlice = createSlice({
@@ -39,10 +40,11 @@ const tableSlice = createSlice({
     SetSelectedTableName: (state, action) => {
       state.selectedTableName = action.payload;
     },
+    SetTableSelectedDate: (state, action) => {
+      state.tableSelectedDate = action.payload;
+    },
   },
 });
-
-
 
 export const {
   SetSelectedDate,
@@ -52,10 +54,9 @@ export const {
   SetDiningName,
   SetTables,
   SetSelectedTable,
-  SetSelectedTableName
+  SetSelectedTableName,
+  SetTableSelectedDate,
 } = tableSlice.actions;
-
-
 
 const tableSliceReducer = tableSlice.reducer;
 export default tableSliceReducer;

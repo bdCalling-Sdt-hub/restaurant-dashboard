@@ -73,7 +73,7 @@ export const reservationApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
-            SuccessToast("Table is updated successfully");
+            SuccessToast("Schedule is updated successfully");
         } catch (err) {
           const status = err?.error?.status;
           if (status === 404) {
@@ -100,7 +100,7 @@ export const reservationApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          SuccessToast("Table is deleted successfully");
+          SuccessToast("Schedule is deleted successfully");
         } catch (err) {
           const status = err?.error?.status;
           if (status === 404) {

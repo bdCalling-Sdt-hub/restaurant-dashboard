@@ -41,14 +41,9 @@ export const menuItems = [
     icon: FaTable,
   },
   {
-    title: "Reservation Calendar",
+    title: "Booking Calendar (App)",
     path: "/reservation-calendar",
     icon: FaTable,
-  },
-   {
-    title: "Schedule Details",
-    path: "/schedule-details",
-    icon: MdScheduleSend,
   },
   {
     title: "Booking Management",
