@@ -1,21 +1,26 @@
 import { useDispatch, useSelector } from "react-redux";
-import { SetSelectedTable, SetSelectedTableName } from "../../redux/features/table/tableSlice";
+import { SetSelectedTable, SetSelectedTableName, SetSelectedTableSeats, SetShowSummary } from "../../redux/features/table/tableSlice";
 
 const TableListItem = ({ table }) => {
   const dispatch = useDispatch();
   const { selectedTable } = useSelector((state) => state.table);
-  const { booking } = useSelector((state) => state.booking);
+    const { booking } = useSelector((state) => state.booking);
+
 
   const handleTableSelect = (tableId) => {
     if (selectedTable === tableId) {
       dispatch(SetSelectedTable(""));
+      dispatch(SetSelectedTableSeats(table.seats));
+      dispatch(SetShowSummary(false))
     } else {
       dispatch(SetSelectedTable(tableId));
       dispatch(SetSelectedTableName(table?.name))
+      dispatch(SetSelectedTableSeats(table.seats));
+      dispatch(SetShowSummary(false))
     }
   };
 
-  const available = table?.seats > 0;
+  const available = table?.seats > 0 && booking?.remainingBookedGuests !==0;
  
 
   return (

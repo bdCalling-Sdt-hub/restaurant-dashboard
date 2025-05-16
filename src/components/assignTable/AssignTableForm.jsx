@@ -1,8 +1,11 @@
+/* eslint-disable no-unused-vars */
 import { useDispatch, useSelector } from "react-redux";
 import { Check } from "lucide-react";
 import TableBookingModal from "../modal/tableBooking/TableBookingModal";
 import { Form, Input } from "antd";
-import { SetTableBookingSeats } from "../../redux/features/table/tableSlice";
+import { SetShowSummary, SetTableBookingSeats } from "../../redux/features/table/tableSlice";
+import { ErrorToast } from "../../helper/ValidationHelper";
+import { useEffect } from "react";
 
 const AssignTableForm = () => {
   const dispatch = useDispatch();
@@ -12,15 +15,29 @@ const AssignTableForm = () => {
     diningId,
     diningName,
     selectedTable,
+    selecetedTableSeats,
     selectedTableName,
     tableBookingSeats,
     time,
+    showSummary
   } = useSelector((state) => state.table);
   const { booking } = useSelector((state) => state.booking);
   const [form] = Form.useForm();
 
+
   const onFinish = (values) => {
-    dispatch(SetTableBookingSeats(Number(values.seats)))
+     if(Number(values.seats) > booking?.remainingBookedGuests){
+      ErrorToast(`You can book only ${booking?.remainingBookedGuests} seat(s) more`);
+      return
+    }
+    if(Number(values.seats) > selecetedTableSeats){
+      ErrorToast(`This table has only ${selecetedTableSeats} seat(s)`);
+      return
+    }
+    else{
+      dispatch(SetShowSummary(true))
+      dispatch(SetTableBookingSeats(Number(values.seats)))
+    }
   }
 
   return (
@@ -44,7 +61,7 @@ const AssignTableForm = () => {
             <div className="flex items-center gap-2">
               <span className="w-20 font-medium">Total Guest:</span>
               <span className="bg-pink-100 text-pink-800 border border-pink-300 px-3 py-1 rounded-full text-xs font-semibold">
-                {/* In door */} {booking?.guest}
+                {/* In door */} {booking?.remainingBookedGuests}
               </span>
             </div>
           </div>
@@ -97,7 +114,7 @@ const AssignTableForm = () => {
                         }
                       }}
                       onChange={(e)=>{
-                        dispatch(SetTableBookingSeats(0))
+                        dispatch(SetShowSummary(false))
                       }}
                     />
                   </Form.Item>
@@ -115,7 +132,7 @@ const AssignTableForm = () => {
        
 
         {/* Reservation Summary */}
-        {selectedTable && scheduleId && diningId && tableBookingSeats !== 0 && (
+        {selectedTable && scheduleId && diningId && tableBookingSeats !== 0 && showSummary &&(
           <>
             <div className="mt-6 p-4 bg-rose-50 rounded-lg border border-rose-100">
               <h3 className="font-medium text-rose-800 flex items-center gap-1">

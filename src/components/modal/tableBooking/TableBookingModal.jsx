@@ -11,8 +11,8 @@ const TableBookingModal = () => {
   const [createTableBooking, { isLoading, isSuccess }] =
     useCreateTableBookingMutation();
   const { booking } = useSelector((state) => state.booking);
-  const { time, diningName, selectedTable, selectedTableName } = useSelector((state) => state.table);
-  const { token, customerName, guest } = booking || {};
+  const { time, diningName, selectedTable, selectedTableName, tableBookingSeats } = useSelector((state) => state.table);
+  const { token, customerName } = booking || {};
   const navigate = useNavigate();
   const dispatch = useDispatch()
 
@@ -24,7 +24,7 @@ const TableBookingModal = () => {
       dispatch(SetSelectedDate(""))
       dispatch(SetScheduleId(""))
       dispatch(SetDiningId(""))
-      navigate("/table-booking-list")
+      //navigate("/table-booking-list")
     }
   }, [isSuccess, navigate, dispatch]);
 
@@ -32,6 +32,7 @@ const TableBookingModal = () => {
     createTableBooking({
       tableId: selectedTable,
       bookingId: booking?._id,
+      guest: tableBookingSeats
     });
   };
 
@@ -76,7 +77,7 @@ const TableBookingModal = () => {
               <span className="font-medium">Dining:</span> {diningName}
             </p>
             <p>
-              <span className="font-medium">Guest:</span> {guest}
+              <span className="font-medium">Seats: </span> {tableBookingSeats}
             </p>
           </div>
           <div className="mt-6">
