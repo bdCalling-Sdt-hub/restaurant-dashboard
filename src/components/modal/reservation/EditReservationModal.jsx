@@ -1,13 +1,18 @@
-import { Modal, Form, Input } from "antd";
+import { Modal, Form, Input, Select } from "antd";
 import { useEffect, useState } from "react";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { Edit } from "lucide-react";
 import { useUpdateReservationMutation } from "../../../redux/features/reservation/reservationApi";
+import { useGetDiningDropDownQuery } from "../../../redux/features/dining/diningApi";
+import { useSelector } from "react-redux";
 
 const EditReservationModal = ({ reservation }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [updateReservation, { isLoading, isSuccess }] = useUpdateReservationMutation();
   const [form] = Form.useForm();
+  const { diningOptions } = useSelector((state)=>state.dining);
+  useGetDiningDropDownQuery();
+  
 
   useEffect(() => {
     if (isSuccess) {
@@ -50,9 +55,27 @@ const EditReservationModal = ({ reservation }) => {
           form={form}
           name="edit"
           layout="vertical"
-          initialValues={{ seats: reservation?.seats }}
+          initialValues={{ seats: reservation?.seats, dinings: reservation?.diningIds }}
           onFinish={onFinish}
         >
+           <Form.Item
+            name="dinings"
+            rules={[{ required: true, message: "Please select atleast one dining" }]}
+            label={
+              <span className="font-semibold">
+                <span className="text-red-500 mr-1">*</span>
+                Dining (multiple)
+              </span>
+            }
+          >
+            <Select
+              mode="multiple"
+              placeholder="Select dining"
+              disabled={diningOptions.length === 0}
+              style={{ width: "100%" }}
+              options={diningOptions}
+            />
+          </Form.Item>
           <Form.Item
             name="seats"
             label={

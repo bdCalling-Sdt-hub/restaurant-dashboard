@@ -1,10 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-  SetDiningId,
-  SetDiningName,
-} from "../../redux/features/table/tableSlice";
 import { Check } from "lucide-react";
 import TableBookingModal from "../modal/tableBooking/TableBookingModal";
+import { Form, Input } from "antd";
+import { SetTableBookingSeats } from "../../redux/features/table/tableSlice";
 
 const AssignTableForm = () => {
   const dispatch = useDispatch();
@@ -15,11 +13,15 @@ const AssignTableForm = () => {
     diningName,
     selectedTable,
     selectedTableName,
+    tableBookingSeats,
     time,
   } = useSelector((state) => state.table);
-  const { diningOptions } = useSelector((state) => state.dining);
   const { booking } = useSelector((state) => state.booking);
+  const [form] = Form.useForm();
 
+  const onFinish = (values) => {
+    dispatch(SetTableBookingSeats(Number(values.seats)))
+  }
 
   return (
     <>
@@ -40,63 +42,80 @@ const AssignTableForm = () => {
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-20 font-medium">Guest:</span>
+              <span className="w-20 font-medium">Total Guest:</span>
               <span className="bg-pink-100 text-pink-800 border border-pink-300 px-3 py-1 rounded-full text-xs font-semibold">
                 {/* In door */} {booking?.guest}
               </span>
             </div>
           </div>
         </div>
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">
-            * Dining
-          </label>
-          <select
-            className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white disabled:text-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed"
-            value={diningId}
-            onChange={(e) => {
-              dispatch(SetDiningId(e.target.value));
-              const selectedLabel =
-                e.target.options[e.target.selectedIndex].text;
-              dispatch(SetDiningName(selectedLabel));
-            }}
-            disabled={diningOptions.length === 0 || !scheduleId}
-          >
-            <option value="" disabled>
-              Select a dining
-            </option>
-            {diningOptions?.map((dining, index) => (
-              <option key={index} value={dining.value}>
-                {dining.label}
-              </option>
-            ))}
-          </select>
-        </div>
-        {/* Summary Part */}
-        {/* {selectedDate && scheduleId && diningId && ( */}
-        {/* <div className="border-t pt-4"> */}
-        {/* <h3 className="text-sm font-semibold text-gray-700 mb-3"> */}
-        {/* Selected Summary */}
-        {/* </h3> */}
-        {/* <div className="space-y-2 text-sm text-gray-700"> */}
-        {/* <div className="flex items-center gap-2"> */}
-        {/* <span className="w-20 font-medium">Schedule:</span> */}
-        {/* <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold"> */}
-        {/* 10:00 AM–11:00 AM {time} */}
-        {/* </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="w-20 font-medium">Dining:</span>
-                <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs font-semibold"> */}
-        {/* In door {diningName} */}
-        {/* </span>
-              </div>
-            </div>
-          </div> */}
-        {/* )} */}
+
+        {
+          selectedTable && (
+            <>
+               <Form
+                  form={form}
+                  name="edit"
+                  layout="vertical"
+                  onFinish={onFinish}
+                >
+                   
+                  <Form.Item
+                    name="seats"
+                    label={
+                      <span className="font-semibold">
+                        <span className="text-red-500 mr-1">*</span>
+                        Seats
+                      </span>
+                    }
+                    rules={[
+                      { required: true, message: "Please enter the seat(s)" },
+                      {
+                        pattern: /^\d+$/,
+                        message: "Only numeric values are allowed",
+                      },
+                      {
+                        min: 1,
+                        message: "enter minimum one seat"
+                      },
+                      {
+                        validator: (_, value) => {
+                          if (value && Number(value) <= 0) {
+                            return Promise.reject("Price must be greater than 0");
+                          }
+                          return Promise.resolve();
+                        },
+                      },
+                    ]}
+                  >
+                    <Input
+                      type="number"
+                      placeholder="Type here"
+                      onKeyUp={(e) => {
+                        if (!/[0-9]/.test(e.key)) {
+                          e.preventDefault();
+                        }
+                      }}
+                      onChange={(e)=>{
+                        dispatch(SetTableBookingSeats(0))
+                      }}
+                    />
+                  </Form.Item>
+                  <button
+                    type="submit"
+                    className="w-full mt-1 bg-rose-500 hover:bg-rose-600 duration-200 p-2 border-0 rounded-md text-white flex justify-center items-center gap-x-2 disabled:cursor-not-allowed"
+                  >
+                    Set
+                  </button>
+                </Form>
+            </>
+          )
+        }
+
+       
 
         {/* Reservation Summary */}
-        {selectedTable && scheduleId && diningId && (
+        {selectedTable && scheduleId && diningId && tableBookingSeats !== 0 && (
           <>
             <div className="mt-6 p-4 bg-rose-50 rounded-lg border border-rose-100">
               <h3 className="font-medium text-rose-800 flex items-center gap-1">
@@ -113,7 +132,7 @@ const AssignTableForm = () => {
                   <span className="font-medium">Time:</span> {time}
                 </p>
                 <p>
-                  <span className="font-medium">Guest:</span> {booking?.guest}
+                  <span className="font-medium">Seat(s):</span> {tableBookingSeats}
                 </p>
                 <p>
                   <span className="font-medium">Dining:</span> {diningName}

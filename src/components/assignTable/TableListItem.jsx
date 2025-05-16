@@ -15,7 +15,7 @@ const TableListItem = ({ table }) => {
     }
   };
 
-  const available = table?.seats > 0 && table?.seats >= booking.guest;
+  const available = table?.seats > 0;
  
 
   return (

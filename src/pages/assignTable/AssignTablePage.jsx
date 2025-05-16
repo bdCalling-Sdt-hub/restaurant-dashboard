@@ -7,9 +7,8 @@ import BookingLoading from "../../components/Loader/BookingLoading";
 import AssignTable from "../../components/assignTable/AssignTable";
 import { useEffect } from "react";
 import { SetBooking } from "../../redux/features/booking/bookingSlice";
-import { SetDiningId, SetScheduleId, SetSelectedDate, SetSelectedTable, SetSelectedTableName, SetTime } from "../../redux/features/table/tableSlice";
+import { SetDiningId, SetDiningName, SetScheduleId, SetSelectedDate, SetSelectedTable, SetSelectedTableName, SetTime } from "../../redux/features/table/tableSlice";
 import makeScheduleOptions from "../../utils/makeScheduleOptions";
-import convertUTCtimeString from "../../utils/convertUTCtimeString";
 
 const AssignTablePage = () => {
   const dispatch = useDispatch();
@@ -20,11 +19,15 @@ const AssignTablePage = () => {
   useEffect(() => {
     if (data?.data) {
       dispatch(SetBooking(data.data));
-      const date = data?.data?.startDateTime?.split("T")[0];
-      const Time = convertUTCtimeString(data?.data?.startDateTime) +"-"+ convertUTCtimeString(data?.data?.endDateTime)
+      const date = data?.data?.date;
+      const Time = data?.data?.time;
       dispatch(SetSelectedDate(date));
       dispatch(SetTime(Time));
       dispatch(SetScheduleId(data?.data?.scheduleId));
+      dispatch(SetDiningId(data?.data?.diningId));
+      dispatch(SetDiningName(data?.data?.diningName));
+
+
       if(selectedDate !== date){
          dispatch(SetScheduleId(""));
          dispatch(SetDiningId(""));

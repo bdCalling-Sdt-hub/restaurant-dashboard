@@ -16,6 +16,7 @@ const WaitlistTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, s
         email: booking?.customerEmail,
         phone: booking?.customerPhone,
         profileImg: booking?.customerImg,
+        diningName: booking?.diningName,
         status: booking?.status,
         paymentStatus: booking?.paymentStatus,
         guest: booking?.guest,
@@ -69,8 +70,13 @@ const WaitlistTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, s
         //   dataIndex: "email",
         //   key: "email",
         // },
+         {
+          title: "Dining",
+          dataIndex: "diningName",
+          key: "diningName",
+        },
         {
-          title: "Contact Number",
+          title: "Contact",
           dataIndex: "phone",
           key: "phone",
         },

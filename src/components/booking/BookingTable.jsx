@@ -15,6 +15,7 @@ const BookingTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, se
         email: booking?.customerEmail,
         phone: booking?.customerPhone,
         profileImg: booking?.customerImg,
+        diningName: booking?.diningName,
         status: booking?.status,
         paymentStatus: booking?.paymentStatus,
         guest: booking?.guest,
@@ -81,7 +82,12 @@ const BookingTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, se
         // },
         // {
         {
-          title: "Contact Number",
+          title: "Dining",
+          dataIndex: "diningName",
+          key: "diningName",
+        },
+        {
+          title: "Contact",
           dataIndex: "phone",
           key: "phone",
         },
@@ -93,7 +99,7 @@ const BookingTable = ({bookings, meta, currentPage, setCurrentPage, pageSize, se
           width: 80,
         },
         {
-          title: "Payment Status",
+          title: "Status",
           dataIndex: "paymentStatus",
           key: "paymentStatus",
           align: "center",

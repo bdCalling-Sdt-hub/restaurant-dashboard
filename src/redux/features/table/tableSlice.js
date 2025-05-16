@@ -9,7 +9,9 @@ const initialState = {
   tables: [],
   selectedTable: "",
   selectedTableName: "",
+  selecetedTableSeats:0,
   tableSelectedDate: null,
+  tableBookingSeats: 0,
 };
 
 const tableSlice = createSlice({
@@ -37,11 +39,17 @@ const tableSlice = createSlice({
     SetSelectedTable: (state, action) => {
       state.selectedTable = action.payload;
     },
+    SetSelectedTableSeats: (state, action) => {
+      state.selecetedTableSeats = action.payload;
+    },
     SetSelectedTableName: (state, action) => {
       state.selectedTableName = action.payload;
     },
     SetTableSelectedDate: (state, action) => {
       state.tableSelectedDate = action.payload;
+    },
+    SetTableBookingSeats: (state, action) => {
+      state.tableBookingSeats = action.payload;
     },
   },
 });
@@ -54,8 +62,10 @@ export const {
   SetDiningName,
   SetTables,
   SetSelectedTable,
+  SetSelectedTableSeats,
   SetSelectedTableName,
   SetTableSelectedDate,
+  SetTableBookingSeats
 } = tableSlice.actions;
 
 const tableSliceReducer = tableSlice.reducer;
