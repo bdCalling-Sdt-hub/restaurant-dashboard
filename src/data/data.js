@@ -16,6 +16,11 @@ export const menuItems = [
     icon: RiRestaurantLine,
   },
   // {
+  //   title: "Location Form",
+  //   path: "/map",
+  //   icon: RiRestaurantLine,
+  // },
+  // {
   //   title: "Dashboard",
   //   path: "/dashboard",
   //   icon: RiPieChart2Fill,

@@ -1,15 +1,17 @@
 import restaurant_img from "../../assets/images/restaurant.png";
-import { MapPin, Star, Tag, Check, DollarSign, X } from "lucide-react";
+import { MapPin, Star, Tag, Check, DollarSign, X, SquarePen } from "lucide-react";
 import UpdateNameModal from "../modal/restaurant/UpdateNameModal";
 import UpdateImageModal from "../modal/restaurant/UpdateImageModal";
 import UpdateAddressModal from "../modal/restaurant/UpdateAddressModal";
-import UpdateLocationModal from "../modal/restaurant/UpdateLocationModal";
 import UpdateInformationModal from "../modal/restaurant/UpdateInformationModal";
 import UpdateDiscountModal from "../modal/restaurant/UpdateDiscountModal";
 import UpdateFeaturesModal from "../modal/restaurant/UpdateFeaturesModal";
 import UpdateKeywordsModal from "../modal/restaurant/UpdateKeywordsModal";
+import { useNavigate } from "react-router-dom";
+import UpdateLocationModal from "../modal/restaurant/UpdateLocationModal";
 
 const MyRestaurant = ({ data: restaurant }) => {
+  const navigate = useNavigate()
 
   return (
     <div className="max-w-7xl mx-auto p-4 md:p-6 bg-white">
@@ -30,7 +32,7 @@ const MyRestaurant = ({ data: restaurant }) => {
           }}
           className="w-full h-[300px] object-cover"
         />
-        <UpdateImageModal restaurant={restaurant}/>
+        <UpdateImageModal restaurant={restaurant} />
       </div>
 
       {/* Main Info Grid */}
@@ -38,7 +40,8 @@ const MyRestaurant = ({ data: restaurant }) => {
         {/* Left Column */}
         <div className="space-y-4">
           {/* Address */}
-          <div className="flex items-start justify-between group">
+          <div className="bg-gray-50 rounded-md">
+            <div className="flex items-start justify-between group p-3">
             <div className="flex items-start">
               <MapPin className="w-5 h-5 text-gray-600 mt-1 mr-2 flex-shrink-0" />
               <div>
@@ -46,19 +49,26 @@ const MyRestaurant = ({ data: restaurant }) => {
                 <p className="text-gray-600">{restaurant.address}</p>
               </div>
             </div>
-            <UpdateAddressModal restaurant={restaurant} />
+             <button
+                onClick={() => navigate(`/restaurant/update-location`)}
+                className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
+                aria-label="Edit restaurant name"
+              >
+                <SquarePen className="w-5 h-5" />
+              </button>
           </div>
 
           {/* Coordinates */}
           <div className="bg-gray-50 p-3 rounded-md relative group">
             <div className="flex justify-between items-start">
               <h3 className="font-semibold text-gray-800 mb-1">Location</h3>
-              <UpdateLocationModal restaurant={restaurant} />
+            
             </div>
             <p className="text-sm text-gray-600">
               Latitude: {restaurant.latitude} | Longitude:{" "}
               {restaurant.longitude}
             </p>
+          </div>
           </div>
 
           {/* Discount */}
@@ -74,7 +84,7 @@ const MyRestaurant = ({ data: restaurant }) => {
           <div className="relative group">
             <div className="flex justify-between items-start mb-2">
               <h3 className="font-semibold text-gray-800">Keywords</h3>
-              <UpdateKeywordsModal restaurant={restaurant}/>
+              <UpdateKeywordsModal restaurant={restaurant} />
             </div>
             <div className="flex flex-wrap gap-2">
               {restaurant.keywords.map((keyword, index) => (
@@ -99,7 +109,7 @@ const MyRestaurant = ({ data: restaurant }) => {
                 <h3 className="font-semibold text-gray-800 mr-2">Rating</h3>
                 <div className="flex items-center gap-x-1">
                   <Star className={`w-4 h-4 fill-amber-400 text-amber-400`} />
-                  <span className="text-xl font-bold text-amber-500">
+                  <span className="text-md font-bold text-amber-500">
                     {restaurant?.ratings}
                   </span>
                   <span>({restaurant?.totalReview} reviews)</span>
@@ -150,7 +160,7 @@ const MyRestaurant = ({ data: restaurant }) => {
       <div className="border-t pt-6">
         <div className="flex justify-between items-center mb-4">
           <h3 className="font-semibold text-gray-800 text-lg">Features</h3>
-          <UpdateFeaturesModal restaurant={restaurant}/>
+          <UpdateFeaturesModal restaurant={restaurant} />
         </div>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {restaurant?.features?.map((feature, index) => (

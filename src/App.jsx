@@ -34,6 +34,9 @@ import AssignTablePage from "./pages/assignTable/AssignTablePage";
 import RestaurantDetailsPage from "./pages/restaurantDetails/RestaurantDetailsPage";
 import ReservationCalendarPage from "./pages/ReservationCalendar/ReservationCalendarPage";
 import CalendarDetailsPage from "./pages/ReservationCalendar/CalendarDetailsPage";
+import LocationForm from "./components/form/LocationForm";
+import UpdateLocationForm from "./components/Location/UpdateLocationForm";
+import UpdateLocationPage from "./pages/location/UpdateLocationPage";
 
 function App() {
   const router = createBrowserRouter(
@@ -52,6 +55,8 @@ function App() {
           ></Route>
 
           <Route path="/menu" element={<Menu />}></Route>
+          <Route path="/map" element={<LocationForm />}></Route>
+           <Route path="/restaurant/update-location" element={<UpdateLocationPage />}></Route>
 
           {/* <Route path="/table-booking" element={<TableBooking />}></Route> */}
           <Route path="/assign-table/:bookingId" element={<AssignTablePage />}></Route>
