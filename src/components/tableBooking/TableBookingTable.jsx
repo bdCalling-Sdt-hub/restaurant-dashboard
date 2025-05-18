@@ -17,6 +17,7 @@ const TableBookingTable = ({
     serial: Number(index + 1) + (currentPage - 1) * pageSize,
     _id: booking?._id,
     userId: booking?.userId,
+    bookingId: booking?.bookingId,
     token: booking?.token,
     name: booking?.name,
     date: booking?.date,
@@ -86,8 +87,8 @@ const TableBookingTable = ({
     {
       title: "View",
       key: "view",
-      render: () => (
-       <ViewBookingCardModal/>
+      render: (_, {bookingId}) => (
+       <ViewBookingCardModal bookingId={bookingId}/>
       ),
     },
   ];

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {apiSlice} from "../api/apiSlice.js";
 import TagTypes from "../../../constant/tagType.constant.js";
 import { ErrorToast, SuccessToast } from "../../../helper/ValidationHelper.js";
@@ -96,23 +97,7 @@ export const bookingApi = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 600,
       providesTags: (result, error, arg) => [ {type: TagTypes.booking, id:arg}],
-      // async onQueryStarted(arg, { queryFulfilled, dispatch}) {
-      //   try {
-      //     const res = await queryFulfilled;
-      //     const data = res?.data?.data;
-      //     dispatch(SetBooking(data));
-      //     const date = data?.date?.split("T")[0];
-      //     dispatch(SetSelectedDate(date))
-      //     dispatch(SetScheduleId("")); 
-      //     dispatch(SetDiningId(""));       
-      //   } catch (err) {
-      //     //ErrorToast("Something Went Wrong!");
-      //     //do nothing
-      //     //console.log(err);
-      //   }
-      // },
     }),
-
   }),
 });
 

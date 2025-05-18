@@ -12,7 +12,6 @@ import VerificationPage from "./components/verificationComponents/VerificationPa
 import ResetPassword from "./pages/auth/resetPassword";
 import BookingManagement from "./pages/bookingManagement";
 import Menu from "./pages/menu";
-import MyDetails from "./pages/myDetails";
 import Reviews from "./components/restaurantComponents/Reviews";
 import SocialMedia from "./components/restaurantComponents/SocialMedia";
 import BusinessHours from "./components/restaurantComponents/BusinessHours";
@@ -35,8 +34,8 @@ import RestaurantDetailsPage from "./pages/restaurantDetails/RestaurantDetailsPa
 import ReservationCalendarPage from "./pages/ReservationCalendar/ReservationCalendarPage";
 import CalendarDetailsPage from "./pages/ReservationCalendar/CalendarDetailsPage";
 import LocationForm from "./components/form/LocationForm";
-import UpdateLocationForm from "./components/Location/UpdateLocationForm";
 import UpdateLocationPage from "./pages/location/UpdateLocationPage";
+import ProfilePage from "./pages/profile/ProfilePage";
 
 function App() {
   const router = createBrowserRouter(
@@ -64,7 +63,7 @@ function App() {
           <Route path="/reservation-calendar" element={<ReservationCalendarPage />}></Route>
           <Route path="/reservation-calendar/details/:date" element={<CalendarDetailsPage/>}></Route>
 
-          <Route path="/profile" element={<MyDetails/>}></Route>
+          <Route path="/profile" element={<ProfilePage/>}></Route>
           <Route path="/restaurant-details" element={<RestaurantDetailsPage/>}></Route>
           <Route path="/restaurant/reviews" element={<Reviews/>}></Route>
           <Route path="/restaurant/social-media" element={<SocialMedia/>}></Route>

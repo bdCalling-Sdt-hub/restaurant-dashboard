@@ -1,7 +1,6 @@
 import { Pagination, Table } from "antd";
 import DeleteDiningModal from "../modal/dining/DeleteDiningModal";
 import EditDiningModal from "../modal/dining/EditDiningModal";
-import { getDiningColorClass } from "../../utils/getDiningColorClass";
 
 const DiningTable = ({
   diningList,

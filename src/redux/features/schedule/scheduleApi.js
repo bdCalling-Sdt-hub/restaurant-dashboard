@@ -59,16 +59,6 @@ export const scheduleApi = apiSlice.injectEndpoints({
             ErrorToast("No schedules found for the selected date.");
             return;
           }
-
-          // const Options = schedules?.map((schedule) => ({
-          //   value: schedule?._id,
-          //   label: (
-          //     convertUTCtimeString(schedule?.startDateTime) +
-          //     "-" +
-          //     convertUTCtimeString(schedule.endDateTime)
-          //   ).toString(),
-          // }));
-          // dispatch(SetScheduleOptions(Options))
         } catch (err) {
           const status = err?.error?.status;
           if (status === 500) {

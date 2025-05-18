@@ -2,13 +2,11 @@ import restaurant_img from "../../assets/images/restaurant.png";
 import { MapPin, Star, Tag, Check, DollarSign, X, SquarePen } from "lucide-react";
 import UpdateNameModal from "../modal/restaurant/UpdateNameModal";
 import UpdateImageModal from "../modal/restaurant/UpdateImageModal";
-import UpdateAddressModal from "../modal/restaurant/UpdateAddressModal";
 import UpdateInformationModal from "../modal/restaurant/UpdateInformationModal";
 import UpdateDiscountModal from "../modal/restaurant/UpdateDiscountModal";
 import UpdateFeaturesModal from "../modal/restaurant/UpdateFeaturesModal";
 import UpdateKeywordsModal from "../modal/restaurant/UpdateKeywordsModal";
 import { useNavigate } from "react-router-dom";
-import UpdateLocationModal from "../modal/restaurant/UpdateLocationModal";
 
 const MyRestaurant = ({ data: restaurant }) => {
   const navigate = useNavigate()
@@ -30,7 +28,7 @@ const MyRestaurant = ({ data: restaurant }) => {
             e.currentTarget.onerror = null; // Prevent infinite loop
             e.currentTarget.src = restaurant_img; // placeholder_img;
           }}
-          className="w-full h-[300px] object-cover"
+          className="w-full h-[350px] object-cover"
         />
         <UpdateImageModal restaurant={restaurant} />
       </div>

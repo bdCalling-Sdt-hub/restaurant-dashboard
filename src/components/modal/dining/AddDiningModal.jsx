@@ -51,7 +51,7 @@ const AddDiningModal = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-red-500 hover:bg-red-600 duration-200 p-2 border-0 rounded-md text-white flex justify-center items-center gap-x-2 disabled:cursor-not-allowed"
+            className="w-full bg-rose-500 hover:bg-rose-600 duration-200 p-2 border-0 rounded-md text-white flex justify-center items-center gap-x-2 disabled:cursor-not-allowed"
           >
             {isLoading ? (
               <>

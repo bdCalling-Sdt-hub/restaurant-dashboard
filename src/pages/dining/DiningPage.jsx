@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import DiningList from "../../components/dining/DiningList";
 
 

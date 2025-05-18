@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 import {apiSlice} from "../api/apiSlice.js";
 import {ErrorToast, SuccessToast} from "../../../helper/ValidationHelper.js";
 import TagTypes from "../../../constant/tagType.constant.js";
@@ -36,7 +37,21 @@ export const restaurantApi = apiSlice.injectEndpoints({
         url: `/restaurant/get-owner-restaurant`,
         method: "GET",
       }),
-      providesTags: [TagTypes.restaurant]
+      providesTags: [TagTypes.restaurant],
+      async onQueryStarted() {
+        try {
+        } catch (err) {
+          console.log(err);
+          const status = err?.error?.status;
+          if (status === 404) {
+            ErrorToast(err?.error?.data?.message);
+          } else if (status === 409) {
+            ErrorToast(err?.error?.data?.message);
+          } else {
+            ErrorToast("Something Went Wrong!");
+          }
+        }
+      },
     }),
     updateRestaurant: builder.mutation({
       query: (data) => ({

@@ -42,7 +42,6 @@ export const diningApi = apiSlice.injectEndpoints({
           await queryFulfilled;
           SuccessToast("Dining is created successfully");
         } catch (err) {
-          console.log(err)
           const status = err?.error?.status;
           if (status === 409) {
             ErrorToast(err?.error?.data?.message);

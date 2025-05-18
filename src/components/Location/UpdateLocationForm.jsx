@@ -9,8 +9,6 @@ import { useUpdateRestaurantMutation } from "../../redux/features/restaurant/res
 const UpdateLocationForm = ({restaurant}) => {
   const { address: initialAddress, latitude:initialLatitude, longitude:initialLongitude} = restaurant;
   const navigate = useNavigate();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [ updateRestaurant, { isLoading, isSuccess }] = useUpdateRestaurantMutation();
 
@@ -178,14 +176,14 @@ const UpdateLocationForm = ({restaurant}) => {
             <div className="pt-2">
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isLoading}
                 className={`
                 w-full px-4 py-2 text-white font-medium rounded-lg 
                 transition-all duration-300 flex items-center justify-center
                 ${
-                  isSubmitting || submitted
+                  isSuccess
                     ? "bg-green-500 hover:bg-green-600"
-                    : "bg-blue-500 hover:bg-blue-600"
+                    : "bg-rose-500 hover:bg-rose-600"
                 }
                 `}
               >

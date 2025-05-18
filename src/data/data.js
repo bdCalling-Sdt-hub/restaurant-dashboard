@@ -101,10 +101,10 @@ export const subMenuItems = [
     title: "Reviews",
     path: "/restaurant/reviews",
   },
-  {
-    title: "Cuisine",
-    path: "/restaurant/cuisine",
-  },
+  // {
+  //   title: "Cuisine",
+  //   path: "/restaurant/cuisine",
+  // },
   {
     title: "Social Media",
     path: "/restaurant/social-media",
