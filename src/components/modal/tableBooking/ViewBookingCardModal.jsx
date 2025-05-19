@@ -21,7 +21,7 @@ const ViewBookingCardModal = ({bookingId}) => {
       </button>
 
       <Modal
-        title={<span className="text-2xl">Booking Details{bookingId}</span>}
+        title={<span className="text-2xl">Reservation Details</span>}
         open={modalOpen}
         onCancel={() => setModalOpen(false)}
         maskClosable={false}

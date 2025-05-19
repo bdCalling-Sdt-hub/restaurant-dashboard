@@ -36,6 +36,7 @@ import CalendarDetailsPage from "./pages/ReservationCalendar/CalendarDetailsPage
 import LocationForm from "./components/form/LocationForm";
 import UpdateLocationPage from "./pages/location/UpdateLocationPage";
 import ProfilePage from "./pages/profile/ProfilePage";
+import ReviewPage from "./pages/review/ReviewPage";
 
 function App() {
   const router = createBrowserRouter(
@@ -65,6 +66,7 @@ function App() {
 
           <Route path="/profile" element={<ProfilePage/>}></Route>
           <Route path="/restaurant-details" element={<RestaurantDetailsPage/>}></Route>
+          <Route path="/reviews" element={<ReviewPage/>}></Route>
           <Route path="/restaurant/reviews" element={<Reviews/>}></Route>
           <Route path="/restaurant/social-media" element={<SocialMedia/>}></Route>
           <Route path="/restaurant/business-hours" element={<BusinessHours/>}></Route>

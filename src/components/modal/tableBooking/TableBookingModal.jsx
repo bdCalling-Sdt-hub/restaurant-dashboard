@@ -65,7 +65,7 @@ const TableBookingModal = () => {
             </p>
             <p>
               <span className="font-medium">Time: </span>
-              <span className="bg-purple-100 text-purple-700 border border-purple-300 p-0.5 rounded-sm">
+              <span className="bg-purple-100 text-purple-700 border border-purple-300 p-0.5 rounded-md">
                 {time}
               </span>
             </p>
