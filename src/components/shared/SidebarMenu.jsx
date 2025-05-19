@@ -39,7 +39,7 @@ const SidebarMenu = () => {
             ))}
 
             {/* Restaurant Details Submenu Items  */}
-            <Menu.SubMenu
+            {/* <Menu.SubMenu
               icon={<IoRestaurantSharp size={25} />}
               title={
                 <span className="text-[18px] text-black">
@@ -65,7 +65,7 @@ const SidebarMenu = () => {
                   </Link>
                 </Menu.Item>
               ))}
-            </Menu.SubMenu>
+            </Menu.SubMenu> */}
           </div>
 
           <div className="p-4  ">

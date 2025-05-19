@@ -7,11 +7,13 @@ import { useSelector } from "react-redux";
 import { useCreateReservationMutation } from "../../../redux/features/reservation/reservationApi";
 import { useParams } from "react-router-dom";
 import { Plus } from "lucide-react";
+import { useGetDiningDropDownQuery } from "../../../redux/features/dining/diningApi";
 
 const AddReservationModal = () => {
   const { date } = useParams();
   const [modalOpen, setModalOpen] = useState(false);
   const { scheduleOptions } = useSelector((state) => state.schedule);
+  const { diningOptions } = useSelector((state)=>state.dining);
   const [createReservation, { isLoading, isSuccess }] =
     useCreateReservationMutation();
   const { data } = useGetScheduleDropDownQuery(
@@ -20,6 +22,10 @@ const AddReservationModal = () => {
       skip: !date,
     }
   );
+
+  //getDiningDropdown
+  useGetDiningDropDownQuery();
+
 
   useEffect(() => {
     if (data?.data) {
@@ -38,9 +44,9 @@ const AddReservationModal = () => {
   }, [isSuccess, form]);
 
   const onFinish = (values) => {
-    console.log(values);
     createReservation({
       scheduleIds: values.scheduleIds,
+      dinings: values.dinings,
       seats: Number(values.seats),
     });
   };
@@ -86,13 +92,24 @@ const AddReservationModal = () => {
               style={{ width: "100%" }}
               options={scheduleOptions}
             />
-            {/* <Select
-                          mode="multiple"
-                          disabled={dropDownLoading}
-                          placeholder="Please select"
-                          style={{ width: "100%" }}
-                          options={slotOptions}
-                        /> */}
+          </Form.Item>
+           <Form.Item
+            name="dinings"
+            rules={[{ required: true, message: "Please select atleast one dining" }]}
+            label={
+              <span className="font-semibold">
+                <span className="text-red-500 mr-1">*</span>
+                Dining (multiple)
+              </span>
+            }
+          >
+            <Select
+              mode="multiple"
+              placeholder="Select dining"
+              disabled={diningOptions.length === 0}
+              style={{ width: "100%" }}
+              options={diningOptions}
+            />
           </Form.Item>
           <Form.Item
             name="seats"

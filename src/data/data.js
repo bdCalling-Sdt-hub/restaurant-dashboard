@@ -90,6 +90,11 @@ export const menuItems = [
     path: "/reviews",
     icon: MdPreview,
   },
+  //  {
+  //   title: "Social Media",
+  //   path: "/restaurant/social-media",
+  //   icon: MdPreview,
+  // },
   // {
   //     title: "Add Category",
   //     path: '/add-category',

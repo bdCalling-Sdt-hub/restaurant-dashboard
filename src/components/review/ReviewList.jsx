@@ -2,11 +2,8 @@
 import { DatePicker, Input } from "antd";
 import { useEffect, useState } from "react";
 import ListLoading from "../Loader/ListLoading";
-import { useGetBookingsQuery } from "../../redux/features/booking/bookingApi";
-import { useDispatch, useSelector } from "react-redux";
-import dayjs from "dayjs";
-import { SetBookingSelectedDate } from "../../redux/features/booking/bookingSlice";
 import ReviewTable from "./ReviewTable";
+import { useGetReviewsQuery } from "../../redux/features/review/reviewApi";
 
 const { Search } = Input;
 
@@ -15,8 +12,6 @@ const ReviewList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [ currentPage, setCurrentPage ] = useState(1);
   const [ pageSize, setPageSize ] = useState(10);
-  const { bookingSelectedDate } = useSelector((state) => state.booking);
-  const dispatch = useDispatch();
   //debounced handle
   useEffect(() => {
     let timeoutId;
@@ -26,14 +21,12 @@ const ReviewList = () => {
     }, 600);
   }, [searchQuery]);
 
-  const { data, isLoading } = useGetBookingsQuery([
+  const { data, isLoading } = useGetReviewsQuery([
     { name: "searchTerm", value: searchTerm },
     { name: "page", value: currentPage },
     { name: "limit", value: pageSize },
-    { name: "status", value: "pending"},
-    { name: "date", value: bookingSelectedDate}
   ]);
-  const bookings = data?.data || []
+  const reviews = data?.data || []
   const meta = data?.meta;
     
    
@@ -55,26 +48,13 @@ const ReviewList = () => {
             className="p-4 rounded"
           />
         </div>
-        <div className="w-[250px] flex justify-center mr-20 gap-x-2">
-          <h1 className="text-xl font-semibold">Filter:</h1>
-          <div>
-            <DatePicker
-            value={bookingSelectedDate ? dayjs(bookingSelectedDate) : null}
-            onChange={(_, dateString) => {
-              dispatch(SetBookingSelectedDate(dateString));
-            }}
-            style={{ width: "100%" }}
-            className="p-2 rounded"
-          />
-          </div>
-        </div>
         </div>
       </div>
       {
         isLoading ? (
           <ListLoading/>
         ): (
-          <ReviewTable bookings={bookings} meta={meta} currentPage={currentPage} setCurrentPage={setCurrentPage} pageSize={pageSize} setPageSize={setPageSize}/>
+          <ReviewTable reviews={reviews} meta={meta} currentPage={currentPage} setCurrentPage={setCurrentPage} pageSize={pageSize} setPageSize={setPageSize}/>
         )
       }
     </>
