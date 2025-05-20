@@ -4,7 +4,7 @@ import { CgSpinnerTwo } from "react-icons/cg";
 import { Trash2 } from "lucide-react";
 import { useDeleteReservationMutation } from "../../../redux/features/reservation/reservationApi";
 
-const DeleteResrvationModal = ({ reservationId }) => {
+const DeleteReservationModal = ({ reservationId }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteReservation, { isLoading, isSuccess, isError }] =
     useDeleteReservationMutation();
@@ -61,4 +61,4 @@ const DeleteResrvationModal = ({ reservationId }) => {
   );
 };
 
-export default DeleteResrvationModal;
+export default DeleteReservationModal;

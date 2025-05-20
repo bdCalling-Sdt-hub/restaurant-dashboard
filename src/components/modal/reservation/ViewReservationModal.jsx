@@ -2,11 +2,9 @@ import { Modal } from "antd";
 import { Clock, HandPlatter, Users } from "lucide-react";
 import { useState } from "react";
 import { IoEyeSharp } from "react-icons/io5";
-import CalendarScheduleCard from "../../reservation/CalendarScheduleCard";
 import { useGetReservationsByDateQuery } from "../../../redux/features/reservation/reservationApi";
 import { useParams } from "react-router-dom";
 import EditReservationModal from "./EditReservationModal";
-import DeleteResrvationModal from "./DeleteResrvationModal";
 
 const ViewReservationModal = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -79,7 +77,6 @@ const ViewReservationModal = () => {
             ) : (
               <>
                 <EditReservationModal reservation={schedule} />
-                <DeleteResrvationModal reservationId={schedule?._id} />
               </>
             )}
           </div>

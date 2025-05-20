@@ -1,7 +1,4 @@
 import { Clock, Users, HandPlatter } from "lucide-react";
-import DeleteResrvationModal from "../modal/reservation/DeleteResrvationModal";
-import EditReservationModal from "../modal/reservation/EditReservationModal";
-import { IoEyeSharp } from "react-icons/io5";
 import ViewReservationModal from "../modal/reservation/ViewReservationModal";
 
 const CalendarScheduleCard = ({ schedule }) => {
