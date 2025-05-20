@@ -1,6 +1,7 @@
 import { Pagination , Table } from 'antd';
 import getColorClassForDate from '../../utils/getColorClassForDate';
 import { useNavigate } from 'react-router-dom';
+import {getDiningColorClass} from "../../utils/getDiningColorClass";
 import { IoEyeSharp } from 'react-icons/io5';
 
 
@@ -11,8 +12,9 @@ const ReservationTable = ({reservations, meta, currentPage, setCurrentPage, page
         key: index,
         serial: Number(index+1) + ((currentPage-1)*pageSize),
         date: reservation?.date,
-        totalSeats: reservation?.totalSeats,
-        totalSchedules: reservation?.totalSchedules
+        seats: reservation?.seats,
+        time: reservation?.time,
+        diningName: reservation?.diningName
     }))
 
  
@@ -36,9 +38,32 @@ const ReservationTable = ({reservations, meta, currentPage, setCurrentPage, page
           }
         }, 
         {
+          title: "Time",
+          dataIndex: "time",
+          key: "time",
+          render: (val) => (
+            <div className="text-sm text-gray-700">
+              {val}
+            </div>
+          ),
+        },
+        {
+          title: "Dining",
+          dataIndex: "diningName",
+          key: "diningName",
+          render: (val) => {
+            const colorClass = getDiningColorClass(val);
+            return (
+              <span className={`inline-block min-w-24 text-center px-3 py-1 rounded-full text-sm font-medium ${colorClass}`}>
+                {val}
+              </span>
+            );
+          },
+        },
+        {
           title: "Total Seats",
-          dataIndex: "totalSeats",
-          key: "totalSeats",
+          dataIndex: "seats",
+          key: "seats",
           align: "center"
         },
         //  {
@@ -53,8 +78,7 @@ const ReservationTable = ({reservations, meta, currentPage, setCurrentPage, page
           key: "view",
           render: (_, {date}) => (
             <button onClick={()=> navigate(`/reservation-calendar/details/${date}`)} className="bg-black hover:bg-primary p-1.5 text-white rounded-md">
-              {/* <IoEyeSharp size={18} /> */}
-              View Schedule
+              <IoEyeSharp size={18} />
             </button>
           ),
         },
