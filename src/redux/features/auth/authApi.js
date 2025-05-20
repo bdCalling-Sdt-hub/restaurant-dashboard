@@ -90,7 +90,10 @@ export const authApi = apiSlice.injectEndpoints({
         try {
           await queryFulfilled;
           SuccessToast("Password is reset successfully");
-          logout();
+          setTimeout(() => {
+            localStorage.clear();
+            window.location.href = "/";
+          }, 300);
         } catch (err) {
           const status = err?.error?.status;
           if (status === 404) {

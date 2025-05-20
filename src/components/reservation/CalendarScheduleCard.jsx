@@ -29,23 +29,13 @@ const CalendarScheduleCard = ({ schedule }) => {
               <div className="flex items-center mb-4">
                 <HandPlatter className="h-5 w-5 mr-2 text-gray-500" />
                 <span className="text-gray-700">
-                  Dining: {schedule?.totalDining}
+                  Dining: {schedule?.count}
                 </span>
               </div>
             </div>
             <div>
                <ViewReservationModal schedule={schedule}/>
             </div>
-          </div>
-          <div className="flex justify-end space-x-2">
-            {schedule?.seats === 0 ? (
-              <h1 className="text-red-600">No Seats Available</h1>
-            ) : (
-              <>
-                <EditReservationModal reservation={schedule} />
-                <DeleteResrvationModal reservationId={schedule?._id} />
-              </>
-            )}
           </div>
         </div>
       </div>

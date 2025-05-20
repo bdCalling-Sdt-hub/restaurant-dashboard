@@ -23,6 +23,25 @@ export const reservationApi = apiSlice.injectEndpoints({
       keepUnusedDataFor: 600,
       providesTags: [TagTypes.reservations],
     }),
+    getCalendars: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args !== undefined && args.length > 0) {
+          args.forEach((item) => {
+            if(item.value){
+              params.append(item.name, item.value);
+            }
+          });
+        }
+        return {
+          url: "/reservation/get-calendars",
+          method: "GET",
+          params: params
+        };
+      },
+      keepUnusedDataFor: 600,
+      providesTags: [TagTypes.calendars],
+    }),
     getReservationsByDate: builder.query({
       query: (date) => {
         return {
@@ -117,4 +136,4 @@ export const reservationApi = apiSlice.injectEndpoints({
 });
 
 
-export const { useGetReservationsQuery, useGetReservationsByDateQuery, useCreateReservationMutation, useUpdateReservationMutation, useDeleteReservationMutation  } = reservationApi;
+export const { useGetReservationsQuery, useGetCalendarsQuery, useGetReservationsByDateQuery, useCreateReservationMutation, useUpdateReservationMutation, useDeleteReservationMutation  } = reservationApi;

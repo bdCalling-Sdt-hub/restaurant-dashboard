@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { IoEyeSharp } from 'react-icons/io5';
 
 
-const ReservationTable = ({reservations, meta, currentPage, setCurrentPage, pageSize, setPageSize}) => {
+const CalendarTable = ({reservations, meta, currentPage, setCurrentPage, pageSize, setPageSize}) => {
   const navigate = useNavigate();
 
     const dataSource = reservations?.map((reservation, index)=> ({
@@ -41,20 +41,19 @@ const ReservationTable = ({reservations, meta, currentPage, setCurrentPage, page
           key: "totalSeats",
           align: "center"
         },
-        //  {
-        //   title: "Total Schedules",
-        //   dataIndex: "totalSchedules",
-        //   key: "totalSchedules",
-        //   align: "center"
-        // },
+         {
+          title: "Total Schedules",
+          dataIndex: "totalSchedules",
+          key: "totalSchedules",
+          align: "center"
+        },
         {
           title: "View",
           dataIndex: "view",
           key: "view",
           render: (_, {date}) => (
             <button onClick={()=> navigate(`/reservation-calendar/details/${date}`)} className="bg-black hover:bg-primary p-1.5 text-white rounded-md">
-              {/* <IoEyeSharp size={18} /> */}
-              View Schedule
+              <IoEyeSharp size={18} />
             </button>
           ),
         },
@@ -78,4 +77,4 @@ const ReservationTable = ({reservations, meta, currentPage, setCurrentPage, page
   )
 }
 
-export default ReservationTable;
+export default CalendarTable;

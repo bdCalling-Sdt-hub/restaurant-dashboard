@@ -100,11 +100,6 @@ const VerificationForm = () => {
         ))}
       </div>
 
-      {/* Success Message (Conditional - Example) */}
-      <p className="text-red-500 mb-6">
-        The code you entered is correct. Please proceed to recover your account.
-      </p>
-
       {/* Verify Button */}
       <button
         type="submit"
