@@ -2,7 +2,7 @@ import { BsMenuButtonWideFill } from "react-icons/bs";
 import { CiNoWaitingSign } from "react-icons/ci";
 import { FaCheckToSlot, FaTable, FaTableList } from "react-icons/fa6";
 import { MdDining, MdPreview, MdScheduleSend } from "react-icons/md";
-import { RiCalendarScheduleFill, RiRestaurantLine } from "react-icons/ri";
+import { RiCalendarScheduleFill, RiPieChart2Fill, RiRestaurantLine } from "react-icons/ri";
 import { TbBrandBooking } from "react-icons/tb";
 
 export const menuItems = [
@@ -21,11 +21,11 @@ export const menuItems = [
   //   path: "/map",
   //   icon: RiRestaurantLine,
   // },
-  // {
-  //   title: "Dashboard",
-  //   path: "/dashboard",
-  //   icon: RiPieChart2Fill,
-  // },
+  {
+    title: "Dashboard",
+    path: "/dashboard",
+    icon: RiPieChart2Fill,
+  },
   {
     title: "Slots",
     path: "/slots",

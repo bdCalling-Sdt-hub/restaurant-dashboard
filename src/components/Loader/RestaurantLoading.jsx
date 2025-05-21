@@ -1,7 +1,7 @@
 
 const RestaurantLoading = () => {
   return (
-    <div className="max-w-4xl mx-auto rounded-lg overflow-hidden shadow-lg bg-white animate-pulse">
+    <div className="max-w-7xl mx-auto rounded-lg overflow-hidden shadow-lg bg-white animate-pulse">
       <div className="h-64 bg-gray-300"></div>
 
       <div className="flex flex-col md:flex-row justify-between p-6 gap-8">
