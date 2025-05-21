@@ -1,4 +1,4 @@
-import {apiSlice} from "../api/apiSlice.js";
+import { apiSlice } from "../api/apiSlice.js";
 import { ErrorToast, SuccessToast } from "../../../helper/ValidationHelper.js";
 import TagTypes from "../../../constant/tagType.constant.js";
 
@@ -22,6 +22,16 @@ export const scheduleApi = apiSlice.injectEndpoints({
       },
       keepUnusedDataFor: 600,
       providesTags: [TagTypes.schedules],
+    }),
+    getSchedulesByDate: builder.query({
+      query: (date) => {
+        return {
+          url: `/schedule/get-schedules-by-date/${date}`,
+          method: "GET",
+        };
+      },
+      keepUnusedDataFor: 600,
+      providesTags: [TagTypes.schedulesByDate],
     }),
     getScheduleDropDown: builder.query({
       query: (args) => {
@@ -47,6 +57,7 @@ export const scheduleApi = apiSlice.injectEndpoints({
           const schedules = res?.data?.data;
           if (schedules.length === 0) {
             ErrorToast("No schedules found for the selected date.");
+            return;
           }
         } catch (err) {
           const status = err?.error?.status;
@@ -62,9 +73,13 @@ export const scheduleApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: (result, error, arg) => {
+      invalidatesTags: (result) => {
         if (result?.success) {
-          return [TagTypes.schedules, TagTypes.scheduleDropDown];
+          return [
+            TagTypes.schedules,
+            TagTypes.scheduleDropDown,
+            TagTypes.schedulesByDate,
+          ];
         }
         return [];
       },
@@ -87,9 +102,13 @@ export const scheduleApi = apiSlice.injectEndpoints({
         url: `/schedule/delete-schedule/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error, arg) => {
+      invalidatesTags: (result) => {
         if (result?.success) {
-          return [TagTypes.schedules, TagTypes.scheduleDropDown];
+          return [
+            TagTypes.schedules,
+            TagTypes.scheduleDropDown,
+            TagTypes.schedulesByDate,
+          ];
         }
         return [];
       },
@@ -112,5 +131,10 @@ export const scheduleApi = apiSlice.injectEndpoints({
   }),
 });
 
-
-export const { useGetSchedulesQuery, useGetScheduleDropDownQuery, useCreateScheduleMutation, useDeleteScheduleMutation } = scheduleApi;
+export const {
+  useGetSchedulesQuery,
+  useGetSchedulesByDateQuery,
+  useGetScheduleDropDownQuery,
+  useCreateScheduleMutation,
+  useDeleteScheduleMutation,
+} = scheduleApi;

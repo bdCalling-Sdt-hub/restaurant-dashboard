@@ -5,7 +5,6 @@ import { useUpdateMenuMutation } from "../../../redux/features/menu/menuApi";
 import { useGetCusineDropDownQuery } from "../../../redux/features/cuisine/cuisineApi";
 import { FiEdit } from "react-icons/fi";
 import placeholder_img from "../../../assets/images/placeholder.jpeg";
-import { IoCameraOutline } from "react-icons/io5";
 import { MdPhotoCamera } from "react-icons/md";
 
 

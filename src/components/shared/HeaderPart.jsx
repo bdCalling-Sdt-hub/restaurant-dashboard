@@ -1,8 +1,10 @@
 import {Typography } from 'antd';
 import 'antd/dist/reset.css'; // Import Ant Design styles
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useGetMeQuery } from '../../redux/features/user/userApi';
 import profile_placeholder from "../../assets/images/profile_placeholder.png";
+import Logo from "../../assets/images/elhagz.png";
+
 
 const { Text } = Typography;
 
@@ -14,11 +16,11 @@ const HeaderPart = () => {
 
 
   return (
-    <div className="bg-[#F6F6F6] px-4 flex items-center justify-between ">
+    <div className="bg-[#F6F6F6] p-4 flex items-center justify-between ">
       {/* Logo Section */}
-      <Link to={"/"}>
-        <img src="elhagz.png" alt="Logo" className="h-20 w-20 mr-4" />
-      </Link>
+      <div to={"/"} className="w-[256px] flex justify-center items-center">
+        <img src={Logo} alt="Logo" className="h-[60px] w-[60px] rounded-md mr-4" />
+      </div>
       {/* User Section */}
       <div className="flex items-center gap-x-2">
         {isLoading ? (

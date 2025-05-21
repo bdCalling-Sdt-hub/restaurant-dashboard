@@ -1,16 +1,24 @@
-import { configureStore } from '@reduxjs/toolkit'
-import authSliceReducer from '../features/auth/authSlice'
+import { configureStore} from '@reduxjs/toolkit'
 import { apiSlice } from '../features/api/apiSlice'
-import UserSliceReducer from '../features/user/userSlice'
+import tableSliceReducer from '../features/table/tableSlice'
+import userSliceReducer from '../features/user/userSlice'
+import scheduleSliceReducer from '../features/schedule/scheduleSlice'
+import bookingSliceReducer from '../features/booking/bookingSlice'
+import diningSliceReducer from '../features/dining/diningSlice'
+import reservationSliceReducer from '../features/reservation/reservationSlice'
 
 const store = configureStore({
    reducer: {
      [apiSlice.reducerPath]: apiSlice.reducer,
-     auth: authSliceReducer,
-     user: UserSliceReducer
+     user: userSliceReducer,
+     schedule: scheduleSliceReducer,
+     table: tableSliceReducer,
+     booking: bookingSliceReducer,
+     dining: diningSliceReducer,
+     reservation: reservationSliceReducer
    },
    middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
 })
 
-export default store
+export default store;

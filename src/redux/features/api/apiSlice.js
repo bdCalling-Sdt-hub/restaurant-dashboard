@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import { getToken } from "../../../helper/SessionHelper.js";
 import { ErrorToast } from "../../../helper/ValidationHelper.js";
@@ -26,22 +27,7 @@ export const apiSlice = createApi({
     }
     return result;
   },
-  tagTypes: [
-    TagTypes.cuisine,
-    TagTypes.dining,
-    TagTypes.administrator,
-    TagTypes.users,
-    TagTypes.me,
-    TagTypes.restaurants,
-    TagTypes.menus,
-    TagTypes.bookings,
-    TagTypes.slots,
-    TagTypes.slotDropDown,
-    TagTypes.schedules,
-    TagTypes.scheduleDropDown,
-    TagTypes.myDining,
-    TagTypes.tables
-], //TagS WhiteLists
+  tagTypes: Object.values(TagTypes), //TagS WhiteLists
   endpoints: (builder) => ({}),
 });
 

@@ -31,7 +31,7 @@ export const tableApi = apiSlice.injectEndpoints({
         };
       },
       keepUnusedDataFor: 600,
-      providesTags: [TagTypes.tables],
+      providesTags: [TagTypes.tablesByScheduleAndDining],
     }),
     createTable: builder.mutation({
       query: (data) => ({
@@ -41,7 +41,7 @@ export const tableApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result) =>{
         if(result?.success){
-          return [TagTypes.tables]
+          return [TagTypes.tables, TagTypes.tablesByScheduleAndDining]
         }
         return []
       },
@@ -49,8 +49,36 @@ export const tableApi = apiSlice.injectEndpoints({
         try {
           await queryFulfilled;
           SuccessToast("Table created successfully");
-        } catch (err) {      
+        } catch (err) {   
           ErrorToast("Something Went Wrong!");  
+        }
+      },
+    }),
+    updateTable: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/table/update-table/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: (result) =>{
+        if(result?.success){
+          return [TagTypes.tables, TagTypes.tablesByScheduleAndDining]
+        }
+        return []
+      },
+      async onQueryStarted(arg, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+            SuccessToast("Table is updated successfully");
+        } catch (err) {
+          const status = err?.error?.status;
+          if (status === 404) {
+            ErrorToast(err?.error?.data?.message);
+          } else if (status === 409) {
+            ErrorToast(err?.error?.data?.message);
+          } else {
+            ErrorToast("Something Went Wrong!");
+          }
         }
       },
     }),
@@ -61,7 +89,7 @@ export const tableApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result) =>{
         if(result?.success){
-          return [TagTypes.tables]
+          return [TagTypes.tables, TagTypes.tablesByScheduleAndDining]
         }
         return []
       },
@@ -70,11 +98,12 @@ export const tableApi = apiSlice.injectEndpoints({
           await queryFulfilled;
           SuccessToast("Table is deleted successfully");
         } catch (err) {
-          console.log(err);
           const status = err?.error?.status;
           if (status === 404) {
             ErrorToast(err?.error?.data?.message);
-          }else {
+          } else if (status === 409) {
+            ErrorToast(err?.error?.data?.message);
+          } else {
             ErrorToast("Something Went Wrong!");
           }
         }
@@ -84,4 +113,4 @@ export const tableApi = apiSlice.injectEndpoints({
 });
 
 
-export const { useGetTablesQuery, useGetTablesByScheduleAndDiningQuery, useCreateTableMutation, useDeleteTableMutation } = tableApi;
+export const { useGetTablesQuery, useGetTablesByScheduleAndDiningQuery, useCreateTableMutation, useUpdateTableMutation, useDeleteTableMutation } = tableApi;

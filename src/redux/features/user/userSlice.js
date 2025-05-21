@@ -16,5 +16,5 @@ const userSlice = createSlice({
 
 export const { SetAccess } = userSlice.actions
 
-const UserSliceReducer = userSlice.reducer;
-export default UserSliceReducer;
+const userSliceReducer = userSlice.reducer;
+export default userSliceReducer;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import logo from "../../../public/elhagz.png";
+import logo from "../../assets/images/elhagz.png";
 import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { ErrorToast } from "../../helper/ValidationHelper";
@@ -99,11 +99,6 @@ const VerificationForm = () => {
           />
         ))}
       </div>
-
-      {/* Success Message (Conditional - Example) */}
-      <p className="text-red-500 mb-6">
-        The code you entered is correct. Please proceed to recover your account.
-      </p>
 
       {/* Verify Button */}
       <button

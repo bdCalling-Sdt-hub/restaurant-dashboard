@@ -53,7 +53,7 @@ export const userApi = apiSlice.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: (result, error, arg) => {
+      invalidatesTags: (result) => {
         if (result?.success) {
           return [TagTypes.me];
         }

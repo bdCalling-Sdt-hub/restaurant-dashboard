@@ -1,7 +1,7 @@
 import { Typography } from 'antd';
 import 'antd/dist/reset.css'; 
-import logo from '../../../../public/elhagz.png';
-import sign from '../../../../public/signin.png';
+import logo from "../../../assets/images/elhagz.png";
+import sign from "../../../assets/images/signin.png"
 import LoginForm from '../../../components/auth/LoginForm';
 
 const { Title } = Typography;

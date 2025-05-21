@@ -4,8 +4,9 @@ import { PlusOutlined } from "@ant-design/icons";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { useGetScheduleDropDownQuery } from "../../../redux/features/schedule/scheduleApi";
 import convertUTCtimeString from "../../../utils/convertUTCtimeString";
-import { useGetMyDiningsQuery } from "../../../redux/features/dining/diningApi";
+import { useGetDiningDropDownQuery } from "../../../redux/features/dining/diningApi";
 import { useCreateTableMutation } from "../../../redux/features/table/tableApi";
+import disabledDate from "../../../utils/disabledDate";
 
 const CreateTableModal = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -38,7 +39,7 @@ const CreateTableModal = () => {
 
 
   const [form] = Form.useForm();
-  const { data:diningData } = useGetMyDiningsQuery();
+  const { data:diningData } = useGetDiningDropDownQuery();
   const dinings = diningData?.data || [];
   const diningOptions = dinings?.map((dining)=>({
     value: dining?._id,
@@ -53,7 +54,6 @@ const CreateTableModal = () => {
   }, [isSuccess, form]);
 
   const onFinish = (values) => {
-    console.log(values);
     createTable({
       scheduleId: values.scheduleId,
       diningId: values.diningId,
@@ -90,9 +90,7 @@ const CreateTableModal = () => {
             rules={[{ required: true, message: "Please select a date" }]}
           >
             <DatePicker
-              disabledDate={(current) =>
-                current && current < new Date().setHours(0, 0, 0, 0)
-              }
+              disabledDate={disabledDate}
               onChange={(_, dateString) => {
                 setDate(dateString);
               }}

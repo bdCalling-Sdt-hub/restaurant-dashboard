@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ReservationChart from "../../components/dashboardComponents/ReservationChart";
 import IncomeCard from "../../components/dashboardComponents/IncomeCard";
 import BalanceCard from "../../components/dashboardComponents/BalanceCard";

@@ -12,57 +12,59 @@ import VerificationPage from "./components/verificationComponents/VerificationPa
 import ResetPassword from "./pages/auth/resetPassword";
 import BookingManagement from "./pages/bookingManagement";
 import Menu from "./pages/menu";
-import AddCategory from "./pages/addCategory";
-import TableBooking from "./pages/tableBooking";
-import MyDetails from "./pages/myDetails";
-import RestaurantDetails from "./pages/restaurantDetails";
-import Reviews from "./components/restaurantComponents/Reviews";
-import SocialMedia from "./components/restaurantComponents/SocialMedia";
-import BusinessHours from "./components/restaurantComponents/BusinessHours";
-import Party from "./components/restaurantComponents/Party";
-import ReservationsAgreement from "./components/restaurantComponents/ReservationsAgreement";
-import MenuItems from "./components/restaurantComponents/MenuItems";
-import RestaurantFeatures from "./components/restaurantComponents/RestaurantFeatures";
-import Cuisine from "./components/restaurantComponents/Cuisine";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
 import SlotPage from "./pages/slot/SlotPage";
 import SchedulePage from "./pages/schedule/SchedulePage";
+import ScheduleDetailsPage from "./pages/schedule/ScheduleDetailsPage";
 import TablePage from "./pages/table/TablePage";
 import TableDetailsPage from "./pages/TableDetails/TableDetailsPage";
-import TableBookingSchedulePage from "./pages/tableBookingSchedule/TableBookingSchedulePage";
+import TableBookingListPage from "./pages/tableBookingList/TableBookingListPage";
+import DiningPage from "./pages/dining/DiningPage";
+import NotFoundPage from "./pages/NotFound/NotFoundPage";
+import RestaurantPage from "./pages/restaurant/RestaurantPage";
+import WaitlistPage from "./pages/waitlist/WaitlistPage";
+import AssignTablePage from "./pages/assignTable/AssignTablePage";
+import ReservationCalendarPage from "./pages/ReservationCalendar/ReservationCalendarPage";
+import LocationForm from "./components/form/LocationForm";
+import UpdateLocationPage from "./pages/location/UpdateLocationPage";
+import ProfilePage from "./pages/profile/ProfilePage";
+import ReviewPage from "./pages/review/ReviewPage";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
         <Route element={<PrivateRoute> <RootLayOut /> </PrivateRoute>}>
-          <Route path="/" element={<Dashboard />}></Route>
+          <Route path="/dashboard" element={<Dashboard />}></Route>
+          <Route path="/" element={<RestaurantPage />}></Route>
           <Route
             path="/booking-management"
             element={<BookingManagement />}
           ></Route>
+          <Route
+            path="/waitlist"
+            element={<WaitlistPage />}
+          ></Route>
+
           <Route path="/menu" element={<Menu />}></Route>
-          <Route path="/add-category" element={<AddCategory />}></Route>
+          <Route path="/map" element={<LocationForm />}></Route>
+           <Route path="/restaurant/update-location" element={<UpdateLocationPage />}></Route>
 
-          <Route path="/table-booking" element={<TableBooking />}></Route>
-          <Route path="/table-booking-schedule" element={<TableBookingSchedulePage />}></Route>
+          {/* <Route path="/table-booking" element={<TableBooking />}></Route> */}
+          <Route path="/assign-table/:bookingId" element={<AssignTablePage />}></Route>
+          <Route path="/table-booking-list" element={<TableBookingListPage />}></Route>
+          <Route path="/reservation-calendar" element={<ReservationCalendarPage />}></Route>
 
-          <Route path="/profile" element={<MyDetails/>}></Route>
-          <Route path="/restaurant-details" element={<RestaurantDetails/>}></Route>
-          <Route path="/restaurant/reviews" element={<Reviews/>}></Route>
-          <Route path="/restaurant/social-media" element={<SocialMedia/>}></Route>
-          <Route path="/restaurant/business-hours" element={<BusinessHours/>}></Route>
-          <Route path="/restaurant/party" element={<Party/>}></Route>
-          <Route path="/restaurant/cuisine" element={<Cuisine/>}></Route>
-          <Route path="/restaurant/restaurant-agreement" element={<ReservationsAgreement/>}></Route>
-          <Route path="/restaurant/menu-items" element={<MenuItems/>}></Route>
-          <Route path="/restaurant/restaurant-features" element={<RestaurantFeatures/>}></Route>
-
+          <Route path="/profile" element={<ProfilePage/>}></Route>
+          <Route path="/reviews" element={<ReviewPage/>}></Route>
+          <Route path="/restaurant" element={<RestaurantPage/>}></Route>
+          <Route path="/dining" element={<DiningPage/>}></Route>
           <Route path="/slots" element={<SlotPage/>}></Route>
           <Route path="/schedules" element={<SchedulePage/>}></Route>
+          <Route path="/schedule-details/:date" element={<ScheduleDetailsPage/>}></Route>
           <Route path="/tables" element={<TablePage/>}></Route>
-          <Route path="/table-details/:scheduleId/:diningId" element={<TableDetailsPage/>}></Route>
+          <Route path="/tables/details/:scheduleId/:diningId" element={<TableDetailsPage/>}></Route>
 
 
         </Route>
@@ -70,6 +72,7 @@ function App() {
         <Route path="/forgot-password" element={<PublicRoute><ForgotPassword /></PublicRoute>}></Route>
         <Route path="/verify-otp" element={<PublicRoute><VerificationPage /></PublicRoute>}></Route>
         <Route path="/reset-password" element={<PublicRoute><ResetPassword /></PublicRoute>}></Route>
+        <Route path="*" element={<NotFoundPage/>}/>
 
       </Route>
     )
