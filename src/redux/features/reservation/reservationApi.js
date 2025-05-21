@@ -67,10 +67,12 @@ export const reservationApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          SuccessToast("Reservation created successfully");
+          SuccessToast("Booking Schedule created successfully");
         } catch (err) {   
           const status = err?.error?.status;
           if (status === 404) {
+            ErrorToast(err?.error?.data?.message);
+          } else if (status === 409) {
             ErrorToast(err?.error?.data?.message);
           }else {
             ErrorToast("Something Went Wrong!");
@@ -92,7 +94,7 @@ export const reservationApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
-            SuccessToast("Schedule is updated successfully");
+            SuccessToast("Booking Schedule is updated successfully");
         } catch (err) {
           const status = err?.error?.status;
           if (status === 404) {
@@ -119,7 +121,7 @@ export const reservationApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          SuccessToast("Schedule is deleted successfully");
+          SuccessToast("Booking Schedule is deleted successfully");
         } catch (err) {
           const status = err?.error?.status;
           if (status === 404) {

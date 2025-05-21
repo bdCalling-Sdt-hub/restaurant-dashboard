@@ -70,6 +70,7 @@ const ReservationTable = ({
       dataIndex: "seats",
       key: "seats",
       align: "center",
+      width: 150
     },
     {
       title: "Action",

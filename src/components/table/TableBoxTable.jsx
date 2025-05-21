@@ -71,13 +71,15 @@ const TableBoxTable = ({tables, meta, currentPage, setCurrentPage, pageSize, set
           title: "Total Tables",
           dataIndex: "totalTables",
           key: "totalTables",
-          align: "center"
+          align: "center",
+          width:150
         },
         {
           title: "Total Seats",
           dataIndex: "totalSeats",
           key: "totalSeats",
-          align: "center"
+          align: "center",
+          width: 120
         },
         {
           title: "View",

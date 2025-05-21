@@ -33,7 +33,7 @@ const EditReservationModal = ({ reservation }) => {
     <>
       <button
         onClick={() => setModalOpen(true)}
-        className="p-2 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-500 transition-colors"
+        className="p-2 rounded-full bg-blue-500 hover:bg-blue-600 text-white transition-colors duration-200"
         aria-label="Edit schedule"
       >
         <Edit className="h-4 w-4" />
@@ -58,24 +58,6 @@ const EditReservationModal = ({ reservation }) => {
           initialValues={{ seats: reservation?.seats, dinings: reservation?.diningIds }}
           onFinish={onFinish}
         >
-           <Form.Item
-            name="dinings"
-            rules={[{ required: true, message: "Please select atleast one dining" }]}
-            label={
-              <span className="font-semibold">
-                <span className="text-red-500 mr-1">*</span>
-                Dining (multiple)
-              </span>
-            }
-          >
-            <Select
-              mode="multiple"
-              placeholder="Select dining"
-              disabled={diningOptions.length === 0}
-              style={{ width: "100%" }}
-              options={diningOptions}
-            />
-          </Form.Item>
           <Form.Item
             name="seats"
             label={
@@ -121,7 +103,7 @@ const EditReservationModal = ({ reservation }) => {
                 Processing...
               </>
             ) : (
-              "Save Changes"
+              "Save Change"
             )}
           </button>
         </Form>

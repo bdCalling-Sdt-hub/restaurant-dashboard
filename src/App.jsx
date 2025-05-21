@@ -63,7 +63,6 @@ function App() {
           <Route path="/assign-table/:bookingId" element={<AssignTablePage />}></Route>
           <Route path="/table-booking-list" element={<TableBookingListPage />}></Route>
           <Route path="/reservation-calendar" element={<ReservationCalendarPage />}></Route>
-          <Route path="/calendar" element={<CalendarPage />}></Route>
           <Route path="/reservation-calendar/details/:date" element={<CalendarDetailsPage/>}></Route>
 
           <Route path="/profile" element={<ProfilePage/>}></Route>

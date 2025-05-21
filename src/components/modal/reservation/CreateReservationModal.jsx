@@ -44,10 +44,9 @@ const CreateReservationModal = () => {
   }, [isSuccess, form]);
 
   const onFinish = (values) => {
-    console.log(values);
     createReservation({
-      scheduleIds: values.scheduleIds,
-      dinings: values.dinings,
+      scheduleId: values.scheduleId,
+      diningId: values.diningId,
       seats: Number(values.seats)
     });
   };
@@ -64,7 +63,7 @@ const CreateReservationModal = () => {
       <Modal
         title={
           <span className="font-bold text-xl">
-            Add New Reservation Calendar
+            New Booking Schedule
           </span>
         }
         open={modalOpen}
@@ -93,18 +92,17 @@ const CreateReservationModal = () => {
             />
           </Form.Item>
           <Form.Item
-            name="scheduleIds"
+            name="scheduleId"
             dependencies={["date"]}
             rules={[{ required: true, message: "Please select a schedule" }]}
             label={
               <span className="font-semibold">
                 <span className="text-red-500 mr-1">*</span>
-                Schedule (multiple)
+                Schedule
               </span>
             }
           >
             <Select
-              mode="multiple"
               placeholder="Select schedule"
               disabled={scheduleOptions.length === 0}
               style={{ width: "100%" }}
@@ -112,17 +110,16 @@ const CreateReservationModal = () => {
             />
           </Form.Item>
            <Form.Item
-            name="dinings"
+            name="diningId"
             rules={[{ required: true, message: "Please select atleast one dining" }]}
             label={
               <span className="font-semibold">
                 <span className="text-red-500 mr-1">*</span>
-                Dining (multiple)
+                Dining
               </span>
             }
           >
             <Select
-              mode="multiple"
               placeholder="Select dining"
               disabled={diningOptions.length === 0}
               style={{ width: "100%" }}

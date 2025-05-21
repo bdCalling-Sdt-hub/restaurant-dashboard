@@ -23,7 +23,7 @@ const DeleteReservationModal = ({ reservationId }) => {
     <>
       <button
         onClick={() => setModalOpen(true)}
-        className="p-2 rounded-full bg-red-50 hover:bg-red-100 text-red-500 transition-colors"
+        className="p-2 rounded-full bg-red-500 hover:bg-red-600 text-white transition-colors duration-200"
         aria-label="Delete schedule"
       >
         <Trash2 className="h-4 w-4" />
