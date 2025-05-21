@@ -18,8 +18,8 @@ const LoginPage = () => {
             <img src={logo} alt="Elhagz Logo" className="w-[106px] ml-36 " />
           </div>
           <div>
+            <h1>Welcome to Owner Dashboard</h1>
             <Title level={2} className="text-2xl font-semibold mb-4">Login</Title>
-            <p className="text-gray-600 mb-6">Kickstart your night life journey with Tap In!</p>
           </div>
          {/* LoginForm */}
          <LoginForm/>

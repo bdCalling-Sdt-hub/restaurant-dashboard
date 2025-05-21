@@ -4,7 +4,7 @@ import { useGetMyRestaurantQuery } from "../../redux/features/restaurant/restaur
 
 
 const UpdateLocationPage = () => {
-   const { data, isLoading, isSuccess, error} = useGetMyRestaurantQuery(undefined);
+  const { data, isLoading, isSuccess, error} = useGetMyRestaurantQuery(undefined);
   const restaurantData = data?.data;
 
  if(isLoading){

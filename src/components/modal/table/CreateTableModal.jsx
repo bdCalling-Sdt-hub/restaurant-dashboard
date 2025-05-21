@@ -7,6 +7,7 @@ import convertUTCtimeString from "../../../utils/convertUTCtimeString";
 import { useGetDiningDropDownQuery } from "../../../redux/features/dining/diningApi";
 import { useCreateTableMutation } from "../../../redux/features/table/tableApi";
 import disabledDate from "../../../utils/disabledDate";
+import { useSelector } from "react-redux";
 
 const CreateTableModal = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -19,6 +20,7 @@ const CreateTableModal = () => {
     }
   );
  
+  const { diningOptions } = useSelector((state)=>state.dining);
   const [scheduleOptions, setScheduleOptions] = useState([]);
   useEffect(() => {
     if (date) {
@@ -39,12 +41,6 @@ const CreateTableModal = () => {
 
 
   const [form] = Form.useForm();
-  const { data:diningData } = useGetDiningDropDownQuery();
-  const dinings = diningData?.data || [];
-  const diningOptions = dinings?.map((dining)=>({
-    value: dining?._id,
-    label: dining?.name
-  }))
 
   useEffect(() => {
     if (isSuccess) {
@@ -61,6 +57,8 @@ const CreateTableModal = () => {
       seats: Number(values.seats)
     });
   };
+
+
 
   return (
     <>

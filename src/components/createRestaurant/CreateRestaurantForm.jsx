@@ -30,7 +30,6 @@ const CreateRestaurantForm = () => {
       //longitude: -74.0060,
       latitude: 23.777176,
       longitude: 90.399452,
-      keywords: '',
       features: '',
       bookingFeePerGuest: 0,
       cancellationPercentage: 0,
@@ -67,17 +66,16 @@ const CreateRestaurantForm = () => {
     const finalValues = {
       ...data,
       paymentRequired,
-      keywords: data.keywords ? data.keywords.split(',').map(s => s.trim()) : [],
       features: data.features ? data.features.split(',').map(s => s.trim()) : []
     };
     
-    console.log(finalValues);
+   
     // Create FormData for file upload
     const formData = new FormData();
     Object.keys(finalValues).forEach(key => {
       if (key === 'file' && finalValues[key]) {
         formData.append('file', finalValues[key][0]);
-      } else if (['keywords', 'features'].includes(key)) {
+      } else if (['features'].includes(key)) {
         finalValues[key].forEach(item => {
           formData.append(key, item);
         });
@@ -87,7 +85,7 @@ const CreateRestaurantForm = () => {
     });
     
     // Simulate API call
-    //console.log('Form Data:', Object.fromEntries(formData));
+   // console.log('Form Data:', Object.fromEntries(formData));
     
     // Simulate API call with timeout
        createRestaurant(formData);
@@ -124,24 +122,10 @@ const CreateRestaurantForm = () => {
           setValue={setValue}
         />
         
-        {/* Keywords */}
-        <FormInput
-          label="Keywords (comma-separated, optional)"
-          name="keywords"
-          register={register}
-          rules={{ 
-            pattern: {
-              value: /^([\w\s-]+)(,\s*[\w\s-]+)*$/,
-              message: "Please enter valid comma-separated keywords"
-            }
-          }}
-          error={errors.keywords}
-          placeholder="e.g. plant-based, organic"
-        />
-        
+       
         {/* Features */}
         <FormInput
-          label="Features (comma-separated, optional)"
+          label="Features (comma-separated)"
           name="features"
           register={register}
           rules={{ 
@@ -152,6 +136,7 @@ const CreateRestaurantForm = () => {
           }}
           error={errors.features}
           placeholder="e.g. outdoor seating, private dining"
+          required
         />
         
      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 bg-white shadow-md p-6 rounded-md">

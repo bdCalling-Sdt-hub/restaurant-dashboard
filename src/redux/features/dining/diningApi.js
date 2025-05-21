@@ -25,116 +25,7 @@ export const diningApi = apiSlice.injectEndpoints({
       keepUnusedDataFor: 600,
       providesTags: [TagTypes.dining],
     }),
-    createDining: builder.mutation({
-      query: (data) => ({
-        url: `/dining/create-dining`,
-        method: "POST",
-        body: data,
-      }),
-      invalidatesTags: (result) =>{
-        if(result?.success){
-          return [TagTypes.dining]
-        }
-        return []
-      },
-      async onQueryStarted(arg, { queryFulfilled }) {
-        try {
-          await queryFulfilled;
-          SuccessToast("Dining is created successfully");
-        } catch (err) {
-          const status = err?.error?.status;
-          if (status === 409) {
-            ErrorToast(err?.error?.data?.message);
-          } else {
-            ErrorToast("Something Went Wrong!");
-          }
-        }
-      },
-    }),
-    deleteDining: builder.mutation({
-      query: (id) => ({
-        url: `/dining/delete-dining/${id}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: (result) =>{
-        if(result?.success){
-          return [TagTypes.dining]
-        }
-        return []
-      },
-      async onQueryStarted(arg, { queryFulfilled }) {
-        try {
-          await queryFulfilled;
-          SuccessToast("Dining is deleted successfully");
-        } catch (err) {
-          const status = err?.error?.status;
-          if (status === 404) {
-            ErrorToast(err?.error?.data?.message);
-          } else if (status === 409) {
-            ErrorToast(err?.error?.data?.message);
-          } else {
-            ErrorToast("Something Went Wrong!");
-          }
-        }
-      },
-    }),
-    updateDining: builder.mutation({
-      query: ({ id, data }) => ({
-        url: `/dining/update-dining/${id}`,
-        method: "PATCH",
-        body: data,
-      }),
-      invalidatesTags: (result) =>{
-        if(result?.success){
-          return [TagTypes.dining]
-        }
-        return []
-      },
-      async onQueryStarted(arg, { queryFulfilled }) {
-        try {
-          await queryFulfilled;
-            SuccessToast("Dining is updated successfully");
-        } catch (err) {
-          const status = err?.error?.status;
-          if (status === 404) {
-            ErrorToast(err?.error?.data?.message);
-          } else if (status === 409) {
-            ErrorToast(err?.error?.data?.message);
-          } else {
-            ErrorToast("Something Went Wrong!");
-          }
-        }
-      },
-    }),
-    getMyDinings: builder.query({
-      query: (args) => {
-        const params = new URLSearchParams();
-        if (args !== undefined && args.length > 0) {
-          args.forEach((item) => {
-            if(item.value){
-              params.append(item.name, item.value);
-            }
-          });
-        }
-        return {
-          url: "/dining/get-my-dinings",
-          method: "GET",
-          params: params
-        };
-      },
-      keepUnusedDataFor: 600,
-      providesTags: [TagTypes.myDining],
-      async onQueryStarted(arg, { queryFulfilled}) {
-        try {
-          await queryFulfilled;
-        } catch (err) {
-          //ErrorToast("Something Went Wrong!");
-          //do nothing
-          //console.log(err);
-        }
-      },
-    }),
-    getDiningDropDown: builder.query({
+     getDiningDropDown: builder.query({
       query: (args) => {
         const params = new URLSearchParams();
         if (args !== undefined && args.length > 0) {
@@ -170,8 +61,89 @@ export const diningApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    createDining: builder.mutation({
+      query: (data) => ({
+        url: `/dining/create-dining`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: (result) =>{
+        if(result?.success){
+          return [TagTypes.dining, TagTypes.diningDropDown]
+        }
+        return []
+      },
+      async onQueryStarted(arg, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          SuccessToast("Dining is created successfully");
+        } catch (err) {
+          const status = err?.error?.status;
+          if (status === 409) {
+            ErrorToast(err?.error?.data?.message);
+          } else {
+            ErrorToast("Something Went Wrong!");
+          }
+        }
+      },
+    }),
+    deleteDining: builder.mutation({
+      query: (id) => ({
+        url: `/dining/delete-dining/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: (result) =>{
+        if(result?.success){
+          return [TagTypes.dining, TagTypes.diningDropDown]
+        }
+        return []
+      },
+      async onQueryStarted(arg, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          SuccessToast("Dining is deleted successfully");
+        } catch (err) {
+          const status = err?.error?.status;
+          if (status === 404) {
+            ErrorToast(err?.error?.data?.message);
+          } else if (status === 409) {
+            ErrorToast(err?.error?.data?.message);
+          } else {
+            ErrorToast("Something Went Wrong!");
+          }
+        }
+      },
+    }),
+    updateDining: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/dining/update-dining/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: (result) =>{
+        if(result?.success){
+          return [TagTypes.dining, TagTypes.diningDropDown]
+        }
+        return []
+      },
+      async onQueryStarted(arg, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+            SuccessToast("Dining is updated successfully");
+        } catch (err) {
+          const status = err?.error?.status;
+          if (status === 404) {
+            ErrorToast(err?.error?.data?.message);
+          } else if (status === 409) {
+            ErrorToast(err?.error?.data?.message);
+          } else {
+            ErrorToast("Something Went Wrong!");
+          }
+        }
+      },
+    }),
   }),
 });
 
 
-export const { useGetDiningListQuery, useCreateDiningMutation, useUpdateDiningMutation, useDeleteDiningMutation, useGetMyDiningsQuery, useGetDiningDropDownQuery } = diningApi;
+export const { useGetDiningListQuery, useCreateDiningMutation, useUpdateDiningMutation, useDeleteDiningMutation, useGetDiningDropDownQuery } = diningApi;

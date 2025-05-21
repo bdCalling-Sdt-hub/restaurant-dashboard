@@ -31,6 +31,7 @@ const DeleteDiningModal = ({ diningId }) => {
         onCancel={() => setModalOpen(false)}
         maskClosable={false}
         footer={false}
+        closable={false}
       >
        
       

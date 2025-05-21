@@ -1,11 +1,10 @@
 import restaurant_img from "../../assets/images/restaurant.png";
-import { MapPin, Star, Tag, Check, DollarSign, X, SquarePen } from "lucide-react";
+import { MapPin, Star, Check, DollarSign, X, SquarePen } from "lucide-react";
 import UpdateNameModal from "../modal/restaurant/UpdateNameModal";
 import UpdateImageModal from "../modal/restaurant/UpdateImageModal";
 import UpdateInformationModal from "../modal/restaurant/UpdateInformationModal";
 import UpdateDiscountModal from "../modal/restaurant/UpdateDiscountModal";
 import UpdateFeaturesModal from "../modal/restaurant/UpdateFeaturesModal";
-import UpdateKeywordsModal from "../modal/restaurant/UpdateKeywordsModal";
 import { useNavigate } from "react-router-dom";
 
 const MyRestaurant = ({ data: restaurant }) => {
@@ -76,25 +75,6 @@ const MyRestaurant = ({ data: restaurant }) => {
               <UpdateDiscountModal restaurant={restaurant} />
             </div>
             <p className="text-green-600">{restaurant.discount}</p>
-          </div>
-
-          {/* Keywords */}
-          <div className="relative group">
-            <div className="flex justify-between items-start mb-2">
-              <h3 className="font-semibold text-gray-800">Keywords</h3>
-              <UpdateKeywordsModal restaurant={restaurant} />
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {restaurant.keywords.map((keyword, index) => (
-                <span
-                  key={index}
-                  className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
-                >
-                  <Tag className="w-3 h-3 mr-1" />
-                  {keyword}
-                </span>
-              ))}
-            </div>
           </div>
         </div>
 
