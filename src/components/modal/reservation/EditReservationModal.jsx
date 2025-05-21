@@ -3,16 +3,12 @@ import { useEffect, useState } from "react";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { Edit } from "lucide-react";
 import { useUpdateReservationMutation } from "../../../redux/features/reservation/reservationApi";
-import { useGetDiningDropDownQuery } from "../../../redux/features/dining/diningApi";
-import { useSelector } from "react-redux";
 
 const EditReservationModal = ({ reservation }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [updateReservation, { isLoading, isSuccess }] = useUpdateReservationMutation();
   const [form] = Form.useForm();
-  const { diningOptions } = useSelector((state)=>state.dining);
-  useGetDiningDropDownQuery();
-  
+
 
   useEffect(() => {
     if (isSuccess) {
@@ -32,7 +28,7 @@ const EditReservationModal = ({ reservation }) => {
   return (
     <>
       <button
-        onClick={() => setModalOpen(true)}
+        onClick={() => reservation?.seats  !==0 && setModalOpen(true)}
         className="p-2 rounded-full bg-blue-500 hover:bg-blue-600 text-white transition-colors duration-200"
         aria-label="Edit schedule"
       >

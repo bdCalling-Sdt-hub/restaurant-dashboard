@@ -1,8 +1,9 @@
 import { BsMenuButtonWideFill } from "react-icons/bs";
+import { CiNoWaitingSign } from "react-icons/ci";
 import { FaCheckToSlot, FaTable, FaTableList } from "react-icons/fa6";
-import { GiStabbedNote } from "react-icons/gi";
-import { MdDining, MdPreview, MdSchedule, MdScheduleSend } from "react-icons/md";
-import { RiPieChart2Fill, RiRestaurantLine } from "react-icons/ri";
+import { MdDining, MdPreview, MdScheduleSend } from "react-icons/md";
+import { RiCalendarScheduleFill, RiRestaurantLine } from "react-icons/ri";
+import { TbBrandBooking } from "react-icons/tb";
 
 export const menuItems = [
   // {
@@ -25,11 +26,6 @@ export const menuItems = [
   //   path: "/dashboard",
   //   icon: RiPieChart2Fill,
   // },
-  // {
-  //   title: "Restaurant",
-  //   path: '/restaurant',
-  //   icon: RiRestaurantLine
-  // },
   {
     title: "Slots",
     path: "/slots",
@@ -48,38 +44,23 @@ export const menuItems = [
   {
     title: "Booking Schedule (App)",
     path: "/reservation-calendar",
-    icon: FaTable,
+    icon: RiCalendarScheduleFill,
   },
-  //  {
-  //   title: "Calendar (App)",
-  //   path: "/calendar",
-  //   icon: FaTable,
-  // },
   {
     title: "Booking Management",
     path: "/booking-management",
-    icon: GiStabbedNote,
+    icon: TbBrandBooking,
   },
   {
     title: "Waitlist",
     path: "/waitlist",
-    icon: GiStabbedNote,
+    icon: CiNoWaitingSign,
   },
-  // {
-  //   title: "Table Booking Schedule",
-  //   path: '/table-booking-schedule',
-  //   icon: MdSchedule
-  // },
   {
     title: "Table Booking List",
     path: "/table-booking-list",
     icon: FaTableList,
   },
-  // {
-  //   title: "Table Booking",
-  //   path: '/table-booking',
-  //   icon: MdSchedule
-  // },
   {
     title: "Menu",
     path: "/menu",
@@ -94,41 +75,9 @@ export const menuItems = [
     title: "Reviews",
     path: "/reviews",
     icon: MdPreview,
-  },
-  //  {
-  //   title: "Social Media",
-  //   path: "/restaurant/social-media",
-  //   icon: MdPreview,
-  // },
-  // {
-  //     title: "Add Category",
-  //     path: '/add-category',
-  //     icon: MdOutlineCategory
-  // },
+  }
 ];
 
-export const subMenuItems = [
-  {
-    title: "Business Hours",
-    path: "/restaurant/business-hours",
-  },
-  {
-    title: "Reviews",
-    path: "/restaurant/reviews",
-  },
-  // {
-  //   title: "Cuisine",
-  //   path: "/restaurant/cuisine",
-  // },
-  {
-    title: "Social Media",
-    path: "/restaurant/social-media",
-  },
-  // {
-  //   title: "Restaurant Features",
-  //   path: "/restaurant/features",
-  // },
-];
 
 
 

@@ -1,10 +1,8 @@
 import { Menu } from "antd";
 import { Link, useLocation } from "react-router-dom";
 import { RiLogoutBoxRLine } from "react-icons/ri";
-
-import { IoRestaurantSharp } from "react-icons/io5";
 import { logout } from "../../helper/SessionHelper";
-import { menuItems, subMenuItems } from "../../data/data";
+import { menuItems } from "../../data/data";
 
 const SidebarMenu = () => {
   const location = useLocation();
@@ -37,38 +35,9 @@ const SidebarMenu = () => {
                 </Link>
               </Menu.Item>
             ))}
-
-            {/* Restaurant Details Submenu Items  */}
-            {/* <Menu.SubMenu
-              icon={<IoRestaurantSharp size={25} />}
-              title={
-                <span className="text-[18px] text-black">
-                  Restaurant Details
-                </span>
-              }
-              popupClassName="bg-white !p-4"
-            >
-              {subMenuItems?.map((item) => (
-                <Menu.Item
-                  key={item.path}
-                  className={
-                    item.path === path ? "!bg-red-500 !text-white" : ""
-                  }
-                >
-                  <Link
-                    to={item.path}
-                    className={`${
-                      item.path === path ? "text-white" : "text-black"
-                    } text-[18px]`}
-                  >
-                    {item.title}
-                  </Link>
-                </Menu.Item>
-              ))}
-            </Menu.SubMenu> */}
           </div>
 
-          <div className="p-4  ">
+          <div className="px-4 pt-6">
             <Menu.Item
               onClick={() => logout()}
               key="signout"

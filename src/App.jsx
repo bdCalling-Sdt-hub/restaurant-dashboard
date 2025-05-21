@@ -12,11 +12,6 @@ import VerificationPage from "./components/verificationComponents/VerificationPa
 import ResetPassword from "./pages/auth/resetPassword";
 import BookingManagement from "./pages/bookingManagement";
 import Menu from "./pages/menu";
-import Reviews from "./components/restaurantComponents/Reviews";
-import SocialMedia from "./components/restaurantComponents/SocialMedia";
-import BusinessHours from "./components/restaurantComponents/BusinessHours";
-import RestaurantFeatures from "./components/restaurantComponents/RestaurantFeatures";
-import Cuisine from "./components/restaurantComponents/Cuisine";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
 import SlotPage from "./pages/slot/SlotPage";
@@ -30,14 +25,11 @@ import NotFoundPage from "./pages/NotFound/NotFoundPage";
 import RestaurantPage from "./pages/restaurant/RestaurantPage";
 import WaitlistPage from "./pages/waitlist/WaitlistPage";
 import AssignTablePage from "./pages/assignTable/AssignTablePage";
-import RestaurantDetailsPage from "./pages/restaurantDetails/RestaurantDetailsPage";
 import ReservationCalendarPage from "./pages/ReservationCalendar/ReservationCalendarPage";
-import CalendarDetailsPage from "./pages/ReservationCalendar/CalendarDetailsPage";
 import LocationForm from "./components/form/LocationForm";
 import UpdateLocationPage from "./pages/location/UpdateLocationPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import ReviewPage from "./pages/review/ReviewPage";
-import CalendarPage from "./pages/CanderPage/CalendarPage";
 
 function App() {
   const router = createBrowserRouter(
@@ -63,17 +55,9 @@ function App() {
           <Route path="/assign-table/:bookingId" element={<AssignTablePage />}></Route>
           <Route path="/table-booking-list" element={<TableBookingListPage />}></Route>
           <Route path="/reservation-calendar" element={<ReservationCalendarPage />}></Route>
-          <Route path="/reservation-calendar/details/:date" element={<CalendarDetailsPage/>}></Route>
 
           <Route path="/profile" element={<ProfilePage/>}></Route>
-          <Route path="/restaurant-details" element={<RestaurantDetailsPage/>}></Route>
           <Route path="/reviews" element={<ReviewPage/>}></Route>
-          <Route path="/restaurant/reviews" element={<Reviews/>}></Route>
-          <Route path="/restaurant/social-media" element={<SocialMedia/>}></Route>
-          <Route path="/restaurant/business-hours" element={<BusinessHours/>}></Route>
-          <Route path="/restaurant/cuisine" element={<Cuisine/>}></Route>
-          <Route path="/restaurant/features" element={<RestaurantFeatures/>}></Route>
-
           <Route path="/restaurant" element={<RestaurantPage/>}></Route>
           <Route path="/dining" element={<DiningPage/>}></Route>
           <Route path="/slots" element={<SlotPage/>}></Route>

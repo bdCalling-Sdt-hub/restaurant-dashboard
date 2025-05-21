@@ -69,8 +69,13 @@ const ReviewTable = ({reviews, meta, currentPage, setCurrentPage, pageSize, setP
           title: "Comment",
           dataIndex: "comment",
           key: "comment",
-          width: 350,
-          align: "center"
+          width: 500,
+          align: "center",
+          render: (val)=>(
+            <span className="text-sm">
+              {val}
+            </span>
+          )
         },
         {
           title: "Action",

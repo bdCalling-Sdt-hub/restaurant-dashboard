@@ -46,7 +46,7 @@ const TableDetails = ({ tables, data }) => {
         <AddTableModal />
       </div>
 
-      <div className="mx-auto bg-white shadow-lg rounded-md p-4 h-[600px] overflow-y-scroll">
+      <div className="mx-auto bg-gray-50 shadow-lg rounded-md p-4 h-[600px] overflow-y-scroll">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {tables?.map((table, index) => (
            <TableCard table={table} key={index}/>
