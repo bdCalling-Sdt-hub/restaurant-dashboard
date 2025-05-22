@@ -25,17 +25,22 @@ const TableList = () => {
   return (
     <>
       <div className="flex justify-between items-center mb-4">
-        <CreateTableModal />
-        {/* Filter By Date */}
-        <div className="mr-20 px-6 flex gap-x-2">
-          <span className="text-xl font-semibold">Filter:</span>
-          <DatePicker
-            value={tableSelectedDate ? dayjs(tableSelectedDate) : null}
-            onChange={(_, dateString) => {
-              dispatch(SetTableSelectedDate(dateString));
-            }}
-            style={{ width: "100%" }}
-          />
+        <h1 className="text-lg">
+          Total: <span className="font-bold"> {meta?.total} </span>
+        </h1>
+        <div className="flex items-center gap-2 mr-8">
+          {/* Filter By Date */}
+          <div className="mr-6 px-6 flex gap-x-2">
+            <span className="text-xl font-semibold">Filter:</span>
+            <DatePicker
+              value={tableSelectedDate ? dayjs(tableSelectedDate) : null}
+              onChange={(_, dateString) => {
+                dispatch(SetTableSelectedDate(dateString));
+              }}
+              style={{ width: "100%" }}
+            />
+          </div>
+          <CreateTableModal />
         </div>
       </div>
       {isLoading ? (

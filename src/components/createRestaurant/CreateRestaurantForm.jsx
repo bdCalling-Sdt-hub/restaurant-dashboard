@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import FormInput from './FormInput';
 import FormToggle from './FormToggle';
@@ -130,7 +130,8 @@ const CreateRestaurantForm = () => {
           register={register}
           rules={{ 
             pattern: {
-              value: /^([\w\s-]+)(,\s*[\w\s-]+)*$/,
+              //value: /^([\w\s&-]+)(,\s*[\w\s&-]+)*$/,
+              value: /^([^,\n]+)(,\s*[^,\n]+)*$/,
               message: "Please enter valid comma-separated features"
             }
           }}

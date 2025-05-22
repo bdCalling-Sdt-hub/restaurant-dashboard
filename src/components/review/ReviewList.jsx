@@ -38,7 +38,10 @@ const ReviewList = () => {
 
   return (
     <>
-      <div className="flex justify-end items-center mb-4">
+      <div className="flex justify-between items-center mb-4">
+          <h1 className="text-lg">
+          Total: <span className="font-bold"> {meta?.total} </span>
+        </h1>
         <div className="flex gap-3 items-center">
           <div className="w-[348px]">
           <Search

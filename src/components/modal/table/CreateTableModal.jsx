@@ -63,7 +63,7 @@ const CreateTableModal = () => {
   return (
     <>
       <Button
-        className="mb-4 !bg-red-500 !text-white  hover:bg-red-700"
+        className="!bg-red-500 !text-white  hover:bg-red-700"
         icon={<PlusOutlined />}
         onClick={() => setModalOpen(true)}
       >

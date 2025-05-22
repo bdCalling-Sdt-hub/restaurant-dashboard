@@ -23,6 +23,9 @@ const SlotList = () => {
   return (
     <>
       <div className="flex justify-between items-center mb-4">
+         <h1 className="text-lg">
+          Total: <span className="font-bold"> {meta?.total} </span>
+        </h1>
         <CreateSlotModal/>
       </div>
       {

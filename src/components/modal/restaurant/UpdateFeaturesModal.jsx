@@ -66,7 +66,8 @@ const UpdateFeaturesModal = ({ restaurant }) => {
             name="features"
             rules={[
               {
-                pattern: /^([\w\s-]+)(,\s*[\w\s-]+)*$/,
+                pattern: /^([^,\n]+)(,\s*[^,\n]+)*$/,
+                //pattern: /^([\w\s&-]+)(,\s*[\w\s&-]+)*$/,
                 message: "Please enter valid comma-separated keywords.",
               },
             ]}
