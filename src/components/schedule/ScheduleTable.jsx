@@ -46,6 +46,7 @@ const ScheduleTable = ({
       title: "Total Schedule",
       dataIndex: "count",
       key: "count",
+      align: "center"
     },
     {
       title: "View",

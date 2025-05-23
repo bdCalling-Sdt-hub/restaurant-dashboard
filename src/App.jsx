@@ -4,7 +4,6 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import Dashboard from "./pages/dashboard";
 import RootLayOut from "./RootLayOut";
 import LoginPage from "./pages/auth/login";
 import ForgotPassword from "./pages/auth/forgotPassword";
@@ -30,13 +29,14 @@ import LocationForm from "./components/form/LocationForm";
 import UpdateLocationPage from "./pages/location/UpdateLocationPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import ReviewPage from "./pages/review/ReviewPage";
+import DashboardPage from "./pages/dashboard/DashboardPage";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
         <Route element={<PrivateRoute> <RootLayOut /> </PrivateRoute>}>
-          <Route path="/dashboard" element={<Dashboard />}></Route>
+          <Route path="/dashboard" element={<DashboardPage />}></Route>
           <Route path="/" element={<RestaurantPage />}></Route>
           <Route
             path="/booking-management"

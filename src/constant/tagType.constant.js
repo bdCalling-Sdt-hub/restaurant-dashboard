@@ -23,7 +23,8 @@ const TagTypes = {
     tablesByScheduleAndDining: "TablesByScheduleAndDining",
     tableBookings: "tableBookings",
     tableBooking: "tableBooking",
-    reviews: "Reviews"
+    reviews: "Reviews",
+    dashboard: "Dashboard"
 }
 
 export default TagTypes;
